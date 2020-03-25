@@ -2,21 +2,21 @@ import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 
-arNews = 'https://www.kold.com/2020/03/24/update-pima-county-confirms-first-death-covid-/'
+azNews = 'https://www.kold.com/2020/03/24/update-pima-county-confirms-first-death-covid-/'
 
 bypass = {'User-Agent': 'Mozilla/5.0'}
 
-arClient = Request(arNews, headers=bypass)
-arPage = urlopen(arClient)
+azClient = Request(azNews, headers=bypass)
+azPage = urlopen(azClient)
 
-site_parse = soup(arPage.read(), 'lxml')
-arPage.close()
+site_parse = soup(azPage.read(), 'lxml')
+azPage.close()
 
 tables = site_parse.find("ul", {"class": "secondary no-margin"})
 
 tags = tables.findAll('li')
 
-csvfile = "COVID-19_cases_arNews.csv"
+csvfile = "COVID-19_cases_azNews.csv"
 headers = "County, Confirmed Cases \n"
 
 file = open(csvfile, "w")
