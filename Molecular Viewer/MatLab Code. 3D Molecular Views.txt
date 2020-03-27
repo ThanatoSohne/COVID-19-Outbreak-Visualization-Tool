@@ -1,0 +1,9 @@
+% 
+% "Sars-CoV-2 main protease with unliganded active site (2019-nCoV, coronavirus disease 2019, covid-19)"
+% (http://molview.org/?pdbid=6Y84)
+f = molviewer('6Y84')
+
+%
+% "Crystal structure of rna binding domain of nucleocapsid phosphoprotein from sars coronavirus 2"
+% (http://molview.org/?pdbid=6VYO)
+f = molviewer('6VYO')
