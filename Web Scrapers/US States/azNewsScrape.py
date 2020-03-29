@@ -1,8 +1,8 @@
 import bs4
-from urllib.request import urlopen as req
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as soup
 
-azNews = 'https://www.kold.com/2020/03/24/update-pima-county-confirms-first-death-covid-/'
+azNews = 'https://www.abc15.com/news/state/coronavirus-in-arizona-tracking-latest-cases-covid-19-updates-in-our-state/'
 
 bypass = {'User-Agent': 'Mozilla/5.0'}
 
@@ -12,9 +12,11 @@ azPage = urlopen(azClient)
 site_parse = soup(azPage.read(), 'lxml')
 azPage.close()
 
-tables = site_parse.find("ul", {"class": "secondary no-margin"})
+tables = site_parse.find("div", {"class": "RichTextArticleBody-body"})
 
-tags = tables.findAll('li')
+death = tables.find_all('p')[4].get_text()[0:20].split(': ')[1]
+
+cases = tables.find_all('p')[6].get_text()
 
 csvfile = "COVID-19_cases_azNews.csv"
 headers = "County, Confirmed Cases \n"
@@ -22,83 +24,117 @@ headers = "County, Confirmed Cases \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-hold = []
+#hold = []
+#
+#for t in tags:
+#    take = t.get_text()
+#    hold.append(take)
+#    
+#test = hold[6]
+#new = test.get_text()
 
-for li in tags:
-    take = li.get_text()
-    hold.append(take)
-    
-pima = hold[0].split(' - ')
-pimaC = pima.pop(0)
-pimaN = pima.pop()
+pi = cases[59:68].split(': ')
+pimaC = pi[0]
+pimaN = pi[1]
 #print("County = %s, Confirmed Cases = %s" % (pimaC, pimaN))
 file.write(pimaC + ", " + pimaN + "\n")
 
-maricopa = hold[1].split(' - ')
-mariC = maricopa.pop(0)
-mariN = maricopa.pop()
+mari = cases[25:38].split(': ')
+mariC = mari[0]
+mariN = mari[1]
 #print("County = %s, Confirmed Cases = %s" % (mariC, mariN))
 file.write(mariC + ", " + mariN + "\n")
 
-pinal = hold[2].split(' - ')
-pinalC = pinal.pop(0)
-pinalN = pinal.pop()
+pin = cases[38:47].split(': ')
+pinalC = pin[0]
+pinalN = pin[1]
 #print("County = %s, Confirmed Cases = %s" % (pinalC, pinalN))
 file.write(pinalC + ", " + pinalN + "\n")
 
-cochise = hold[3].split(' - ')
-cochiseC = cochise.pop(0)
-cochiseN = cochise.pop()
+cochise = cases[99:109].split(': ')
+cochiseC = cochise[0]
+cochiseN = cochise[1]
 #print("County = %s, Confirmed Cases = %s" % (cochiseC, cochiseN))
 file.write(cochiseC + ", " + cochiseN + "\n")
 
-santaCruz = hold[4].split(' - ')
-santaC = santaCruz.pop(0)
-santaN = santaCruz.pop()
+santaCruz = cases[118:131].split(': ')
+santaC = santaCruz[0]
+santaN = santaCruz[1]
 #print("County = %s, Confirmed Cases = %s" % (santaC, santaN))
 file.write(santaC + ", " + santaN + "\n")
 
-navajo = hold[5].split(' - ')
-navajoC = navajo.pop(0)
-navajoN = navajo.pop()
+navajo = cases[68:78].split(': ')
+navajoC = navajo[0]
+navajoN = navajo[1]
 #print("County = %s, Confirmed Cases = %s" % (navajoC, navajoN))
 file.write(navajoC + ", " + navajoN + "\n")
 
-graham = hold[6].split(' - ')
-grahamC = graham.pop(0)
-grahamN = graham.pop()
+graham = cases[109:118].split(': ')
+grahamC = graham[0]
+grahamN = graham[1]
 #print("County = %s, Confirmed Cases = %s" % (grahamC, grahamN))
 file.write(grahamC + ", " + grahamN + "\n")
 
-cococino = hold[7].split(' - ')
-cocoC = cococino.pop(0)
-cocoN = cococino.pop()
+coco = cases[47:59].split(': ')
+cocoC = coco[0]
+cocoN = coco[1]
 #print("County = %s, Confirmed Cases = %s" % (cocoC, cocoN))
 file.write(cocoC + ", " + cocoN + "\n")
 
-yuma = hold[8].split(' - ')
-yumaC = yuma.pop(0)
-yumaN = yuma.pop()
+yuma = cases[131:138].split(': ')
+yumaC = yuma[0]
+yumaN = yuma[1]
 #print("County = %s, Confirmed Cases = %s" % (yumaC, yumaN))
 file.write(yumaC + ", " + yumaN + "\n")
 
-apache = hold[9].split(' - ')
-apacheC = apache.pop(0)
-apacheN = apache.pop()
+pache = cases[89:99].split(': ')
+apacheC = apache[0]
+apacheN = apache[1]
 #print("County = %s, Confirmed Cases = %s" % (apacheC, apacheN))
 file.write(apacheC + ", " + apacheN + "\n")
 
-yavapai = hold[10].split(' - ')
-yavaC = yavapai.pop(0)
-yavaN = yavapai.pop()
+yava = cases[78:89].split(': ')
+yavaC = yava[0]
+yavaN = yava[1]
 #print("County = %s, Confirmed Cases = %s" % (yavaC, yavaN))
 file.write(yavaC + ", " + yavaN + "\n")
 
-other = hold[11].split(' - ')
-otherC = other.pop(0)
-otherN = other.pop()
-#print("County = %s, Confirmed Cases = %s" % (otherC, otherN))
-file.write(otherC + ", " + otherN + "\n")
+mohave = cases[138:147].split(': ')
+mohC = mohave[0]
+mohN = mohave[1]
+file.write(mohC + ", " + mohN + "\n")
+
+lapaz = cases[147:156].split(': ')
+lpC = lapaz[0]
+lpN = lapaz[1]
+file.write(lpC + ", " + lpN + "\n")
+
+gila = cases[156:163].split(': ')
+gilaC = gila[0]
+gilaN = gila[1]
+file.write(gilaC + ", " + gilaN + "\n")
+
+green = cases[163:174].split(': ')
+glC = green[0]
+glN = green[1]
+file.write(glC + ", " + glN + "\n")
+
+gilaR = cases[174:205].split(': ')
+gilC = gilaR[0]
+gilN = gilaR[1]
+file.write(gilaC + ", " + gilaN + "\n")
+
+navajoN = cases[205:223].split(': ')
+nnC = green[0]
+nnN = green[1]
+file.write(nnC + ", " + nnN + "\n")
+
+saltR = cases[239:].split(': ')
+saltC = saltR[0]
+saltN = saltR[1]
+file.write(saltC + ", " + saltN + "\n")
+
+file.write("Deaths in Arizona = %s" % death)
 
 file.close()
 
