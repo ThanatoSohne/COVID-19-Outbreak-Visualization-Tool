@@ -14,7 +14,7 @@ tables = site_parse.find("div", {"id": "collapseOne"}).find("tbody")
 tags = tables.findAll('tr')
 
 csvfile = "COVID-19_cases_ordoh.csv"
-headers = "County, Cases, Deaths, Negative Test Results \n"
+headers = "County, Positive Cases, Deaths, Negative Test Results \n"
 
 file = open(csvfile, "w")
 file.write(headers)

@@ -9,7 +9,7 @@ paClient = req(paDOH)
 site_parse = soup(paClient.read(), "lxml")
 paClient.close()
 
-tables = site_parse.find("table", {"class": "ms-rteTable-default", "style": "width:419px;height:1830px;"}).find("tbody")
+tables = site_parse.find("div", {"class": "ms-rtestate-field", "style": "display:inline"}).find("div", {"style": "text-align:center;"}).find("table", {"class": "ms-rteTable-default"})
 
 tags = tables.findAll('tr')
 

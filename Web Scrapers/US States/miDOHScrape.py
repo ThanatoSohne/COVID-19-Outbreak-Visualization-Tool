@@ -2,7 +2,7 @@ import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 
-miDOH = 'https://www.michigan.gov/Coronavirus'
+miDOH = 'https://www.michigan.gov/coronavirus/0,9753,7-406-98163_98173---,00.html'
 
 miClient = req(miDOH)
 
@@ -19,7 +19,7 @@ headers = "County, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[0:33]:
+for tag in tags[1:61]:
     pull = tag.findAll('td')
     print("County = %s, Cases = %s, Deaths = %s" % \
           (pull[0].text, pull[1].text, pull[2].text))

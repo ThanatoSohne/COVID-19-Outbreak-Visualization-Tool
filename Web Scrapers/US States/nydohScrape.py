@@ -1,5 +1,5 @@
 import bs4
-from urllib.request import urlopen as req
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as soup
 
 nydoh = 'https://coronavirus.health.ny.gov/county-county-breakdown-positive-cases'
@@ -19,10 +19,10 @@ tags = tables.findAll('tr')
 csvfile = "COVID-19_cases_nydoh.csv"
 headers = "County, Positive Cases \n"
 
-file = open(csvfile, "w")
+file = open(csvfile, "w", encoding = 'utf-8')
 file.write(headers)
 
-for tag in tags[1:47]:
+for tag in tags[1:57]:
     pull = tag.findAll('td')
     print("County = %s, Positive Cases = %s" % \
           (pull[0].text, pull[1].text))
