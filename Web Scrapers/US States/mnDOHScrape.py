@@ -23,104 +23,53 @@ for td in tables:
     take = td.get_text()
     hold.append(take)
 
-anoka = hold[0:2]
-#print(anoka.pop(0) + ", " + anoka.pop())
-file.write(anoka.pop(0) + ", " + anoka.pop() + "\n")
-
-benton = hold[2:4]
-file.write(benton.pop(0) + ", " + benton.pop() + "\n")
-
-big = hold[4:6]
-file.write(big.pop(0) + ", " + big.pop() + "\n")
-
-blue = hold[6:8]
-file.write(blue.pop(0) + ", " + blue.pop() + "\n")
-
-carv = hold[8:10]
-file.write(carv.pop(0) + ", " + carv.pop() + "\n")
-
-cass = hold[10:12]
-file.write(cass.pop(0) + ", " + cass.pop() + "\n")
-
-chis = hold[12:14]
-file.write(chis.pop(0) + ", " + chis.pop() + "\n")
-
-clay = hold[14:16]
-file.write(clay.pop(0) + ", " + clay.pop() + "\n")
-
-dak = hold[16:18]
-file.write(dak.pop(0) + ", " + dak.pop() + "\n")
-
-dod = hold[18:20]
-file.write(dod.pop(0) + ", " + dod.pop() + "\n")
-
-fill = hold[20:22]
-file.write(fill.pop(0) + ", " + fill.pop() + "\n")
-
-good = hold[22:24]
-file.write(good.pop(0) + ", " + good.pop() + "\n")
-
-henn = hold[24:26]
-file.write(henn.pop(0) + ", " + henn.pop() + "\n")
-
-jack = hold[26:28]
-file.write(jack.pop(0) + ", " + jack.pop() + "\n")
-
-lac = hold[28:30]
-file.write(lac.pop(0) + ", " + lac.pop() + "\n")
-
-le = hold[30:32]
-file.write(le.pop(0) + ", " + le.pop() + "\n")
-
-mar = hold[32:34]
-file.write(mar.pop(0) + ", " + mar.pop() + "\n")
-
-mow = hold[34:36]
-file.write(mow.pop(0) + ", " + mow.pop() + "\n")
-
-nic = hold[36:38]
-file.write(nic.pop(0) + ", " + nic.pop() + "\n")
-
-olm = hold[38:40]
-file.write(olm.pop(0) + ", " + olm.pop() + "\n")
-
-ram = hold[40:42]
-file.write(ram.pop(0) + ", " + ram.pop() + "\n")
-
-ren = hold[42:44]
-file.write(ren.pop(0) + ", " + ren.pop() + "\n")
-
-rice = hold[44:46]
-file.write(rice.pop(0) + ", " + rice.pop() + "\n")
-
-scott = hold[46:48]
-file.write(scott.pop(0) + ", " + scott.pop() + "\n")
-
-sher = hold[48:50]
-file.write(sher.pop(0) + ", " + sher.pop() + "\n")
-
-stl = hold[50:52]
-file.write(stl.pop(0) + ", " + stl.pop() + "\n")
-
-stea = hold[52:54]
-file.write(stea.pop(0) + ", " + stea.pop() + "\n")
-
-stee = hold[54:56]
-file.write(stee.pop(0) + ", " + stee.pop() + "\n")
-
-wab = hold[56:58]
-file.write(wab.pop(0) + ", " + wab.pop() + "\n")
-
-was = hold[58:60]
-file.write(was.pop(0) + ", " + was.pop() + "\n")
-
-wash = hold[60:62]
-file.write(wash.pop(0) + ", " + wash.pop() + "\n")
-
-win = hold[62:64]
-file.write(win.pop(0) + ", " + win.pop() + "\n")
-
-wri = hold[64:66]
-file.write(wri.pop(0) + ", " + wri.pop() + "\n")
+file.write(hold[0] + ", " + hold[1] + "\n")
+file.write(hold[2] + ", " + hold[3] + "\n")
+file.write(hold[4] + ", " + hold[5] + "\n")
+file.write(hold[6] + ", " + hold[7] + "\n")
+file.write(hold[8] + ", " + hold[9] + "\n")
+file.write(hold[10] + ", " + hold[11] + "\n")
+file.write(hold[12] + ", " + hold[13] + "\n")
+file.write(hold[14] + ", " + hold[15] + "\n")
+file.write(hold[16] + ", " + hold[17] + "\n")
+file.write(hold[18] + ", " + hold[19] + "\n")
+file.write(hold[20] + ", " + hold[21] + "\n")
+file.write(hold[22] + ", " + hold[23] + "\n")
+file.write(hold[24] + ", " + hold[25] + "\n")
+file.write(hold[26] + ", " + hold[27] + "\n")
+file.write(hold[28] + ", " + hold[29] + "\n")
+file.write(hold[30] + ", " + hold[31] + "\n")
+file.write(hold[32] + ", " + hold[33] + "\n")
+file.write(hold[34] + ", " + hold[35] + "\n")
+file.write(hold[36] + ", " + hold[37] + "\n")
+file.write(hold[38] + ", " + hold[39] + "\n")
+file.write(hold[40] + ", " + hold[41] + "\n")
+file.write(hold[42] + ", " + hold[43] + "\n")
+file.write(hold[44] + ", " + hold[45] + "\n")
+file.write(hold[46] + ", " + hold[47] + "\n")
+file.write(hold[48] + ", " + hold[49] + "\n")
+file.write(hold[50] + ", " + hold[51] + "\n")
+file.write(hold[52] + ", " + hold[53] + "\n")
+file.write(hold[54] + ", " + hold[55] + "\n")
+file.write(hold[56] + ", " + hold[57] + "\n")
+file.write(hold[58] + ", " + hold[59] + "\n")
+file.write(hold[60] + ", " + hold[61] + "\n")
+file.write(hold[62] + ", " + hold[63] + "\n")
+file.write(hold[64] + ", " + hold[65] + "\n")
+file.write(hold[66] + ", " + hold[67] + "\n")
+file.write(hold[68] + ", " + hold[69] + "\n")
+file.write(hold[70] + ", " + hold[71] + "\n")
+file.write(hold[72] + ", " + hold[73] + "\n")
+file.write(hold[74] + ", " + hold[75] + "\n")
+file.write(hold[76] + ", " + hold[77] + "\n")
+file.write(hold[78] + ", " + hold[79] + "\n")
+file.write(hold[80] + ", " + hold[81] + "\n")
+file.write(hold[82] + ", " + hold[83] + "\n")
+file.write(hold[84] + ", " + hold[85] + "\n")
+file.write(hold[86] + ", " + hold[87] + "\n")
+file.write(hold[88] + ", " + hold[89] + "\n")
+file.write(hold[90] + ", " + hold[91] + "\n")
+file.write(hold[92] + ", " + hold[93] + "\n")
+file.write(hold[94] + ", " + hold[95] + "\n")
 
 file.close()

@@ -27,6 +27,6 @@ for t in tables:
 
 for h in hold[43:65]:
     take = h.split('\n')
-    file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + "\n")
+    file.write(take[1] + ", " + take[3].replace(',','') + ", " + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
 
 file.close()

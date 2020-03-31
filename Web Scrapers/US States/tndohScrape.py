@@ -30,7 +30,7 @@ for tag in tags[1:]:
     pull = tag.findAll('p')
     print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
     
-    file.write(pull[0].text + ", " + pull[1].text + "\n")
+    file.write(pull[0].text + ", " + pull[1].text.replace(',','') + "\n")
 
 file.write("\n")
 file.write(faStr + ", " + faNo + "\n")

@@ -19,7 +19,7 @@ headers = "County, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[1:61]:
+for tag in tags[1:66]:
     pull = tag.findAll('td')
     print("County = %s, Cases = %s, Deaths = %s" % \
           (pull[0].text, pull[1].text, pull[2].text))

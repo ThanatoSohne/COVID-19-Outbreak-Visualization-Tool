@@ -25,7 +25,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[39:79]:
+for h in hold[40:80]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
 

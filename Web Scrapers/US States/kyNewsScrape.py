@@ -211,9 +211,9 @@ mccN = mcc[1].split(' ')
 mccNo = mccN[0].split('\xa0')[1]
 file.write(mccC + ", " + mccNo + "\n")
 
-mcr = hold[30].split(': ')
+mcr = hold[30].split(':\xa0')
 mcrC = mcr[0]
-mcrN = mcr[1].split(' ')
+mcrN = mcr[1].split('\xa0')
 mcrNo = mcrN[0]
 file.write(mcrC + ", " + mcrNo + "\n")
 

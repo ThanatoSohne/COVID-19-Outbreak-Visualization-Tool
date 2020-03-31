@@ -1,7 +1,6 @@
 from urllib import request
 from urllib.request import urlretrieve
 import requests
-import time
 
 #Retrieved from Florida's opendata site https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-cases
 

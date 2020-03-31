@@ -18,10 +18,10 @@ sHeaders = "County, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in tables[1:41]:
+for t in tables[1:119]:
     pull = t.findAll('td')
-    print("County = %s, Cases = %s" % \
-          (pull[0].text, pull[1].text))
+    #print("County = %s, Cases = %s" % \
+          #(pull[0].text, pull[1].text))
     file.write(pull[0].text + ", " + pull[1].text + "\n")
 
 tablesDe = site_parse.find("div", {"id": "collapseDeaths"}).findAll('tr')
@@ -31,7 +31,7 @@ file.write(sHeaders)
 
 for ta in tablesDe[1:]:
     pullDe = ta.findAll('td')
-    print("County = %s, Deaths = %s" % (pullDe[0].text, pullDe[1].text))
+    #print("County = %s, Deaths = %s" % (pullDe[0].text, pullDe[1].text))
     file.write(pullDe[0].text + ", " + pullDe[1].text + "\n")
 
 file.close()

@@ -87,7 +87,7 @@ yumaN = yuma[1]
 #print("County = %s, Confirmed Cases = %s" % (yumaC, yumaN))
 file.write(yumaC + ", " + yumaN + "\n")
 
-pache = cases[89:99].split(': ')
+apache = cases[89:99].split(': ')
 apacheC = apache[0]
 apacheN = apache[1]
 #print("County = %s, Confirmed Cases = %s" % (apacheC, apacheN))

@@ -1,7 +1,6 @@
 from urllib import request
 from urllib.request import urlretrieve
 import requests
-import time
 
 dcFile = "https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/COVID19_DCHealthStatisticsDataV2%20%283%29.xlsx"
 

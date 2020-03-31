@@ -9,7 +9,7 @@ meClient = req(meDDS)
 site_parse = soup(meClient.read(), "lxml")
 meClient.close()
 
-tables = site_parse.find("div", {"id": "Accordion1"}).findAll("td")[4:72]
+tables = site_parse.find("div", {"id": "Accordion1"}).findAll("td")[5:90]
 
 #print(tables)
 
@@ -25,170 +25,170 @@ for t in tables:
     take = t.get_text()
     hold.append(take)
 
-andr = hold[0:4]
-anC = andr.pop(0)
-anCC = andr.pop(0)
-anR = andr.pop(0)
-anD = andr.pop()
+andr = hold[0:5]
+anC = andr[0]
+anCC = andr[1]
+anR = andr[2]
+anD = andr[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (anC, anCC, anR, anD))
 file.write(anC + ", " + anCC + ", " + anR + ", " + anD +"\n")
 
-aroo = hold[4:8]
-arC = aroo.pop(0)
-arCC = aroo.pop(0)
-arR = aroo.pop(0)
-arD = aroo.pop()
+aroo = hold[5:10]
+arC = aroo[0]
+arCC = aroo[1]
+arR = aroo[2]
+arD = aroo[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (arC, arCC, arR, arD))
 file.write(arC + ", " + arCC + ", " + arR + ", " + arD + "\n")
 
 
-cumb = hold[8:12]
-cumbC = cumb.pop(0)
-cumbCC = cumb.pop(0)
-cumbR = cumb.pop(0)
-cumbD = cumb.pop()
+cumb = hold[10:15]
+cumbC = cumb[0]
+cumbCC = cumb[1]
+cumbR = cumb[2]
+cumbD = cumb[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (cumbC, cumbCC, cumbR, cumbD))
 file.write(cumbC + ", " + cumbCC + ", " + cumbR + ", " + cumbD + "\n")
 
 
-frank = hold[12:16]
-frC = frank.pop(0)
-frCC = frank.pop(0)
-frR = frank.pop(0)
-frD = frank.pop()
+frank = hold[15:20]
+frC = frank[0]
+frCC = frank[1]
+frR = frank[2]
+frD = frank[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (frC, frCC, frR, frD))
 file.write(frC + ", " + frCC + ", " + frR + ", " + frD + "\n")
 
 
-hanc = hold[16:20]
-haC = hanc.pop(0)
-haCC = hanc.pop(0)
-haR = hanc.pop(0)
-haD = hanc.pop()
+hanc = hold[20:25]
+haC = hanc[0]
+haCC = hanc[1]
+haR = hanc[2]
+haD = hanc[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (haC, haCC, haR, haD))
 file.write(haC + ", " + haCC + ", " + haR + ", " + haD + "\n")
 
 
-kenne = hold[20:24]
-keC = kenne.pop(0)
-keCC = kenne.pop(0)
-keR = kenne.pop(0)
-keD = kenne.pop()
+kenne = hold[25:30]
+keC = kenne[0]
+keCC = kenne[1]
+keR = kenne[2]
+keD = kenne[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (keC, keCC, keR, keD))
 file.write(keC + ", " + keCC + ", " + keR + ", " + keD + "\n")
 
 
-knox = hold[24:28]
-knC = knox.pop(0)
-knCC = knox.pop(0)
-knR = knox.pop(0)
-knD = knox.pop()
+knox = hold[30:35]
+knC = knox[0]
+knCC = knox[1]
+knR = knox[2]
+knD = knox[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (knC, knCC, knR, knD))
 file.write(knC + ", " + knCC + ", " + knR + ", " + knD + "\n")
 
 
-linc = hold[28:32]
-linC = linc.pop(0)
-linCC = linc.pop(0)
-linR = linc.pop(0)
-linD = linc.pop()
+linc = hold[35:40]
+linC = linc[0]
+linCC = linc[1]
+linR = linc[2]
+linD = linc[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (linC, linCC, linR, linD))
 file.write(linC + ", " + linCC + ", " + linR + ", " + linD + "\n")
 
 
-ox = hold[32:36]
-oxC = ox.pop(0)
-oxCC = ox.pop(0)
-oxR = ox.pop(0)
-oxD = ox.pop()
+ox = hold[40:45]
+oxC = ox[0]
+oxCC = ox[1]
+oxR = ox[2]
+oxD = ox[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (oxC, oxCC, oxR, oxD))
 file.write(oxC + ", " + oxCC + ", " + oxR + ", " + oxD + "\n")
 
 
-peno = hold[36:40]
-penC = peno.pop(0)
-penCC = peno.pop(0)
-penR = peno.pop(0)
-penD = peno.pop()
+peno = hold[45:50]
+penC = peno[0]
+penCC = peno[1]
+penR = peno[2]
+penD = peno[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (penC, penCC, penR, penD))
 file.write(penC + ", " + penCC + ", " + penR + ", " + penD + "\n")
 
 
-pisca = hold[40:44]
-piC = pisca.pop(0)
-piCC = pisca.pop(0)
-piR = pisca.pop(0)
-piD = pisca.pop()
+pisca = hold[50:55]
+piC = pisca[0]
+piCC = pisca[1]
+piR = pisca[2]
+piD = pisca[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (piC, piCC, piR, piD))
 file.write(piC + ", " + piCC + ", " + piR + ", " + piD + "\n")
 
 
-saga = hold[44:48]
-sC = saga.pop(0)
-sCC = saga.pop(0)
-sR = saga.pop(0)
-sD = saga.pop()
+saga = hold[55:60]
+sC = saga[0]
+sCC = saga[1]
+sR = saga[2]
+sD = saga[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (sC, sCC, sR, sD))
 file.write(sC + ", " + sCC + ", " + sR + ", " + sD + "\n")
 
 
-somer = hold[48:52]
-soC = somer.pop(0)
-soCC = somer.pop(0)
-soR = somer.pop(0)
-soD = somer.pop()
+somer = hold[60:65]
+soC = somer[0]
+soCC = somer[1]
+soR = somer[2]
+soD = somer[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (soC, soCC, soR, soD))
 file.write(soC + ", " + soCC + ", " + soR + ", " + soD + "\n")
 
 
-waldo = hold[52:56]
-wdC = waldo.pop(0)
-wdCC = waldo.pop(0)
-wdR = waldo.pop(0)
-wdD = waldo.pop()
+waldo = hold[65:70]
+wdC = waldo[0]
+wdCC = waldo[1]
+wdR = waldo[2]
+wdD = waldo[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (wdC, wdCC, wdR, wdD))
 file.write(wdC + ", " + wdCC + ", " + wdR + ", " + wdD + "\n")
 
 
-wash = hold[56:60]
-wsC = wash.pop(0)
-wsCC = wash.pop(0)
-wsR = wash.pop(0)
-wsD = wash.pop()
+wash = hold[70:75]
+wsC = wash[0]
+wsCC = wash[1]
+wsR = wash[2]
+wsD = wash[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (wsC, wsCC, wsR, wsD))
 file.write(wsC + ", " + wsCC + ", " + wsR + ", " + wsD + "\n")
 
 
-york = hold[60:64]
-yC = york.pop(0)
-yCC = york.pop(0)
-yR = york.pop(0)
-yD = york.pop()
+york = hold[75:80]
+yC = york[0]
+yCC = york[1]
+yR = york[2]
+yD = york[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (yC, yCC, yR, yD))
 file.write(yC + ", " + yCC + ", " + yR + ", " + yD + "\n")
 
 
-unk = hold[64:68]
-uC = unk.pop(0)
-uCC = unk.pop(0)
-uR = unk.pop(0)
-uD = unk.pop()
+unk = hold[80:85]
+uC = unk[0]
+uCC = unk[1]
+uR = unk[2]
+uD = unk[4]
 print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
       (uC, uCC, uR, uD))
 file.write(uC + ", " + uCC + ", " + uR + ", " + uD + "\n")
