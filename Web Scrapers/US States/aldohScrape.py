@@ -7,7 +7,7 @@ aldoh = 'https://services7.arcgis.com/4RQmZZ0yaZkGR1zy/arcgis/rest/services/COV1
 
 alClient = req(aldoh).read().decode('utf-8')
 
-rJS = json.loads(response)
+rJS = json.loads(alClient)
 
 attr = rJS.get('features')
 
