@@ -25,13 +25,13 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[42:99]:
+for h in hold[43:100]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
 
 file.close()
 
-if (hold[42].split('\n')[1]) == 'Adair' and (hold[98].split('\n')[1]) == 'Wright':
+if (hold[43].split('\n')[1]) == 'Adair' and (hold[99].split('\n')[1]) == 'Wright':
     print("Iowa scraper is complete.\n")
 else:
     print("ERROR: Must fix Iowa Scraper.\n")

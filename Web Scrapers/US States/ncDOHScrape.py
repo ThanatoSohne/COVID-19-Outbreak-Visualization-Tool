@@ -26,7 +26,7 @@ for tag in tags:
 
 file.close()
 
-if (tags[0].find('td').text) == 'Alamance County' and (tags[77].find('td').text) == 'Yadkin County':
+if (tags[0].find('td').text) == 'Alamance County' and (tags[82].find('td').text) == 'Yadkin County':
     print("North Carolina scraper is complete.\n")
 else:
     print("ERROR: Must fix North Carolina scraper.\n")

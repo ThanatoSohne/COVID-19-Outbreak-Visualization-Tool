@@ -61,6 +61,8 @@ file.write(hold[75].strip() + ", " + hold[76].strip() + ", " + hold[77].strip() 
 file.write(hold[78].strip() + ", " + hold[79].strip() + ", " + hold[80].strip() + "\n")
 file.write(hold[81].strip() + ", " + hold[82].strip() + ", " + hold[83].strip() + "\n")
 file.write(hold[84].strip() + ", " + hold[85].strip() + ", " + hold[86].strip() + "\n")
+file.write(hold[87].strip() + ", " + hold[88].strip() + ", " + hold[89].strip() + "\n")
+file.write(hold[90].strip() + ", " + hold[91].strip() + ", " + hold[92].strip() + "\n")
 
 file.write("\n")
 file.write("Deaths, Recoveries, Hospitalized \n")
@@ -83,7 +85,7 @@ file.write(hope + ", " + hopeN + "\n")
 
 file.close()
 
-if (hold[0].strip()) == 'Aurora' and (hold[84].strip()) ==  'Yankton' and hope == 'Recovered':
+if (hold[0].strip()) == 'Aurora' and (hold[90].strip()) ==  'Yankton' and hope == 'Recovered':
     print("South Dakota scraper is complete.\n")
 else:
     print("ERROR: Must fix South Dakota scraper.\n")

@@ -18,21 +18,21 @@ tables = site_parse.find("div", {"id": "inner-wrap"}).find('tbody')
 #pull = tables.get_text().split('\n')
 
 csvfile = "COVID-19_cases_hidoh.csv"
-headers = "County, HI Residents, Non-HI Residents, Total Cases \n"
+headers = "County, Total Cases \n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
 tags = tables.findAll('tr')
 
-for t in tags[2:9]:
+for t in tags[9:35]:
     pull = t.findAll('td')
     #print(pull[0].text, pull[1].text.split(' (')[0], pull[2].text.split(' (')[0], pull[3].text.split(' (')[0])
-    file.write(pull[0].text+", "+pull[1].text.split(' (')[0]+", "+pull[2].text.split(' (')[0]+", "+pull[3].text.split(' (')[0]+"\n")
+    file.write(pull[0].text+", "+pull[2].text +"\n")
 
 file.close()
 
-if (tags[2].find('td').text) == 'Hawaii' and (tags[8].find('td').text) == 'Total (new)':
+if (tags[9].find('td').text.replace('\xa0', '')) == 'Hawaii County' and (tags[34].find('td').text) == 'County Pending':
     print("Hawai'i scraper is complete.\n")
 else:
     print("ERROR: Must fix Hawai'i scraper.\n")

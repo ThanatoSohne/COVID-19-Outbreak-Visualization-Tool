@@ -27,7 +27,7 @@ for tag in tags[1:]:
 
 file.close()
 
-if (tags[1].find('td').text) == 'Adams' and (tags[60].find('td').text.strip()) == 'York':
+if (tags[1].find('td').text) == 'Adams' and (tags[62].find('td').text.strip()) == 'York':
     print("Pennsylvania scraper is complete.\n")
 else:
     print("ERROR: Must fix Pennsylvania scraper.\n")

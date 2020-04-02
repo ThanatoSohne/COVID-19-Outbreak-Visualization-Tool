@@ -34,7 +34,7 @@ for tag in tags[11:136]:
 
 file.close()
 
-if (tags[0].find('td').text) == 'Harris' and (tags[135].find('td').text) == 'Wood':
+if (tags[0].find('td').text) == 'Harris' and (tags[143].find('td').text) == 'Wood':
     print("Texas scraper is complete.\n")
 else:
     print("ERROR: Must fix Texas scraper.\n")

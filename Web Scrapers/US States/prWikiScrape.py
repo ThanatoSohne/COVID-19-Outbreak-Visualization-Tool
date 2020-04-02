@@ -25,13 +25,13 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[39:48]:
+for h in hold[40:49]:
     take = h.split('\n')
     file.write(take[1] +  ", " + take[5] + "\n")
 
 file.close()
 
-if (hold[39].split('\n')[1]) == 'Arecibo' and (hold[47].split('\n')[1]) == 'Not available':
+if (hold[40].split('\n')[1]) == 'Arecibo' and (hold[48].split('\n')[1]) == 'Not available':
     print("Puerto Rico scraper is complete.\n")
 else:
     print("ERROR: Must fix Puerto Rico scraper.\n")

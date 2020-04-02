@@ -26,13 +26,13 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[39:54]:
+for h in hold[40:56]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
 
 file.close()
 
-if (hold[39].split('\n')[1]) == 'Maricopa' and (hold[53].split('\n')[1]) == 'Greenlee':
+if (hold[40].split('\n')[1]) == 'Maricopa' and (hold[55].split('\n')[1]) == 'Undetermined':
     print("Arizona scraper is complete.\n")
 else:
     print("ERROR: Must fix Arizona scraper.\n")

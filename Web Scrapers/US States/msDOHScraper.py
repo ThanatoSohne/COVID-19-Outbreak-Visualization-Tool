@@ -17,23 +17,23 @@ headers = "County, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in tables[0:31]:
+for t in tables[:78]:
     pull = t.findAll('td')
     #print("County = %s, Cases = %s, Deaths = %s" % \
      #     (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
-file.write(tables[32].findAll('td')[0].text + ", " + tables[32].findAll('td')[1].text + ", " + tables[32].findAll('td')[2].text + "\n")
-
-for t in tables[34:79]:
-    pull = t.findAll('td')
-    #print("County = %s, Cases = %s, Deaths = %s" % \
-     #     (pull[0].text, pull[1].text, pull[2].text))
-    file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
+#file.write(tables[32].findAll('td')[0].text + ", " + tables[32].findAll('td')[1].text + ", " + tables[32].findAll('td')[2].text + "\n")
+#
+#for t in tables[34:79]:
+#    pull = t.findAll('td')
+#    #print("County = %s, Cases = %s, Deaths = %s" % \
+#     #     (pull[0].text, pull[1].text, pull[2].text))
+#    file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
 
-if (tables[0].find('td').text) == 'Adams' and (tables[78].find('td').text) == 'Yazoo':
+if (tables[0].find('td').text) == 'Adams' and (tables[77].find('td').text) == 'Yazoo':
     print("Mississippi scraper is complete.\n")
 else:
     print("ERROR: Must fix Mississippi scraper.\n")

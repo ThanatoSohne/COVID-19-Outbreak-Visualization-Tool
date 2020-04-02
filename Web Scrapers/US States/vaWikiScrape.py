@@ -25,13 +25,13 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[44:145]:
+for h in hold[46:149]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3].split('[')[0] + ", " + take[5].split('[')[0] + "\n")
 
 file.close()
 
-if (hold[44].split('\n')[1]) == 'Accomack County' and (hold[144].split('\n')[1]) == 'York County':
+if (hold[46].split('\n')[1]) == 'Accomack County' and (hold[148].split('\n')[1]) == 'York County':
     print("Virginia scraper is complete.")
 else:
     print("ERROR: Must fix Virginia scraper.")

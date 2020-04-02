@@ -80,10 +80,11 @@ file.write(hold[102] + ", " + hold[103] + "\n")
 file.write(hold[104] + ", " + hold[105] + "\n")
 file.write(hold[106] + ", " + hold[107] + "\n")
 file.write(hold[108] + ", " + hold[109] + "\n")
+file.write(hold[110] + ", " + hold[111] + "\n")
 
 file.close()
 
-if hold[0] == 'Anoka' and hold[108] == 'Yellow Medicine':
+if hold[0] == 'Anoka' and hold[110] == 'Yellow Medicine':
     print("Minnesota scraper is complete.\n")
 else:
     print("ERROR: Must fix Minnesota scraper.\n")

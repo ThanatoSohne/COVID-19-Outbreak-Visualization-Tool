@@ -17,7 +17,7 @@ headers = "County, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in tables[5:148]:
+for t in tables[5:149]:
         pull = t.findAll('td')
         #print("County = %s, Cases = %s, Deaths = %s" % \
          #     (pull[0].text, pull[1].text, pull[2].text))
@@ -25,7 +25,7 @@ for t in tables[5:148]:
 
 file.close()
 
-if (tables[5].find('td').text) == 'Fulton' and (tables[147].find('td').text) == 'Unknown':
+if (tables[5].find('td').text) == 'Fulton' and (tables[148].find('td').text) == 'Unknown':
     print("Georgia scraper is complete.\n")
 else:
     print("ERROR: Must fix Georgia scraper.\n")

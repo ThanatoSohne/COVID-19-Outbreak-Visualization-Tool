@@ -27,7 +27,7 @@ for tag in tags:
     
 file.close()
 
-if (tags[0].find('td').text) == 'Adair' and (tags[48].find('td').text) == 'Total':
+if (tags[0].find('td').text) == 'Adair' and (tags[52].find('td').text) == 'Total':
     print("Oklahoma scraper is complete.\n")
 else:
     print("ERROR: Must fix Oklahoma scraper.\n")
