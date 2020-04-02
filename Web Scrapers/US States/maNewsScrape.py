@@ -26,3 +26,7 @@ for t in range(0,15):
 
 file.close()
      
+if (tags[0].get_text().split(': ')[0]) == 'Barnstable' and (tags[14].get_text().split(': ')[0]) == 'Unknown':
+    print("Massachusetts scraper is complete.\n")
+else:
+    print("ERROR: Must fix Massachusetts scraper.\n")

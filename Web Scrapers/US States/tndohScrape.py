@@ -15,8 +15,8 @@ colTable = site_parse.find("div", {"class": "row parsys_column tn-3cols"}).findA
 
 fatal = colTable.find('tr')
 fa = fatal.get_text().split('\n')
-faStr = fa.pop(0)
-faNo = fa.pop(0)
+faStr = fa[0]
+faNo = fa[1]
 
 tags = tables.findAll('tr')
 
@@ -26,9 +26,9 @@ headers = "County, Positive Cases \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[1:]:
+for tag in tags[1:98]:
     pull = tag.findAll('p')
-    print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
+    #print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
     
     file.write(pull[0].text + ", " + pull[1].text.replace(',','') + "\n")
 
@@ -36,3 +36,13 @@ file.write("\n")
 file.write(faStr + ", " + faNo + "\n")
 
 file.close()
+
+if (tags[1].find('p').text) == 'Anderson' and (tags[97].find('p').text) == 'Unknown':
+    print("Tennessee scraper is complete.\n")
+else:
+    print("ERROR: Must fix Tennessee scraper.\n")
+
+
+
+
+

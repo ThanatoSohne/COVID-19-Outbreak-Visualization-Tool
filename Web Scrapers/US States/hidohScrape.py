@@ -30,38 +30,9 @@ for t in tags[2:9]:
     #print(pull[0].text, pull[1].text.split(' (')[0], pull[2].text.split(' (')[0], pull[3].text.split(' (')[0])
     file.write(pull[0].text+", "+pull[1].text.split(' (')[0]+", "+pull[2].text.split(' (')[0]+", "+pull[3].text.split(' (')[0]+"\n")
 
-#total = pull[1].split(': ')[0]
-#toNo = pull[1].split(': ')[1]
-#totalNo = toNo.split(' (')[0]
-#
-#hawaii = pull[2].split(': ')[0]
-#hTo = pull[2].split(': ')[1]
-#hawaiiT = hTo.split(' (')[0]
-#file.write(hawaii + ", " + hawaiiT + "\n")
-#
-#honolulu = pull[3].split(': ')[0]
-#honTo = pull[3].split(': ')[1]
-#honoluluT = honTo.split(' (')[0]
-#file.write(honolulu + ", " + honoluluT + "\n")
-#
-#kauai = pull[4].split(': ')[0]
-#kTo = pull[4].split(': ')[1]
-#kauaiT = kTo.split(' (')[0]
-#file.write(kauai + ", " + kauaiT + "\n")
-#
-#maui = pull[5].split(': ')[0]
-#mTo = pull[5].split(': ')[1]
-#mauiT = mTo.split(' (')[0]
-#file.write(maui + ", " + mauiT + "\n")
-#
-#pend = pull[6].split(': ')[0]
-#pTo = pull[6].split(': ')[1]
-#pendT = [pTo[0].split('|')]
-#pendNo = pendT.pop()
-#fin = ''.join(pendNo)
-#file.write(pend + ", " + fin + "\n")
-#
-#file.write(total + ", " + totalNo + "\n")
-#file.write(mort.get_text() + "\n")
-
 file.close()
+
+if (tags[2].find('td').text) == 'Hawaii' and (tags[8].find('td').text) == 'Total (new)':
+    print("Hawai'i scraper is complete.\n")
+else:
+    print("ERROR: Must fix Hawai'i scraper.\n")

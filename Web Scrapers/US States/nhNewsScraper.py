@@ -26,3 +26,10 @@ for t in range(0,9):
 
 file.close()
      
+if (tags[0].get_text().split(': ')[0]) == 'Rockingham' and (tags[8].get_text().split(': ')[0]) == 'Sullivan':
+    print("New Hampshire scraper is complete.\n")
+else:
+    print("ERROR: Must fix New Hampshire scraper.\n")
+
+
+

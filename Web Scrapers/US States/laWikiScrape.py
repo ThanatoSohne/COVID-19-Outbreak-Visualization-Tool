@@ -26,9 +26,14 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[61:118]:
+for h in hold[64:121]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3].replace(',','') + ", " + take[5].replace(',','') + "\n")
     #file.writerow(take[1], take[3], take[5])
 
 file.close()
+
+if (hold[64].split('\n')[1]) == 'Acadia' and (hold[120].split('\n')[1]) == 'Under Investigation':
+    print("Louisiana scraper is complete.\n")
+else:
+    print("ERROR: Must fix Louisiana scraper.\n")

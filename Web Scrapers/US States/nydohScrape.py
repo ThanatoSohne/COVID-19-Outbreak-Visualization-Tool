@@ -22,7 +22,7 @@ headers = "County, Positive Cases \n"
 file = open(csvfile, "w", encoding = 'utf-8')
 file.write(headers)
 
-for tag in tags[1:57]:
+for tag in tags[1:58]:
     pull = tag.findAll('td')
     print("County = %s, Positive Cases = %s" % \
           (pull[0].text, pull[1].text))
@@ -30,3 +30,11 @@ for tag in tags[1:57]:
     file.write(pull[0].text + ", " + pull[1].text.replace(',','') + "\n")
 
 file.close()
+
+if (tags[1].find('td').text) == 'Albany' and (tags[57].find('td').text) == 'Wyoming':
+    print("New York scraper is complete.\n")
+else:
+    print("ERROR: Must fix New York scraper.\n")
+
+
+

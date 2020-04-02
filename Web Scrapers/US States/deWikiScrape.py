@@ -32,3 +32,13 @@ file.write(newCastle + ", " + newC + "\n")
 file.write(suss + ", " + sussC + "\n")
 
 file.close()
+
+if kent == 'Kent' and suss == 'Sussex':
+    print("Delaware scraper is complete.\n")
+else:
+    print("ERROR: Must fix Delaware scraper\n")
+
+
+
+
+

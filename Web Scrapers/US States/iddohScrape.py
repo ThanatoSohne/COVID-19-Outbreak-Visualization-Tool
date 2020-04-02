@@ -41,7 +41,10 @@ for c, a, d in zip(holdCo, holdCas, holdDe):
     
 file.close()
 
-
+if holdCo[0] == 'Bonner' and holdCo[29] == 'TOTAL':
+    print("Idaho scraper is complete.\n")
+else:
+    print("ERROR: Must fix Idaho scraper.\n")
 
 
 

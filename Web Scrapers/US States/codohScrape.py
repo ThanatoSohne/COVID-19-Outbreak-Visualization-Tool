@@ -15,13 +15,16 @@ test = tables.findAll('tr')
 
 hold = []
 
+adamsTest = test[1].find('td').text
+outTest = test[52].find('td').text
+
 csvfile = "COVID-19_cases_coDOH.csv"
 headers = "County, Positive Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in test[1:50]:
+for t in test[1:53]:
         pull = t.findAll('td')
         #print("County = %s, Positive Cases = %s, Deaths = %s" % \
          #     (pull[0].text, pull[1].text, pull[2].text))
@@ -29,5 +32,9 @@ for t in test[1:50]:
 
 file.close()
 
+if adamsTest == 'Adams' and outTest == 'Out of state':
+    print("Colorado scraper is complete.\n")
+else:
+    print("ERROR: Must fix Colorado scraper.\n")
 
 

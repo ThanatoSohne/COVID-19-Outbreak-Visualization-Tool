@@ -195,5 +195,9 @@ file.write(uC + ", " + uCC + ", " + uR + ", " + uD + "\n")
 
 file.close()
 
+if anC == 'Androscoggin' and uC == 'Unknown':
+    print("Maine scraper is complete.\n")
+else:
+    print("ERROR: Must fix Maine scraper.\n")
 
     

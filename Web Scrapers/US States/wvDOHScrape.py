@@ -48,8 +48,15 @@ file.write(cNo[50] + ", " + cNo[51].strip('(),') + "\n")
 file.write(cNo[52] + ", " + cNo[53].strip('(),') + "\n")
 file.write(cNo[54] + ", " + cNo[55].strip('(),') + "\n")
 file.write(cNo[56] + ", " + cNo[57].strip('(),') + "\n")
+file.write(cNo[58] + ", " + cNo[59].strip('(),') + "\n")
+file.write(cNo[60] + ", " + cNo[61].strip('(),') + "\n")
 
 file.close()
+
+if cNo[4] == 'Barbour' and cNo[60] == 'Wood':
+    print("West Virginia scraper is complete.")
+else:
+    print("ERROR: Must fix West Virginia scraper.")
 
 
 

@@ -27,9 +27,20 @@ for tag in tags[:10]:
     #print("County = %s, No. of Cases = %s, Deaths = %s" % (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
-for tag in tags[11:125]:
+for tag in tags[11:136]:
     pull = tag.findAll('td')
     #print("County = %s, No. of Cases = %s, Deaths = %s" % (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
+
+if (tags[0].find('td').text) == 'Harris' and (tags[135].find('td').text) == 'Wood':
+    print("Texas scraper is complete.\n")
+else:
+    print("ERROR: Must fix Texas scraper.\n")
+
+
+
+
+
+

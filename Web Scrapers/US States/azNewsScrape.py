@@ -51,8 +51,8 @@ pinalN = pin[1]
 #print("County = %s, Confirmed Cases = %s" % (pinalC, pinalN))
 file.write(pinalC + ", " + pinalN + "\n")
 
-cochise = cases[99:109].split(': ')
-cochiseC = cochise[0]
+cochise = cases[99:110].split(': ')
+cochiseC = cochise[0].strip('7')
 cochiseN = cochise[1]
 #print("County = %s, Confirmed Cases = %s" % (cochiseC, cochiseN))
 file.write(cochiseC + ", " + cochiseN + "\n")
@@ -125,20 +125,23 @@ gilN = gilaR[1]
 file.write(gilaC + ", " + gilaN + "\n")
 
 navajoN = cases[205:223].split(': ')
-nnC = green[0]
-nnN = green[1]
-file.write(nnC + ", " + nnN + "\n")
+nnC = navajoN[0]
+nnN = navajoN[1]
+file.write("N"+nnC + ", " + nnN + "\n")
 
 saltR = cases[239:].split(': ')
 saltC = saltR[0]
 saltN = saltR[1]
-file.write(saltC + ", " + saltN + "\n")
+file.write("S"+saltC + ", " + saltN + "\n")
 
 file.write("Deaths in Arizona = %s" % death)
 
 file.close()
 
-
+if pimaC == 'Pima' and ("S"+saltC) == 'Salt River Pima-Maricopa Indian Community':
+    print("Arizona scraper is complete.\n")
+else:
+    print("ERROR: Must fix Arizona scraper.\n")
 
 
 

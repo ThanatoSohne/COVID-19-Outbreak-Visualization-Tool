@@ -11,6 +11,4 @@ newLife = open('DC-COVID-19.xlsx', 'wb')
 for chunk in download.iter_content(100000):
     newLife.write(chunk)
 
-
-
 newLife.close()

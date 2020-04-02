@@ -21,9 +21,14 @@ file.write(headers)
 
 for tag in tags[1:]:
     pull = tag.findAll('td')
-    print("County = %s, Cases = %s, Deaths = %s" % \
-          (pull[0].text, pull[1].text, pull[2].text))
+    #print("County = %s, Cases = %s, Deaths = %s" % \
+     #     (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
     
+if (tags[1].find('td').text) == 'Bernalillo County' and (tags[33].find('td').text) == 'Valencia County':
+    print("New Mexico scraper is complete.\n")
+else:
+    print("ERROR: Must fix New Mexico scraper.\n")
+

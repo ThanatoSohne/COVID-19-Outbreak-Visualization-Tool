@@ -21,3 +21,8 @@ for a in attr:
     file.write(a.get('attributes').get('NAME') + ", " + str(a.get('attributes').get('POSITIVE')) + ", " + str(a.get('attributes').get('DEATHS')) + "\n")
 
 file.close()
+
+if attr[0].get('attributes').get('NAME') == 'Adams' and attr[71].get('attributes').get('NAME') == 'Wood':
+    print("Wisconsin scraper is complete.")
+else:
+    print("ERROR: Must fix Wisconsin scraper.")

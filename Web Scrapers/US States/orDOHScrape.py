@@ -26,3 +26,9 @@ for tag in tags:
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + ", " + pull[3].text + "\n")
 
 file.close()
+
+if (tags[0].find('td').text) == 'Baker' and (tags[36].find('td').text) == 'Total':
+    print("Oregon Scraper is complete.\n")
+else:
+    print("ERROR: Must fix Oregon scraper.\n")
+

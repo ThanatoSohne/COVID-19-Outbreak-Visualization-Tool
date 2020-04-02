@@ -25,8 +25,17 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
     
-for h in hold[67:90]:
+for h in hold[70:94]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + "\n")
 
 file.close()
+
+if (hold[70].split('\n')[1]) == 'Anne Arundel' and (hold[93].split('\n')[1]) == 'Unassigned':
+    print("Maryland scraper is complete.\n")
+else:
+    print("ERROR: Must fix Maryland scraper.\n")
+
+
+
+

@@ -9,7 +9,9 @@ mnClient = req(mnDOH)
 site_parse = soup(mnClient.read(), "lxml")
 mnClient.close()
 
-tables = site_parse.find("div", {"class": "clearfix"}).find("tbody").findAll('td')
+tables = site_parse.find("div", {"class": "clearfix"}).findAll("tbody")[2]
+
+tags = tables.findAll('td')
 
 csvfile = "COVID-19_cases_mndoh.csv"
 headers = "County, Cases \n"
@@ -19,7 +21,7 @@ file.write(headers)
 
 hold = []
 
-for td in tables:
+for td in tags:
     take = td.get_text()
     hold.append(take)
 
@@ -71,5 +73,19 @@ file.write(hold[88] + ", " + hold[89] + "\n")
 file.write(hold[90] + ", " + hold[91] + "\n")
 file.write(hold[92] + ", " + hold[93] + "\n")
 file.write(hold[94] + ", " + hold[95] + "\n")
+file.write(hold[96] + ", " + hold[97] + "\n")
+file.write(hold[98] + ", " + hold[99] + "\n")
+file.write(hold[100] + ", " + hold[101] + "\n")
+file.write(hold[102] + ", " + hold[103] + "\n")
+file.write(hold[104] + ", " + hold[105] + "\n")
+file.write(hold[106] + ", " + hold[107] + "\n")
+file.write(hold[108] + ", " + hold[109] + "\n")
 
 file.close()
+
+if hold[0] == 'Anoka' and hold[108] == 'Yellow Medicine':
+    print("Minnesota scraper is complete.\n")
+else:
+    print("ERROR: Must fix Minnesota scraper.\n")
+
+

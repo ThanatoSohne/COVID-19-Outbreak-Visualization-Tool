@@ -24,3 +24,8 @@ for t in tags:
     file.write(pull[0] + ", " + pull[1] + "\n")
 
 file.close()
+
+if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[20].get_text().split(": ")[0]) == 'Hill':
+    print("Montana scraper is complete.\n")
+else:
+    print("ERROR: Must fix Montana scraper.\n")

@@ -32,52 +32,57 @@ for li in tags:
 
 fair = hold[0].split(' County ')
 #print(fair)
-fairC = fair.pop(0)
-fairN = fair.pop()
+fairC = fair[0]
+fairN = fair[1]
 file.write(fairC + ", " + fairN.replace(',', '') + "\n")
 
 
 hart = hold[1].split(' County ')
 #print(hart)
-hartC = hart.pop(0)
-hartN = hart.pop()
+hartC = hart[0]
+hartN = hart[1]
 file.write(hartC + ", " + hartN.replace(',', '') + "\n")
 
 litch = hold[2].split(' County ')
 #print(litch)
-litC = litch.pop(0)
-litN = litch.pop()
+litC = litch[0]
+litN = litch[1]
 file.write(litC + ", " + litN.replace(',', '') + "\n")
 
 midd = hold[3].split(' County ')
 #print(midd)
-midC = midd.pop(0)
-midN = midd.pop()
+midC = midd[0]
+midN = midd[1]
 file.write(midC + ", " + midN.replace(',', '') + "\n")
 
 newHa = hold[4].split(' County ')
 #print(newHa)
-nhC = newHa.pop(0)
-nhN = newHa.pop()
+nhC = newHa[0]
+nhN = newHa[1]
 file.write(nhC + ", " + nhN.replace(',', '') + "\n")
 
 newLo = hold[5].split(' County ')
 #print(newLo)
-nlC = newLo.pop(0)
-nlN = newLo.pop()
+nlC = newLo[0]
+nlN = newLo[1]
 file.write(nlC + ", " + nlN.replace(',', '') + "\n")
 
 toll = hold[6].split(' County ')
 #print(toll)
-tollC = toll.pop(0)
-tollN = toll.pop()
+tollC = toll[0]
+tollN = toll[1]
 file.write(tollC + ", " + tollN.replace(',', '') + "\n")
 
 wind = hold[7].split(' County ')
 #print(wind)
-windC = wind.pop(0)
-windN = wind.pop()
+windC = wind[0]
+windN = wind[1]
 file.write(windC + ", " + windN.replace(',', '') + "\n")
 
 file.close()
+
+if fairC == 'Fairfield' and windC == 'Windham':
+    print("Connecticut scraper is complete.\n")
+else:
+    print("ERROR: Must fix Connecticut scraper.\n")
     

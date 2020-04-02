@@ -26,3 +26,11 @@ for tag in tags[1:]:
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
+
+if (tags[1].find('td').text) == 'Adams' and (tags[60].find('td').text.strip()) == 'York':
+    print("Pennsylvania scraper is complete.\n")
+else:
+    print("ERROR: Must fix Pennsylvania scraper.\n")
+
+
+

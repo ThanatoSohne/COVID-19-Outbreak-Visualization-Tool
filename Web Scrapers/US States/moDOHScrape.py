@@ -35,3 +35,8 @@ for ta in tablesDe[1:]:
     file.write(pullDe[0].text + ", " + pullDe[1].text + "\n")
 
 file.close()
+
+if (tables[1].find('td').text) == 'Adair' and (tables[118].find('td').text) == 'TBD':
+    print("Missouri scraper is complete.\n")
+else:
+    print("ERROR: Must fix Missour scraper.\n")

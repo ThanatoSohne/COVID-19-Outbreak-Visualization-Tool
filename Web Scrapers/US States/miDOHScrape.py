@@ -19,10 +19,15 @@ headers = "County, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[1:66]:
+for tag in tags[1:71]:
     pull = tag.findAll('td')
-    print("County = %s, Cases = %s, Deaths = %s" % \
-          (pull[0].text, pull[1].text, pull[2].text))
+    #print("County = %s, Cases = %s, Deaths = %s" % \
+     #     (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
+
+if (tags[1].find('td').text.strip()) == 'Allegan' and (tags[70].find('td').text.strip()) == 'Out of State':
+    print("Michigan scraper is complete.\n")
+else:
+    print("ERROR: Must fix Michigan scraper.\n")

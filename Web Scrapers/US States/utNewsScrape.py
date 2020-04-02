@@ -25,3 +25,14 @@ for t in range(0,13):
      file.write(tags[t].get_text().split('- ')[0] + ", " + tags[t].get_text().split('- ')[1] + "\n")
 
 file.close()
+
+if (tags[0].get_text().split('- ')[0].strip()) == 'Bear River' and (tags[12].get_text().split('- ')[0].strip()) == 'Weber-Morgan county':
+    print("Utah scraper is complete.")
+else:
+    print("ERROR: Must fix Utah scraper.")
+
+
+
+
+
+

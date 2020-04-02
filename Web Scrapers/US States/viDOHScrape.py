@@ -38,3 +38,9 @@ file.write(neg + ", " + negNo + "\n")
 file.write(pend + ", " + pendNo + "\n")
 
 file.close()
+
+if (pos == 'Positive') and (pend == 'Pending'):
+    print("US Virgin Islands scraper is complete.")
+else:
+    print("ERROR: Must fix US Virgin Islands scraper.")
+

@@ -14,12 +14,18 @@ attr = rJS.get('features')
 csvfile = "COVID-19_cases_aldoh.csv"
 headers = "County, Positive Cases, Deaths \n"
 
+test = []
+
 file = open(csvfile, "w")
 file.write(headers)
 
 for a in attr:
     file.write(a.get('attributes').get('CNTYNAME') + ", " + str(a.get('attributes').get('CONFIRMED')) + ", " + str(a.get('attributes').get('DIED')) + "\n")
-
+    
+    if(attr[0].get('attributes').get('CNTYNAME')) == 'Autauga':
+        test = True
+    else:
+        test = False
 
 #for tag in tags[2:23]:
 #    pull = tag.findAll('p')
@@ -28,3 +34,8 @@ for a in attr:
 #    file.write(pull[0].text + ", " + pull[1].text + "\n")
 #
 file.close()
+
+if test == True:
+    print("Alabama scraper is complete.\n")
+else:
+    print("Must fix Alabama scraper.\n")

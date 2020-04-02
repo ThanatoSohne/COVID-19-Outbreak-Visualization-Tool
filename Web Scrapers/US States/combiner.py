@@ -28,47 +28,52 @@ def akScrape():
     
         anch = tags[1].text.split('\n')
         anR = anch[1].split('\xa0')
-        anR1 = anR[1]
+        anR1 = ''.join(anR[1:3])
         anT = anch[6]
         f.write(anR1 + ", " + anT + "\n")
-    
+        
         gulf = tags[5].text.split('\n')
         gulfR = gulf[1].split('\xa0')
         gulfR1 = gulfR[1]
         gulfT = gulf[6]
         f.write(gulfR1 + ", " + gulfT +"\n")
-    
-        intr = tags[10].text.split('\n')
+        
+        intr = tags[11].text.split('\n')
         intrR = intr[1].split('\xa0')
         intrR1 = intrR[1]
         intrT = intr[6]
         f.write(intrR1 + ", " + intrT + "\n")
-    
-        matsu = tags[13].text.split('\n')
+        
+        matsu = tags[14].text.split('\n')
         matsuR = matsu[1].split('\xa0')
         matsuR1 = matsuR[1]
         matsuT = matsu[6]
         f.write(matsuR1 + ", " + matsuT + "\n")
-    
-        nort = tags[15].text.split('\n')
+        
+        nort = tags[17].text.split('\n')
         nortR = nort[1].split('\xa0')
         nortR1 = nortR[1]
         nortT = nort[6]
         f.write(nortR1 + ", " + nortT + "\n")
-    
-        se = tags[16].text.split('\n')
+        
+        se = tags[18].text.split('\n')
         seR = se[1].split('\xa0')
         seR1 = seR[1]
         seT = se[6]
         f.write(seR1 + ", " + seT + "\n")
-    
-        sw = tags[19].text.split('\n')
+        
+        sw = tags[21].text.split('\n')
         swR = sw[1].split('\xa0')
         swR1 = swR[1]
         swT = sw[6]
         f.write(swR1 + ", " + swT + "\n")
 
     f.close()
+    
+    if (anR1 == 'Municipality of Anchorage' and swR1 == 'Southwest'):
+        print("Alaska scraper complete.")
+    else:
+        print("ERROR: Must fix Alaska scraper.")
 
 def alScrape():
     
@@ -80,6 +85,8 @@ def alScrape():
     
     attr = rJS.get('features')
     
+    test = []
+    
     csvfile = "COVID-19_cases_aldoh.csv"
     headers = "County, Positive Cases, Deaths \n"
     
@@ -88,8 +95,17 @@ def alScrape():
     
     for a in attr:
         file.write(a.get('attributes').get('CNTYNAME') + ", " + str(a.get('attributes').get('CONFIRMED')) + ", " + str(a.get('attributes').get('DIED')) + "\n")
-    
+        
+        if(attr[0].get('attributes').get('CNTYNAME')) == 'Autauga':
+            test = True
+        else:
+            test = False
     file.close()
+    
+    if test == True:
+        print("Alabama scraper is complete.")
+    else:
+        print("ERROR: Must fix Alabama scraper.")
     
 def arScrape():
     
@@ -116,140 +132,54 @@ def arScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[39:90]:
+    for h in hold[42:97]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] +"\n")
     
     file.close()    
     
+    if (hold[42].split('\n')[1]) == 'Arkansas' and (hold[96].split('\n')[1]) == 'Woodruff':
+        print("Arkansas scraper is complete.")
+    else:
+        print("ERROR: Must fix Arkansas scraper.")
+    
 def azScrape():
     
-    azNews = 'https://www.abc15.com/news/state/coronavirus-in-arizona-tracking-latest-cases-covid-19-updates-in-our-state/'
+    azWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Arizona'
+
+    azClient = req(azWiki)
     
-    bypass = {'User-Agent': 'Mozilla/5.0'}
+    site_parse = soup(azClient.read(), "lxml")
+    azClient.close()
     
-    azClient = Request(azNews, headers=bypass)
-    azPage = urlopen(azClient)
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
     
-    site_parse = soup(azPage.read(), 'lxml')
-    azPage.close()
-    
-    tables = site_parse.find("div", {"class": "RichTextArticleBody-body"})
-    
-    death = tables.find_all('p')[4].get_text()[0:20].split(': ')[1]
-    
-    cases = tables.find_all('p')[6].get_text()
-    
-    csvfile = "COVID-19_cases_azNews.csv"
-    headers = "County, Confirmed Cases \n"
+    csvfile = "COVID-19_cases_azWiki.csv"
+    headers = "County, Confirmed Cases, Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
     
-    pi = cases[59:68].split(': ')
-    pimaC = pi[0]
-    pimaN = pi[1]
-    #print("County = %s, Confirmed Cases = %s" % (pimaC, pimaN))
-    file.write(pimaC + ", " + pimaN + "\n")
     
-    mari = cases[25:38].split(': ')
-    mariC = mari[0]
-    mariN = mari[1]
-    #print("County = %s, Confirmed Cases = %s" % (mariC, mariN))
-    file.write(mariC + ", " + mariN + "\n")
+    hold = []
     
-    pin = cases[38:47].split(': ')
-    pinalC = pin[0]
-    pinalN = pin[1]
-    #print("County = %s, Confirmed Cases = %s" % (pinalC, pinalN))
-    file.write(pinalC + ", " + pinalN + "\n")
+    for t in tables:
+            pull = t.findAll('tr')
+            for p in pull:
+                take = p.get_text()
+                hold.append(take)
     
-    cochise = cases[99:109].split(': ')
-    cochiseC = cochise[0]
-    cochiseN = cochise[1]
-    #print("County = %s, Confirmed Cases = %s" % (cochiseC, cochiseN))
-    file.write(cochiseC + ", " + cochiseN + "\n")
-    
-    santaCruz = cases[118:131].split(': ')
-    santaC = santaCruz[0]
-    santaN = santaCruz[1]
-    #print("County = %s, Confirmed Cases = %s" % (santaC, santaN))
-    file.write(santaC + ", " + santaN + "\n")
-    
-    navajo = cases[68:78].split(': ')
-    navajoC = navajo[0]
-    navajoN = navajo[1]
-    #print("County = %s, Confirmed Cases = %s" % (navajoC, navajoN))
-    file.write(navajoC + ", " + navajoN + "\n")
-    
-    graham = cases[109:118].split(': ')
-    grahamC = graham[0]
-    grahamN = graham[1]
-    #print("County = %s, Confirmed Cases = %s" % (grahamC, grahamN))
-    file.write(grahamC + ", " + grahamN + "\n")
-    
-    coco = cases[47:59].split(': ')
-    cocoC = coco[0]
-    cocoN = coco[1]
-    #print("County = %s, Confirmed Cases = %s" % (cocoC, cocoN))
-    file.write(cocoC + ", " + cocoN + "\n")
-    
-    yuma = cases[131:138].split(': ')
-    yumaC = yuma[0]
-    yumaN = yuma[1]
-    #print("County = %s, Confirmed Cases = %s" % (yumaC, yumaN))
-    file.write(yumaC + ", " + yumaN + "\n")
-    
-    apache = cases[89:99].split(': ')
-    apacheC = apache[0]
-    apacheN = apache[1]
-    #print("County = %s, Confirmed Cases = %s" % (apacheC, apacheN))
-    file.write(apacheC + ", " + apacheN + "\n")
-    
-    yava = cases[78:89].split(': ')
-    yavaC = yava[0]
-    yavaN = yava[1]
-    #print("County = %s, Confirmed Cases = %s" % (yavaC, yavaN))
-    file.write(yavaC + ", " + yavaN + "\n")
-    
-    mohave = cases[138:147].split(': ')
-    mohC = mohave[0]
-    mohN = mohave[1]
-    file.write(mohC + ", " + mohN + "\n")
-    
-    lapaz = cases[147:156].split(': ')
-    lpC = lapaz[0]
-    lpN = lapaz[1]
-    file.write(lpC + ", " + lpN + "\n")
-    
-    gila = cases[156:163].split(': ')
-    gilaC = gila[0]
-    gilaN = gila[1]
-    file.write(gilaC + ", " + gilaN + "\n")
-    
-    green = cases[163:174].split(': ')
-    glC = green[0]
-    glN = green[1]
-    file.write(glC + ", " + glN + "\n")
-    
-    gilaR = cases[174:205].split(': ')
-    gilC = gilaR[0]
-    gilN = gilaR[1]
-    file.write(gilaC + ", " + gilaN + "\n")
-    
-    navajoN = cases[205:223].split(': ')
-    nnC = green[0]
-    nnN = green[1]
-    file.write(nnC + ", " + nnN + "\n")
-    
-    saltR = cases[239:].split(': ')
-    saltC = saltR[0]
-    saltN = saltR[1]
-    file.write(saltC + ", " + saltN + "\n")
-    
-    file.write("Deaths in Arizona = %s" % death)
+    for h in hold[39:54]:
+        take = h.split('\n')
+        file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
     
     file.close()
+    
+    if (hold[39].split('\n')[1]) == 'Maricopa' and (hold[53].split('\n')[1]) == 'Greenlee':
+        print("Arizona scraper is complete.")
+    else:
+        print("ERROR: Must fix Arizona scraper.")
+    
     
 def caScrape():
     
@@ -276,12 +206,17 @@ def caScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[:47]:
+    for h in hold[:50]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + "\n")
                 
     
     file.close()
+    
+    if (hold[0].split('\n')[1]) == 'Los Angeles' and (hold[49].split('\n')[1]) == 'Tuolumne':
+        print("California scraper is complete.")
+    else:
+        print("ERROR: Must fix California scraper.")
     
 def coScrape():
 
@@ -296,7 +231,8 @@ def coScrape():
     
     test = tables.findAll('tr')
     
-    hold = []
+    adamsTest = test[1].find('td').text
+    outTest = test[52].find('td').text
     
     csvfile = "COVID-19_cases_coDOH.csv"
     headers = "County, Positive Cases, Deaths \n"
@@ -304,13 +240,19 @@ def coScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in test[1:50]:
+    for t in test[1:53]:
             pull = t.findAll('td')
             #print("County = %s, Positive Cases = %s, Deaths = %s" % \
              #     (pull[0].text, pull[1].text, pull[2].text))
             file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if adamsTest == 'Adams' and outTest == 'Out of state':
+        print("Colorado scraper is complete.")
+    else:
+        print("ERROR: Must fix Colorado scraper.")
+
 
 def ctScrape():
     
@@ -344,54 +286,61 @@ def ctScrape():
     
     fair = hold[0].split(' County ')
     #print(fair)
-    fairC = fair.pop(0)
-    fairN = fair.pop()
+    fairC = fair[0]
+    fairN = fair[1]
     file.write(fairC + ", " + fairN.replace(',', '') + "\n")
     
     
     hart = hold[1].split(' County ')
     #print(hart)
-    hartC = hart.pop(0)
-    hartN = hart.pop()
+    hartC = hart[0]
+    hartN = hart[1]
     file.write(hartC + ", " + hartN.replace(',', '') + "\n")
     
     litch = hold[2].split(' County ')
     #print(litch)
-    litC = litch.pop(0)
-    litN = litch.pop()
+    litC = litch[0]
+    litN = litch[1]
     file.write(litC + ", " + litN.replace(',', '') + "\n")
     
     midd = hold[3].split(' County ')
     #print(midd)
-    midC = midd.pop(0)
-    midN = midd.pop()
+    midC = midd[0]
+    midN = midd[1]
     file.write(midC + ", " + midN.replace(',', '') + "\n")
     
     newHa = hold[4].split(' County ')
     #print(newHa)
-    nhC = newHa.pop(0)
-    nhN = newHa.pop()
+    nhC = newHa[0]
+    nhN = newHa[1]
     file.write(nhC + ", " + nhN.replace(',', '') + "\n")
     
     newLo = hold[5].split(' County ')
     #print(newLo)
-    nlC = newLo.pop(0)
-    nlN = newLo.pop()
+    nlC = newLo[0]
+    nlN = newLo[1]
     file.write(nlC + ", " + nlN.replace(',', '') + "\n")
     
     toll = hold[6].split(' County ')
     #print(toll)
-    tollC = toll.pop(0)
-    tollN = toll.pop()
+    tollC = toll[0]
+    tollN = toll[1]
     file.write(tollC + ", " + tollN.replace(',', '') + "\n")
     
     wind = hold[7].split(' County ')
     #print(wind)
-    windC = wind.pop(0)
-    windN = wind.pop()
+    windC = wind[0]
+    windN = wind[1]
     file.write(windC + ", " + windN.replace(',', '') + "\n")
     
     file.close()
+    
+    if fairC == 'Fairfield' and windC == 'Windham':
+        print("Connecticut scraper is complete.")
+    else:
+        print("ERROR: Must fix Connecticut scraper.")
+        
+
     
 def dcScrape():
     
@@ -400,11 +349,13 @@ def dcScrape():
     download = requests.get(dcFile)
     download.raise_for_status()
     
-    newLife = open('DC-COVID-19.xlsx', 'wb')
+    newLife = open('COVID-19-DC.xlsx', 'wb')
     for chunk in download.iter_content(100000):
         newLife.write(chunk)
     
     newLife.close()
+    
+    print("DC pull is complete.")
     
 def deScrape():
     
@@ -439,6 +390,11 @@ def deScrape():
     
     file.close()
     
+    if kent == 'Kent' and suss == 'Sussex':
+        print("Delaware scraper is complete.")
+    else:
+        print("ERROR: Must fix Delaware scraper.")
+    
 def flScrape():
     
     #Retrieved from Florida's opendata site https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-cases
@@ -448,11 +404,13 @@ def flScrape():
     download = requests.get(flFile)
     download.raise_for_status()
     
-    newLife = open('FLCOVID-19.csv', 'wb')
+    newLife = open('COVID-19-FL.csv', 'wb')
     for chunk in download.iter_content(100000):
         newLife.write(chunk)
     
     newLife.close()
+    
+    print("Florida pull complete.")
 
 def gaScrape():
     
@@ -471,13 +429,18 @@ def gaScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in tables[5:119]:
+    for t in tables[5:148]:
             pull = t.findAll('td')
-            print("County = %s, Cases = %s, Deaths = %s" % \
-                  (pull[0].text, pull[1].text, pull[2].text))
+            #print("County = %s, Cases = %s, Deaths = %s" % \
+            #      (pull[0].text, pull[1].text, pull[2].text))
             file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tables[5].find('td').text) == 'Fulton' and (tables[147].find('td').text) == 'Unknown':
+        print("Georgia scraper is complete.")
+    else:
+        print("ERROR: Must fix Georgia scraper.")
     
 def hiScrape():
     
@@ -505,6 +468,11 @@ def hiScrape():
     
     
     file.close()
+    
+    if (tags[2].find('td').text) == 'Hawaii' and (tags[8].find('td').text) == 'Total (new)':
+        print("Hawai'i scraper is complete.")
+    else:
+        print("ERROR: Must fix Hawai'i scraper.")
 
 
 def idScrape():
@@ -547,6 +515,12 @@ def idScrape():
         file.write(c + ", " + a + ", " + d + "\n")
         
     file.close()
+    
+    if holdCo[0] == 'Bonner' and holdCo[29] == 'TOTAL':
+        print("Idaho scraper is complete.")
+    else:
+        print("ERROR: Must fix Idaho scraper.")
+
 
 def ilScrape():
     
@@ -573,12 +547,17 @@ def ilScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    for h in hold[46:97]:
+    for h in hold[49:105]:
         take = h.split('\n')
         #print(take[1], take[3], take[5], take[7], take[9])
         file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + ", " + take[9] + "\n")
     
     file.close()
+    
+    if (hold[49].split('\n')[1]) == 'Adams' and (hold[104].split('\n')[1]) == 'Woodford':
+        print("Illinois scraper is complete.")
+    else:
+        print("ERROR: Must fix Illinois scraper.")
     
 
 def inScrape():
@@ -606,11 +585,16 @@ def inScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[36:104]:
+    for h in hold[40:122]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
     
     file.close()
+    
+    if (hold[40].split('\n')[1]) == 'Adams' and (hold[121].split('\n')[1]) == 'Whitley':
+        print("Indiana scraper is complete.")
+    else:
+        print("ERROR: Must fix Indiana scraper.")
     
 def ioScrape():
     
@@ -637,12 +621,16 @@ def ioScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[39:76]:
+    for h in hold[42:99]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
     
     file.close()
     
+    if (hold[42].split('\n')[1]) == 'Adair' and (hold[98].split('\n')[1]) == 'Wright':
+        print("Iowa scraper is complete.")
+    else:
+        print("ERROR: Must fix Iowa Scraper.")
 
 def kaScrape():
     
@@ -669,11 +657,17 @@ def kaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[42:82]:
+    for h in hold[45:88]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[4] + "\n")
     
     file.close()
+    
+    if (hold[45].split('\n')[1]) == 'Atchison' and (hold[87].split('\n')[1]) == 'Wyandotte':
+        print("Kansas scraper is complete.")
+    else:
+        print("ERROR: Must fix Kansas scraper.")
+
     
 def kyScrape():
     
@@ -692,309 +686,24 @@ def kyScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    tag = tables.find_all('p')[12:60]
-    
+    tag = tables.find_all('p')[12:84]
+
     hold = []
     
     for t in tag:
         take = t.get_text()
         hold.append(take)
-    
-    allen = hold[0].split(': ')
-    allC = allen[0]
-    allN = allen[1].split(' ')
-    allNo = allN[0]
-    file.write(allC + ", " + allNo + "\n")
-    
-    ander = hold[1].split(': ')
-    andC = ander[0]
-    andN = ander[1].split(' ')
-    andNo = andN[0]
-    andD = andN[2]
-    file.write(andC + ", " + andNo + ", " + andD + "\n")
-    
-    boone = hold[2].split(': ')
-    booneC = boone[0]
-    booneN = boone[1].split(' ')
-    booneNo = booneN[0].split('\xa0')[0]
-    file.write(booneC + ", " + booneNo + "\n")
-    
-    bour = hold[3].split(': ')
-    bourC = bour[0]
-    bourN = bour[1].split(' ')
-    bourNo = bourN[0]
-    bourD = bourN[2]
-    file.write(bourC + ", " + bourNo + ", " + bourD + "\n")
-    
-    breat = hold[4].split(': ')
-    breatC = breat[0]
-    breatN = breat[1].split(' ')
-    breatNo = breatN[0]
-    file.write(breatC + ", " + breatNo + "\n")
-    
-    bull = hold[5].split(': ')
-    bullC = bull[0]
-    bullN = bull[1].split(' ')
-    bullNo = bullN[0]
-    file.write(bullC + ", " + bullNo + "\n")
-    
-    camp = hold[6].split(': ')
-    campC = camp[0]
-    campN = camp[1].split(' ')
-    campNo = campN[0].split('\xa0')[0]
-    file.write(campC + ", " + campNo + "\n")
-    
-    call = hold[7].split(':')
-    callC = call[0]
-    callN = call[1].split(' ')
-    callNo = callN[0].split('\xa0')[1]
-    file.write(callC + ", " + callNo + "\n")
-    
-    christos = hold[8].split(': ')
-    chrC = christos[0]
-    chrN = christos[1].split(' ')
-    chrNo = chrN[0].split('\xa0')[0]
-    file.write(chrC + ", " + chrNo + "\n")
-    
-    clark = hold[9].split(': ')
-    clrC = clark[0]
-    clrN = clark[1].split(' ')
-    clrNo = clrN[0].split('\xa0')[0]
-    file.write(clrC + ", " + clrNo + "\n")
-    
-    dav = hold[10].split(':')
-    davC = dav[0]
-    davN = dav[1].split(' ')
-    davNo = davN[0].split('\xa0')[1]
-    file.write(davC + ", " + davNo + "\n")
-    
-    fay = hold[11].split(':')
-    fayC = fay[0]
-    fayN = fay[1].split(' ')
-    fayNo = fayN[0].split('\xa0')[1]
-    fayD = fayN[1].split('\xa0')[0]
-    file.write(fayC + ", " + fayNo + ", " + fayD + "\n")
-    
-    floyd = hold[12].split(': ')
-    flyC = floyd[0]
-    flyN = floyd[1].split(' ')
-    flyNo = flyN[0]
-    file.write(flyC + ", " + flyNo + "\n")
-    
-    frank = hold[13].split(': ')
-    frkC = frank[0]
-    frkN = frank[1].split(' ')
-    frkNo = frkN[0].split('\xa0')[0]
-    file.write(frkC + ", " + frkNo + "\n")
-    
-    gray = hold[14].split(': ')
-    grayC = gray[0]
-    grayN = gray[1].split(' ')
-    grayNo = grayN[0]
-    file.write(grayC + ", " + grayNo + "\n")
-    
-    hard = hold[15].split(':')
-    hardC = hard[0]
-    hardN = hard[1].split(' ')
-    hardNo = hardN[0].split('\xa0')[1]
-    file.write(hardC + ", " + hardNo + "\n")
-    
-    harr = hold[16].split(': ')
-    harrC = harr[0]
-    harrN = harr[1].split(' ')
-    harrNo = harrN[0]
-    file.write(harrC + ", " + harrNo + "\n")
-    
-    hend = hold[17].split(':')
-    henC = hend[0]
-    henN = hend[1].split(' ')
-    henNo = henN[0].split('\xa0')[1]
-    file.write(henC + ", " + henNo + "\n")
-    
-    hop = hold[18].split(': ')
-    hopC = hop[0]
-    hopN = hop[1].split(' ')
-    hopNo = hopN[0].split('\xa0')[0]
-    hopD = hopN[1]
-    file.write(hopC + ", " + hopNo + ", " + hopD + "\n")
-    
-    jeff = hold[19].split(': ')
-    jeffC = jeff[0]
-    jeffN = jeff[1].split(' ')
-    jeffNo = jeffN[0].split('\xa0')[0]
-    jeffD = jeffN[1].split('\xa0')[0]
-    file.write(jeffC + ", " + jeffNo + ", " + jeffD + "\n")
-    
-    jess = hold[20].split(': ')
-    jessC = jess[0]
-    jessN = jess[1].split(' ')
-    jessNo = jessN[0]
-    file.write(jessC + ", " + jessNo + "\n")
-    
-    kent = hold[21].split(':')
-    kenC = kent[0]
-    kenN = kent[1].split(' ')
-    kenNo = kenN[0].split('\xa0')[1]
-    kenD = kenN[1]
-    file.write(kenC + ", " + kenNo + ", " + kenD + "\n")
-    
-    larue = hold[22].split(': ')
-    larC = larue[0]
-    larN = larue[1].split(' ')
-    larNo = larN[0]
-    file.write(larC + ", " + larNo + "\n")
-    
-    laur = hold[23].split(': ')
-    lauC = laur[0]
-    lauN = laur[1].split(' ')
-    lauNo = lauN[0]
-    file.write(lauC + ", " + lauNo + "\n")
-    
-    lew = hold[24].split(': ')
-    lewC = lew[0]
-    lewN = lew[1].split(' ')
-    lewNo = lewN[0]
-    file.write(lewC + ", " + lewNo + "\n")
-    
-    logan = hold[25].split(':')
-    logC = logan[0]
-    logN = logan[1].split(' ')
-    logNo = logN[0].split('\xa0')[1]
-    file.write(logC + ", " + logNo + "\n")
-    
-    lyon = hold[26].split(':\xa0')
-    lyC = lyon[0]
-    lyN = lyon[1].split(' ')
-    lyNo = lyN[0]
-    file.write(lyC + ", " + lyNo + "\n")
-    
-    mad = hold[27].split(':')
-    madC = mad[0]
-    madN = mad[1].split(' ')
-    madNo = madN[0].split('\xa0')[1]
-    file.write(madC + ", " + madNo + "\n")
-    
-    mas = hold[28].split(':')
-    masC = mas[0]
-    masN = mas[1].split(' ')
-    masNo = masN[0].split('\xa0')[1]
-    file.write(masC + ", " + masNo + "\n")
-    
-    mcc = hold[29].split(':')
-    mccC = mcc[0]
-    mccN = mcc[1].split(' ')
-    mccNo = mccN[0].split('\xa0')[1]
-    file.write(mccC + ", " + mccNo + "\n")
-    
-    mcr = hold[30].split(':\xa0')
-    mcrC = mcr[0]
-    mcrN = mcr[1].split('\xa0')
-    mcrNo = mcrN[0]
-    file.write(mcrC + ", " + mcrNo + "\n")
-    
-    men = hold[31].split(':\xa0')
-    menC = men[0]
-    menN = men[1].split(' ')
-    menNo = menN[0]
-    file.write(menC + ", " + menNo + "\n")
-    
-    mer = hold[32].split(': ')
-    merC = mer[0]
-    merN = mer[1].split(' ')
-    merNo = merN[0]
-    file.write(merC + ", " + merNo + "\n")
-    
-    mont = hold[33].split(': ')
-    moC = mont[0]
-    moN = mont[1].split(' ')
-    moNo = moN[0]
-    file.write(moC + ", " + moNo + "\n")
-    
-    muh = hold[34].split(': ')
-    muC = muh[0]
-    muN = muh[1].split(' ')
-    muNo = muN[0]
-    file.write(muC + ", " + muNo + "\n")
-    
-    nel = hold[35].split(': ')
-    nelC = nel[0]
-    nelN = nel[1].split(' ')
-    nelNo = nelN[0].split('\xa0')[0]
-    file.write(nelC + ", " + nelNo + "\n")
-    
-    old = hold[36].split(':')
-    oldC = old[0]
-    oldN = old[1].split(' ')
-    oldNo = oldN[0].split('\xa0')[1]
-    file.write(oldC + ", " + oldNo + "\n")
-    
-    pul = hold[37].split(':')
-    pulC = pul[0]
-    pulN = pul[1].split(' ')
-    pulNo = pulN[0].split('\xa0')[1]
-    file.write(pulC + ", " + pulNo + "\n")
-    
-    scott = hold[38].split(': ')
-    scoC = scott[0]
-    scoN = scott[1].split(' ')
-    scoNo = scoN[0].split('\xa0')[0]
-    file.write(scoC + ", " + scoNo + "\n")
-    
-    simp = hold[39].split(': ')
-    simC = simp[0]
-    simN = simp[1].split(' ')
-    simNo = simN[0].split('\xa0')[0]
-    file.write(simC + ", " + simNo + "\n")
-    
-    spe = hold[40].split(': ')
-    speC = spe[0]
-    speN = spe[1].split(' ')
-    speNo = speN[0].split('\xa0')[0]
-    file.write(speC + ", " + speNo + "\n")
-    
-    tay = hold[41].split(': ')
-    tayC = tay[0]
-    tayN = tay[1].split(' ')
-    tayNo = tayN[0].split('\xa0')[0]
-    file.write(tayC + ", " + tayNo + "\n")
-    
-    unio = hold[42].split(': ')
-    unC = unio[0]
-    unN = unio[1].split(' ')
-    unNo = unN[0]
-    file.write(unC + ", " + unNo + "\n")
-    
-    war = hold[43].split(':')
-    warC = war[0]
-    warN = war[1].split(' ')
-    warNo = warN[0].split('\xa0')[1]
-    file.write(warC + ", " + warNo + "\n")
-    
-    way = hold[44].split(': ')
-    wayC = way[0]
-    wayN = way[1].split(' ')
-    wayNo = wayN[0].split('\xa0')[0]
-    file.write(wayC + ", " + wayNo + "\n")
-    
-    web = hold[45].split(': ')
-    webC = web[0]
-    webN = web[1].split(' ')
-    webNo = webN[0]
-    file.write(webC + ", " + webNo + "\n")
-    
-    wood = hold[46].split(':')
-    woC = wood[0]
-    woN = wood[1].split(' ')
-    woNo = woN[0].split('\xa0')[1]
-    file.write(woC + ", " + woNo + "\n")
-    
-    other = hold[47].split(':')
-    oC = other[0]
-    oN = other[1].split(' ')
-    oNo = oN[0].split('\xa0')[1]
-    file.write(oC + ", " + oNo + "\n")
-    
+        
+    for h in hold:
+        file.write(h.split(':')[0] + ", " + h.split(':')[1].split('c')[0] + "\n")
+        
     file.close()
+    
+    if (hold[0].split(':')[0]) == 'Adair County' and (hold[71].split(':')[0]) == 'No County Available':
+        print("Kentucky scraper is complete.")
+    else:
+        print("ERROR: Must fix Kentucky scraper.")
+
     
 def laScrape():
     
@@ -1021,12 +730,17 @@ def laScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[61:118]:
+    for h in hold[64:121]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3].replace(',','') + ", " + take[5].replace(',','') + "\n")
         #file.writerow(take[1], take[3], take[5])
     
     file.close()
+    
+    if (hold[64].split('\n')[1]) == 'Acadia' and (hold[120].split('\n')[1]) == 'Under Investigation':
+        print("Louisiana scraper is complete.")
+    else:
+        print("ERROR: Must fix Louisiana scraper.")
 
 def maScrape():
     
@@ -1053,6 +767,11 @@ def maScrape():
          file.write(tags[t].get_text().split(': ')[0] + ", " + tags[t].get_text().split(': ')[1].replace(',','') + "\n")
     
     file.close()
+    
+    if (tags[0].get_text().split(': ')[0]) == 'Barnstable' and (tags[14].get_text().split(': ')[0]) == 'Unknown':
+        print("Massachusetts scraper is complete.")
+    else:
+        print("ERROR: Must fix Massachusetts scraper.")
 
 def mdScrape():
     
@@ -1079,11 +798,16 @@ def mdScrape():
                 take = p.get_text()
                 hold.append(take)
         
-    for h in hold[67:90]:
+    for h in hold[70:94]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + "\n")
     
     file.close()
+    
+    if (hold[70].split('\n')[1]) == 'Anne Arundel' and (hold[93].split('\n')[1]) == 'Unassigned':
+        print("Maryland scraper is complete.")
+    else:
+        print("ERROR: Must fix Maryland scraper.")
     
 def meScrape():
     
@@ -1115,8 +839,8 @@ def meScrape():
     anCC = andr[1]
     anR = andr[2]
     anD = andr[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (anC, anCC, anR, anD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+    #      (anC, anCC, anR, anD))
     file.write(anC + ", " + anCC + ", " + anR + ", " + anD +"\n")
     
     aroo = hold[5:10]
@@ -1124,8 +848,8 @@ def meScrape():
     arCC = aroo[1]
     arR = aroo[2]
     arD = aroo[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (arC, arCC, arR, arD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+    #     (arC, arCC, arR, arD))
     file.write(arC + ", " + arCC + ", " + arR + ", " + arD + "\n")
     
     
@@ -1134,8 +858,8 @@ def meScrape():
     cumbCC = cumb[1]
     cumbR = cumb[2]
     cumbD = cumb[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (cumbC, cumbCC, cumbR, cumbD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (cumbC, cumbCC, cumbR, cumbD))
     file.write(cumbC + ", " + cumbCC + ", " + cumbR + ", " + cumbD + "\n")
     
     
@@ -1144,8 +868,8 @@ def meScrape():
     frCC = frank[1]
     frR = frank[2]
     frD = frank[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (frC, frCC, frR, frD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (frC, frCC, frR, frD))
     file.write(frC + ", " + frCC + ", " + frR + ", " + frD + "\n")
     
     
@@ -1154,8 +878,8 @@ def meScrape():
     haCC = hanc[1]
     haR = hanc[2]
     haD = hanc[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (haC, haCC, haR, haD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (haC, haCC, haR, haD))
     file.write(haC + ", " + haCC + ", " + haR + ", " + haD + "\n")
     
     
@@ -1164,8 +888,8 @@ def meScrape():
     keCC = kenne[1]
     keR = kenne[2]
     keD = kenne[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (keC, keCC, keR, keD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (keC, keCC, keR, keD))
     file.write(keC + ", " + keCC + ", " + keR + ", " + keD + "\n")
     
     
@@ -1174,8 +898,8 @@ def meScrape():
     knCC = knox[1]
     knR = knox[2]
     knD = knox[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (knC, knCC, knR, knD))
+   # print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+    #      (knC, knCC, knR, knD))
     file.write(knC + ", " + knCC + ", " + knR + ", " + knD + "\n")
     
     
@@ -1184,8 +908,8 @@ def meScrape():
     linCC = linc[1]
     linR = linc[2]
     linD = linc[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (linC, linCC, linR, linD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (linC, linCC, linR, linD))
     file.write(linC + ", " + linCC + ", " + linR + ", " + linD + "\n")
     
     
@@ -1194,8 +918,8 @@ def meScrape():
     oxCC = ox[1]
     oxR = ox[2]
     oxD = ox[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (oxC, oxCC, oxR, oxD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (oxC, oxCC, oxR, oxD))
     file.write(oxC + ", " + oxCC + ", " + oxR + ", " + oxD + "\n")
     
     
@@ -1204,8 +928,8 @@ def meScrape():
     penCC = peno[1]
     penR = peno[2]
     penD = peno[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (penC, penCC, penR, penD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (penC, penCC, penR, penD))
     file.write(penC + ", " + penCC + ", " + penR + ", " + penD + "\n")
     
     
@@ -1214,8 +938,8 @@ def meScrape():
     piCC = pisca[1]
     piR = pisca[2]
     piD = pisca[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (piC, piCC, piR, piD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (piC, piCC, piR, piD))
     file.write(piC + ", " + piCC + ", " + piR + ", " + piD + "\n")
     
     
@@ -1224,8 +948,8 @@ def meScrape():
     sCC = saga[1]
     sR = saga[2]
     sD = saga[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (sC, sCC, sR, sD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (sC, sCC, sR, sD))
     file.write(sC + ", " + sCC + ", " + sR + ", " + sD + "\n")
     
     
@@ -1234,8 +958,8 @@ def meScrape():
     soCC = somer[1]
     soR = somer[2]
     soD = somer[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (soC, soCC, soR, soD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (soC, soCC, soR, soD))
     file.write(soC + ", " + soCC + ", " + soR + ", " + soD + "\n")
     
     
@@ -1244,8 +968,8 @@ def meScrape():
     wdCC = waldo[1]
     wdR = waldo[2]
     wdD = waldo[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (wdC, wdCC, wdR, wdD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (wdC, wdCC, wdR, wdD))
     file.write(wdC + ", " + wdCC + ", " + wdR + ", " + wdD + "\n")
     
     
@@ -1254,8 +978,8 @@ def meScrape():
     wsCC = wash[1]
     wsR = wash[2]
     wsD = wash[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (wsC, wsCC, wsR, wsD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (wsC, wsCC, wsR, wsD))
     file.write(wsC + ", " + wsCC + ", " + wsR + ", " + wsD + "\n")
     
     
@@ -1264,8 +988,8 @@ def meScrape():
     yCC = york[1]
     yR = york[2]
     yD = york[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (yC, yCC, yR, yD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (yC, yCC, yR, yD))
     file.write(yC + ", " + yCC + ", " + yR + ", " + yD + "\n")
     
     
@@ -1274,11 +998,16 @@ def meScrape():
     uCC = unk[1]
     uR = unk[2]
     uD = unk[4]
-    print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-          (uC, uCC, uR, uD))
+    #print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
+     #     (uC, uCC, uR, uD))
     file.write(uC + ", " + uCC + ", " + uR + ", " + uD + "\n")
     
     file.close()
+    
+    if anC == 'Androscoggin' and uC == 'Unknown':
+        print("Maine scraper is complete.")
+    else:
+        print("ERROR: Must fix Maine scraper.")
 
 def miScrape():
     
@@ -1301,11 +1030,16 @@ def miScrape():
     
     for tag in tags[1:66]:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text))
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[1].find('td').text.strip()) == 'Allegan' and (tags[70].find('td').text.strip()) == 'Out of State':
+        print("Michigan scraper is complete.")
+    else:
+        print("ERROR: Must fix Michigan scraper.")
 
 def mnScrape():
     
@@ -1316,7 +1050,9 @@ def mnScrape():
     site_parse = soup(mnClient.read(), "lxml")
     mnClient.close()
     
-    tables = site_parse.find("div", {"class": "clearfix"}).find("tbody").findAll('td')
+    tables = site_parse.find("div", {"class": "clearfix"}).findAll("tbody")[2]
+
+    tags = tables.findAll('td')
     
     csvfile = "COVID-19_cases_mndoh.csv"
     headers = "County, Cases \n"
@@ -1326,7 +1062,7 @@ def mnScrape():
     
     hold = []
     
-    for td in tables:
+    for td in tags:
         take = td.get_text()
         hold.append(take)
     
@@ -1378,8 +1114,21 @@ def mnScrape():
     file.write(hold[90] + ", " + hold[91] + "\n")
     file.write(hold[92] + ", " + hold[93] + "\n")
     file.write(hold[94] + ", " + hold[95] + "\n")
+    file.write(hold[96] + ", " + hold[97] + "\n")
+    file.write(hold[98] + ", " + hold[99] + "\n")
+    file.write(hold[100] + ", " + hold[101] + "\n")
+    file.write(hold[102] + ", " + hold[103] + "\n")
+    file.write(hold[104] + ", " + hold[105] + "\n")
+    file.write(hold[106] + ", " + hold[107] + "\n")
+    file.write(hold[108] + ", " + hold[109] + "\n")
     
     file.close()
+    
+    if hold[0] == 'Anoka' and hold[108] == 'Yellow Medicine':
+        print("Minnesota scraper is complete.")
+    else:
+        print("ERROR: Must fix Minnesota scraper.")
+
     
 def moScrape():
     
@@ -1417,6 +1166,12 @@ def moScrape():
     
     file.close()
 
+    if (tables[1].find('td').text) == 'Adair' and (tables[118].find('td').text) == 'TBD':
+        print("Missouri scraper is complete.")
+    else:
+        print("ERROR: Must fix Missour scraper.")
+    
+
 def msScrape():
     
     msDOH = 'https://msdh.ms.gov/msdhsite/_static/14,0,420.html'
@@ -1434,13 +1189,26 @@ def msScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in tables:
+    for t in tables[0:31]:
         pull = t.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text))
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
+        file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
+
+    file.write(tables[32].findAll('td')[0].text + ", " + tables[32].findAll('td')[1].text + ", " + tables[32].findAll('td')[2].text + "\n")
+    
+    for t in tables[34:79]:
+        pull = t.findAll('td')
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tables[0].find('td').text) == 'Adams' and (tables[78].find('td').text) == 'Yazoo':
+        print("Mississippi scraper is complete.")
+    else:
+        print("ERROR: Must fix Mississippi scraper.")
 
 def mtScrape():
     
@@ -1466,33 +1234,42 @@ def mtScrape():
         file.write(pull[0] + ", " + pull[1] + "\n")
     
     file.close()
+    
+    if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[20].get_text().split(": ")[0]) == 'Hill':
+        print("Montana scraper is complete.")
+    else:
+        print("ERROR: Must fix Montana scraper.")
 
 def ncScrape():
     
-    orDOH = 'https://govstatus.egov.com/OR-OHA-COVID-19'
+    ncDOH = 'https://www.ncdhhs.gov/covid-19-case-count-nc#nc-counties-with-cases'
 
-    orClient = req(orDOH)
+    ncClient = req(ncDOH)
     
-    site_parse = soup(orClient.read(), "lxml")
-    orClient.close()
+    site_parse = soup(ncClient.read(), 'lxml')
+    ncClient.close()
     
-    tables = site_parse.find("div", {"id": "collapseOne"}).find("tbody")
+    tables = site_parse.find("div", {"class": "content band-content landing-wrapper"}).find('tbody')
     
-    tags = tables.findAll('tr')
-    
-    csvfile = "COVID-19_cases_ordoh.csv"
-    headers = "County, Positive Cases, Deaths, Negative Test Results \n"
+    csvfile = "COVID-19_cases_ncdoh.csv"
+    headers = "County, Cases, Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
     
+    tags = tables.findAll('tr')
+    
     for tag in tags:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s, Negative Test Results = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text, pull[3].text))
-        file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + ", " + pull[3].text + "\n")
+        #print("County = %s, Cases = %s, Deaths = %s" % (pull[0].text, pull[1].text, pull[2].text))
+        file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[0].find('td').text) == 'Alamance County' and (tags[77].find('td').text) == 'Yadkin County':
+        print("North Carolina scraper is complete.")
+    else:
+        print("ERROR: Must fix North Carolina scraper.")
 
 def ndScrape():
     
@@ -1513,12 +1290,18 @@ def ndScrape():
     
     tags = tables.findAll('tr')
     
-    for tag in tags[1:]:
+    for tag in tags:
         pull = tag.findAll('td')
         #print("County = %s, Total Tests = %s, Positive Cases = %s" % (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[0].find('td').text) == 'Adams' and (tags[50].find('td').text) == 'Williams':
+        print("North Dakota scraper is complete.")
+    else:
+        print("ERROR: Must fix North Dakota Scraper.")
+        
 
 def neScrape():
     
@@ -1545,11 +1328,47 @@ def neScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[38:58]:
+    for h in hold[42:66]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
     
     file.close()
+    
+    if (hold[42].split('\n')[1]) == 'Adams' and (hold[65].split('\n')[1]) == 'TBD':
+        print("Nebraska scraper is complete.")
+    else:
+        print("ERROR: Must fix Nebraska scraper.")
+        
+def nhScrape():
+    
+    nhNews = 'https://www.livescience.com/new-hampshire-coronavirus-updates.html'
+
+    nhClient = req(nhNews)
+    
+    site_parse = soup(nhClient.read(), "lxml")
+    nhClient.close()
+    
+    tables = site_parse.find("article", {"class":"news-article"}).find("div", {"itemprop": "articleBody"}).find('ul')
+    
+    csvfile = "COVID-19_cases_nhNews.csv"
+    headers = "County, Confirmed Cases \n"
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    tags = tables.findAll('li')
+    
+    for t in range(0,9):
+        #print("%s %s" % \
+        #      (tags[t].get_text().split(': ')[0], tags[t].get_text().split(': ')[1]))
+        file.write(tags[t].get_text().split(': ')[0] + ", " + tags[t].get_text().split(': ')[1] + "\n")
+
+    file.close()
+         
+    if (tags[0].get_text().split(': ')[0]) == 'Rockingham' and (tags[8].get_text().split(': ')[0]) == 'Sullivan':
+        print("New Hampshire scraper is complete.")
+    else:
+        print("ERROR: Must fix New Hampshire scraper.")
     
 def njScrape():
     
@@ -1576,11 +1395,16 @@ def njScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[43:65]:
+    for h in hold[46:68]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3].replace(',','') + ", " + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
     
     file.close()
+    
+    if (hold[46].split('\n')[1]) == 'Atlantic' and (hold[67].split('\n')[1]) == 'Under investigation':
+        print("New Jersey scraper is complete.")
+    else:
+        print("ERROR: Must fix New Jersey scraper.")
     
 def nmScrape():
     
@@ -1603,11 +1427,16 @@ def nmScrape():
     
     for tag in tags[1:]:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text))
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[1].find('td').text) == 'Bernalillo County' and (tags[33].find('td').text) == 'Valencia County':
+        print("New Mexico scraper is complete.")
+    else:
+        print("ERROR: Must fix New Mexico scraper.")
     
 
 def nyScrape():
@@ -1631,14 +1460,19 @@ def nyScrape():
     file = open(csvfile, "w", encoding = 'utf-8')
     file.write(headers)
 
-    for tag in tags[1:57]:
+    for tag in tags[1:58]:
         pull = tag.findAll('td')
-        print("County = %s, Positive Cases = %s" % \
-              (pull[0].text, pull[1].text))
+        #print("County = %s, Positive Cases = %s" % \
+         #     (pull[0].text, pull[1].text))
     
         file.write(pull[0].text + ", " + pull[1].text.replace(',','') + "\n")
 
     file.close()
+    
+    if (tags[1].find('td').text) == 'Albany' and (tags[57].find('td').text) == 'Wyoming':
+        print("New York scraper is complete.")
+    else:
+        print("ERROR: Must fix New York scraper.")
     
 def ohScrape():
     
@@ -1665,11 +1499,17 @@ def ohScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[37:105]:
+    for h in hold[40:112]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
     
     file.close()
+    
+    if (hold[40].split('\n')[1]) == 'Allen' and (hold[111].split('\n')[1]) == 'Wyandot':
+        print("Ohio scraper is complete.")
+    else:
+        print("ERROR: Must fix Ohio scraper.")
+
     
 def okScrape():
     
@@ -1692,11 +1532,16 @@ def okScrape():
     
     for tag in tags:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text))
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
         
     file.close()
+    
+    if (tags[0].find('td').text) == 'Adair' and (tags[48].find('td').text) == 'Total':
+        print("Oklahoma scraper is complete.")
+    else:
+        print("ERROR: Must fix Oklahoma scraper.")
     
 def orScrape():
     
@@ -1719,11 +1564,16 @@ def orScrape():
     
     for tag in tags:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s, Negative Test Results = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text, pull[3].text))
+        #print("County = %s, Cases = %s, Deaths = %s, Negative Test Results = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text, pull[3].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + ", " + pull[3].text + "\n")
     
     file.close()
+    
+    if (tags[0].find('td').text) == 'Baker' and (tags[36].find('td').text) == 'Total':
+        print("Oregon Scraper is complete.")
+    else:
+        print("ERROR: Must fix Oregon scraper.")
 
 def paScrape():
     
@@ -1746,11 +1596,16 @@ def paScrape():
     
     for tag in tags[1:]:
         pull = tag.findAll('td')
-        print("County = %s, Cases = %s, Deaths = %s" % \
-              (pull[0].text, pull[1].text, pull[2].text))
+        #print("County = %s, Cases = %s, Deaths = %s" % \
+         #     (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[1].find('td').text) == 'Adams' and (tags[60].find('td').text.strip()) == 'York':
+        print("Pennsylvania scraper is complete.")
+    else:
+        print("ERROR: Must fix Pennsylvania scraper.")
 
 def prScrape():
     
@@ -1777,11 +1632,16 @@ def prScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[13:22]:
+    for h in hold[39:48]:
         take = h.split('\n')
         file.write(take[1] +  ", " + take[5] + "\n")
-    
+
     file.close()
+    
+    if (hold[39].split('\n')[1]) == 'Arecibo' and (hold[47].split('\n')[1]) == 'Not available':
+        print("Puerto Rico scraper is complete.")
+    else:
+        print("ERROR: Must fix Puerto Rico scraper.")
 
 def scScrape():
     
@@ -1808,11 +1668,16 @@ def scScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[40:80]:
+    for h in hold[43:86]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
-    
+
     file.close()
+    
+    if (hold[43].split('\n')[1]) == 'Abbeville' and (hold[85].split('\n')[1]) == 'York':
+        print("South Carolina scraper is complete.")
+    else:
+        print("ERROR: Must fix South Carolina scraper.")
 
 def sdScrape():
     
@@ -1846,50 +1711,61 @@ def sdScrape():
         taken = ta.get_text()
         holdE.append(taken)
     
-    file.write(hold[0].strip() + ", " + hold[1].strip() + "\n")
-    file.write(hold[2].strip() + ", " + hold[3].strip() + "\n")
-    file.write(hold[4].strip() + ", " + hold[5].strip() + "\n")
-    file.write(hold[6].strip() + ", " + hold[7].strip() + "\n")
-    file.write(hold[8].strip() + ", " + hold[9].strip() + "\n")
-    file.write(hold[10].strip() + ", " + hold[11].strip() + "\n")
-    file.write(hold[12].strip() + ", " + hold[13].strip() + "\n")
-    file.write(hold[14].strip() + ", " + hold[15].strip() + "\n")
-    file.write(hold[16].strip() + ", " + hold[17].strip() + "\n")
-    file.write(hold[18].strip() + ", " + hold[19].strip() + "\n")
-    file.write(hold[20].strip() + ", " + hold[21].strip() + "\n")
-    file.write(hold[22].strip() + ", " + hold[23].strip() + "\n")
-    file.write(hold[24].strip() + ", " + hold[25].strip() + "\n")
-    file.write(hold[26].strip() + ", " + hold[27].strip() + "\n")
-    file.write(hold[28].strip() + ", " + hold[29].strip() + "\n")
-    file.write(hold[30].strip()+ ", " + hold[31].strip()+ "\n")
-    file.write(hold[32].strip() + ", " + hold[33].strip() + "\n")
-    file.write(hold[34].strip() + ", " + hold[35].strip() + "\n")
-    file.write(hold[36].strip() + ", " + hold[37].strip() + "\n")
-    file.write(hold[38].strip() + ", " + hold[39].strip() + "\n")
-    file.write(hold[40].strip() + ", " + hold[41].strip() + "\n")
-    file.write(hold[42].strip() + ", " + hold[43].strip() + "\n")
-    file.write(hold[44].strip() + ", " + hold[45].strip() + "\n")
-    file.write(hold[46].strip() + ", " + hold[47].strip() + "\n")
-    file.write(hold[48].strip() + ", " + hold[49].strip() + "\n")
-    file.write(hold[50].strip() + ", " + hold[51].strip() + "\n")
-    file.write(hold[52].strip() + ", " + hold[53].strip() + "\n")
-    file.write(hold[54].strip() + ", " + hold[55].strip() + "\n")
-    file.write(hold[56].strip() + ", " + hold[57].strip() + "\n")
-    file.write(hold[58].strip() + ", " + hold[59].strip() + "\n")
+    file.write(hold[0].strip() + ", " + hold[1].strip() + ", " + hold[2].strip() + "\n")
+    file.write(hold[3].strip() + ", " + hold[4].strip() + ", " + hold[5].strip() + "\n")
+    file.write(hold[6].strip() + ", " + hold[7].strip() + ", " + hold[8].strip() + "\n")
+    file.write(hold[9].strip() + ", " + hold[10].strip() + ", " + hold[11].strip() + "\n")
+    file.write(hold[12].strip() + ", " + hold[13].strip() + ", " + hold[14].strip() + "\n")
+    file.write(hold[15].strip() + ", " + hold[16].strip() + ", " + hold[17].strip() + "\n")
+    file.write(hold[18].strip() + ", " + hold[19].strip() + ", " + hold[20].strip() + "\n")
+    file.write(hold[21].strip() + ", " + hold[22].strip() + ", " + hold[23].strip() + "\n")
+    file.write(hold[24].strip() + ", " + hold[25].strip() + ", " + hold[26].strip() + "\n")
+    file.write(hold[27].strip() + ", " + hold[28].strip() + ", " + hold[29].strip() + "\n")
+    file.write(hold[30].strip() + ", " + hold[31].strip() + ", " + hold[32].strip() + "\n")
+    file.write(hold[33].strip() + ", " + hold[34].strip() + ", " + hold[35].strip() + "\n")
+    file.write(hold[36].strip() + ", " + hold[37].strip() + ", " + hold[38].strip() + "\n")
+    file.write(hold[39].strip() + ", " + hold[40].strip() + ", " + hold[41].strip() + "\n")
+    file.write(hold[42].strip() + ", " + hold[43].strip() + ", " + hold[44].strip() + "\n")
+    file.write(hold[45].strip() + ", " + hold[46].strip() + ", " + hold[47].strip() + "\n")
+    file.write(hold[48].strip() + ", " + hold[49].strip() + ", " + hold[50].strip() + "\n")
+    file.write(hold[51].strip() + ", " + hold[52].strip() + ", " + hold[53].strip() + "\n")
+    file.write(hold[54].strip() + ", " + hold[55].strip() + ", " + hold[53].strip() + "\n")
+    file.write(hold[57].strip() + ", " + hold[58].strip() + ", " + hold[59].strip() + "\n")
+    file.write(hold[60].strip() + ", " + hold[61].strip() + ", " + hold[62].strip() + "\n")
+    file.write(hold[63].strip() + ", " + hold[64].strip() + ", " + hold[65].strip() + "\n")
+    file.write(hold[66].strip() + ", " + hold[67].strip() + ", " + hold[68].strip() + "\n")
+    file.write(hold[69].strip() + ", " + hold[70].strip() + ", " + hold[71].strip() + "\n")
+    file.write(hold[72].strip() + ", " + hold[73].strip() + ", " + hold[74].strip() + "\n")
+    file.write(hold[75].strip() + ", " + hold[76].strip() + ", " + hold[77].strip() + "\n")
+    file.write(hold[78].strip() + ", " + hold[79].strip() + ", " + hold[80].strip() + "\n")
+    file.write(hold[81].strip() + ", " + hold[82].strip() + ", " + hold[83].strip() + "\n")
+    file.write(hold[84].strip() + ", " + hold[85].strip() + ", " + hold[86].strip() + "\n")
     
     file.write("\n")
-    file.write("Deaths and Recoveries \n")
-    deaths = holdE[2:4]
-    mort = deaths.pop(0)
-    mortNo = deaths.pop()
+    file.write("Deaths, Recoveries, Hospitalized \n")
+    
+    krankenhaus = holdE[2:4]
+    haus = krankenhaus[0]
+    hausNo = krankenhaus[1]
+    file.write(haus + ", " + hausNo + "\n")
+    
+    deaths = holdE[4:6]
+    mort = deaths[0]
+    mortNo = deaths[1]
     file.write(mort + ", " + mortNo + "\n")
     
-    recovered = holdE[4:6]
-    hope = recovered.pop(0)
-    hopeN = recovered.pop()
+    recovered = holdE[6:8]
+    hope = recovered[0]
+    hopeN = recovered[1]
     file.write(hope + ", " + hopeN + "\n")
     
+    
     file.close()
+    
+    if (hold[0].strip()) == 'Aurora' and (hold[84].strip()) ==  'Yankton' and hope == 'Recovered':
+        print("South Dakota scraper is complete.")
+    else:
+        print("ERROR: Must fix South Dakota scraper.")
     
 def tnScrape():
     
@@ -1906,8 +1782,8 @@ def tnScrape():
     
     fatal = colTable.find('tr')
     fa = fatal.get_text().split('\n')
-    faStr = fa.pop(0)
-    faNo = fa.pop(0)
+    faStr = fa[0]
+    faNo = fa[1]
     
     tags = tables.findAll('tr')
     
@@ -1917,9 +1793,9 @@ def tnScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for tag in tags[1:]:
+    for tag in tags[1:98]:
         pull = tag.findAll('p')
-        print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
+        #print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
         
         file.write(pull[0].text + ", " + pull[1].text.replace(',','') + "\n")
     
@@ -1927,7 +1803,12 @@ def tnScrape():
     file.write(faStr + ", " + faNo + "\n")
     
     file.close()
-
+    
+    if (tags[1].find('p').text) == 'Anderson' and (tags[97].find('p').text) == 'Unknown':
+        print("Tennessee scraper is complete.")
+    else:
+        print("ERROR: Must fix Tennessee scraper.")
+    
 def txScrape():
     
     txNews = 'https://apps.texastribune.org/features/2020/tx-coronavirus-tracker/embeds/daily-tables/table-latest/index.html'
@@ -1955,12 +1836,18 @@ def txScrape():
         #print("County = %s, No. of Cases = %s, Deaths = %s" % (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
-    for tag in tags[11:125]:
+    for tag in tags[11:136]:
         pull = tag.findAll('td')
         #print("County = %s, No. of Cases = %s, Deaths = %s" % (pull[0].text, pull[1].text, pull[2].text))
         file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
     
     file.close()
+    
+    if (tags[0].find('td').text) == 'Harris' and (tags[135].find('td').text) == 'Wood':
+        print("Texas scraper is complete.")
+    else:
+        print("ERROR: Must fix Texas scraper.")
+
 
 def utScrape():
     
@@ -1988,6 +1875,11 @@ def utScrape():
     
     file.close()
     
+    if (tags[0].get_text().split('- ')[0].strip()) == 'Bear River' and (tags[12].get_text().split('- ')[0].strip()) == 'Weber-Morgan county':
+        print("Utah scraper is complete.")
+    else:
+        print("ERROR: Must fix Utah scraper.")
+    
 def vaScrape():
     
     vaWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Virginia'
@@ -2013,11 +1905,16 @@ def vaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[41:128]:
+    for h in hold[44:145]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3].split('[')[0] + ", " + take[5].split('[')[0] + "\n")
     
     file.close()
+    
+    if (hold[44].split('\n')[1]) == 'Accomack County' and (hold[144].split('\n')[1]) == 'York County':
+        print("Virginia scraper is complete.")
+    else:
+        print("ERROR: Must fix Virginia scraper.")
     
 def viScrape():
     
@@ -2056,6 +1953,11 @@ def viScrape():
     file.write(pend + ", " + pendNo + "\n")
     
     file.close()
+    
+    if (pos == 'Positive') and (pend == 'Pending'):
+        print("US Virgin Islands scraper is complete.")
+    else:
+        print("ERROR: Must fix US Virgin Islands scraper.")
 
 def vtScrape():
     
@@ -2082,11 +1984,16 @@ def vtScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[39:52]:
+    for h in hold[42:57]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + "\n")
     
     file.close()
+    
+    if (hold[42].split('\n')[1]) == 'Addison' and (hold[55].split('\n')[1]) == 'Windsor':
+        print("Vermont scraper is complete.")
+    else:
+        print("ERROR: Must fix Vermont scraper.")
     
 def waScrape():
     
@@ -2113,11 +2020,16 @@ def waScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[49:84]:
+    for h in hold[53:93]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3].split('[')[0].replace(',','') + ", " + take[5].split('[')[0].replace(',','') + ", " + take[7].split('[')[0].replace(',','') + "\n")
     
     file.close()
+    
+    if (hold[53].split('\n')[1]) == 'Adams' and (hold[92].split('\n')[1]) == '(Unassigned)':
+        print("Washington scraper is complete.")
+    else:
+        print("ERROR: Must fix Washington scraper.")
     
 def wiScrape():
     
@@ -2139,6 +2051,11 @@ def wiScrape():
         file.write(a.get('attributes').get('NAME') + ", " + str(a.get('attributes').get('POSITIVE')) + ", " + str(a.get('attributes').get('DEATHS')) + "\n")
     
     file.close()
+    
+    if attr[0].get('attributes').get('NAME') == 'Adams' and attr[71].get('attributes').get('NAME') == 'Wood':
+        print("Wisconsin scraper is complete.")
+    else:
+        print("ERROR: Must fix Wisconsin scraper.")
     
 def wvScrape():
     
@@ -2188,8 +2105,16 @@ def wvScrape():
     file.write(cNo[52] + ", " + cNo[53].strip('(),') + "\n")
     file.write(cNo[54] + ", " + cNo[55].strip('(),') + "\n")
     file.write(cNo[56] + ", " + cNo[57].strip('(),') + "\n")
+    file.write(cNo[58] + ", " + cNo[59].strip('(),') + "\n")
+    file.write(cNo[60] + ", " + cNo[61].strip('(),') + "\n")
     
     file.close()
+    
+    if cNo[4] == 'Barbour' and cNo[60] == 'Wood':
+        print("West Virginia scraper is complete.")
+    else:
+        print("ERROR: Must fix West Virginia scraper.")
+
 
 def wyScrape():
     
@@ -2216,12 +2141,16 @@ def wyScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[33:56]:
+    for h in hold[46:69]:
         take = h.split('\n')
         file.write(take[1] + ", " + take[3] + ", " + take[5] + "\n")
-    
+
     file.close()
-        
+    
+    if (hold[46].split('\n')[1]) == 'Albany' and (hold[68].split('\n')[1]) == 'Weston':
+        print("Wyoming scraper is complete.")
+    else:
+        print("ERROR: Must fix Wyoming scraper.")
     
 
 def main():
@@ -2256,6 +2185,7 @@ def main():
     ncScrape()
     ndScrape()
     neScrape()
+    nhScrape()
     njScrape()
     nmScrape()
     nyScrape()

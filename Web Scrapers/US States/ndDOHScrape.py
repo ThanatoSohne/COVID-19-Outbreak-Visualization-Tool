@@ -20,9 +20,18 @@ file.write(headers)
 
 tags = tables.findAll('tr')
 
-for tag in tags[1:]:
+for tag in tags:
     pull = tag.findAll('td')
     #print("County = %s, Total Tests = %s, Positive Cases = %s" % (pull[0].text, pull[1].text, pull[2].text))
     file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
 file.close()
+
+if (tags[0].find('td').text) == 'Adams' and (tags[50].find('td').text) == 'Williams':
+    print("North Dakota scraper is complete.\n")
+else:
+    print("ERROR: Must fix North Dakota Scraper.\n")
+
+
+
+

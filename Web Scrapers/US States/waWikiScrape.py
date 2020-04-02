@@ -25,8 +25,15 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[49:84]:
+for h in hold[53:93]:
     take = h.split('\n')
     file.write(take[1] + ", " + take[3].split('[')[0].replace(',','') + ", " + take[5].split('[')[0].replace(',','') + ", " + take[7].split('[')[0].replace(',','') + "\n")
 
 file.close()
+
+if (hold[53].split('\n')[1]) == 'Adams' and (hold[92].split('\n')[1]) == '(Unassigned)':
+    print("Washington scraper is complete.")
+else:
+    print("ERROR: Must fix Washington scraper.")
+
+
