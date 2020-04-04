@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 codoh = 'https://covid19.colorado.gov/case-data'
 
@@ -11,24 +12,35 @@ coClient.close()
 
 tables = site_parse.findAll("div", {"class": "field field--name-field-card-body field--type-text-long field--label-hidden field--item"})[1]
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+co = "COLORADO"
+
 test = tables.findAll('tr')
 
 hold = []
 
 adamsTest = test[1].find('td').text
-outTest = test[53].find('td').text
+outTest = test[55].find('td').text
 
 csvfile = "COVID-19_cases_coDOH.csv"
-headers = "County, Positive Cases, Deaths \n"
+headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
 for t in test[1:54]:
         pull = t.findAll('td')
-        #print("County = %s, Positive Cases = %s, Deaths = %s" % \
-         #     (pull[0].text, pull[1].text, pull[2].text))
-        file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
+        locale = liegen.geocode(test[1].find('td').text + ", " + co)
+        file.write(pull[0].text + ", " + co + ", " + str(locale.latitude) +
+                   ", " + str(locale.longitude) + ", " + pull[1].text + 
+                   ", " + pull[2].text + "\n")
+        sleep(1)
+
+file.write(test[54].find('td').text + ", " + co + ", " + "" + ", " + "" + ", " +
+           test[54].findAll('td')[1].text.strip()+", " +test[54].findAll('td')[2].text.strip()+ "\n")
+
+file.write(test[55].find('td').text + ", " + co + ", " + "" + ", " + "" + ", " +
+           test[55].findAll('td')[1].text.strip()+", " +test[55].findAll('td')[2].text.strip()+ "\n")
 
 file.close()
 
