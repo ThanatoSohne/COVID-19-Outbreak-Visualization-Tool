@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 njWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_New_Jersey'
 
@@ -11,8 +12,12 @@ njClient.close()
 
 tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+nj = "NEW JERSEY"
+co = ' County'
+
 csvfile = "COVID-19_cases_njWiki.csv"
-headers = "County, Confirmed Cases, Deaths, Recoveries \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -25,13 +30,21 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[47:69]:
+for h in hold[49:70]:
     take = h.split('\n')
-    file.write(take[1] + ", " + take[3].replace(',','') + ", " + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
+    locale = liegen.geocode(take[1] + co + ", " + nj)
+    file.write(take[1] + ", " + nj + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " +take[3].replace(',','') + ", " 
+               + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
+    sleep(1.2)
+
+file.write(hold[70].split('\n')[1] + ", " + nj + ", " + "" + ", " + "" + ", " 
+           + hold[70].split('\n')[3].replace(',','') + ", " + hold[70].split('\n')[5].replace(',','') 
+           + ", " + hold[70].split('\n')[7].replace(',','') + "\n")
 
 file.close()
 
-if (hold[47].split('\n')[1]) == 'Atlantic' and (hold[68].split('\n')[1]) == 'Under investigation':
-    print("New Jersey scraper is complete.\n")
+if (hold[49].split('\n')[1]) == 'Atlantic' and (hold[70].split('\n')[1]) == 'Under investigation':
+    print("New Jersey scraper is complete.")
 else:
-    print("ERROR: Must fix New Jersey scraper.\n")
+    print("ERROR: Must fix New Jersey scraper.")
