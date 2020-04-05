@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 dedoh = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Delaware'
 
@@ -13,27 +14,36 @@ tables = site_parse.find("div", {"class": "mw-parser-output"}).findAll('tbody')[
 
 pull = tables.findAll('td')
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+de = "DELAWARE"
+
 csvfile = "COVID-19_cases_deWiki.csv"
-headers = "County, Confirmed Cases \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases \n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
-kent = pull[0].get_text().split('\n')[0]
-kentC = pull[1].get_text().split('\n')[0]
-newCastle = pull[2].get_text().split('\n')[0]
-newC = pull[3].get_text().split('\n')[0]
-suss = pull[4].get_text().split('\n')[0]
-sussC = pull[5].get_text().split('\n')[0]
+kent = pull[0].text.strip() + " County"
+kentC = pull[1].text.strip()
+kLocale = liegen.geocode(kent + ", " + de)
+newCastle = pull[2].text.strip() + " County"
+newC = pull[3].text.strip()
+nLocale = liegen.geocode(newCastle + ", " + de)
+suss = pull[4].text.strip() + " County"
+sussC = pull[5].text.strip() 
+sLocale = liegen.geocode(suss + ", " + de)
 
 
-file.write(kent + ", " + kentC + "\n")
-file.write(newCastle + ", " + newC + "\n")
-file.write(suss + ", " + sussC + "\n")
+file.write(kent + ", "+ de + ", " + str(kLocale.latitude) + ", " + str(kLocale.longitude) + ", " + kentC + "\n")
+sleep(1)
+file.write(newCastle + ", "+ de + ", " + str(nLocale.latitude) + ", " + str(nLocale.longitude) + ", " + newC + "\n")
+sleep(1)
+file.write(suss + ", "+ de + ", " + str(sLocale.latitude) + ", " + str(sLocale.longitude) + ", " + sussC + "\n")
+sleep(1)
 
 file.close()
 
-if kent == 'Kent' and suss == 'Sussex':
+if kent == 'Kent County' and suss == 'Sussex County':
     print("Delaware scraper is complete.\n")
 else:
     print("ERROR: Must fix Delaware scraper\n")

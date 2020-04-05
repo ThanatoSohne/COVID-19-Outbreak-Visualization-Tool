@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 kyNews = 'https://www.courier-journal.com/story/news/2020/03/09/coronavirus-kentucky-how-many-cases-and-where-they-kentucky/5001636002/'
 
@@ -11,13 +12,16 @@ kyClient.close()
 
 tables = site_parse.find("div", {"class": "asset-double-wide double-wide p402_premium"})
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+ky = "KENTUCKY"
+
 csvfile = "COVID-19_cases_kyNews.csv"
-headers = "County, Confirmed Cases \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths\n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
-tag = tables.find_all('p')[12:84]
+tag = tables.find_all('p')[12:98]
 
 hold = []
 
@@ -25,12 +29,20 @@ for t in tag:
     take = t.get_text()
     hold.append(take)
     
-for h in hold:
-    file.write(h.split(':')[0] + ", " + h.split(':')[1].split('c')[0] + "\n")
+for h in hold[:84]: 
+    locale = liegen.geocode(h.split(':')[0] + ", " + ky)
+    file.write(h.split(':')[0] + ", " + ky + ", " + str(locale.latitude) + ", "
+               + str(locale.longitude) + ", " + h.split(':')[1].split('c')[0].strip()
+               + ", " + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+    sleep(1)
+
+file.write(hold[84].split(':')[0] + ", " + ky + ", " + "" + ", " + "" + ", "
+           + h.split(':')[1].split('c')[0].strip() + ", "
+           + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
     
 file.close()
 
-if (hold[0].split(':')[0]) == 'Adair County' and (hold[71].split(':')[0]) == 'No County Available':
+if (hold[0].split(':')[0]) == 'Adair County' and (hold[84].split(':')[0]) == 'No County Available':
     print("Kentucky scraper is complete.")
 else:
     print("ERROR: Must fix Kentucky scraper.")

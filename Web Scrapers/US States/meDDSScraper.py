@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim 
+from time import sleep
 
 meDDS = 'https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus.shtml'
 
@@ -11,10 +12,14 @@ meClient.close()
 
 tables = site_parse.find("div", {"id": "Accordion1"}).findAll("td")[5:90]
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+me = "MAINE"
+co = ' County'
+
 #print(tables)
 
 csvfile = "COVID-19_cases_meDDS.csv"
-headers = "County, Confirmed Cases, Recovered, Deaths \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Recovered, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -30,18 +35,20 @@ anC = andr[0]
 anCC = andr[1]
 anR = andr[2]
 anD = andr[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (anC, anCC, anR, anD))
-file.write(anC + ", " + anCC + ", " + anR + ", " + anD +"\n")
+anLocale = liegen.geocode(anC + co + ", " + me)
+sleep(1)
+file.write(anC + ", " + me + ", " + str(anLocale.latitude) + ", " 
+           + str(anLocale.longitude) + ", " + anCC + ", " + anR + ", " + anD +"\n")
 
 aroo = hold[5:10]
 arC = aroo[0]
 arCC = aroo[1]
 arR = aroo[2]
 arD = aroo[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (arC, arCC, arR, arD))
-file.write(arC + ", " + arCC + ", " + arR + ", " + arD + "\n")
+arLocale = liegen.geocode(arC + co + ", " + me)
+sleep(1)
+file.write(arC + ", " + me + ", " + str(arLocale.latitude) + ", " 
+           + str(arLocale.longitude) + ", " + arCC + ", " + arR + ", " + arD +"\n")
 
 
 cumb = hold[10:15]
@@ -49,9 +56,10 @@ cumbC = cumb[0]
 cumbCC = cumb[1]
 cumbR = cumb[2]
 cumbD = cumb[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (cumbC, cumbCC, cumbR, cumbD))
-file.write(cumbC + ", " + cumbCC + ", " + cumbR + ", " + cumbD + "\n")
+cLocale = liegen.geocode(cumbC + co + ", " + me)
+sleep(1)
+file.write(cumbC + ", " + me + ", " + str(cLocale.latitude) + ", " 
+           + str(cLocale.longitude) + ", " + cumbCC + ", " + cumbR + ", " + cumbD +"\n")
 
 
 frank = hold[15:20]
@@ -59,9 +67,10 @@ frC = frank[0]
 frCC = frank[1]
 frR = frank[2]
 frD = frank[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (frC, frCC, frR, frD))
-file.write(frC + ", " + frCC + ", " + frR + ", " + frD + "\n")
+fLocale = liegen.geocode(frC + co + ", " + me)
+sleep(1)
+file.write(frC + ", " + me + ", " + str(fLocale.latitude) + ", " 
+           + str(fLocale.longitude) + ", " + frCC + ", " + frR + ", " + frD +"\n")
 
 
 hanc = hold[20:25]
@@ -69,9 +78,10 @@ haC = hanc[0]
 haCC = hanc[1]
 haR = hanc[2]
 haD = hanc[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (haC, haCC, haR, haD))
-file.write(haC + ", " + haCC + ", " + haR + ", " + haD + "\n")
+hLocale = liegen.geocode(haC + co + ", " + me)
+sleep(1)
+file.write(haC + ", " + me + ", " + str(hLocale.latitude) + ", " 
+           + str(hLocale.longitude) + ", " + haCC + ", " + haR + ", " + haD +"\n")
 
 
 kenne = hold[25:30]
@@ -79,9 +89,10 @@ keC = kenne[0]
 keCC = kenne[1]
 keR = kenne[2]
 keD = kenne[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (keC, keCC, keR, keD))
-file.write(keC + ", " + keCC + ", " + keR + ", " + keD + "\n")
+keLocale = liegen.geocode(keC + co + ", " + me)
+sleep(1)
+file.write(keC + ", " + me + ", " + str(keLocale.latitude) + ", " 
+           + str(keLocale.longitude) + ", " + keCC + ", " + keR + ", " + keD +"\n")
 
 
 knox = hold[30:35]
@@ -89,9 +100,10 @@ knC = knox[0]
 knCC = knox[1]
 knR = knox[2]
 knD = knox[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (knC, knCC, knR, knD))
-file.write(knC + ", " + knCC + ", " + knR + ", " + knD + "\n")
+knLocale = liegen.geocode(knC + co + ", " + me)
+sleep(1)
+file.write(knC + ", " + me + ", " + str(knLocale.latitude) + ", " 
+           + str(knLocale.longitude) + ", " + knCC + ", " + knR + ", " + knD +"\n")
 
 
 linc = hold[35:40]
@@ -99,9 +111,10 @@ linC = linc[0]
 linCC = linc[1]
 linR = linc[2]
 linD = linc[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (linC, linCC, linR, linD))
-file.write(linC + ", " + linCC + ", " + linR + ", " + linD + "\n")
+lLocale = liegen.geocode(linC + co + ", " + me)
+sleep(1)
+file.write(linC + ", " + me + ", " + str(lLocale.latitude) + ", " 
+           + str(lLocale.longitude) + ", " + linCC + ", " + linR + ", " + linD +"\n")
 
 
 ox = hold[40:45]
@@ -109,9 +122,10 @@ oxC = ox[0]
 oxCC = ox[1]
 oxR = ox[2]
 oxD = ox[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (oxC, oxCC, oxR, oxD))
-file.write(oxC + ", " + oxCC + ", " + oxR + ", " + oxD + "\n")
+oxLocale = liegen.geocode(oxC + co + ", " + me)
+sleep(1)
+file.write(oxC + ", " + me + ", " + str(oxLocale.latitude) + ", " 
+           + str(oxLocale.longitude) + ", " + oxCC + ", " + oxR + ", " + oxD +"\n")
 
 
 peno = hold[45:50]
@@ -119,9 +133,10 @@ penC = peno[0]
 penCC = peno[1]
 penR = peno[2]
 penD = peno[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (penC, penCC, penR, penD))
-file.write(penC + ", " + penCC + ", " + penR + ", " + penD + "\n")
+peLocale = liegen.geocode(penC + co + ", " + me)
+sleep(1)
+file.write(penC + ", " + me + ", " + str(peLocale.latitude) + ", " 
+           + str(peLocale.longitude) + ", " + penCC + ", " + penR + ", " + penD +"\n")
 
 
 pisca = hold[50:55]
@@ -129,9 +144,10 @@ piC = pisca[0]
 piCC = pisca[1]
 piR = pisca[2]
 piD = pisca[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (piC, piCC, piR, piD))
-file.write(piC + ", " + piCC + ", " + piR + ", " + piD + "\n")
+piLocale = liegen.geocode(piC + co + ", " + me)
+sleep(1)
+file.write(piC + ", " + me + ", " + str(piLocale.latitude) + ", " 
+           + str(piLocale.longitude) + ", " + piCC + ", " + piR + ", " + piD +"\n")
 
 
 saga = hold[55:60]
@@ -139,9 +155,10 @@ sC = saga[0]
 sCC = saga[1]
 sR = saga[2]
 sD = saga[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (sC, sCC, sR, sD))
-file.write(sC + ", " + sCC + ", " + sR + ", " + sD + "\n")
+saLocale = liegen.geocode(sC + co + ", " + me)
+sleep(1)
+file.write(sC + ", " + me + ", " + str(saLocale.latitude) + ", " 
+           + str(saLocale.longitude) + ", " + sCC + ", " + sR + ", " + sD +"\n")
 
 
 somer = hold[60:65]
@@ -149,9 +166,10 @@ soC = somer[0]
 soCC = somer[1]
 soR = somer[2]
 soD = somer[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (soC, soCC, soR, soD))
-file.write(soC + ", " + soCC + ", " + soR + ", " + soD + "\n")
+soLocale = liegen.geocode(soC + co + ", " + me)
+sleep(1)
+file.write(soC + ", " + me + ", " + str(soLocale.latitude) + ", " 
+           + str(soLocale.longitude) + ", " + soCC + ", " + soR + ", " + soD +"\n")
 
 
 waldo = hold[65:70]
@@ -159,9 +177,10 @@ wdC = waldo[0]
 wdCC = waldo[1]
 wdR = waldo[2]
 wdD = waldo[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (wdC, wdCC, wdR, wdD))
-file.write(wdC + ", " + wdCC + ", " + wdR + ", " + wdD + "\n")
+wdLocale = liegen.geocode(wdC + co + ", " + me)
+sleep(1)
+file.write(wdC + ", " + me + ", " + str(wdLocale.latitude) + ", " 
+           + str(wdLocale.longitude) + ", " + wdCC + ", " + wdR + ", " + wdD +"\n")
 
 
 wash = hold[70:75]
@@ -169,9 +188,10 @@ wsC = wash[0]
 wsCC = wash[1]
 wsR = wash[2]
 wsD = wash[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (wsC, wsCC, wsR, wsD))
-file.write(wsC + ", " + wsCC + ", " + wsR + ", " + wsD + "\n")
+waLocale = liegen.geocode(wsC + co + ", " + me)
+sleep(1)
+file.write(wsC + ", " + me + ", " + str(waLocale.latitude) + ", " 
+           + str(waLocale.longitude) + ", " + wsCC + ", " + wsR + ", " + wsD +"\n")
 
 
 york = hold[75:80]
@@ -179,9 +199,10 @@ yC = york[0]
 yCC = york[1]
 yR = york[2]
 yD = york[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (yC, yCC, yR, yD))
-file.write(yC + ", " + yCC + ", " + yR + ", " + yD + "\n")
+yoLocale = liegen.geocode(yC + co + ", " + me)
+sleep(1)
+file.write(yC + ", " + me + ", " + str(yoLocale.latitude) + ", " 
+           + str(yoLocale.longitude) + ", " + yCC + ", " + yR + ", " + yD +"\n")
 
 
 unk = hold[80:85]
@@ -189,15 +210,13 @@ uC = unk[0]
 uCC = unk[1]
 uR = unk[2]
 uD = unk[4]
-print("County = %s, Confirmed Cases = %s, Recovered = %s, Deaths = %s" % \
-      (uC, uCC, uR, uD))
-file.write(uC + ", " + uCC + ", " + uR + ", " + uD + "\n")
+file.write(uC + ", " + me + ", " + "" + ", " + "" + ", " + uCC + ", " + uR + ", " + uD +"\n")
 
 file.close()
 
 if anC == 'Androscoggin' and uC == 'Unknown':
-    print("Maine scraper is complete.\n")
+    print("Maine scraper is complete.")
 else:
-    print("ERROR: Must fix Maine scraper.\n")
+    print("ERROR: Must fix Maine scraper.")
 
     

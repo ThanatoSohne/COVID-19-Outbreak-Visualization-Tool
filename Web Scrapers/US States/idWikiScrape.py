@@ -1,5 +1,7 @@
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup 
+from geopy import Nominatim
+from time import sleep
 
 idWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Idaho'
 
@@ -11,8 +13,12 @@ idClient.close()
 
 tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+iD = "IDAHO"
+co = ' County'
+
 csvfile = "COVID-19_cases_idWiki.csv"
-headers = "County, Active Cases, Deaths, Recoveries, Total Cases \n"
+headers = "County, State, Latitude, Longitude, Active Cases, Deaths, Recoveries, Total Cases \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -26,9 +32,13 @@ for t in tables:
             hold.append(take)
             
 for h in hold[28:53]:
+    locale = liegen.geocode((h.split('\n')[1] + co) + ", " + iD)
     take = h.split('\n')
     #print(take[1], take[3], take[5], take[7], take[9])
-    file.write(take[1] + ", " + take[3] + ", " + take[5] + ", " + take[7] + ", " + take[9] + "\n")
+    file.write(take[1] + ", " + iD + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", "
+               + take[7] + ", " + take[9] + "\n")
+    sleep(1)
 
 file.close()
     
