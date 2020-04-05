@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 msDOH = 'https://msdh.ms.gov/msdhsite/_static/14,0,420.html'
 
@@ -11,25 +12,22 @@ msClient.close()
 
 tables = site_parse.find("table", {"id": "msdhTotalCovid-19Cases"}).find("tbody").findAll('tr')
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+ms = "MISSISSIPPI"
+co = ' County'
+
 csvfile = "COVID-19_cases_msdoh.csv"
-headers = "County, Cases, Deaths \n"
+headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
 
 for t in tables[:78]:
     pull = t.findAll('td')
-    #print("County = %s, Cases = %s, Deaths = %s" % \
-     #     (pull[0].text, pull[1].text, pull[2].text))
-    file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
-
-#file.write(tables[32].findAll('td')[0].text + ", " + tables[32].findAll('td')[1].text + ", " + tables[32].findAll('td')[2].text + "\n")
-#
-#for t in tables[34:79]:
-#    pull = t.findAll('td')
-#    #print("County = %s, Cases = %s, Deaths = %s" % \
-#     #     (pull[0].text, pull[1].text, pull[2].text))
-#    file.write(pull[0].text + ", " + pull[1].text + ", " + pull[2].text + "\n")
+    locale = liegen.geocode(pull[0].text + co + ", " + ms)
+    file.write(pull[0].text + ", " + ms + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
+    sleep(2)
 
 file.close()
 
