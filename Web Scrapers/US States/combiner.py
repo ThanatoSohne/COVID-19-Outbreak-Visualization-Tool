@@ -142,6 +142,51 @@ def arScrape():
         print("Arkansas scraper is complete.")
     else:
         print("ERROR: Must fix Arkansas scraper.")
+        
+def aSamScrape():
+    
+    asWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_the_United_States'
+
+    asClient = req(asWiki)
+    
+    site_parse = soup(asClient.read(), "lxml")
+    asClient.close()
+    
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
+    
+    csvfile = "COVID-19_cases_asWiki.csv"
+    headers = "Region, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    
+    aSam = "AMERICAN SAMOA"
+    
+    asGeo = liegen.geocode(aSam)
+    
+    sleep(1)
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    hold = []
+    
+    for t in tables:
+            pull = t.findAll('tr')
+            for p in pull:
+                take = p.get_text()
+                hold.append(take)
+    
+    file.write(hold[19].split('\n')[3] + ", " + aSam + ", " + str(asGeo.latitude) 
+               + ", " + str(asGeo.longitude) + ", " + hold[19].split('\n')[5].replace(',','') 
+               + ", " + hold[19].split('\n')[7].replace(',','') + ", " 
+               + hold[19].split('\n')[9].replace(',','') + "\n")
+    
+    file.close()
+    
+    if hold[19].split('\n')[3] == "American Samoa":
+        print("American Samoa scraper is complete.")
+    else:
+        print("ERROR: Must fix American Samoa scraper.")
     
 def azScrape():
     
@@ -328,18 +373,48 @@ def ctScrape():
     
 def dcScrape():
     
-    dcFile = "https://coronavirus.dc.gov/sites/default/files/dc/sites/coronavirus/page_content/attachments/COVID19_DCHealthStatisticsDataV2%20%283%29.xlsx"
+    dcWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_the_United_States'
 
-    download = requests.get(dcFile)
-    download.raise_for_status()
+    dcClient = req(dcWiki)
     
-    newLife = open('COVID-19-DC.xlsx', 'wb')
-    for chunk in download.iter_content(100000):
-        newLife.write(chunk)
+    site_parse = soup(dcClient.read(), "lxml")
+    dcClient.close()
     
-    newLife.close()
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
     
-    print("DC pull is complete.")
+    csvfile = "COVID-19_cases_dcWiki.csv"
+    headers = "Region, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    
+    dc = "WASHINGTON DC"
+    
+    dcGeo = liegen.geocode(dc)
+    
+    sleep(1)
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    hold = []
+    
+    for t in tables:
+            pull = t.findAll('tr')
+            for p in pull:
+                take = p.get_text()
+                hold.append(take)
+    
+    file.write(hold[26].split('\n')[3] + ", " + dc + ", " + str(dcGeo.latitude) 
+               + ", " + str(dcGeo.longitude) + ", " + hold[26].split('\n')[5].replace(',','') 
+               + ", " + hold[26].split('\n')[7].replace(',','') + ", " 
+               + hold[26].split('\n')[9].replace(',','') + "\n")
+    
+    file.close()
+    
+    if hold[26].split('\n')[3] == "Washington D.C.":
+        print("DC scraper is complete.")
+    else:
+        print("ERROR: Must fix DC scraper.")
     
 def deScrape():
     
@@ -442,6 +517,48 @@ def gaScrape():
         print("Georgia scraper is complete.")
     else:
         print("ERROR: Must fix Georgia scraper.")
+        
+def guScrape():
+    
+    guDOH = 'http://dphss.guam.gov/covid-19/'
+
+    guClient = req(guDOH)
+    
+    site_parse = soup(guClient.read(), "lxml")
+    guClient.close()
+    
+    tables = site_parse.find("div", {"class" : "et_pb_row et_pb_row_2"}).findAll('p')
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    gu = "GUAM"
+    
+    csvfile = "COVID-19_cases_guDOH.csv"
+    headers = "Region, State, Latitude, Longitude, Positive Cases, Deaths, Recoveries \n"
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    hold = []
+    
+    for t in tables:
+        take = t.text
+        hold.append(take)
+    
+    locale = liegen.geocode(gu)
+    sleep(1)
+    pos = hold[0]
+    mort = hold[2]
+    hope = hold[4]
+    
+    file.write(gu + ", " + gu + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " + pos + ", " + mort + ", " + hope + "\n")
+    
+    file.close()
+    
+    if hold[1] == 'POSITIVE':
+        print("Guam scraper is complete.")
+    else:
+        print("ERROR: Must fix Guam scraper.")
     
 def hiScrape():
     
@@ -1461,6 +1578,52 @@ def moScrape():
     else:
         print("ERROR: Must fix Missour scraper.")
 
+def mpScrape():
+    
+    mpWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_the_United_States'
+
+    mpClient = req(mpWiki)
+    
+    site_parse = soup(mpClient.read(), "lxml")
+    mpClient.close()
+    
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
+    
+    csvfile = "COVID-19_cases_mpWiki.csv"
+    headers = "Region, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    
+    mp = "NORTHERN MARIANA ISLANDS"
+    
+    mpGeo = liegen.geocode(mp)
+    
+    sleep(1.5)
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    hold = []
+    
+    for t in tables:
+            pull = t.findAll('tr')
+            for p in pull:
+                take = p.get_text()
+                hold.append(take)
+    
+    file.write(hold[54].split('\n')[3] + ", " + mp + ", " + str(mpGeo.latitude) 
+               + ", " + str(mpGeo.longitude) + ", " + hold[54].split('\n')[5].replace(',','') 
+               + ", " + hold[54].split('\n')[7].replace(',','') + ", " 
+               + hold[54].split('\n')[9].replace(',','') + "\n")
+    
+    file.close()
+    
+    if hold[54].split('\n')[3] == "Northern Mariana Islands":
+        print("Northern Mariana Islands scraper is complete.")
+    else:
+        print("ERROR: Must fix Northern Mariana Islands scraper.")
+
+
 def msScrape():
     
     msDOH = 'https://msdh.ms.gov/msdhsite/_static/14,0,420.html'
@@ -1775,6 +1938,45 @@ def nmScrape():
     else:
         print("ERROR: Must fix New Mexico scraper.")
 
+def nvScrape():
+    
+    nvNews = 'https://www.livescience.com/nevada-coronavirus-updates.html'
+
+    nvClient = req(nvNews)
+    
+    site_parse = soup(nvClient.read(), "lxml")
+    nvClient.close()
+    
+    tables = site_parse.find("div", {"itemprop": "articleBody"}).find('ul')
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    nv = "NEVADA"
+    co = ' County'
+    
+    csvfile = "COVID-19_cases_nvNews.csv"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases \n"
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    tags = tables.findAll('li')
+    
+    for t in range(0,9):
+        locale = liegen.geocode(tags[t].get_text().split(': ')[0] + co + ", " + nv)
+        sleep(1)
+        file.write(tags[t].get_text().split(': ')[0] + ", " + nv + ", " 
+                    + str(locale.latitude) + ", " + str(locale.longitude) + ", "
+                    + tags[t].get_text().split(': ')[1].replace(',','') + "\n")
+    
+    file.close()
+         
+    if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[8].get_text().split(': ')[0]) == 'White Pine':
+        print("Nevada scraper is complete.\n")
+    else:
+        print("ERROR: Must fix Nevada scraper.\n")
+
+
+
 def nyScrape():
     
     nyWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_New_York_(state)'
@@ -2048,6 +2250,87 @@ def prScrape():
     else:
         print("ERROR: Must fix Puerto Rico scraper.")
     
+def riScrape():
+    
+    riDOH = 'https://www.nytimes.com/interactive/2020/us/rhode-island-coronavirus-cases.html'
+
+    riClient = req(riDOH)
+    
+    site_parse = soup(riClient.read(), "lxml")
+    riClient.close()
+    
+    tables = site_parse.find("table", {"class": "svelte-r6hxge"}).find('tbody')
+    
+    tags = tables.findAll('td')
+    
+    liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    ri = "RHODE ISLAND"
+    co = ' County'
+    
+    csvfile = "COVID-19_cases_riNews.csv"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
+    
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    hold = []
+    
+    for t in tags[5:]:
+        take = t.text.split('\n')[0]
+        hold.append(take)
+    
+    prov = hold[1]
+    provL = liegen.geocode(prov + co + ", " + ri)
+    sleep(1)
+    provC = hold[2]
+    provD = hold[4]
+    file.write(prov + ", " + ri + ", " + str(provL.latitude) + ", " 
+               + str(provL.longitude) + ", " + provC + ", " + provD + "\n")
+    
+    kent = hold[7]
+    kentL = liegen.geocode(kent + co + ", " + ri)
+    sleep(1)
+    kentC = hold[8]
+    kentD = hold[10]
+    file.write(kent + ", " + ri + ", " + str(kentL.latitude) + ", " 
+               + str(kentL.longitude) + ", " + kentC + ", " + kentD + "\n")
+    
+    wash = hold[13]
+    washL = liegen.geocode(wash + co + ", " + ri)
+    sleep(1)
+    washC = hold[14]
+    washD = hold[16]
+    file.write(wash + ", " + ri + ", " + str(washL.latitude) + ", " 
+               + str(washL.longitude) + ", " + washC + ", " + washD + "\n")
+    
+    new = hold[19]
+    newL = liegen.geocode(new + co + ", " + ri)
+    sleep(1)
+    newC = hold[20]
+    newD = hold[22]
+    file.write(new + ", " + ri + ", " + str(newL.latitude) + ", " 
+               + str(newL.longitude) + ", " + newC + ", " + newD + "\n")
+    
+    brist = hold[25]
+    bristL = liegen.geocode(brist + co + ", " + ri)
+    sleep(1)
+    bristC = hold[26]
+    bristD = hold[28]
+    file.write(brist + ", " + ri + ", " + str(bristL.latitude) + ", " 
+               + str(bristL.longitude) + ", " + bristC + ", " + bristD + "\n")
+    
+    unkn = hold[31]
+    unkC = hold[32]
+    unkD = hold[34]
+    file.write(unkn + ", " + ri + ", " + "" + ", " + "" + ", " + unkC + ", " + unkD + "\n")
+    
+    file.close()
+    
+    if prov == "Providence" and unkn == "Unknown":
+        print("Rhode Island scraper is complete.")
+    else:
+        print("ERROR: Must fix Rhode Island scraper.")
+
 def scScrape():
     
     scWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_South_Carolina'
