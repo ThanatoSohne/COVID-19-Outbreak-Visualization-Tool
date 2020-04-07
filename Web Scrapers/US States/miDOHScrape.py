@@ -24,28 +24,28 @@ headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[:70]:
+for tag in tags[:73]:
     pull = tag.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + mi)
     sleep(1)
     file.write(pull[0].text + ", " + mi + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
-file.write(tags[70].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
-           + "" + ", " + tags[70].findAll('td')[1].text.strip() + ", " 
-           + tags[70].findAll('td')[2].text.strip() + "\n")
-
-file.write(tags[71].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
-           + "" + ", " + tags[71].findAll('td')[1].text.strip() + ", " 
-           + tags[71].findAll('td')[2].text.strip() + "\n")
-
 file.write(tags[72].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
            + "" + ", " + tags[72].findAll('td')[1].text.strip() + ", " 
            + tags[72].findAll('td')[2].text.strip() + "\n")
 
+file.write(tags[73].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
+           + "" + ", " + tags[73].findAll('td')[1].text.strip() + ", " 
+           + tags[73].findAll('td')[2].text.strip() + "\n")
+
+file.write(tags[74].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
+           + "" + ", " + tags[74].findAll('td')[1].text.strip() + ", " 
+           + tags[74].findAll('td')[2].text.strip() + "\n")
+
 file.close()
 
-if (tags[0].find('td').text.strip()) == 'Allegan' and (tags[72].find('td').text.strip()) == 'Out of State':
+if (tags[0].find('td').text.strip()) == 'Allegan' and (tags[74].find('td').text.strip()) == 'Out of State':
     print("Michigan scraper is complete.")
 else:
     print("ERROR: Must fix Michigan scraper.")

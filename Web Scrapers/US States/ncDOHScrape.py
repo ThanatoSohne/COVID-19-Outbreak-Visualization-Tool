@@ -29,11 +29,11 @@ for tag in tags:
     file.write(pull[0].text + ", " + nc + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " + pull[1].text + ", " 
                + pull[2].text + "\n")
-    sleep(1.5)
+    sleep(1.1)
 
 file.close()
 
-if (tags[0].find('td').text) == 'Alamance County' and (tags[87].find('td').text) == 'Yadkin County':
+if (tags[0].find('td').text) == 'Alamance County' and (tags[89].find('td').text) == 'Yadkin County':
     print("North Carolina scraper is complete.")
 else:
     print("ERROR: Must fix North Carolina scraper.")

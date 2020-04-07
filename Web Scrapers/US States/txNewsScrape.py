@@ -34,19 +34,19 @@ for tag in tags[:10]:
                + str(locale.longitude) + ", " + pull[1].text.replace(',','') + ", " + pull[2].text + "\n")
     sleep(1)
 
-for tag in tags[11:65]:
+for tag in tags[11:70]:
     pull = tag.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + tx)
     file.write(pull[0].text + ", " + tx + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " + pull[1].text.replace(',','') + ", " + pull[2].text + "\n")
     sleep(1)
 
-locale1 = liegen.geocode(tags[65].find('td').text.replace(' ', '') + co + ", " + tx)
-file.write(tags[65].find('td').text.replace(' ', '') + ", " + tx + ", " + str(locale1.latitude) + ", " 
-               + str(locale1.longitude) + ", " + tags[65].findAll('td')[1].text.replace(',','') 
-               + ", " + tags[65].findAll('td')[2].text + "\n")
+locale1 = liegen.geocode(tags[70].find('td').text.replace(' ', '') + co + ", " + tx)
+file.write(tags[70].find('td').text.replace(' ', '') + ", " + tx + ", " + str(locale1.latitude) + ", " 
+               + str(locale1.longitude) + ", " + tags[70].findAll('td')[1].text.replace(',','') 
+               + ", " + tags[70].findAll('td')[2].text + "\n")
 
-for tag in tags[66:152]:
+for tag in tags[71:162]:
     pull = tag.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + tx)
     file.write(pull[0].text + ", " + tx + ", " + str(locale.latitude) + ", " 
@@ -55,7 +55,7 @@ for tag in tags[66:152]:
 
 file.close()
 
-if (tags[0].find('td').text) == 'Harris' and (tags[151].find('td').text) == 'Wood':
+if (tags[0].find('td').text) == 'Harris' and (tags[161].find('td').text) == 'Zapata':
     print("Texas scraper is complete.")
 else:
     print("ERROR: Must fix Texas scraper.")

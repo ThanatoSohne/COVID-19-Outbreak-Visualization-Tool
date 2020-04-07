@@ -1,6 +1,5 @@
 import json
 from urllib.request import urlopen as req
-from bs4 import BeautifulSoup as soup
 from geopy import Nominatim
 from time import sleep
 

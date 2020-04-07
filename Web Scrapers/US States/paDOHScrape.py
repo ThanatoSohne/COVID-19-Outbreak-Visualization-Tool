@@ -33,7 +33,7 @@ for tag in tags[1:]:
 
 file.close()
 
-if (tags[1].find('td').text) == 'Adams' and (tags[64].find('td').text.strip()) == 'York':
+if (tags[1].find('td').text) == 'Adams' and (tags[67].find('td').text.strip()) == 'York':
     print("Pennsylvania scraper is complete.")
 else:
     print("ERROR: Must fix Pennsylvania scraper.")

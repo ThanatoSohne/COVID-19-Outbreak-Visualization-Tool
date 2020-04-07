@@ -30,20 +30,20 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
     
-for h in hold[73:97]:
+for h in hold[76:100]:
     locale = liegen.geocode(h.split('\n')[1] + co + ", " + md)
     sleep(1)
     take = h.split('\n')
     file.write(take[1] + ", " + md + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", " 
                + take[7] + "\n")
-file.write(hold[97].split('\n')[1] + ", " + md + ", " + "" + ", " + "" + ", " 
-           + hold[97].split('\n')[3] + ", " + hold[97].split('\n')[5] + ", " 
-           + hold[97].split('\n')[7] + "\n")
+file.write(hold[100].split('\n')[1] + ", " + md + ", " + "" + ", " + "" + ", " 
+           + hold[100].split('\n')[3] + ", " + hold[100].split('\n')[5] + ", " 
+           + hold[100].split('\n')[7] + "\n")
 
 file.close()
 
-if (hold[73].split('\n')[1]) == 'Allegany' and (hold[97].split('\n')[1]) == 'Unassigned':
+if (hold[76].split('\n')[1]) == 'Allegany' and (hold[100].split('\n')[1]) == 'Unassigned':
     print("Maryland scraper is complete.")
 else:
     print("ERROR: Must fix Maryland scraper.")

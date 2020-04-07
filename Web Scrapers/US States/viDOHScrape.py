@@ -10,7 +10,7 @@ viClient = req(viDOH)
 site_parse = soup(viClient.read(), "lxml")
 viClient.close()
 
-tables = site_parse.find("div", {"class": "page-content-sidebar col-sm-12 col-md-4"}).find("div", {"class": "block-content clearfix"})
+tables = site_parse.find("div", {"class": "field field-name-body field-type-text-with-summary field-label-hidden"}).find("div", {"class":"row"})
 
 liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 vi = "US VIRGIN ISLANDS"
@@ -23,17 +23,20 @@ file.write(headers)
 
 tags = tables.findAll('p')
 
-pos = tags[0].text.split(':\xa0')[0]
-posNo = tags[0].text.split(':\xa0')[1]
+pos = tags[3].text.split(': ')[0]
+posNo = tags[3].text.split(': ')[1].split('\xa0')[0]
 
-recov = tags[1].text.split(':\xa0')[0]
-recNo = tags[1].text.split(':\xa0')[1]
+recov = tags[6].text.split(': ')[0]
+recNo = tags[6].text.split(': ')[1].split('/')[0]
 
-neg = tags[2].text.split(':\xa0')[0]
-negNo = tags[2].text.split(':\xa0')[1]
+neg = tags[4].text.split(': ')[0]
+negNo = tags[4].text.split(': ')[1].split(' ')[0]
 
-pend = tags[3].text.split(':\xa0')[0]
-pendNo = tags[3].text.split(':\xa0')[1]
+pend = tags[5].text.split(': ')[0]
+pendNo = tags[5].text.split(': ')[1].split(' ')[0]
+
+mort = tags[7].text.split(':\xa0')[0]
+mortNo = tags[7].text.split(':\xa0')[1]
 
 locale = liegen.geocode(vi)
 sleep(1)
@@ -41,6 +44,7 @@ file.write(pos + ", " + posNo + ", " + vi + ", " + str(locale.latitude) + ", " +
 file.write(recov + ", " + recNo + "\n")
 file.write(neg + ", " + negNo + "\n")
 file.write(pend + ", " + pendNo + "\n")
+file.write(mort + ", " + mortNo + "\n")
 
 file.close()
 

@@ -24,7 +24,7 @@ headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for tag in tags[:56]:
+for tag in tags[:61]:
     pull = tag.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + ok)
     file.write(pull[0].text + ", " + ok + ", " + str(locale.latitude) + ", "
@@ -33,7 +33,7 @@ for tag in tags[:56]:
     
 file.close()
 
-if (tags[0].find('td').text) == 'Adair' and (tags[55].find('td').text) == 'Woodward':
+if (tags[0].find('td').text) == 'Adair' and (tags[60].find('td').text) == 'Woodward':
     print("Oklahoma scraper is complete.")
 else:
     print("ERROR: Must fix Oklahoma scraper.")

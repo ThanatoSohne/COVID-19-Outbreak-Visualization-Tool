@@ -1,6 +1,7 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
+from geopy import Nominatim
+from time import sleep
 
 waWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Washington_(state)'
 
@@ -11,8 +12,12 @@ waClient.close()
 
 tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 
+liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+wa = "WASHINGTON"
+co = ' County'
+
 csvfile = "COVID-19_cases_waWiki.csv"
-headers = "County, Confirmed Cases, Deaths, Recoveries \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -25,13 +30,21 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[54:94]:
+for h in hold[47:84]:
     take = h.split('\n')
-    file.write(take[1] + ", " + take[3].split('[')[0].replace(',','') + ", " + take[5].split('[')[0].replace(',','') + ", " + take[7].split('[')[0].replace(',','') + "\n")
+    locale = liegen.geocode(take[1] + co + ", " + wa)
+    file.write(take[1] + ", " + wa + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " + take[3].split('[')[0].replace(',','') 
+               + ", " + take[5].split('[')[0].replace(',','') + "\n")
+    sleep(1)
+    
+file.write(hold[84].split('\n')[1] + ", " + wa + ", " + "" + ", " 
+               + "" + ", " + hold[84].split('\n')[3].split('[')[0].replace(',','') 
+               + ", " + hold[84].split('\n')[5].split('[')[0].replace(',','') + "\n")
 
 file.close()
 
-if (hold[54].split('\n')[1]) == 'Adams' and (hold[93].split('\n')[1]) == '(Unassigned)':
+if (hold[47].split('\n')[1]) == 'Adams' and (hold[84].split('\n')[1]) == '(Unassigned by county)':
     print("Washington scraper is complete.")
 else:
     print("ERROR: Must fix Washington scraper.")

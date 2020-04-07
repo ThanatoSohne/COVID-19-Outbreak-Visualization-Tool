@@ -30,21 +30,21 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[49:70]:
+for h in hold[51:72]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + co + ", " + nj)
     file.write(take[1] + ", " + nj + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " +take[3].replace(',','') + ", " 
                + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
-    sleep(1.2)
+    sleep(1.1)
 
-file.write(hold[70].split('\n')[1] + ", " + nj + ", " + "" + ", " + "" + ", " 
-           + hold[70].split('\n')[3].replace(',','') + ", " + hold[70].split('\n')[5].replace(',','') 
-           + ", " + hold[70].split('\n')[7].replace(',','') + "\n")
+file.write(hold[72].split('\n')[1] + ", " + nj + ", " + "" + ", " + "" + ", " 
+           + hold[72].split('\n')[3].replace(',','') + ", " + hold[72].split('\n')[5].replace(',','') 
+           + ", " + hold[72].split('\n')[7].replace(',','') + "\n")
 
 file.close()
 
-if (hold[49].split('\n')[1]) == 'Atlantic' and (hold[70].split('\n')[1]) == 'Under investigation':
+if (hold[51].split('\n')[1]) == 'Atlantic' and (hold[72].split('\n')[1]) == 'Under investigation':
     print("New Jersey scraper is complete.")
 else:
     print("ERROR: Must fix New Jersey scraper.")

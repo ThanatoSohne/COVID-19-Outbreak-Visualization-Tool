@@ -48,7 +48,7 @@ file.write(faStr + ", " + faNo + "\n")
 
 file.close()
 
-if (tags[1].find('p').text) == 'Anderson County' and (tags[97].find('p').text) == 'Out of state':
+if (tags[1].find('p').text) == 'Anderson County' and (tags[97].find('p').text) == 'Out of State':
     print("Tennessee scraper is complete.")
 else:
     print("ERROR: Must fix Tennessee scraper.")

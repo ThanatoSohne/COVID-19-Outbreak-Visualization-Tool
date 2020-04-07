@@ -29,7 +29,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[38:69]:
+for h in hold[41:80]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + wv)
     file.write(take[1] + ", " + wv + ", " + str(locale.latitude) + ", "
@@ -38,7 +38,7 @@ for h in hold[38:69]:
 
 file.close()
 
-if hold[38].split('\n')[1] == 'Barbour County' and hold[68].split('\n')[1] == 'Wood County':
+if hold[41].split('\n')[1] == 'Barbour County' and hold[79].split('\n')[1] == 'Wyoming County':
     print("West Virginia scraper is complete.")
 else:
     print("ERROR: Must fix West Virginia scraper.")

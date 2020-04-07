@@ -32,10 +32,10 @@ for t in range(0,10):
 
 file.close()
      
-if (tags[0].get_text().split(': ')[0]) == 'Rockingham' and (tags[9].get_text().split(': ')[0]) == 'Sullivan':
-    print("New Hampshire scraper is complete.\n")
+if (tags[0].get_text().split(': ')[0]) == 'Hillsborough' and (tags[9].get_text().split(': ')[0]) == 'Coos':
+    print("New Hampshire scraper is complete.")
 else:
-    print("ERROR: Must fix New Hampshire scraper.\n")
+    print("ERROR: Must fix New Hampshire scraper.")
 
 
 
