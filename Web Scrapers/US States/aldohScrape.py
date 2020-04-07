@@ -13,7 +13,7 @@ rJS = json.loads(alClient)
 attr = rJS.get('features')
 
 csvfile = "COVID-19_cases_aldoh.csv"
-headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
+headers = "County/Region, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
 
 test = []
 
@@ -27,7 +27,7 @@ for a in attr:
                + str(liegen.geocode(a.get('attributes').get('CNTYNAME') + " ALABAMA").latitude) + ", " 
                + str(liegen.geocode(a.get('attributes').get('CNTYNAME') + " ALABAMA").longitude) + ", "
                + str(a.get('attributes').get('CONFIRMED')) + ", " + str(a.get('attributes').get('DIED')) + "\n")
-    sleep(1)
+    sleep(1.5)
     
     if(attr[0].get('attributes').get('CNTYNAME')) == 'Autauga':
         test = True

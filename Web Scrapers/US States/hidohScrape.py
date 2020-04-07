@@ -24,52 +24,52 @@ file.write(headers)
 
 tags = tables.findAll('td')
 
-hawaii = tags[26].text.replace("\xa0","")
+hawaii = tags[18].text.replace("\xa0","")
 haLocale = liegen.geocode(hawaii + ", " + hi)
-haTotal = tags[31].text
-haIso = tags[34].text
-haHosp = tags[37].text
-haDeaths = tags[40].text
+haTotal = tags[21].text
+haIso = tags[23].text
+haHosp = tags[25].text
+haDeaths = tags[27].text
 file.write(hawaii + ", " + hi + ", " + str(haLocale.latitude) + ", " +
            str(haLocale.longitude) + ", " + haTotal + ", " + haIso + ", " +
            haHosp + ", " + haDeaths + "\n")
 
-honolulu = tags[44].text
+honolulu = tags[30].text
 honLocale = liegen.geocode(honolulu + ", " + hi)
-honTotal = tags[49].text
-honIso = tags[52].text
-honHosp = tags[55].text
-honDeaths = tags[58].text
+honTotal = tags[33].text
+honIso = tags[35].text
+honHosp = tags[37].text
+honDeaths = tags[39].text
 file.write(honolulu + ", " + hi + ", " + str(honLocale.latitude) + ", " +
            str(honLocale.longitude) + ", " + honTotal + ", " + honIso + ", " +
            honHosp + ", " + honDeaths + "\n")
 
-kauai = tags[62].text
+kauai = tags[42].text
 kauLocale = liegen.geocode(kauai + ", " + hi)
-kauTotal = tags[67].text
-kauIso = tags[70].text
-kauHosp = tags[73].text
-kauDeaths = tags[76].text
+kauTotal = tags[45].text
+kauIso = tags[47].text
+kauHosp = tags[49].text
+kauDeaths = tags[51].text
 file.write(kauai + ", " + hi + ", " + str(kauLocale.latitude) + ", " +
            str(kauLocale.longitude) + ", " + kauTotal + ", " + kauIso + ", " +
            kauHosp + ", " + kauDeaths + "\n")
 
-maui = tags[80].text
+maui = tags[54].text
 mauiLocale = liegen.geocode(maui + ", " + hi)
-mauiTotal = tags[85].text
-mauiIso = tags[88].text
-mauiHosp = tags[91].text
-mauiDeaths = tags[94].text
+mauiTotal = tags[57].text
+mauiIso = tags[59].text
+mauiHosp = tags[61].text
+mauiDeaths = tags[63].text
 file.write(maui + ", " + hi + ", " + str(mauiLocale.latitude) + ", " +
            str(mauiLocale.longitude) + ", " + mauiTotal + ", " + mauiIso + ", " +
            mauiHosp + ", " + mauiDeaths + "\n")
 
-outHI = tags[98].text
-outHIno = tags[100].text
+outHI = tags[66].text
+outHIno = tags[67].text
 file.write(outHI + ", " + hi + ", " + "" + ", " + "" + ", " + outHIno + "\n")
 
-pending = tags[101].text
-penNo = tags[103].text
+pending = tags[68].text
+penNo = tags[69].text
 file.write(pending + ", " + hi + ", " + "" + ", " + "" + ", " + penNo + "\n")
 
 file.close()

@@ -13,7 +13,7 @@ arClient.close()
 tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 
 csvfile = "COVID-19_cases_arWiki.csv"
-headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
+headers = "County/Region, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
 
 liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 
@@ -28,18 +28,18 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[44:105]:
+for h in hold[48:116]:
     locale = liegen.geocode(h.split('\n')[1] + ", " + "ARKANSAS")
     take = h.split('\n')
     file.write(take[1] + ", " + "ARKANSAS" + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", " + take[7] +"\n")
     sleep(1)
 
-file.write(hold[105].split('\n')[1] + ", " + "ARKANSAS" +  ", " + "" + ", " + "" + ", " + hold[105].split('\n')[3] + ", " + hold[105].split('\n')[5] + ", " + hold[105].split('\n')[7] +"\n")
+file.write(hold[116].split('\n')[1] + ", " + "ARKANSAS" +  ", " + "" + ", " + "" + ", " + hold[105].split('\n')[3] + ", " + hold[105].split('\n')[5] + ", " + hold[105].split('\n')[7] +"\n")
     
 
 file.close()
 
-if (hold[44].split('\n')[1]) == 'Arkansas' and (hold[105].split('\n')[1]) == 'Missing county information':
+if (hold[48].split('\n')[1]) == 'Arkansas' and (hold[116].split('\n')[1]) == 'Missing county information':
     print("Arkansas scraper is complete.\n")
 else:
     print("ERROR: Must fix Arkansas scraper.\n")

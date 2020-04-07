@@ -9,7 +9,7 @@ flFile = "https://opendata.arcgis.com/datasets/a7887f1940b34bf5a02c6f7f27a5cb2c_
 download = requests.get(flFile)
 download.raise_for_status()
 
-newLife = open('FLCOVID-19.csv', 'wb')
+newLife = open('COVID-19-FL.csv', 'wb')
 for chunk in download.iter_content(100000):
     newLife.write(chunk)
 

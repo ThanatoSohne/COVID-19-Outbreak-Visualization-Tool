@@ -30,7 +30,17 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[44:129]:
+for h in hold[46:123]:
+    locale = liegen.geocode((h.split('\n')[1] + co) + ", " + inD)
+    take = h.split('\n')
+    file.write(take[1] + ", " + inD + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + ", " + take[2] + ", " + take[3] + "\n")
+    sleep(1)
+
+file.write(hold[123].split('\n')[1] + ", " + inD + ", " + "" + ", " 
+               + "" + ", " + hold[123].split('\n')[2] + ", " + hold[123].split('\n')[3] + "\n")
+
+for h in hold[124:136]:
     locale = liegen.geocode((h.split('\n')[1] + co) + ", " + inD)
     take = h.split('\n')
     file.write(take[1] + ", " + inD + ", " + str(locale.latitude) + ", " 
@@ -39,10 +49,10 @@ for h in hold[44:129]:
 
 file.close()
 
-if (hold[44].split('\n')[1]) == 'Adams' and (hold[128].split('\n')[1]) == 'Whitley':
-    print("Indiana scraper is complete.\n")
+if (hold[46].split('\n')[1]) == 'Adams' and (hold[135].split('\n')[1]) == 'Whitley':
+    print("Indiana scraper is complete.")
 else:
-    print("ERROR: Must fix Indiana scraper.\n")
+    print("ERROR: Must fix Indiana scraper.")
 
 
 

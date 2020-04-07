@@ -30,17 +30,17 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[41:56]:
+for h in hold[44:59]:
     locale = liegen.geocode(h.split('\n')[1] + ", " + az)
     take = h.split('\n')
     file.write(take[1] + ", " + az + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
     sleep(1)
 
-file.write(hold[56].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[56].split('\n')[3] + ", " + hold[56].split('\n')[5] + "\n" )
+file.write(hold[59].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[56].split('\n')[3] + ", " + hold[56].split('\n')[5] + "\n" )
 
 file.close()
 
-if (hold[41].split('\n')[1]) == 'Maricopa' and (hold[56].split('\n')[1]) == 'Undetermined':
+if (hold[44].split('\n')[1]) == 'Maricopa' and (hold[59].split('\n')[1]) == 'Undetermined':
     print("Arizona scraper is complete.\n")
 else:
     print("ERROR: Must fix Arizona scraper.\n")

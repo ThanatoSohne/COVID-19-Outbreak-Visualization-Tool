@@ -1,4 +1,3 @@
-import bs4
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 from geopy.geocoders import Nominatim
@@ -30,7 +29,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[:52]:
+for h in hold[:53]:
     locale = liegen.geocode(h.split('\n')[1].strip('[c]') + ", " + ca)
     take = h.split('\n')
     file.write(take[1] + ", " + ca + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
@@ -39,7 +38,7 @@ for h in hold[:52]:
 
 file.close()
 
-if (hold[0].split('\n')[1]) == 'Los Angeles' and (hold[51].split('\n')[1]) == 'Tuolumne':
+if (hold[0].split('\n')[1]) == 'Los Angeles' and (hold[52].split('\n')[1]) == 'Tuolumne':
     print("California scraper is complete.\n")
 else:
     print("ERROR: Must fix California scraper.\n")

@@ -1,4 +1,3 @@
-import bs4
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as soup
 from geopy import Nominatim
@@ -16,7 +15,7 @@ ctPage.close()
 
 tables = site_parse.find("div", {"class": "article-content rich-text"})
 
-listed = tables.findAll('ul')[1]
+listed = tables.findAll('ul')[2]
 
 tags = listed.findAll('li')
 
@@ -48,9 +47,9 @@ file.write((hold[8].split('validation')[0] + 'validation') + ", " + ct + ", " + 
 file.close()
 
 if hold[0].split('County')[0].strip() == 'Fairfield' and hold[8].split('validation')[0].strip() == 'Pending address':
-    print("Connecticut scraper is complete.\n")
+    print("Connecticut scraper is complete.")
 else:
-    print("ERROR: Must fix Connecticut scraper.\n")
+    print("ERROR: Must fix Connecticut scraper.")
 
 #fair = hold[0].split(' County ')
 ##print(fair)

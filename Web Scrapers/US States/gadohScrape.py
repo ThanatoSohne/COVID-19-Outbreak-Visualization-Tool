@@ -21,20 +21,20 @@ headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in tables[5:152]:
+for t in tables[5:159]:
         pull = t.findAll('td')
         locale = liegen.geocode(pull[0].text +  " County" + ", " + ga )
         file.write(pull[0].text + ", "+ ga + ", " + str(locale.latitude) + ", " 
                    + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
         sleep(1)
 
-file.write(tables[152].find('td').text + ", "+ ga + ", " + "" + ", " 
+file.write(tables[159].find('td').text + ", "+ ga + ", " + "" + ", " 
                    + "" + ", " + tables[152].findAll('td')[1].text.strip() 
                    + ", " + tables[152].findAll('td')[2].text.strip() + "\n")
 
 file.close()
 
-if (tables[5].find('td').text) == 'Fulton' and (tables[152].find('td').text) == 'Unknown':
+if (tables[5].find('td').text) == 'Fulton' and (tables[159].find('td').text) == 'Unknown':
     print("Georgia scraper is complete.\n")
 else:
     print("ERROR: Must fix Georgia scraper.\n")

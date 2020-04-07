@@ -23,11 +23,11 @@ headers = "County, State, Latitude, Longitude, Confirmed Cases \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-kent = pull[0].text.strip() + " County"
-kentC = pull[1].text.strip()
+kent = pull[2].text.strip() + " County"
+kentC = pull[3].text.strip()
 kLocale = liegen.geocode(kent + ", " + de)
-newCastle = pull[2].text.strip() + " County"
-newC = pull[3].text.strip()
+newCastle = pull[0].text.strip() + " County"
+newC = pull[1].text.strip()
 nLocale = liegen.geocode(newCastle + ", " + de)
 suss = pull[4].text.strip() + " County"
 sussC = pull[5].text.strip() 

@@ -29,20 +29,20 @@ for t in tag:
     take = t.get_text()
     hold.append(take)
     
-for h in hold[:84]: 
+for h in hold: 
     locale = liegen.geocode(h.split(':')[0] + ", " + ky)
     file.write(h.split(':')[0] + ", " + ky + ", " + str(locale.latitude) + ", "
                + str(locale.longitude) + ", " + h.split(':')[1].split('c')[0].strip()
                + ", " + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
     sleep(1)
 
-file.write(hold[84].split(':')[0] + ", " + ky + ", " + "" + ", " + "" + ", "
-           + h.split(':')[1].split('c')[0].strip() + ", "
-           + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
-    
+#file.write(hold[84].split(':')[0] + ", " + ky + ", " + "" + ", " + "" + ", "
+#           + h.split(':')[1].split('c')[0].strip() + ", "
+#           + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+#    
 file.close()
 
-if (hold[0].split(':')[0]) == 'Adair County' and (hold[84].split(':')[0]) == 'No County Available':
+if (hold[0].split(':')[0]) == 'Adair County' and (hold[85].split(':')[0]) == 'Woodford County':
     print("Kentucky scraper is complete.")
 else:
     print("ERROR: Must fix Kentucky scraper.")
