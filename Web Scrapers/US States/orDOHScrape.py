@@ -19,7 +19,7 @@ orG = "OREGON"
 co = ' County'
 
 csvfile = "COVID-19_cases_ordoh.csv"
-headers = "County, State, Latitude, Longitude, Positive Cases, Deaths, Negative Test Results \n"
+headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -29,7 +29,7 @@ for tag in tags[:36]:
     locale = liegen.geocode(pull[0].text + co + ", " + orG)
     file.write(pull[0].text + ", " + orG + ", " + str(locale.latitude) + ", "
                + str(locale.longitude) + ", " + pull[1].text + ", " 
-               + pull[2].text + ", " + pull[3].text + "\n")
+               + pull[2].text + "\n")
     sleep(1)
 
 file.close()

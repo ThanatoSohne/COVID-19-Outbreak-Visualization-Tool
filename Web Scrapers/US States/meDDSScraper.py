@@ -19,7 +19,7 @@ co = ' County'
 #print(tables)
 
 csvfile = "COVID-19_cases_meDDS.csv"
-headers = "County, State, Latitude, Longitude, Confirmed Cases, Recovered, Deaths \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -38,7 +38,7 @@ anD = andr[4]
 anLocale = liegen.geocode(anC + co + ", " + me)
 sleep(1)
 file.write(anC + ", " + me + ", " + str(anLocale.latitude) + ", " 
-           + str(anLocale.longitude) + ", " + anCC + ", " + anR + ", " + anD +"\n")
+           + str(anLocale.longitude) + ", " + anCC + ", " + anD + ", " + anR +"\n")
 
 aroo = hold[5:10]
 arC = aroo[0]
@@ -48,7 +48,7 @@ arD = aroo[4]
 arLocale = liegen.geocode(arC + co + ", " + me)
 sleep(1)
 file.write(arC + ", " + me + ", " + str(arLocale.latitude) + ", " 
-           + str(arLocale.longitude) + ", " + arCC + ", " + arR + ", " + arD +"\n")
+           + str(arLocale.longitude) + ", " + arCC + ", " + arD + ", " + arR +"\n")
 
 
 cumb = hold[10:15]
@@ -59,7 +59,7 @@ cumbD = cumb[4]
 cLocale = liegen.geocode(cumbC + co + ", " + me)
 sleep(1)
 file.write(cumbC + ", " + me + ", " + str(cLocale.latitude) + ", " 
-           + str(cLocale.longitude) + ", " + cumbCC + ", " + cumbR + ", " + cumbD +"\n")
+           + str(cLocale.longitude) + ", " + cumbCC + ", " + cumbD + ", " + cumbR +"\n")
 
 
 frank = hold[15:20]
@@ -70,7 +70,7 @@ frD = frank[4]
 fLocale = liegen.geocode(frC + co + ", " + me)
 sleep(1)
 file.write(frC + ", " + me + ", " + str(fLocale.latitude) + ", " 
-           + str(fLocale.longitude) + ", " + frCC + ", " + frR + ", " + frD +"\n")
+           + str(fLocale.longitude) + ", " + frCC + ", " + frD + ", " + frR +"\n")
 
 
 hanc = hold[20:25]
@@ -81,7 +81,7 @@ haD = hanc[4]
 hLocale = liegen.geocode(haC + co + ", " + me)
 sleep(1)
 file.write(haC + ", " + me + ", " + str(hLocale.latitude) + ", " 
-           + str(hLocale.longitude) + ", " + haCC + ", " + haR + ", " + haD +"\n")
+           + str(hLocale.longitude) + ", " + haCC + ", " + haD + ", " + haR +"\n")
 
 
 kenne = hold[25:30]
@@ -92,7 +92,7 @@ keD = kenne[4]
 keLocale = liegen.geocode(keC + co + ", " + me)
 sleep(1)
 file.write(keC + ", " + me + ", " + str(keLocale.latitude) + ", " 
-           + str(keLocale.longitude) + ", " + keCC + ", " + keR + ", " + keD +"\n")
+           + str(keLocale.longitude) + ", " + keCC + ", " + keD + ", " + keR +"\n")
 
 
 knox = hold[30:35]
@@ -103,7 +103,7 @@ knD = knox[4]
 knLocale = liegen.geocode(knC + co + ", " + me)
 sleep(1)
 file.write(knC + ", " + me + ", " + str(knLocale.latitude) + ", " 
-           + str(knLocale.longitude) + ", " + knCC + ", " + knR + ", " + knD +"\n")
+           + str(knLocale.longitude) + ", " + knCC + ", " + knD + ", " + knR +"\n")
 
 
 linc = hold[35:40]
@@ -114,7 +114,7 @@ linD = linc[4]
 lLocale = liegen.geocode(linC + co + ", " + me)
 sleep(1)
 file.write(linC + ", " + me + ", " + str(lLocale.latitude) + ", " 
-           + str(lLocale.longitude) + ", " + linCC + ", " + linR + ", " + linD +"\n")
+           + str(lLocale.longitude) + ", " + linCC + ", " + linD + ", " + linR +"\n")
 
 
 ox = hold[40:45]
@@ -125,7 +125,7 @@ oxD = ox[4]
 oxLocale = liegen.geocode(oxC + co + ", " + me)
 sleep(1)
 file.write(oxC + ", " + me + ", " + str(oxLocale.latitude) + ", " 
-           + str(oxLocale.longitude) + ", " + oxCC + ", " + oxR + ", " + oxD +"\n")
+           + str(oxLocale.longitude) + ", " + oxCC + ", " + oxD + ", " + oxR +"\n")
 
 
 peno = hold[45:50]
@@ -136,7 +136,7 @@ penD = peno[4]
 peLocale = liegen.geocode(penC + co + ", " + me)
 sleep(1)
 file.write(penC + ", " + me + ", " + str(peLocale.latitude) + ", " 
-           + str(peLocale.longitude) + ", " + penCC + ", " + penR + ", " + penD +"\n")
+           + str(peLocale.longitude) + ", " + penCC + ", " + penD + ", " + penR +"\n")
 
 
 pisca = hold[50:55]
@@ -147,7 +147,7 @@ piD = pisca[4]
 piLocale = liegen.geocode(piC + co + ", " + me)
 sleep(1)
 file.write(piC + ", " + me + ", " + str(piLocale.latitude) + ", " 
-           + str(piLocale.longitude) + ", " + piCC + ", " + piR + ", " + piD +"\n")
+           + str(piLocale.longitude) + ", " + piCC + ", " + piD + ", " + piR +"\n")
 
 
 saga = hold[55:60]
@@ -158,7 +158,7 @@ sD = saga[4]
 saLocale = liegen.geocode(sC + co + ", " + me)
 sleep(1)
 file.write(sC + ", " + me + ", " + str(saLocale.latitude) + ", " 
-           + str(saLocale.longitude) + ", " + sCC + ", " + sR + ", " + sD +"\n")
+           + str(saLocale.longitude) + ", " + sCC + ", " + sD + ", " + sR +"\n")
 
 
 somer = hold[60:65]
@@ -169,7 +169,7 @@ soD = somer[4]
 soLocale = liegen.geocode(soC + co + ", " + me)
 sleep(1)
 file.write(soC + ", " + me + ", " + str(soLocale.latitude) + ", " 
-           + str(soLocale.longitude) + ", " + soCC + ", " + soR + ", " + soD +"\n")
+           + str(soLocale.longitude) + ", " + soCC + ", " + soD + ", " + soR +"\n")
 
 
 waldo = hold[65:70]
@@ -180,7 +180,7 @@ wdD = waldo[4]
 wdLocale = liegen.geocode(wdC + co + ", " + me)
 sleep(1)
 file.write(wdC + ", " + me + ", " + str(wdLocale.latitude) + ", " 
-           + str(wdLocale.longitude) + ", " + wdCC + ", " + wdR + ", " + wdD +"\n")
+           + str(wdLocale.longitude) + ", " + wdCC + ", " + wdD + ", " + wdR +"\n")
 
 
 wash = hold[70:75]
@@ -191,7 +191,7 @@ wsD = wash[4]
 waLocale = liegen.geocode(wsC + co + ", " + me)
 sleep(1)
 file.write(wsC + ", " + me + ", " + str(waLocale.latitude) + ", " 
-           + str(waLocale.longitude) + ", " + wsCC + ", " + wsR + ", " + wsD +"\n")
+           + str(waLocale.longitude) + ", " + wsCC + ", " + wsD + ", " + wsR +"\n")
 
 
 york = hold[75:80]
@@ -202,7 +202,7 @@ yD = york[4]
 yoLocale = liegen.geocode(yC + co + ", " + me)
 sleep(1)
 file.write(yC + ", " + me + ", " + str(yoLocale.latitude) + ", " 
-           + str(yoLocale.longitude) + ", " + yCC + ", " + yR + ", " + yD +"\n")
+           + str(yoLocale.longitude) + ", " + yCC + ", " + yD + ", " + yR +"\n")
 
 
 unk = hold[80:85]
@@ -210,7 +210,7 @@ uC = unk[0]
 uCC = unk[1]
 uR = unk[2]
 uD = unk[4]
-file.write(uC + ", " + me + ", " + "" + ", " + "" + ", " + uCC + ", " + uR + ", " + uD +"\n")
+file.write(uC + ", " + me + ", " + "" + ", " + "" + ", " + uCC + ", " + uD + ", " + uR +"\n")
 
 file.close()
 

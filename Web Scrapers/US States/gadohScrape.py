@@ -16,7 +16,7 @@ liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 ga = "GEORGIA"
 
 csvfile = "COVID-19_cases_gadoh.csv"
-headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)

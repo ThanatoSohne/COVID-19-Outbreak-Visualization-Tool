@@ -17,7 +17,7 @@ liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 hi= "HAWAII"
 
 csvfile = "COVID-19_cases_hidoh.csv"
-headers = "County, State, Latitude, Longitude, Total Cases, Released from Isolation, Req. Hospitalization, Deaths \n"
+headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Released from Isolation, Req. Hospitalization \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -31,8 +31,8 @@ haIso = tags[23].text
 haHosp = tags[25].text
 haDeaths = tags[27].text
 file.write(hawaii + ", " + hi + ", " + str(haLocale.latitude) + ", " +
-           str(haLocale.longitude) + ", " + haTotal + ", " + haIso + ", " +
-           haHosp + ", " + haDeaths + "\n")
+           str(haLocale.longitude) + ", " + haTotal + ", " + haDeaths + ",  " + "" 
+           + ", " + haIso + ", " + haHosp + "\n")
 
 honolulu = tags[30].text
 honLocale = liegen.geocode(honolulu + ", " + hi)
@@ -41,8 +41,9 @@ honIso = tags[35].text
 honHosp = tags[37].text
 honDeaths = tags[39].text
 file.write(honolulu + ", " + hi + ", " + str(honLocale.latitude) + ", " +
-           str(honLocale.longitude) + ", " + honTotal + ", " + honIso + ", " +
-           honHosp + ", " + honDeaths + "\n")
+           str(honLocale.longitude) + ", " + honTotal + ", " + honDeaths + ",  " + "" 
+           + ", " + honIso + ", " + honHosp + "\n")
+
 
 kauai = tags[42].text
 kauLocale = liegen.geocode(kauai + ", " + hi)
@@ -51,8 +52,8 @@ kauIso = tags[47].text
 kauHosp = tags[49].text
 kauDeaths = tags[51].text
 file.write(kauai + ", " + hi + ", " + str(kauLocale.latitude) + ", " +
-           str(kauLocale.longitude) + ", " + kauTotal + ", " + kauIso + ", " +
-           kauHosp + ", " + kauDeaths + "\n")
+           str(kauLocale.longitude) + ", " + kauTotal + ", " + kauDeaths + ",  " + "" 
+           + ", " + kauIso + ", " + kauHosp + "\n")
 
 maui = tags[54].text
 mauiLocale = liegen.geocode(maui + ", " + hi)
@@ -61,8 +62,8 @@ mauiIso = tags[59].text
 mauiHosp = tags[61].text
 mauiDeaths = tags[63].text
 file.write(maui + ", " + hi + ", " + str(mauiLocale.latitude) + ", " +
-           str(mauiLocale.longitude) + ", " + mauiTotal + ", " + mauiIso + ", " +
-           mauiHosp + ", " + mauiDeaths + "\n")
+           str(mauiLocale.longitude) + ", " + mauiTotal + ", " + mauiDeaths + ",  " + "" 
+           + ", " + mauiIso + ", " + mauiHosp + "\n")
 
 outHI = tags[66].text
 outHIno = tags[67].text

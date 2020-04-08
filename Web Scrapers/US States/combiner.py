@@ -1,4 +1,6 @@
 import json
+import os, glob
+import csv
 from urllib.request import Request
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
@@ -79,7 +81,7 @@ def alScrape():
     attr = rJS.get('features')
     
     csvfile = "COVID-19_cases_aldoh.csv"
-    headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
     
     test = []
     
@@ -344,7 +346,7 @@ def ctScrape():
     ct = "CONNECTICUT"
     
     csvfile = "COVID-19_cases_ctNews.csv"
-    headers = "County/Region, State, Latitude, Longitude, Confirmed Cases \n"
+    headers = "County/Region, State, Latitude, Longitude, Confirmed Cases, , , , , , Pending \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -359,11 +361,15 @@ def ctScrape():
         locale = liegen.geocode(h.split('County')[0] + 'County' + ", " + ct)
         file.write(h.split('County')[0] + ", " + ct + ", " + str(locale.latitude) + 
                    ", " + str(locale.longitude) + ", " + h.split('County')[1].strip().replace(',','') +
-                   "\n")
+                   + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " 
+                   + "" + ", " + "" + "\n")
         sleep(1)
+        
+    file.write(ct ", " + ct + ", " + str(liegen.geocode(ct).latitude) + 
+                   ", " + str(liegen.geocode(ct).longitude) + ", " + "" +
+                   + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " 
+                   + "" + ", " + hold[8].split('validation')[1].strip() + "\n")
     
-    file.write((hold[8].split('validation')[0] + 'validation') + ", " + ct + ", " + "" + 
-                   ", " + "" + ", " + hold[8].split('validation')[1].strip() + "\n")
     
     file.close()
     
@@ -496,7 +502,7 @@ def gaScrape():
     ga = "GEORGIA"
     
     csvfile = "COVID-19_cases_gadoh.csv"
-    headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -576,7 +582,7 @@ def hiScrape():
     hi= "HAWAII"
     
     csvfile = "COVID-19_cases_hidoh.csv"
-    headers = "County, State, Latitude, Longitude, Total Cases, Released from Isolation, Req. Hospitalization, Deaths \n"
+    headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Released from Isolation, Req. Hospitalization, , Pending \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -590,8 +596,8 @@ def hiScrape():
     haHosp = tags[25].text
     haDeaths = tags[27].text
     file.write(hawaii + ", " + hi + ", " + str(haLocale.latitude) + ", " +
-               str(haLocale.longitude) + ", " + haTotal + ", " + haIso + ", " +
-               haHosp + ", " + haDeaths + "\n")
+               str(haLocale.longitude) + ", " + haTotal + ", " + haDeaths + ",  " + "" 
+               + ", " + haIso + ", " + haHosp + "\n")
     
     honolulu = tags[30].text
     honLocale = liegen.geocode(honolulu + ", " + hi)
@@ -600,8 +606,9 @@ def hiScrape():
     honHosp = tags[37].text
     honDeaths = tags[39].text
     file.write(honolulu + ", " + hi + ", " + str(honLocale.latitude) + ", " +
-               str(honLocale.longitude) + ", " + honTotal + ", " + honIso + ", " +
-               honHosp + ", " + honDeaths + "\n")
+               str(honLocale.longitude) + ", " + honTotal + ", " + honDeaths + ",  " + "" 
+               + ", " + honIso + ", " + honHosp + "\n")
+    
     
     kauai = tags[42].text
     kauLocale = liegen.geocode(kauai + ", " + hi)
@@ -610,8 +617,8 @@ def hiScrape():
     kauHosp = tags[49].text
     kauDeaths = tags[51].text
     file.write(kauai + ", " + hi + ", " + str(kauLocale.latitude) + ", " +
-               str(kauLocale.longitude) + ", " + kauTotal + ", " + kauIso + ", " +
-               kauHosp + ", " + kauDeaths + "\n")
+               str(kauLocale.longitude) + ", " + kauTotal + ", " + kauDeaths + ",  " + "" 
+               + ", " + kauIso + ", " + kauHosp + "\n")
     
     maui = tags[54].text
     mauiLocale = liegen.geocode(maui + ", " + hi)
@@ -620,8 +627,8 @@ def hiScrape():
     mauiHosp = tags[61].text
     mauiDeaths = tags[63].text
     file.write(maui + ", " + hi + ", " + str(mauiLocale.latitude) + ", " +
-               str(mauiLocale.longitude) + ", " + mauiTotal + ", " + mauiIso + ", " +
-               mauiHosp + ", " + mauiDeaths + "\n")
+               str(mauiLocale.longitude) + ", " + mauiTotal + ", " + mauiDeaths + ",  " + "" 
+               + ", " + mauiIso + ", " + mauiHosp + "\n")
     
     outHI = tags[66].text
     outHIno = tags[67].text
@@ -629,14 +636,14 @@ def hiScrape():
     
     pending = tags[68].text
     penNo = tags[69].text
-    file.write(pending + ", " + hi + ", " + "" + ", " + "" + ", " + penNo + "\n")
+    file.write(pending + ", " + hi + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " + "" + ", " + penNo + "\n")
     
     file.close()
     
     if hawaii == 'Hawaii County' and pending == 'County Pending':
-        print("Hawai'i scraper is complete.")
+        print("Hawai'i scraper is complete.\n")
     else:
-        print("ERROR: Must fix Hawai'i scraper.")
+        print("ERROR: Must fix Hawai'i scraper.\n")
 
 def idScrape():
     
@@ -655,7 +662,7 @@ def idScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_idWiki.csv"
-    headers = "County, State, Latitude, Longitude, Active Cases, Deaths, Recoveries, Total Cases \n"
+    headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, , , Active Cases \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -673,16 +680,17 @@ def idScrape():
         take = h.split('\n')
         #print(take[1], take[3], take[5], take[7], take[9])
         file.write(take[1] + ", " + iD + ", " + str(locale.latitude) + ", " 
-                   + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", "
-                   + take[7] + ", " + take[9] + "\n")
+                   + str(locale.longitude) + ", " + take[9] + ", " + take[5] + ", "
+                   + take[7] + ", " + "" + ", " + "" + ", " + take[3] + "\n")
         sleep(1)
     
     file.close()
-        
+    
     if (hold[33].split('\n')[1]) == 'Ada' and (hold[57].split('\n')[1]) == 'Valley':
-        print("Idaho scraper is complete.")
+        print("Idaho scraper is complete.\n")
     else:
-        print("ERROR: Must fix Idaho scraper.")
+        print("ERROR: Must fix Idaho scraper.\n")
+
 
 def ilScrape():
     
@@ -700,7 +708,7 @@ def ilScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_ilWiki.csv"
-    headers = "County, State, Latitude, Longitude, Active Cases, Deaths, Recoveries, Total Cases \n"
+    headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Active Cases \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -718,14 +726,16 @@ def ilScrape():
         take = h.split('\n')
         #print(take[1], take[3], take[5], take[7], take[9])
         file.write(take[1] + ", " + il + ", " + str(locale.latitude) + ", "
-                   + str(locale.longitude) + ", " + take[3].replace(',','') + ", " 
+                   + str(locale.longitude) + ", " + take[9].replace(',','') + ", " 
                    + take[5].replace(',','') + ", " + take[7].replace(',','') + ", " 
-                   + take[9].replace(',','') + "\n")
+                   + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
         sleep(1)
     
     file.write(hold[136].split('\n')[1] + ", " + il + ", " + "" + ", "
-                   + "" + ", " + hold[120].split('\n')[3] + ", " + hold[120].split('\n')[5] + ", " 
-                   + hold[120].split('\n')[7] + ", " + hold[120].split('\n')[9] + "\n")
+                   + "" + ", " + hold[120].split('\n')[9] + ", " + hold[120].split('\n')[5] + ", " 
+                   + hold[120].split('\n')[7] + ", " + "" + ", " + "" + ", "
+                   + hold[120].split('\n')[3] + "\n")
+
     
     file.close()
         
@@ -1072,7 +1082,7 @@ def meScrape():
     #print(tables)
     
     csvfile = "COVID-19_cases_meDDS.csv"
-    headers = "County, State, Latitude, Longitude, Confirmed Cases, Recovered, Deaths \n"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -1091,7 +1101,7 @@ def meScrape():
     anLocale = liegen.geocode(anC + co + ", " + me)
     sleep(1)
     file.write(anC + ", " + me + ", " + str(anLocale.latitude) + ", " 
-               + str(anLocale.longitude) + ", " + anCC + ", " + anR + ", " + anD +"\n")
+               + str(anLocale.longitude) + ", " + anCC + ", " + anD + ", " + anR +"\n")
     
     aroo = hold[5:10]
     arC = aroo[0]
@@ -1101,7 +1111,7 @@ def meScrape():
     arLocale = liegen.geocode(arC + co + ", " + me)
     sleep(1)
     file.write(arC + ", " + me + ", " + str(arLocale.latitude) + ", " 
-               + str(arLocale.longitude) + ", " + arCC + ", " + arR + ", " + arD +"\n")
+               + str(arLocale.longitude) + ", " + arCC + ", " + arD + ", " + arR +"\n")
     
     
     cumb = hold[10:15]
@@ -1112,7 +1122,7 @@ def meScrape():
     cLocale = liegen.geocode(cumbC + co + ", " + me)
     sleep(1)
     file.write(cumbC + ", " + me + ", " + str(cLocale.latitude) + ", " 
-               + str(cLocale.longitude) + ", " + cumbCC + ", " + cumbR + ", " + cumbD +"\n")
+               + str(cLocale.longitude) + ", " + cumbCC + ", " + cumbD + ", " + cumbR +"\n")
     
     
     frank = hold[15:20]
@@ -1123,7 +1133,7 @@ def meScrape():
     fLocale = liegen.geocode(frC + co + ", " + me)
     sleep(1)
     file.write(frC + ", " + me + ", " + str(fLocale.latitude) + ", " 
-               + str(fLocale.longitude) + ", " + frCC + ", " + frR + ", " + frD +"\n")
+               + str(fLocale.longitude) + ", " + frCC + ", " + frD + ", " + frR +"\n")
     
     
     hanc = hold[20:25]
@@ -1134,7 +1144,7 @@ def meScrape():
     hLocale = liegen.geocode(haC + co + ", " + me)
     sleep(1)
     file.write(haC + ", " + me + ", " + str(hLocale.latitude) + ", " 
-               + str(hLocale.longitude) + ", " + haCC + ", " + haR + ", " + haD +"\n")
+               + str(hLocale.longitude) + ", " + haCC + ", " + haD + ", " + haR +"\n")
     
     
     kenne = hold[25:30]
@@ -1145,7 +1155,7 @@ def meScrape():
     keLocale = liegen.geocode(keC + co + ", " + me)
     sleep(1)
     file.write(keC + ", " + me + ", " + str(keLocale.latitude) + ", " 
-               + str(keLocale.longitude) + ", " + keCC + ", " + keR + ", " + keD +"\n")
+               + str(keLocale.longitude) + ", " + keCC + ", " + keD + ", " + keR +"\n")
     
     
     knox = hold[30:35]
@@ -1156,7 +1166,7 @@ def meScrape():
     knLocale = liegen.geocode(knC + co + ", " + me)
     sleep(1)
     file.write(knC + ", " + me + ", " + str(knLocale.latitude) + ", " 
-               + str(knLocale.longitude) + ", " + knCC + ", " + knR + ", " + knD +"\n")
+               + str(knLocale.longitude) + ", " + knCC + ", " + knD + ", " + knR +"\n")
     
     
     linc = hold[35:40]
@@ -1167,7 +1177,7 @@ def meScrape():
     lLocale = liegen.geocode(linC + co + ", " + me)
     sleep(1)
     file.write(linC + ", " + me + ", " + str(lLocale.latitude) + ", " 
-               + str(lLocale.longitude) + ", " + linCC + ", " + linR + ", " + linD +"\n")
+               + str(lLocale.longitude) + ", " + linCC + ", " + linD + ", " + linR +"\n")
     
     
     ox = hold[40:45]
@@ -1178,7 +1188,7 @@ def meScrape():
     oxLocale = liegen.geocode(oxC + co + ", " + me)
     sleep(1)
     file.write(oxC + ", " + me + ", " + str(oxLocale.latitude) + ", " 
-               + str(oxLocale.longitude) + ", " + oxCC + ", " + oxR + ", " + oxD +"\n")
+               + str(oxLocale.longitude) + ", " + oxCC + ", " + oxD + ", " + oxR +"\n")
     
     
     peno = hold[45:50]
@@ -1189,7 +1199,7 @@ def meScrape():
     peLocale = liegen.geocode(penC + co + ", " + me)
     sleep(1)
     file.write(penC + ", " + me + ", " + str(peLocale.latitude) + ", " 
-               + str(peLocale.longitude) + ", " + penCC + ", " + penR + ", " + penD +"\n")
+               + str(peLocale.longitude) + ", " + penCC + ", " + penD + ", " + penR +"\n")
     
     
     pisca = hold[50:55]
@@ -1200,7 +1210,7 @@ def meScrape():
     piLocale = liegen.geocode(piC + co + ", " + me)
     sleep(1)
     file.write(piC + ", " + me + ", " + str(piLocale.latitude) + ", " 
-               + str(piLocale.longitude) + ", " + piCC + ", " + piR + ", " + piD +"\n")
+               + str(piLocale.longitude) + ", " + piCC + ", " + piD + ", " + piR +"\n")
     
     
     saga = hold[55:60]
@@ -1211,7 +1221,7 @@ def meScrape():
     saLocale = liegen.geocode(sC + co + ", " + me)
     sleep(1)
     file.write(sC + ", " + me + ", " + str(saLocale.latitude) + ", " 
-               + str(saLocale.longitude) + ", " + sCC + ", " + sR + ", " + sD +"\n")
+               + str(saLocale.longitude) + ", " + sCC + ", " + sD + ", " + sR +"\n")
     
     
     somer = hold[60:65]
@@ -1222,7 +1232,7 @@ def meScrape():
     soLocale = liegen.geocode(soC + co + ", " + me)
     sleep(1)
     file.write(soC + ", " + me + ", " + str(soLocale.latitude) + ", " 
-               + str(soLocale.longitude) + ", " + soCC + ", " + soR + ", " + soD +"\n")
+               + str(soLocale.longitude) + ", " + soCC + ", " + soD + ", " + soR +"\n")
     
     
     waldo = hold[65:70]
@@ -1233,7 +1243,7 @@ def meScrape():
     wdLocale = liegen.geocode(wdC + co + ", " + me)
     sleep(1)
     file.write(wdC + ", " + me + ", " + str(wdLocale.latitude) + ", " 
-               + str(wdLocale.longitude) + ", " + wdCC + ", " + wdR + ", " + wdD +"\n")
+               + str(wdLocale.longitude) + ", " + wdCC + ", " + wdD + ", " + wdR +"\n")
     
     
     wash = hold[70:75]
@@ -1244,7 +1254,7 @@ def meScrape():
     waLocale = liegen.geocode(wsC + co + ", " + me)
     sleep(1)
     file.write(wsC + ", " + me + ", " + str(waLocale.latitude) + ", " 
-               + str(waLocale.longitude) + ", " + wsCC + ", " + wsR + ", " + wsD +"\n")
+               + str(waLocale.longitude) + ", " + wsCC + ", " + wsD + ", " + wsR +"\n")
     
     
     york = hold[75:80]
@@ -1255,7 +1265,7 @@ def meScrape():
     yoLocale = liegen.geocode(yC + co + ", " + me)
     sleep(1)
     file.write(yC + ", " + me + ", " + str(yoLocale.latitude) + ", " 
-               + str(yoLocale.longitude) + ", " + yCC + ", " + yR + ", " + yD +"\n")
+               + str(yoLocale.longitude) + ", " + yCC + ", " + yD + ", " + yR +"\n")
     
     
     unk = hold[80:85]
@@ -1263,7 +1273,7 @@ def meScrape():
     uCC = unk[1]
     uR = unk[2]
     uD = unk[4]
-    file.write(uC + ", " + me + ", " + "" + ", " + "" + ", " + uCC + ", " + uR + ", " + uD +"\n")
+    file.write(uC + ", " + me + ", " + "" + ", " + "" + ", " + uCC + ", " + uD + ", " + uR +"\n")
     
     file.close()
     
@@ -1632,39 +1642,59 @@ def moScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_modoh.csv"
+    csvFile = "COVID-19_deaths_modoh.csv"
     headers = "County, State, Latitude, Longitude, Cases \n"
-    sHeaders = "County, State, Latitude, Longitude,  Deaths \n"
+    sHeaders = "County, State, Latitude, Longitude, , Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in tables[1:118]:
+    for t in tables[1:40]:
         pull = t.findAll('td')
-        sleep(1)
         locale = liegen.geocode(pull[0].text + co + ", " + mo)
         file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
                    + str(locale.longitude) + ", " + pull[1].text + "\n")
-        
+        sleep(1.1)
+    
+    sleep(1)
+    
+    for t in tables[40:80]:
+        pull = t.findAll('td')
+        locale = liegen.geocode(pull[0].text + co + ", " + mo)
+        file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
+                   + str(locale.longitude) + ", " + pull[1].text + "\n")
+        sleep(1.1)
+    
+    
+    for t in tables[80:118]:
+        pull = t.findAll('td')
+        locale = liegen.geocode(pull[0].text + co + ", " + mo)
+        file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
+                   + str(locale.longitude) + ", " + pull[1].text + "\n")
+        sleep(1)
+    
     
     file.write(tables[118].find('td').text + ", " + mo + ", " + "" + ", "
                    + "" + ", " + tables[118].findAll('td')[1].text + "\n")
     
+    file.close()
+    
     tablesDe = site_parse.find("div", {"id": "collapseDeaths"}).findAll('tr')
     
-    file.write("\n")
-    file.write(sHeaders)
+    dFile = open(csvFile, "w")
+    dFile.write(sHeaders)
     
-    for ta in tablesDe[1:11]:
+    for ta in tablesDe[1:17]:
         pullDe = ta.findAll('td')
-        sleep(1)
         localeD = liegen.geocode(pullDe[0].text + co + ", " + mo)
-        file.write(pullDe[0].text + ", " + mo + ", " + str(localeD.latitude) + ", "
-                   + str(localeD.longitude) + ", " + pullDe[1].text + "\n")
+        dFile.write(pullDe[0].text + ", " + mo + ", " + str(localeD.latitude) + ", "
+                   + str(localeD.longitude) + ", " + "" + ", " + pullDe[1].text + "\n")
+        sleep(1)
     
-    file.write(tablesDe[11].find('td').text + ", " + mo + ", " + "" + ", "
-                   + "" + ", " + tablesDe[11].findAll('td')[1].text + "\n")
+    dFile.write(tablesDe[17].find('td').text + ", " + mo + ", " + "" + ", "
+                   + "" + ", " + "" + ", " + tablesDe[17].findAll('td')[1].text + "\n")
     
-    file.close()
+    dFile.close()
     
     if (tables[1].find('td').text) == 'Adair' and (tables[118].find('td').text) == 'TBD':
         print("Missouri scraper is complete.")
@@ -1841,7 +1871,7 @@ def ndScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_nddoh.csv"
-    headers = "County, State, Latitude, Longitude, Total Tests, Positive Cases \n"
+    headers = "County, State, Latitude, Longitude, Positive Cases, , , , ,  Total Tests \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -1852,7 +1882,8 @@ def ndScrape():
         pull = tag.findAll('td')
         locale = liegen.geocode(pull[0].text + co + ", " + nd)
         file.write(pull[0].text + ", " + nd + ", " + str(locale.latitude) + ", " 
-                   + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
+                   + str(locale.longitude) + ", " + pull[2].text + ", " +
+                   "" + ", " + "" + ", " + "" + ", " + "" + ", " + pull[1].text + "\n")
         sleep(1.2)
     
     file.close()
@@ -2218,7 +2249,7 @@ def orScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_ordoh.csv"
-    headers = "County, State, Latitude, Longitude, Positive Cases, Deaths, Negative Test Results \n"
+    headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -2228,7 +2259,7 @@ def orScrape():
         locale = liegen.geocode(pull[0].text + co + ", " + orG)
         file.write(pull[0].text + ", " + orG + ", " + str(locale.latitude) + ", "
                    + str(locale.longitude) + ", " + pull[1].text + ", " 
-                   + pull[2].text + ", " + pull[3].text + "\n")
+                   + pull[2].text + "\n")
         sleep(1)
     
     file.close()
@@ -2487,7 +2518,7 @@ def sdScrape():
     co = ' County'
     
     csvfile = "COVID-19_cases_sddoh.csv"
-    headers = "County, State, Latitude, Longitude, Total Positive Cases, Recovered\n"
+    headers = "County, State, Latitude, Longitude, Total Positive Cases, Deaths, Recovered, , Hospitalizations \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -2505,151 +2536,145 @@ def sdScrape():
     
     locale1 = liegen.geocode(hold[0].strip() + co + ", " + sd)
     file.write(hold[0].strip() + ", " + sd + ", " + str(locale1.latitude) + ", " 
-               + str(locale1.longitude) + ", " + hold[1].strip() + ", " + hold[2].strip() + "\n")
+               + str(locale1.longitude) + ", " + hold[1].strip() + ", " + "" + ", " + hold[2].strip() + "\n")
     sleep(1)
     locale2 = liegen.geocode(hold[3].strip() + co + ", " + sd)
     file.write(hold[3].strip() + ", " + sd + ", " + str(locale2.latitude) + ", " 
-               + str(locale2.longitude) + ", " + hold[4].strip() + ", " + hold[5].strip() + "\n")
+               + str(locale2.longitude) + ", " + hold[4].strip()  + ", " + "" + ", " + hold[5].strip() + "\n")
     sleep(1)
     locale3 = liegen.geocode(hold[6].strip() + co + ", " + sd)
     file.write(hold[6].strip() + ", " + sd + ", " + str(locale3.latitude) + ", " 
-               + str(locale3.longitude) + ", " + hold[7].strip() + ", " + hold[8].strip() + "\n")
+               + str(locale3.longitude) + ", " + hold[7].strip() + ", " + "" + ", " + hold[8].strip() + "\n")
     sleep(1)
     locale4 = liegen.geocode(hold[9].strip() + co + ", " + sd)
     file.write(hold[9].strip() + ", " + sd + ", " + str(locale4.latitude) + ", " 
-               + str(locale4.longitude) + ", " + hold[10].strip() + ", " + hold[11].strip() + "\n")
+               + str(locale4.longitude) + ", " + hold[10].strip() + ", " + "" + ", " + hold[11].strip() + "\n")
     sleep(1)
     locale5 = liegen.geocode(hold[12].strip() + co + ", " + sd)
     file.write(hold[12].strip() + ", " + sd + ", " + str(locale5.latitude) + ", " 
-               + str(locale5.longitude) + ", " + hold[13].strip() + ", " + hold[14].strip() + "\n")
+               + str(locale5.longitude) + ", " + hold[13].strip() + ", "  + "" + ", " + hold[14].strip() + "\n")
     sleep(1)
     locale6 = liegen.geocode(hold[15].strip() + co + ", " + sd)
     file.write(hold[15].strip() + ", " + sd + ", " + str(locale6.latitude) + ", " 
-               + str(locale6.longitude) + ", " + hold[16].strip() + ", " + hold[17].strip() + "\n")
+               + str(locale6.longitude) + ", " + hold[16].strip() + ", "  + "" + ", " + hold[17].strip() + "\n")
     sleep(1)
     locale7 = liegen.geocode(hold[18].strip() + co + ", " + sd)
     file.write(hold[18].strip() + ", " + sd + ", " + str(locale7.latitude) + ", " 
-               + str(locale7.longitude) + ", " + hold[19].strip() + ", " + hold[20].strip() + "\n")
+               + str(locale7.longitude) + ", " + hold[19].strip() + ", " + "" + ", " + hold[20].strip() + "\n")
     sleep(1)
     locale8 = liegen.geocode(hold[21].strip() + co + ", " + sd)
     file.write(hold[21].strip() + ", " + sd + ", " + str(locale8.latitude) + ", " 
-               + str(locale8.longitude) + ", " + hold[22].strip() + ", " + hold[23].strip() + "\n")
+               + str(locale8.longitude) + ", " + hold[22].strip() + ", "  + "" + ", " + hold[23].strip() + "\n")
     sleep(1)
     locale9 = liegen.geocode(hold[24].strip() + co + ", " + sd)
     file.write(hold[24].strip() + ", " + sd + ", " + str(locale9.latitude) + ", " 
-               + str(locale9.longitude) + ", " + hold[25].strip() + ", " + hold[26].strip() + "\n")
+               + str(locale9.longitude) + ", " + hold[25].strip() + ", "  + "" + ", " + hold[26].strip() + "\n")
     sleep(1)
     locale10 = liegen.geocode(hold[27].strip() + co + ", " + sd)
     file.write(hold[27].strip() + ", " + sd + ", " + str(locale10.latitude) + ", " 
-               + str(locale10.longitude) + ", " + hold[28].strip() + ", " + hold[29].strip() + "\n")
+               + str(locale10.longitude) + ", " + hold[28].strip() + ", "  + "" + ", " + hold[29].strip() + "\n")
     sleep(1)
     locale11 = liegen.geocode(hold[30].strip() + co + ", " + sd)
     file.write(hold[30].strip() + ", " + sd + ", " + str(locale11.latitude) + ", " 
-               + str(locale11.longitude) + ", " + hold[31].strip() + ", " + hold[32].strip() + "\n")
+               + str(locale11.longitude) + ", " + hold[31].strip() + ", "  + "" + ", " + hold[32].strip() + "\n")
     sleep(1)
     locale12 = liegen.geocode(hold[33].strip() + co + ", " + sd)
     file.write(hold[33].strip() + ", " + sd + ", " + str(locale12.latitude) + ", " 
-               + str(locale12.longitude) + ", " + hold[34].strip() + ", " + hold[35].strip() + "\n")
+               + str(locale12.longitude) + ", " + hold[34].strip() + ", "  + "" + ", " + hold[35].strip() + "\n")
     sleep(1)
     locale13 = liegen.geocode(hold[36].strip() + co + ", " + sd)
     file.write(hold[36].strip() + ", " + sd + ", " + str(locale13.latitude) + ", " 
-               + str(locale13.longitude) + ", " + hold[37].strip() + ", " + hold[38].strip() + "\n")
+               + str(locale13.longitude) + ", " + hold[37].strip() + ", "  + "" + ", " + hold[38].strip() + "\n")
     sleep(1)
     locale14 = liegen.geocode(hold[0].strip() + co + ", " + sd)
     file.write(hold[39].strip() + ", " + sd + ", " + str(locale14.latitude) + ", " 
-               + str(locale14.longitude) + ", " + hold[40].strip() + ", " + hold[41].strip() + "\n")
+               + str(locale14.longitude) + ", " + hold[40].strip() + ", " + "" + ", " + hold[41].strip() + "\n")
     sleep(1)
     locale15 = liegen.geocode(hold[42].strip() + co + ", " + sd)
     file.write(hold[42].strip() + ", " + sd + ", " + str(locale15.latitude) + ", " 
-               + str(locale15.longitude) + ", " + hold[43].strip() + ", " + hold[44].strip() + "\n")
+               + str(locale15.longitude) + ", " + hold[43].strip() + ", "  + "" + ", " + hold[44].strip() + "\n")
     sleep(1)
     locale16 = liegen.geocode(hold[45].strip() + co + ", " + sd)
     file.write(hold[45].strip() + ", " + sd + ", " + str(locale16.latitude) + ", " 
-               + str(locale16.longitude) + ", " + hold[46].strip() + ", " + hold[47].strip() + "\n")
+               + str(locale16.longitude) + ", " + hold[46].strip() + ", "  + "" + ", " + hold[47].strip() + "\n")
     sleep(1)
     locale17 = liegen.geocode(hold[48].strip() + co + ", " + sd)
     file.write(hold[48].strip() + ", " + sd + ", " + str(locale17.latitude) + ", " 
-               + str(locale17.longitude) + ", " + hold[49].strip() + ", " + hold[50].strip() + "\n")
+               + str(locale17.longitude) + ", " + hold[49].strip() + ", "  + "" + ", " + hold[50].strip() + "\n")
     sleep(1)
     locale18 = liegen.geocode(hold[51].strip() + co + ", " + sd)
     file.write(hold[51].strip() + ", " + sd + ", " + str(locale18.latitude) + ", " 
-               + str(locale18.longitude) + ", " + hold[52].strip() + ", " + hold[53].strip() + "\n")
+               + str(locale18.longitude) + ", " + hold[52].strip() + ", "  + "" + ", " + hold[53].strip() + "\n")
     sleep(1)
     locale19 = liegen.geocode(hold[54].strip() + co + ", " + sd)
     file.write(hold[54].strip() + ", " + sd + ", " + str(locale19.latitude) + ", " 
-               + str(locale19.longitude) + ", " + hold[55].strip() + ", " + hold[56].strip() + "\n")
+               + str(locale19.longitude) + ", " + hold[55].strip() + ", "  + "" + ", " + hold[56].strip() + "\n")
     sleep(1)
     locale20 = liegen.geocode(hold[57].strip() + co + ", " + sd)
     file.write(hold[57].strip() + ", " + sd + ", " + str(locale20.latitude) + ", " 
-               + str(locale20.longitude) + ", " + hold[58].strip() + ", " + hold[59].strip() + "\n")
+               + str(locale20.longitude) + ", " + hold[58].strip() + ", " + "" + ", " + hold[59].strip() + "\n")
     sleep(1)
     locale21 = liegen.geocode(hold[60].strip() + co + ", " + sd)
     file.write(hold[60].strip() + ", " + sd + ", " + str(locale21.latitude) + ", " 
-               + str(locale21.longitude) + ", " + hold[61].strip() + ", " + hold[62].strip() + "\n")
+               + str(locale21.longitude) + ", " + hold[61].strip() + ", "  + "" + ", " + hold[62].strip() + "\n")
     sleep(1)
     locale22 = liegen.geocode(hold[63].strip() + co + ", " + sd)
     file.write(hold[63].strip() + ", " + sd + ", " + str(locale22.latitude) + ", " 
-               + str(locale22.longitude) + ", " + hold[64].strip() + ", " + hold[65].strip() + "\n")
+               + str(locale22.longitude) + ", " + hold[64].strip() + ", "  + "" + ", " + hold[65].strip() + "\n")
     sleep(1)
     locale23 = liegen.geocode(hold[66].strip() + co + ", " + sd)
     file.write(hold[66].strip() + ", " + sd + ", " + str(locale23.latitude) + ", " 
-               + str(locale23.longitude) + ", " + hold[67].strip() + ", " + hold[68].strip() + "\n")
+               + str(locale23.longitude) + ", " + hold[67].strip() + ", "  + "" + ", " + hold[68].strip() + "\n")
     sleep(1)
     locale24 = liegen.geocode(hold[69].strip() + co + ", " + sd)
     file.write(hold[69].strip() + ", " + sd + ", " + str(locale24.latitude) + ", " 
-               + str(locale24.longitude) + ", " + hold[70].strip() + ", " + hold[71].strip() + "\n")
+               + str(locale24.longitude) + ", " + hold[70].strip() + ", "  + "" + ", " + hold[71].strip() + "\n")
     sleep(1)
     locale25 = liegen.geocode(hold[72].strip() + co + ", " + sd)
     file.write(hold[72].strip() + ", " + sd + ", " + str(locale25.latitude) + ", " 
-               + str(locale25.longitude) + ", " + hold[73].strip() + ", " + hold[74].strip() + "\n")
+               + str(locale25.longitude) + ", " + hold[73].strip() + ", "  + "" + ", " + hold[74].strip() + "\n")
     sleep(1)
     locale26 = liegen.geocode(hold[75].strip() + co + ", " + sd)
     file.write(hold[75].strip() + ", " + sd + ", " + str(locale26.latitude) + ", " 
-               + str(locale26.longitude) + ", " + hold[76].strip() + ", " + hold[77].strip() + "\n")
+               + str(locale26.longitude) + ", " + hold[76].strip() + ", " + "" + ", " + hold[77].strip() + "\n")
     sleep(1)
     locale27 = liegen.geocode(hold[78].strip() + co + ", " + sd)
     file.write(hold[78].strip() + ", " + sd + ", " + str(locale27.latitude) + ", " 
-               + str(locale27.longitude) + ", " + hold[79].strip() + ", " + hold[80].strip() + "\n")
+               + str(locale27.longitude) + ", " + hold[79].strip() + ", " + "" + ", " + hold[80].strip() + "\n")
     sleep(1)
     locale28 = liegen.geocode(hold[81].strip() + co + ", " + sd)
     file.write(hold[81].strip() + ", " + sd + ", " + str(locale28.latitude) + ", " 
-               + str(locale28.longitude) + ", " + hold[82].strip() + ", " + hold[83].strip() + "\n")
+               + str(locale28.longitude) + ", " + hold[82].strip() + ", " + "" + ", " + hold[83].strip() + "\n")
     sleep(1)
     locale29 = liegen.geocode(hold[84].strip() + co + ", " + sd)
     file.write(hold[84].strip() + ", " + sd + ", " + str(locale29.latitude) + ", " 
-               + str(locale29.longitude) + ", " + hold[85].strip() + ", " + hold[86].strip() + "\n")
+               + str(locale29.longitude) + ", " + hold[85].strip() + ", " + "" + ", " + hold[86].strip() + "\n")
     sleep(1)
     locale30 = liegen.geocode(hold[87].strip() + co + ", " + sd)
     file.write(hold[87].strip() + ", " + sd + ", " + str(locale30.latitude) + ", " 
-               + str(locale30.longitude) + ", " + hold[88].strip() + ", " + hold[89].strip() + "\n")
+               + str(locale30.longitude) + ", " + hold[88].strip() + ", " + "" + ", " + hold[89].strip() + "\n")
     sleep(1)
     locale31 = liegen.geocode(hold[90].strip() + co + ", " + sd)
     file.write(hold[90].strip() + ", " + sd + ", " + str(locale31.latitude) + ", " 
-               + str(locale31.longitude) + ", " + hold[91].strip() + ", " + hold[92].strip() + "\n")
+               + str(locale31.longitude) + ", " + hold[91].strip() + ", " + "" + ", " + hold[92].strip() + "\n")
     sleep(1)
     
     file.write("\n")
-    file.write("#######, #########, ######### \n")
     
     krankenhaus = holdE[2:4]
     haus = krankenhaus[0]
     hausNo = krankenhaus[1]
-    file.write(haus + ", " + hausNo + "\n")
-    
     deaths = holdE[4:6]
-    mort = deaths[0]
+    mort = deaths[0].strip('**')
     mortNo = deaths[1]
-    file.write(mort + ", " + mortNo + "\n")
+    file.write("SOUTH DAKOTA" + ", " + sd + ", " + str(liegen.geocode("SOUTH DAKOTA").latitude)
+               + ", " + str(liegen.geocode("SOUTH DAKOTA").longitude) + ", " + "" 
+               + ", " + mortNo + ", " + "" + ", " + "" + ", " + hausNo + "\n")
     
-    recovered = holdE[6:8]
-    hope = recovered[0]
-    hopeN = recovered[1]
-    file.write(hope + ", " + hopeN + "\n")
-    
-    
+        
     file.close()
     
-    if (hold[0].strip()) == 'Aurora' and (hold[90].strip()) ==  'Yankton' and hope == 'Recovered':
+    if (hold[0].strip()) == 'Aurora' and (hold[90].strip()) ==  'Yankton' and mort == 'Deaths':
         print("South Dakota scraper is complete.")
     else:
         print("ERROR: Must fix South Dakota scraper.")
@@ -2678,7 +2703,7 @@ def tnScrape():
     tags = tables.findAll('tr')
     
     csvfile = "COVID-19_cases_tndoh.csv"
-    headers = "County, State, Latitude, Longitude, Positive Cases \n"
+    headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -2696,12 +2721,12 @@ def tnScrape():
     file.write(tags[97].find('p').text + ", " + "" + ", " + "" + ", " 
                + tags[97].findAll('p')[1].text.replace(',','') + "\n")
     
-    file.write("\n")
-    file.write(faStr + ", " + faNo + "\n")
+    file.write(tn + ", " + tn + ", " + str(liegen.geocode(tn).latitude) + ", " 
+               + str(liegen.geocode(tn).longitude)+ ", " + "" + ", " + faNo + "\n")
     
     file.close()
     
-    if (tags[1].find('p').text) == 'Anderson County' and (tags[97].find('p').text) == 'Out of State':
+    if (tags[1].find('p').text) == 'Anderson County' and (tags[96].find('p').text) == 'OUT OF STATE':
         print("Tennessee scraper is complete.")
     else:
         print("ERROR: Must fix Tennessee scraper.")
@@ -2892,7 +2917,7 @@ def viScrape():
     vi = "US VIRGIN ISLANDS"
     
     csvfile = "COVID-19_cases_vidoh.csv"
-    headers = "Case Types, No. of Cases, State/Territory, Latitude, Longitude \n"
+    headers = "State/Territory, State/Territory, Latitude, Longitude, No. of Cases, Deaths, Recovered, , , , Pending \n"
     
     file = open(csvfile, "w")
     file.write(headers)
@@ -2905,9 +2930,6 @@ def viScrape():
     recov = tags[6].text.split(': ')[0]
     recNo = tags[6].text.split(': ')[1].split('/')[0]
     
-    neg = tags[4].text.split(': ')[0]
-    negNo = tags[4].text.split(': ')[1].split(' ')[0]
-    
     pend = tags[5].text.split(': ')[0]
     pendNo = tags[5].text.split(': ')[1].split(' ')[0]
     
@@ -2916,11 +2938,9 @@ def viScrape():
     
     locale = liegen.geocode(vi)
     sleep(1)
-    file.write(pos + ", " + posNo + ", " + vi + ", " + str(locale.latitude) + ", " + str(locale.longitude) + "\n")
-    file.write(recov + ", " + recNo + "\n")
-    file.write(neg + ", " + negNo + "\n")
-    file.write(pend + ", " + pendNo + "\n")
-    file.write(mort + ", " + mortNo + "\n")
+    file.write(vi + ", " + vi + ", " + str(locale.latitude) + ", " 
+               + str(locale.longitude) + posNo + ", " + mortNo + ", " 
+               + recNo + ", " + "" + ", " + "" + ", " + pendNo + "\n")
     
     file.close()
     
@@ -3201,6 +3221,37 @@ def main():
     wiScrape()
     wvScrape()
     wyScrape()
+    
+    path = "C:/Users/Erwac/Desktop/COVID-19/Web Scrapers/US States"
+
+    os.chdir(path)
+    
+    csvFile = "csv"
+    
+    alles_COVID = []
+    
+    alles_COVID = [i for i in glob.glob('COVID-19_*.{}'.format(csvFile))]
+    
+    hold = []
+    
+    for i in alles_COVID:
+        reader = list(csv.reader(open(i)))
+        hold.append(reader)
+    
+    
+    headers = ['County/Region', 'State', 'Latitude', 'Longitude', 
+               'Confirmed Cases', 'Deaths', 'Recoveries', 'Released from Isolation',
+               'Hospitalized', 'Pending']
+    
+    f = open("combined.csv","w")
+    writer = csv.writer(f)
+    writer.writerow(headers)
+    
+    for col in hold:
+        writer.writerows(col[1:])
+
+    f.close()
+
     
 if __name__ == "__main__":
     main()

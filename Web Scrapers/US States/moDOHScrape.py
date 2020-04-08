@@ -17,8 +17,9 @@ mo = "MISSOURI"
 co = ' County'
 
 csvfile = "COVID-19_cases_modoh.csv"
+csvFile = "COVID-19_deaths_modoh.csv"
 headers = "County, State, Latitude, Longitude, Cases \n"
-sHeaders = "County, State, Latitude, Longitude,  Deaths \n"
+sHeaders = "County, State, Latitude, Longitude, , Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -51,22 +52,24 @@ for t in tables[80:118]:
 file.write(tables[118].find('td').text + ", " + mo + ", " + "" + ", "
                + "" + ", " + tables[118].findAll('td')[1].text + "\n")
 
+file.close()
+
 tablesDe = site_parse.find("div", {"id": "collapseDeaths"}).findAll('tr')
 
-file.write("\n")
-file.write(sHeaders)
+dFile = open(csvFile, "w")
+dFile.write(sHeaders)
 
-for ta in tablesDe[1:11]:
+for ta in tablesDe[1:17]:
     pullDe = ta.findAll('td')
     localeD = liegen.geocode(pullDe[0].text + co + ", " + mo)
-    file.write(pullDe[0].text + ", " + mo + ", " + str(localeD.latitude) + ", "
-               + str(localeD.longitude) + ", " + pullDe[1].text + "\n")
+    dFile.write(pullDe[0].text + ", " + mo + ", " + str(localeD.latitude) + ", "
+               + str(localeD.longitude) + ", " + "" + ", " + pullDe[1].text + "\n")
     sleep(1)
 
-file.write(tablesDe[11].find('td').text + ", " + mo + ", " + "" + ", "
-               + "" + ", " + tablesDe[11].findAll('td')[1].text + "\n")
+dFile.write(tablesDe[17].find('td').text + ", " + mo + ", " + "" + ", "
+               + "" + ", " + "" + ", " + tablesDe[17].findAll('td')[1].text + "\n")
 
-file.close()
+dFile.close()
 
 if (tables[1].find('td').text) == 'Adair' and (tables[118].find('td').text) == 'TBD':
     print("Missouri scraper is complete.")

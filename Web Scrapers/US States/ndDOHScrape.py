@@ -17,7 +17,7 @@ nd = "NORTH DAKOTA"
 co = ' County'
 
 csvfile = "COVID-19_cases_nddoh.csv"
-headers = "County, State, Latitude, Longitude, Total Tests, Positive Cases \n"
+headers = "County, State, Latitude, Longitude, Positive Cases, , , , ,  Total Tests \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -28,7 +28,8 @@ for tag in tags[:52]:
     pull = tag.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + nd)
     file.write(pull[0].text + ", " + nd + ", " + str(locale.latitude) + ", " 
-               + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
+               + str(locale.longitude) + ", " + pull[2].text + ", " +
+               "" + ", " + "" + ", " + "" + ", " + "" + ", " + pull[1].text + "\n")
     sleep(1.2)
 
 file.close()

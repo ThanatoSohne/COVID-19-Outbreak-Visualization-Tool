@@ -25,7 +25,7 @@ faNo = fa[1]
 tags = tables.findAll('tr')
 
 csvfile = "COVID-19_cases_tndoh.csv"
-headers = "County, State, Latitude, Longitude, Positive Cases \n"
+headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -43,12 +43,12 @@ file.write(tags[96].find('p').text + ", " + "" + ", " + "" + ", "
 file.write(tags[97].find('p').text + ", " + "" + ", " + "" + ", " 
            + tags[97].findAll('p')[1].text.replace(',','') + "\n")
 
-file.write("\n")
-file.write(faStr + ", " + faNo + "\n")
+file.write(tn + ", " + tn + ", " + str(liegen.geocode(tn).latitude) + ", " 
+           + str(liegen.geocode(tn).longitude)+ ", " + "" + ", " + faNo + "\n")
 
 file.close()
 
-if (tags[1].find('p').text) == 'Anderson County' and (tags[97].find('p').text) == 'Out of State':
+if (tags[1].find('p').text) == 'Anderson County' and (tags[96].find('p').text) == 'OUT OF STATE':
     print("Tennessee scraper is complete.")
 else:
     print("ERROR: Must fix Tennessee scraper.")

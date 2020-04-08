@@ -17,7 +17,7 @@ il = "ILLINOIS"
 co = ' County'
 
 csvfile = "COVID-19_cases_ilWiki.csv"
-headers = "County, State, Latitude, Longitude, Active Cases, Deaths, Recoveries, Total Cases \n"
+headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Active Cases \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -35,14 +35,15 @@ for h in hold[63:136]:
     take = h.split('\n')
     #print(take[1], take[3], take[5], take[7], take[9])
     file.write(take[1] + ", " + il + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + take[3].replace(',','') + ", " 
+               + str(locale.longitude) + ", " + take[9].replace(',','') + ", " 
                + take[5].replace(',','') + ", " + take[7].replace(',','') + ", " 
-               + take[9].replace(',','') + "\n")
+               + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
     sleep(1)
 
 file.write(hold[136].split('\n')[1] + ", " + il + ", " + "" + ", "
-               + "" + ", " + hold[120].split('\n')[3] + ", " + hold[120].split('\n')[5] + ", " 
-               + hold[120].split('\n')[7] + ", " + hold[120].split('\n')[9] + "\n")
+               + "" + ", " + hold[120].split('\n')[9] + ", " + hold[120].split('\n')[5] + ", " 
+               + hold[120].split('\n')[7] + ", " + "" + ", " + "" + ", "
+               + hold[120].split('\n')[3] + "\n")
 
 file.close()
     

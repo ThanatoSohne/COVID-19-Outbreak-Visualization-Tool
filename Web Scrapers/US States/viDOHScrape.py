@@ -16,7 +16,7 @@ liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 vi = "US VIRGIN ISLANDS"
 
 csvfile = "COVID-19_cases_vidoh.csv"
-headers = "Case Types, No. of Cases, State/Territory, Latitude, Longitude \n"
+headers = "State/Territory, State/Territory, Latitude, Longitude, No. of Cases, Deaths, Recovered, , , , Pending \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -29,9 +29,6 @@ posNo = tags[3].text.split(': ')[1].split('\xa0')[0]
 recov = tags[6].text.split(': ')[0]
 recNo = tags[6].text.split(': ')[1].split('/')[0]
 
-neg = tags[4].text.split(': ')[0]
-negNo = tags[4].text.split(': ')[1].split(' ')[0]
-
 pend = tags[5].text.split(': ')[0]
 pendNo = tags[5].text.split(': ')[1].split(' ')[0]
 
@@ -40,11 +37,9 @@ mortNo = tags[7].text.split(':\xa0')[1]
 
 locale = liegen.geocode(vi)
 sleep(1)
-file.write(pos + ", " + posNo + ", " + vi + ", " + str(locale.latitude) + ", " + str(locale.longitude) + "\n")
-file.write(recov + ", " + recNo + "\n")
-file.write(neg + ", " + negNo + "\n")
-file.write(pend + ", " + pendNo + "\n")
-file.write(mort + ", " + mortNo + "\n")
+file.write(vi + ", " + vi + ", " + str(locale.latitude) + ", " 
+           + str(locale.longitude) + posNo + ", " + mortNo + ", " 
+           + recNo + ", " + "" + ", " + "" + ", " + pendNo + "\n")
 
 file.close()
 

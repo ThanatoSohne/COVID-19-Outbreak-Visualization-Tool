@@ -27,7 +27,7 @@ for a in attr:
                + str(liegen.geocode(a.get('attributes').get('CNTYNAME') + " ALABAMA").latitude) + ", " 
                + str(liegen.geocode(a.get('attributes').get('CNTYNAME') + " ALABAMA").longitude) + ", "
                + str(a.get('attributes').get('CONFIRMED')) + ", " + str(a.get('attributes').get('DIED')) + "\n")
-    sleep(1.5)
+    sleep(1.1)
     
     if(attr[0].get('attributes').get('CNTYNAME')) == 'Autauga':
         test = True
