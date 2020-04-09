@@ -31,10 +31,6 @@ for tag in tags[:73]:
     file.write(pull[0].text + ", " + mi + ", " + str(locale.latitude) + ", " 
                + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
 
-file.write(tags[72].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
-           + "" + ", " + tags[72].findAll('td')[1].text.strip() + ", " 
-           + tags[72].findAll('td')[2].text.strip() + "\n")
-
 file.write(tags[73].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
            + "" + ", " + tags[73].findAll('td')[1].text.strip() + ", " 
            + tags[73].findAll('td')[2].text.strip() + "\n")
@@ -43,9 +39,13 @@ file.write(tags[74].find('td').text.strip() + ", " + mi + ", " + "" + ", "
            + "" + ", " + tags[74].findAll('td')[1].text.strip() + ", " 
            + tags[74].findAll('td')[2].text.strip() + "\n")
 
+file.write(tags[75].find('td').text.strip() + ", " + mi + ", " + "" + ", " 
+           + "" + ", " + tags[75].findAll('td')[1].text.strip() + ", " 
+           + tags[75].findAll('td')[2].text.strip() + "\n")
+
 file.close()
 
-if (tags[0].find('td').text.strip()) == 'Allegan' and (tags[74].find('td').text.strip()) == 'Out of State':
+if (tags[0].find('td').text.strip()) == 'Allegan' and (tags[75].find('td').text.strip()) == 'Out of State':
     print("Michigan scraper is complete.")
 else:
     print("ERROR: Must fix Michigan scraper.")

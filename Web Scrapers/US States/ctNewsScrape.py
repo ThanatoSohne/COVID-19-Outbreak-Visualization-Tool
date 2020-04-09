@@ -15,7 +15,7 @@ ctPage.close()
 
 tables = site_parse.find("div", {"class": "article-content rich-text"})
 
-listed = tables.findAll('ul')[2]
+listed = tables.findAll('ul')[0]
 
 tags = listed.findAll('li')
 
@@ -23,7 +23,7 @@ liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 ct = "CONNECTICUT"
 
 csvfile = "COVID-19_cases_ctNews.csv"
-headers = "County, State, Latitude, Longitude, Confirmed Cases \n"
+headers = "County, State, Latitude, Longitude, Confirmed Cases, , , , , Pending \n"
 
 file = open(csvfile, "w")
 file.write(headers)
@@ -41,8 +41,9 @@ for h in hold[:8]:
                "\n")
     sleep(1)
 
-file.write((hold[8].split('validation')[0] + 'validation') + ", " + ct + ", " + "" + 
-               ", " + "" + ", " + hold[8].split('validation')[1].strip() + "\n")
+file.write(ct + ", " + ct + ", " + str(liegen.geocode(ct).latitude) + ", " 
+            + str(liegen.geocode(ct).longitude) + ", " + "" + ", " + "" 
+            + ", " + "" + ", " + "" + ", " + "" + ", " + hold[8].split('validation')[1].strip() + "\n")
 
 file.close()
 

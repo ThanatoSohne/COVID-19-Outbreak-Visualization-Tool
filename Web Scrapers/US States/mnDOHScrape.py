@@ -287,10 +287,14 @@ file.write(hold[189] + ", " + mn + ", " + str(liegen.geocode(hold[189] + co + ",
            + ", " + str(liegen.geocode(hold[189] + co + ", " + mn).longitude) + ", " + hold[190] 
            + ", " + hold[191] +"\n")
 sleep(1)
+file.write(hold[192] + ", " + mn + ", " + str(liegen.geocode(hold[192] + co + ", " + mn).latitude) 
+           + ", " + str(liegen.geocode(hold[192] + co + ", " + mn).longitude) + ", " + hold[193] 
+           + ", " + hold[194] +"\n")
+sleep(1)
 
 file.close()
 
-if hold[0] == 'Anoka' and hold[189] == 'Yellow Medicine':
+if hold[0] == 'Anoka' and hold[192] == 'Yellow Medicine':
     print("Minnesota scraper is complete.")
 else:
     print("ERROR: Must fix Minnesota scraper.")

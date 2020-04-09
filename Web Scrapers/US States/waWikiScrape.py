@@ -30,7 +30,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[47:84]:
+for h in hold[49:86]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + co + ", " + wa)
     file.write(take[1] + ", " + wa + ", " + str(locale.latitude) + ", " 
@@ -38,13 +38,13 @@ for h in hold[47:84]:
                + ", " + take[5].split('[')[0].replace(',','') + "\n")
     sleep(1)
     
-file.write(hold[84].split('\n')[1] + ", " + wa + ", " + "" + ", " 
-               + "" + ", " + hold[84].split('\n')[3].split('[')[0].replace(',','') 
-               + ", " + hold[84].split('\n')[5].split('[')[0].replace(',','') + "\n")
+file.write(hold[86].split('\n')[1] + ", " + wa + ", " + "" + ", " 
+               + "" + ", " + hold[86].split('\n')[3].split('[')[0].replace(',','') 
+               + ", " + hold[86].split('\n')[5].split('[')[0].replace(',','') + "\n")
 
 file.close()
 
-if (hold[47].split('\n')[1]) == 'Adams' and (hold[84].split('\n')[1]) == '(Unassigned by county)':
+if (hold[49].split('\n')[1]) == 'Adams' and (hold[86].split('\n')[1]) == '(Unassigned by county)':
     print("Washington scraper is complete.")
 else:
     print("ERROR: Must fix Washington scraper.")

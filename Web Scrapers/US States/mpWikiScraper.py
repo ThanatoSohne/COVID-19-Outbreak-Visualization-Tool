@@ -34,14 +34,14 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-file.write(hold[114].split('\n')[3] + ", " + mp + ", " + str(mpGeo.latitude) 
-           + ", " + str(mpGeo.longitude) + ", " + hold[114].split('\n')[5].replace(',','') 
-           + ", " + hold[114].split('\n')[7].replace(',','') + ", " 
-           + hold[114].split('\n')[9].replace(',','') + "\n")
+file.write(hold[116].split('\n')[3] + ", " + mp + ", " + str(mpGeo.latitude) 
+           + ", " + str(mpGeo.longitude) + ", " + hold[116].split('\n')[5].replace(',','') 
+           + ", " + hold[116].split('\n')[7].replace(',','') + ", " 
+           + hold[116].split('\n')[9].replace(',','') + "\n")
 
 file.close()
 
-if hold[114].split('\n')[3] == "Northern Mariana Islands":
+if hold[116].split('\n')[3] == "Northern Mariana Islands":
     print("Northern Mariana Islands scraper is complete.")
 else:
     print("ERROR: Must fix Northern Mariana Islands scraper.")

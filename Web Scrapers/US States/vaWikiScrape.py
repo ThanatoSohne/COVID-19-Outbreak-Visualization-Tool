@@ -29,7 +29,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[50:73]:
+for h in hold[51:75]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + va)
     file.write(take[1] + ", " + va + ", " + str(locale.latitude) + ", "
@@ -37,7 +37,7 @@ for h in hold[50:73]:
                + ", " + take[5].split('[')[0] + "\n")
     sleep(1)
     
-for h in hold[75:77]:
+for h in hold[77:81]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + va)
     file.write(take[1] + ", " + va + ", " + str(locale.latitude) + ", "
@@ -45,7 +45,7 @@ for h in hold[75:77]:
                + ", " + take[5].split('[')[0] + "\n")
     sleep(1)
 
-for h in hold[78:129]:
+for h in hold[82:135]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + va)
     file.write(take[1] + ", " + va + ", " + str(locale.latitude) + ", "
@@ -53,7 +53,7 @@ for h in hold[78:129]:
                + ", " + take[5].split('[')[0] + "\n")
     sleep(1.2)
 
-for h in hold[130:140]:
+for h in hold[136:148]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + va)
     file.write(take[1] + ", " + va + ", " + str(locale.latitude) + ", "
@@ -61,7 +61,7 @@ for h in hold[130:140]:
                + ", " + take[5].split('[')[0] + "\n")
     sleep(1)
 
-for h in hold[141:169]:
+for h in hold[148:176]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + ", " + va)
     file.write(take[1] + ", " + va + ", " + str(locale.latitude) + ", "
@@ -71,7 +71,7 @@ for h in hold[141:169]:
 
 file.close()
 
-if (hold[50].split('\n')[1]) == 'Accomack County' and (hold[168].split('\n')[1]) == 'York County':
+if (hold[51].split('\n')[1]) == 'Accomack County' and (hold[175].split('\n')[1]) == 'York County':
     print("Virginia scraper is complete.")
 else:
     print("ERROR: Must fix Virginia scraper.")

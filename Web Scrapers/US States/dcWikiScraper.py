@@ -34,14 +34,14 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-file.write(hold[26].split('\n')[3] + ", " + dc + ", " + str(dcGeo.latitude) 
-           + ", " + str(dcGeo.longitude) + ", " + hold[26].split('\n')[5].replace(',','') 
-           + ", " + hold[26].split('\n')[7].replace(',','') + ", " 
-           + hold[26].split('\n')[9].replace(',','') + "\n")
+file.write(hold[88].split('\n')[3] + ", " + dc + ", " + str(dcGeo.latitude) 
+           + ", " + str(dcGeo.longitude) + ", " + hold[88].split('\n')[5].replace(',','') 
+           + ", " + hold[88].split('\n')[7].replace(',','') + ", " 
+           + hold[88].split('\n')[9].replace(',','') + "\n")
 
 file.close()
 
-if hold[26].split('\n')[3] == "Washington D.C.":
+if hold[88].split('\n')[3] == "Washington D.C.":
     print("DC scraper is complete.")
 else:
     print("ERROR: Must fix DC scraper.")

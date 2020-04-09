@@ -30,7 +30,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[113:170]:
+for h in hold[115:172]:
     take = h.split('\n')
     locale = liegen.geocode(take[1].split('[')[0] + co + ", " + ny)
     file.write(take[1].split('[')[0] + ", " + ny + ", " + str(locale.latitude) + ", " 
@@ -38,14 +38,14 @@ for h in hold[113:170]:
                + ", " + take[7].replace(',','') + "\n")
     sleep(1)
     
-nycLocale = liegen.geocode(hold[171].split('\n')[1].strip('(a)').strip() + ", " + ny)
-file.write(hold[171].split('\n')[1].strip('(a)').strip() + ", " + ny + ", " + str(nycLocale.latitude) 
-           + ", " + str(nycLocale.longitude) + ", " + hold[171].split('\n')[3].replace(',','') 
-           + ", " + hold[171].split('\n')[5].replace(',','')  + ", " + hold[171].split('\n')[7].replace(',','')  + "\n")    
+nycLocale = liegen.geocode(hold[173].split('\n')[1].strip('(a)').strip() + ", " + ny)
+file.write(hold[173].split('\n')[1].strip('(a)').strip() + ", " + ny + ", " + str(nycLocale.latitude) 
+           + ", " + str(nycLocale.longitude) + ", " + hold[173].split('\n')[3].replace(',','') 
+           + ", " + hold[173].split('\n')[5].replace(',','')  + ", " + hold[173].split('\n')[7].replace(',','')  + "\n")    
 
 file.close()
 
-if (hold[113].split('\n')[1]) == 'Albany' and (hold[169].split('\n')[1]) == 'Yates':
+if (hold[115].split('\n')[1]) == 'Albany' and (hold[171].split('\n')[1]) == 'Yates':
     print("New York scraper is complete.")
 else:
     print("ERROR: Must fix New York scraper.")

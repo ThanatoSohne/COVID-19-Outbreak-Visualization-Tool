@@ -10,7 +10,7 @@ riClient = req(riDOH)
 site_parse = soup(riClient.read(), "lxml")
 riClient.close()
 
-tables = site_parse.find("table", {"class": "svelte-r6hxge"}).find('tbody')
+tables = site_parse.find("tbody", {"class": "top-level svelte-yabvh9"})
 
 tags = tables.findAll('td')
 
@@ -81,23 +81,3 @@ if prov == "Providence" and unkn == "Unknown":
     print("Rhode Island scraper is complete.")
 else:
     print("ERROR: Must fix Rhode Island scraper.")
-
-
-
-##Retrieved from Florida's opendata site https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-cases
-#
-#riFile = "https://docs.google.com/spreadsheets/d/1n-zMS9Al94CPj_Tc3K7Adin-tN9x1RSjjx2UzJ4SV7Q/edit"
-#download = requests.get(riFile)
-#download.raise_for_status()
-#
-#newLife = open('RICOVID-19.csv', 'wb')
-#for chunk in download.iter_content(100000):
-#    newLife.write(chunk)
-#
-#
-#
-#newLife.close()
-
-
-
-

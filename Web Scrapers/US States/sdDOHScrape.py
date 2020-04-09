@@ -161,6 +161,10 @@ locale31 = liegen.geocode(hold[90].strip() + co + ", " + sd)
 file.write(hold[90].strip() + ", " + sd + ", " + str(locale31.latitude) + ", " 
            + str(locale31.longitude) + ", " + hold[91].strip() + ", " + "" + ", " + hold[92].strip() + "\n")
 sleep(1)
+locale32 = liegen.geocode(hold[93].strip() + co + ", " + sd)
+file.write(hold[93].strip() + ", " + sd + ", " + str(locale32.latitude) + ", " 
+           + str(locale32.longitude) + ", " + hold[94].strip() + ", " + "" + ", " + hold[95].strip() + "\n")
+sleep(1)
 
 file.write("\n")
 
@@ -174,16 +178,9 @@ file.write("SOUTH DAKOTA" + ", " + sd + ", " + str(liegen.geocode("SOUTH DAKOTA"
            + ", " + str(liegen.geocode("SOUTH DAKOTA").longitude) + ", " + "" 
            + ", " + mortNo + ", " + "" + ", " + "" + ", " + hausNo + "\n")
 
-
-#recovered = holdE[6:8]
-#hope = recovered[0]
-#hopeN = recovered[1]
-#file.write(hope + ", " + hopeN + "\n")
-
-
 file.close()
 
-if (hold[0].strip()) == 'Aurora' and (hold[90].strip()) ==  'Yankton' and mort == 'Deaths':
+if (hold[0].strip()) == 'Aurora' and (hold[93].strip()) ==  'Yankton' and mort == 'Deaths':
     print("South Dakota scraper is complete.")
 else:
     print("ERROR: Must fix South Dakota scraper.")

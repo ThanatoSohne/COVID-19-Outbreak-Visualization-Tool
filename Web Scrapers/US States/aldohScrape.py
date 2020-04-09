@@ -1,6 +1,5 @@
 import json
 from urllib.request import urlopen as req
-#from bs4 import BeautifulSoup as soup
 from geopy.geocoders import Nominatim
 from time import sleep
 
@@ -33,12 +32,6 @@ for a in attr:
         test = True
     else:
         test = False
-
-#for tag in tags[2:23]:
-#    pull = tag.findAll('p')
-#    print("County = %s, Positive Cases = %s" % (pull[0].text, pull[1].text))
-#    
-#    file.write(pull[0].text + ", " + pull[1].text + "\n")
 #
 file.close()
 
