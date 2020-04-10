@@ -5,10 +5,12 @@ from time import sleep
 
 okDOH = 'https://coronavirus.health.ok.gov/'
 
-okClient = req(okDOH)
+bypass = {'User-Agent': 'Mozilla/5.0'}
+okClient = Request(okDOH, headers=bypass)
+okPage = req(okClient)
 
-site_parse = soup(okClient.read(), "lxml")
-okClient.close()
+site_parse = soup(okPage.read(), "lxml")
+okPage.close()
 
 tables = site_parse.find("table", {"summary": "COVID-19 Cases by County"}).find("tbody")
 

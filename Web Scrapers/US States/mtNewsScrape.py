@@ -32,7 +32,7 @@ for t in tags:
 
 file.close()
 
-if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[23].get_text().split(": ")[0]) == 'Glacier':
+if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[24].get_text().split(": ")[0]) == 'Glacier':
     print("Montana scraper is complete.")
 else:
     print("ERROR: Must fix Montana scraper.")

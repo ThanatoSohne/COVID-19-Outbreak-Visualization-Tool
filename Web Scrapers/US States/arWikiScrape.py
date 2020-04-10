@@ -1,7 +1,8 @@
 from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
-from geopy.geocoders import Nominatim
+#from geopy.geocoders import Nominatim
 from time import sleep
+import geocoder 
 
 arWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Arkansas'
 
@@ -29,10 +30,11 @@ for t in tables:
             hold.append(take)
 
 for h in hold[50:119]:
-    locale = liegen.geocode(h.split('\n')[1] + ", " + "ARKANSAS")
+    #locale = liegen.geocode(h.split('\n')[1] + ", " + "ARKANSAS")
+    g = geocoder.opencage(h.split('\n')[1] + ", " + "ARKANSAS", key='bf1344578b6f462c9183655c80b12d1e')
     take = h.split('\n')
     file.write(take[1] + ", " + "ARKANSAS" + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", " + take[7] +"\n")
-    sleep(1)
+    #sleep(1)
 
 file.write(hold[119].split('\n')[1] + ", " + "ARKANSAS" +  ", " + "" + ", " + "" + ", " + hold[119].split('\n')[3] + ", " + hold[119].split('\n')[5] + ", " + hold[119].split('\n')[7] +"\n")
     

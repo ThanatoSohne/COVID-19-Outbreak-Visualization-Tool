@@ -30,7 +30,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[47:129]:
+for h in hold[48:131]:
     take = h.split('\n')
     locale = liegen.geocode(take[1] + co + ", " + oh)
     file.write(take[1] + ", " + oh + ", " + str(locale.latitude) + ", " 
@@ -39,7 +39,7 @@ for h in hold[47:129]:
 
 file.close()
 
-if (hold[47].split('\n')[1]) == 'Adams' and (hold[128].split('\n')[1]) == 'Wyandot':
+if (hold[48].split('\n')[1]) == 'Adams' and (hold[130].split('\n')[1]) == 'Wyandot':
     print("Ohio scraper is complete.")
 else:
     print("ERROR: Must fix Ohio scraper.")

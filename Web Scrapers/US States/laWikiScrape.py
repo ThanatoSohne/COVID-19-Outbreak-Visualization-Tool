@@ -29,7 +29,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[85:149]:
+for h in hold[87:151]:
     locale = liegen.geocode(h.split('\n')[1] + ", " + la)
     sleep(1.1)
     take = h.split('\n')
@@ -37,13 +37,13 @@ for h in hold[85:149]:
                + str(locale.longitude) + ", " + take[3].replace(',','') + ", " 
                + take[5].replace(',','') + "\n")
 
-file.write(hold[149].split('\n')[1] + ", " + la + ", " + "" + ", " 
-               + "" + ", " + hold[149].split('\n')[3].replace(',','') + ", " 
-               + hold[149].split('\n')[5].replace(',','') + "\n")
+file.write(hold[151].split('\n')[1] + ", " + la + ", " + "" + ", " 
+               + "" + ", " + hold[151].split('\n')[3].replace(',','') + ", " 
+               + hold[151].split('\n')[5].replace(',','') + "\n")
 
 file.close()
 
-if (hold[85].split('\n')[1]) == 'Acadia' and (hold[149].split('\n')[1]) == 'Under Investigation':
+if (hold[87].split('\n')[1]) == 'Acadia' and (hold[151].split('\n')[1]) == 'Under Investigation':
     print("Louisiana scraper is complete.\n")
 else:
     print("ERROR: Must fix Louisiana scraper.\n")

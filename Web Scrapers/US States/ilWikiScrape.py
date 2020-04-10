@@ -30,7 +30,7 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
             
-for h in hold[63:142]:
+for h in hold[66:147]:
     locale = liegen.geocode((h.split('\n')[1]+co) + ", " + il)
     take = h.split('\n')
     file.write(take[1] + ", " + il + ", " + str(locale.latitude) + ", "
@@ -39,14 +39,14 @@ for h in hold[63:142]:
                + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
     sleep(1)
 
-file.write(hold[142].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
-               + str(liegen.geocode(il).longitude) + ", " + hold[142].split('\n')[9] + ", " + hold[142].split('\n')[5] + ", " 
-               + hold[142].split('\n')[7] + ", " + "" + ", " + "" + ", "
-               + hold[142].split('\n')[3] + "\n")
+file.write(hold[147].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
+               + str(liegen.geocode(il).longitude) + ", " + hold[147].split('\n')[9] + ", " + hold[147].split('\n')[5] + ", " 
+               + hold[147].split('\n')[7] + ", " + "" + ", " + "" + ", "
+               + hold[147].split('\n')[3] + "\n")
 
 file.close()
     
-if (hold[63].split('\n')[1]) == 'Adams' and (hold[141].split('\n')[1]) == 'Woodford':
+if (hold[66].split('\n')[1]) == 'Adams' and (hold[146].split('\n')[1]) == 'Woodford':
     print("Illinois scraper is complete.\n")
 else:
     print("ERROR: Must fix Illinois scraper.\n")

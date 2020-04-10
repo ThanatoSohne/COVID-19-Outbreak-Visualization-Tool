@@ -58,23 +58,23 @@ def akScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    file.write(hold[41].split('\n')[1] + ", " + ak + ", " + str(anch.latitude) + ", " + str(anch.longitude) + ", " + hold[41].split('\n')[3] + "\n")
+    file.write(hold[42].split('\n')[1] + ", " + ak + ", " + str(anch.latitude) + ", " + str(anch.longitude) + ", " + hold[42].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[42].split('\n')[1] + ", " + ak + ", " + str(gulf.latitude) + ", " + str(gulf.longitude) + ", " + hold[42].split('\n')[3] + "\n")
+    file.write(hold[43].split('\n')[1] + ", " + ak + ", " + str(gulf.latitude) + ", " + str(gulf.longitude) + ", " + hold[43].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[43].split('\n')[1] + ", " + ak + ", " + str(inter.latitude) + ", " + str(inter.longitude) + ", " + hold[43].split('\n')[3] + "\n")
+    file.write(hold[44].split('\n')[1] + ", " + ak + ", " + str(inter.latitude) + ", " + str(inter.longitude) + ", " + hold[44].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[44].split('\n')[1] + ", " + ak + ", " + str(matsu.latitude) + ", " + str(matsu.longitude) + ", " + hold[44].split('\n')[3] + "\n")
+    file.write(hold[45].split('\n')[1] + ", " + ak + ", " + str(matsu.latitude) + ", " + str(matsu.longitude) + ", " + hold[45].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[45].split('\n')[1] + ", " + ak + ", " + str(north.latitude) + ", " + str(north.longitude) + ", " + hold[45].split('\n')[3] + "\n")
+    file.write(hold[46].split('\n')[1] + ", " + ak + ", " + str(north.latitude) + ", " + str(north.longitude) + ", " + hold[46].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[46].split('\n')[1] + ", " + ak + ", " + str(sE.latitude) + ", " + str(sE.longitude) + ", " + hold[46].split('\n')[3] + "\n")
+    file.write(hold[47].split('\n')[1] + ", " + ak + ", " + str(sE.latitude) + ", " + str(sE.longitude) + ", " + hold[47].split('\n')[3] + "\n")
     sleep(1)
-    file.write(hold[47].split('\n')[1] + ", " + ak + ", " + str(sW.latitude) + ", " + str(sW.longitude) + ", " + hold[47].split('\n')[3] + "\n")
+    file.write(hold[48].split('\n')[1] + ", " + ak + ", " + str(sW.latitude) + ", " + str(sW.longitude) + ", " + hold[48].split('\n')[3] + "\n")
     
     file.close()
     
-    if (hold[41].split('\n')[1]) == 'Anchorage/Southcentral Alaska' and (hold[47].split('\n')[1]) == 'Southwest':
+    if (hold[42].split('\n')[1]) == 'Anchorage/Southcentral Alaska' and (hold[48].split('\n')[1]) == 'Southwest':
         print("Alaska scraper complete.")
     else:
         print("ERROR: Must fix Alaska scraper.")
@@ -244,11 +244,11 @@ def azScrape():
         file.write(take[1] + ", " + az + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
         sleep(1)
     
-    file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
+    #file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
     
     file.close()
     
-    if (hold[46].split('\n')[1]) == 'Maricopa' and (hold[61].split('\n')[1]) == 'Undetermined':
+    if (hold[46].split('\n')[1]) == 'Apache' and (hold[60].split('\n')[1]) == 'Yuma':
         print("Arizona scraper is complete.")
     else:
         print("ERROR: Must fix Arizona scraper.")
@@ -314,7 +314,7 @@ def coScrape():
     test = tables.findAll('tr')
     
     adamsTest = test[1].find('td').text
-    outTest = test[56].find('td').text
+    outTest = test[58].find('td').text
     
     csvfile = "COVID-19_cases_coDOH.csv"
     headers = "County/Region, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
@@ -322,7 +322,7 @@ def coScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in test[1:55]:
+    for t in test[1:57]:
             pull = t.findAll('td')
             locale = liegen.geocode(test[1].find('td').text + ", " + co)
             catch_TimeOut(test[1].find('td').text + ", " + co)
@@ -331,13 +331,13 @@ def coScrape():
                        ", " + pull[2].text + "\n")
             sleep(1)
     
-    file.write(test[55].find('td').text + ", " + co + ", " + str(liegen.geocode(co).latitude) 
+    file.write(test[57].find('td').text + ", " + co + ", " + str(liegen.geocode(co).latitude) 
                + ", " + str(liegen.geocode(co).longitude) + ", " +
-               test[55].findAll('td')[1].text.strip()+", " +test[55].findAll('td')[2].text.strip()+ "\n")
+               test[57].findAll('td')[1].text.strip()+", " +test[57].findAll('td')[2].text.strip()+ "\n")
     
-    file.write(test[56].find('td').text + ", " + co + ", " + str(liegen.geocode(co).longitude) 
+    file.write(test[58].find('td').text + ", " + co + ", " + str(liegen.geocode(co).longitude) 
                + ", " + str(liegen.geocode(co).longitude) + ", " +
-               test[56].findAll('td')[1].text.strip()+", " +test[56].findAll('td')[2].text.strip()+ "\n")
+               test[58].findAll('td')[1].text.strip()+", " +test[58].findAll('td')[2].text.strip()+ "\n")
     
     file.close()
     
@@ -381,11 +381,11 @@ def ctScrape():
         
     for h in hold[:8]:
         locale = liegen.geocode(h.split('County')[0] + 'County' + ", " + ct)
-        catch_TimeOut((h.split('County')[0] + 'County' + ", " + ct))
         file.write(h.split('County')[0] + ", " + ct + ", " + str(locale.latitude) + 
                    ", " + str(locale.longitude) + ", " + h.split('County')[1].strip().replace(',','') +
                    "\n")
         sleep(1)
+        catch_TimeOut((h.split('County')[0] + 'County' + ", " + ct))
     
     file.write(ct + ", " + ct + ", " + str(liegen.geocode(ct).latitude) + ", " 
                 + str(liegen.geocode(ct).longitude) + ", " + "" + ", " + "" 
@@ -731,7 +731,7 @@ def idScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    for h in hold[35:60]:
+    for h in hold[35:67]:
         locale = liegen.geocode((h.split('\n')[1] + co) + ", " + iD)
         catch_TimeOut((h.split('\n')[1] + co) + ", " + iD)
         take = h.split('\n')
@@ -742,7 +742,7 @@ def idScrape():
     
     file.close()
     
-    if (hold[35].split('\n')[1]) == 'Ada' and (hold[59].split('\n')[1]) == 'Valley':
+    if (hold[35].split('\n')[1]) == 'Ada' and (hold[66].split('\n')[1]) == 'Washington':
         print("Idaho scraper is complete.")
     else:
         print("ERROR: Must fix Idaho scraper.")
@@ -777,7 +777,7 @@ def ilScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    for h in hold[63:142]:
+    for h in hold[66:147]:
         locale = liegen.geocode((h.split('\n')[1]+co) + ", " + il)
         catch_TimeOut((h.split('\n')[1]+co) + ", " + il)
         take = h.split('\n')
@@ -787,14 +787,14 @@ def ilScrape():
                    + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
         sleep(1)
     
-    file.write(hold[142].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
-                   + str(liegen.geocode(il).longitude) + ", " + hold[142].split('\n')[9] + ", " + hold[142].split('\n')[5] + ", " 
-                   + hold[142].split('\n')[7] + ", " + "" + ", " + "" + ", "
-                   + hold[142].split('\n')[3] + "\n")
+    file.write(hold[147].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
+                   + str(liegen.geocode(il).longitude) + ", " + hold[147].split('\n')[9] + ", " + hold[147].split('\n')[5] + ", " 
+                   + hold[147].split('\n')[7] + ", " + "" + ", " + "" + ", "
+                   + hold[147].split('\n')[3] + "\n")
     
     file.close()
         
-    if (hold[63].split('\n')[1]) == 'Adams' and (hold[141].split('\n')[1]) == 'Woodford':
+    if (hold[66].split('\n')[1]) == 'Adams' and (hold[146].split('\n')[1]) == 'Woodford':
         print("Illinois scraper is complete.\n")
     else:
         print("ERROR: Must fix Illinois scraper.\n")
@@ -828,7 +828,7 @@ def inScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[48:123]:
+    for h in hold[49:123]:
         locale = liegen.geocode((h.split('\n')[1] + co) + ", " + inD)
         catch_TimeOut((h.split('\n')[1] + co) + ", " + inD)
         take = h.split('\n')
@@ -839,7 +839,7 @@ def inScrape():
     file.write(hold[123].split('\n')[1] + ", " + inD + ", " + str(liegen.geocode(inD).latitude) + ", " 
                    + str(liegen.geocode(inD).longitude) + ", " + hold[123].split('\n')[2] + ", " + hold[123].split('\n')[3] + "\n")
     
-    for h in hold[124:140]:
+    for h in hold[124:141]:
         locale = liegen.geocode((h.split('\n')[1] + co) + ", " + inD)
         catch_TimeOut((h.split('\n')[1] + co) + ", " + inD)
         take = h.split('\n')
@@ -849,7 +849,7 @@ def inScrape():
     
     file.close()
     
-    if (hold[48].split('\n')[1]) == 'Adams' and (hold[139].split('\n')[1]) == 'Whitley':
+    if (hold[49].split('\n')[1]) == 'Adams' and (hold[140].split('\n')[1]) == 'Whitley':
         print("Indiana scraper is complete.")
     else:
         print("ERROR: Must fix Indiana scraper.")
@@ -884,7 +884,7 @@ def ioScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[52:130]:
+    for h in hold[53:131]:
         locale = liegen.geocode(h.split('\n')[1] + co + ", " + io)
         catch_TimeOut(h.split('\n')[1] + co + ", " + io)
         take = h.split('\n')
@@ -894,7 +894,7 @@ def ioScrape():
         
     file.close()
     
-    if (hold[52].split('\n')[1]) == 'Adair' and (hold[129].split('\n')[1]) == 'Wright':
+    if (hold[53].split('\n')[1]) == 'Adair' and (hold[130].split('\n')[1]) == 'Wright':
         print("Iowa scraper is complete.")
     else:
         print("ERROR: Must fix Iowa Scraper.")
@@ -928,7 +928,7 @@ def kaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[52:109]:
+    for h in hold[53:110]:
         locale = liegen.geocode(h.split('\n')[1] + co + ", " + ka)
         catch_TimeOut(h.split('\n')[1] + co + ", " + ka)
         take = h.split('\n')
@@ -938,7 +938,7 @@ def kaScrape():
     
     file.close()
     
-    if (hold[52].split('\n')[1]) == 'Atchison' and (hold[108].split('\n')[1]) == 'Wyandotte':
+    if (hold[53].split('\n')[1]) == 'Atchison' and (hold[109].split('\n')[1]) == 'Wyandotte':
         print("Kansas scraper is complete.")
     else:
         print("ERROR: Must fix Kansas scraper.")
@@ -971,7 +971,7 @@ def kyScrape():
         take = t.get_text()
         hold.append(take)
         
-    for h in hold[:89]: 
+    for h in hold[:95]: 
         locale = liegen.geocode(h.split(':')[0] + ", " + ky)
         catch_TimeOut(h.split(':')[0] + ", " + ky)
         file.write(h.split(':')[0] + ", " + ky + ", " + str(locale.latitude) + ", "
@@ -979,14 +979,14 @@ def kyScrape():
                    + ", " + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
         sleep(1)
     
-    file.write(hold[89].split(':')[0] + ", " + ky + ", " + str(liegen.geocode(ky).latitude) + ", " 
+    file.write(hold[95].split(':')[0] + ", " + ky + ", " + str(liegen.geocode(ky).latitude) + ", " 
                + str(liegen.geocode(ky).longitude) + ", "
-               + hold[89].split(':')[1].split('c')[0].strip() + ", "
-               + hold[89].split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+               + hold[95].split(':')[1].split('c')[0].strip() + ", "
+               + hold[95].split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
 #        
     file.close()
     
-    if (hold[0].split(':')[0]) == 'Adair County' and (hold[90].split(':')[0]) == 'No County Available':
+    if (hold[0].split(':')[0]) == 'Adair County' and (hold[95].split(':')[0]) == 'No County Available':
         print("Kentucky scraper is complete.")
     else:
         print("ERROR: Must fix Kentucky scraper.")
@@ -1019,7 +1019,7 @@ def laScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[85:149]:
+    for h in hold[87:151]:
         locale = liegen.geocode(h.split('\n')[1] + ", " + la)
         catch_TimeOut(h.split('\n')[1] + ", " + la)
         sleep(1.1)
@@ -1028,13 +1028,13 @@ def laScrape():
                    + str(locale.longitude) + ", " + take[3].replace(',','') + ", " 
                    + take[5].replace(',','') + "\n")
     
-    file.write(hold[149].split('\n')[1] + ", " + la + ", " + str(liegen.geocode(la).latitude) + ", " 
-                   + str(liegen.geocode(la).longitude) + ", " + hold[149].split('\n')[3].replace(',','') + ", " 
-                   + hold[149].split('\n')[5].replace(',','') + "\n")
+    file.write(hold[151].split('\n')[1] + ", " + la + ", " + str(liegen.geocode(la).latitude) + ", " 
+                   + str(liegen.geocode(la).longitude) + ", " + hold[151].split('\n')[3].replace(',','') + ", " 
+                   + hold[151].split('\n')[5].replace(',','') + "\n")
     
     file.close()
     
-    if (hold[85].split('\n')[1]) == 'Acadia' and (hold[149].split('\n')[1]) == 'Under Investigation':
+    if (hold[87].split('\n')[1]) == 'Acadia' and (hold[151].split('\n')[1]) == 'Under Investigation':
         print("Louisiana scraper is complete.")
     else:
         print("ERROR: Must fix Louisiana scraper.")
@@ -1109,7 +1109,7 @@ def mdScrape():
                 take = p.get_text()
                 hold.append(take)
         
-    for h in hold[77:101]:
+    for h in hold[78:102]:
         locale = liegen.geocode(h.split('\n')[1] + co + ", " + md)
         catch_TimeOut(h.split('\n')[1] + co + ", " + md)
         take = h.split('\n')
@@ -1118,14 +1118,14 @@ def mdScrape():
                    + take[7] + "\n")
         sleep(1)
         
-    file.write(hold[101].split('\n')[1] + ", " + md + ", " + str(liegen.geocode(md).latitude) + ", " 
+    file.write(hold[102].split('\n')[1] + ", " + md + ", " + str(liegen.geocode(md).latitude) + ", " 
                + str(liegen.geocode(md).longitude) + ", " 
-               + hold[101].split('\n')[3] + ", " + hold[101].split('\n')[5] + ", " 
-               + hold[101].split('\n')[7] + "\n")
+               + hold[102].split('\n')[3] + ", " + hold[102].split('\n')[5] + ", " 
+               + hold[102].split('\n')[7] + "\n")
     
     file.close()
     
-    if (hold[77].split('\n')[1]) == 'Allegany' and (hold[101].split('\n')[1]) == 'Unassigned':
+    if (hold[78].split('\n')[1]) == 'Allegany' and (hold[102].split('\n')[1]) == 'Unassigned':
         print("Maryland scraper is complete.")
     else:
         print("ERROR: Must fix Maryland scraper.")
@@ -1842,7 +1842,7 @@ def msScrape():
     file = open(csvfile, "w")
     file.write(headers)
     
-    for t in tables[:80]:
+    for t in tables[:81]:
         pull = t.findAll('td')
         locale = liegen.geocode(pull[0].text + co + ", " + ms)
         catch_TimeOut(pull[0].text + co + ", " + ms)
@@ -1852,7 +1852,7 @@ def msScrape():
     
     file.close()
     
-    if (tables[0].find('td').text) == 'Adams' and (tables[79].find('td').text) == 'Yazoo':
+    if (tables[0].find('td').text) == 'Adams' and (tables[80].find('td').text) == 'Yazoo':
         print("Mississippi scraper is complete.\n")
     else:
         print("ERROR: Must fix Mississippi scraper.\n")
@@ -1889,7 +1889,7 @@ def mtScrape():
     
     file.close()
     
-    if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[23].get_text().split(": ")[0]) == 'Glacier':
+    if (tags[0].get_text().split(": ")[0]) == 'Gallatin' and (tags[24].get_text().split(": ")[0]) == 'Glacier':
         print("Montana scraper is complete.")
     else:
         print("ERROR: Must fix Montana scraper.")
@@ -1927,46 +1927,51 @@ def ncScrape():
     
     file.close()
     
-    if (tags[0].find('td').text) == 'Alamance County' and (tags[89].find('td').text) == 'Yadkin County':
+    if (tags[0].find('td').text) == 'Alamance County' and (tags[90].find('td').text) == 'Yadkin County':
         print("North Carolina scraper is complete.")
     else:
         print("ERROR: Must fix North Carolina scraper.")
 
 def ndScrape():
     
-    ndDOH = 'https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases'
+    ndWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_North_Dakota'
 
-    ndClient = req(ndDOH)
+    ndClient = req(ndWiki)
     
     site_parse = soup(ndClient.read(), "lxml")
     ndClient.close()
     
-    tables = site_parse.find("div", {"class":"paragraph paragraph--type--bp-accordion-section paragraph--view-mode--default paragraph--id--3613"}).find('tbody')
-    
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
+
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
     nd = "NORTH DAKOTA"
     co = ' County'
     
-    csvfile = "COVID-19_cases_nddoh.csv"
-    headers = "County, State, Latitude, Longitude, Positive Cases, , , , ,  Total Tests \n"
+    csvfile = "COVID-19_cases_ndWiki.csv"
+    headers = "County, State, Latitude, Longitude, Confirmed Cases \n"
     
     file = open(csvfile, "w")
     file.write(headers)
     
-    tags = tables.findAll('tr')
+    hold = []
+
+    for t in tables:
+            pull = t.findAll('tr')
+            for p in pull:
+                take = p.get_text()
+                hold.append(take)
+
     
-    for tag in tags[:52]:
-        pull = tag.findAll('td')
-        locale = liegen.geocode(pull[0].text + co + ", " + nd)
-        catch_TimeOut(pull[0].text + co + ", " + nd)
-        file.write(pull[0].text + ", " + nd + ", " + str(locale.latitude) + ", " 
-                   + str(locale.longitude) + ", " + pull[2].text + ", " +
-                   "" + ", " + "" + ", " + "" + ", " + "" + ", " + pull[1].text + "\n")
+    for h in hold[46:74]:
+        locale = liegen.geocode(h.split('\n')[1] + co + ", " + nd)
+        take = h.split('\n')
+        file.write(take[1] + ", " + nd + ", " + str(locale.latitude) + ", " 
+                   + str(locale.longitude) + ", " + take[3] + "\n")
         sleep(1.1)
     
     file.close()
     
-    if (tags[0].find('td').text) == 'Adams' and (tags[51].find('td').text) == 'Williams':
+    if hold[46].split('\n')[1] == 'Barnes' and hold[73].split('\n')[1] == 'Ward':
         print("North Dakota scraper is complete.")
     else:
         print("ERROR: Must fix North Dakota Scraper.")
@@ -2086,7 +2091,7 @@ def njScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[53:74]:
+    for h in hold[54:75]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + co + ", " + nj)
         catch_TimeOut(take[1] + co + ", " + nj)
@@ -2095,14 +2100,14 @@ def njScrape():
                    + take[5].replace(',','') + ", " + take[7].replace(',','') + "\n")
         sleep(1)
     
-    file.write(hold[74].split('\n')[1] + ", " + nj + ", " + str(liegen.geocode(nj).latitude) + ", " 
-               + str(liegen.geocode(nj).longitude) + ", " + hold[74].split('\n')[3].replace(',','') 
-               + ", " + hold[74].split('\n')[5].replace(',','') 
-               + ", " + hold[74].split('\n')[7].replace(',','') + "\n")
+    file.write(hold[75].split('\n')[1] + ", " + nj + ", " + str(liegen.geocode(nj).latitude) + ", " 
+               + str(liegen.geocode(nj).longitude) + ", " + hold[75].split('\n')[3].replace(',','') 
+               + ", " + hold[75].split('\n')[5].replace(',','') 
+               + ", " + hold[75].split('\n')[7].replace(',','') + "\n")
     
     file.close()
     
-    if (hold[53].split('\n')[1]) == 'Atlantic' and (hold[74].split('\n')[1]) == 'Under investigation':
+    if (hold[54].split('\n')[1]) == 'Atlantic' and (hold[75].split('\n')[1]) == 'Under investigation':
         print("New Jersey scraper is complete.")
     else:
         print("ERROR: Must fix New Jersey scraper.")
@@ -2169,7 +2174,7 @@ def nvScrape():
     
     tags = tables.findAll('li')
     
-    for t in range(0,9):
+    for t in range(0,10):
         locale = liegen.geocode(tags[t].get_text().split(': ')[0] + co + ", " + nv)
         catch_TimeOut(tags[t].get_text().split(': ')[0] + co + ", " + nv)
         file.write(tags[t].get_text().split(': ')[0] + ", " + nv + ", " 
@@ -2179,7 +2184,7 @@ def nvScrape():
     
     file.close()
          
-    if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[8].get_text().split(': ')[0]) == 'White Pine':
+    if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[9].get_text().split(': ')[0]) == 'White Pine':
         print("Nevada scraper is complete.\n")
     else:
         print("ERROR: Must fix Nevada scraper.\n")
@@ -2215,7 +2220,7 @@ def nyScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[115:172]:
+    for h in hold[116:173]:
         take = h.split('\n')
         locale = liegen.geocode(take[1].split('[')[0] + co + ", " + ny)
         catch_TimeOut(take[1].split('[')[0] + co + ", " + ny)
@@ -2224,14 +2229,14 @@ def nyScrape():
                    + ", " + take[7].replace(',','') + "\n")
         sleep(1)
         
-    nycLocale = liegen.geocode(hold[173].split('\n')[1].strip('(a)').strip() + ", " + ny)
-    file.write(hold[173].split('\n')[1].strip('(a)').strip() + ", " + ny + ", " + str(nycLocale.latitude) 
-               + ", " + str(nycLocale.longitude) + ", " + hold[173].split('\n')[3].replace(',','') 
-               + ", " + hold[173].split('\n')[5].replace(',','')  + ", " + hold[173].split('\n')[7].replace(',','')  + "\n")    
+    nycLocale = liegen.geocode(hold[174].split('\n')[1].strip('(a)').strip() + ", " + ny)
+    file.write(hold[174].split('\n')[1].strip('(a)').strip() + ", " + ny + ", " + str(nycLocale.latitude) 
+               + ", " + str(nycLocale.longitude) + ", " + hold[174].split('\n')[3].replace(',','') 
+               + ", " + hold[174].split('\n')[5].replace(',','')  + ", " + hold[174].split('\n')[7].replace(',','')  + "\n")    
     
     file.close()
     
-    if (hold[114].split('\n')[1]) == 'Albany' and (hold[170].split('\n')[1]) == 'Yates':
+    if (hold[116].split('\n')[1]) == 'Albany' and (hold[172].split('\n')[1]) == 'Yates':
         print("New York scraper is complete.")
     else:
         print("ERROR: Must fix New York scraper.")
@@ -2265,7 +2270,7 @@ def ohScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[47:129]:
+    for h in hold[48:131]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + co + ", " + oh)
         catch_TimeOut(take[1] + co + ", " + oh)
@@ -2275,7 +2280,7 @@ def ohScrape():
     
     file.close()
     
-    if (hold[47].split('\n')[1]) == 'Adams' and (hold[128].split('\n')[1]) == 'Wyandot':
+    if (hold[48].split('\n')[1]) == 'Adams' and (hold[130].split('\n')[1]) == 'Wyandot':
         print("Ohio scraper is complete.")
     else:
         print("ERROR: Must fix Ohio scraper.")
@@ -2285,10 +2290,12 @@ def okScrape():
     
     okDOH = 'https://coronavirus.health.ok.gov/'
 
-    okClient = req(okDOH)
+    bypass = {'User-Agent': 'Mozilla/5.0'}
+    okClient = Request(okDOH, headers=bypass)
+    okPage = req(okClient)
     
-    site_parse = soup(okClient.read(), "lxml")
-    okClient.close()
+    site_parse = soup(okPage.read(), "lxml")
+    okPage.close()
     
     tables = site_parse.find("table", {"summary": "COVID-19 Cases by County"}).find("tbody")
     
@@ -2424,42 +2431,42 @@ def prScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    aLocale = liegen.geocode(hold[46].split('\n')[1] + ", PR")
-    file.write(hold[46].split('\n')[1] + ", " + pr + ", " + str(aLocale.latitude)
-               + ", " + str(aLocale.longitude) + ", " + hold[46].split('\n')[5] + "\n")
+    aLocale = liegen.geocode(hold[47].split('\n')[1] + ", PR")
+    file.write(hold[47].split('\n')[1] + ", " + pr + ", " + str(aLocale.latitude)
+               + ", " + str(aLocale.longitude) + ", " + hold[47].split('\n')[5] + "\n")
     sleep(1)
-    bLocale = liegen.geocode(hold[47].split('\n')[1] + ", PR")
-    file.write(hold[47].split('\n')[1] + ", " + pr + ", " + str(bLocale.latitude)
-               + ", " + str(bLocale.longitude) + ", " + hold[47].split('\n')[5] + "\n")
+    bLocale = liegen.geocode(hold[48].split('\n')[1] + ", PR")
+    file.write(hold[48].split('\n')[1] + ", " + pr + ", " + str(bLocale.latitude)
+               + ", " + str(bLocale.longitude) + ", " + hold[48].split('\n')[5] + "\n")
     sleep(1)
-    cLocale = liegen.geocode(hold[48].split('\n')[1] + ", PR")
-    file.write(hold[48].split('\n')[1] + ", " + pr + ", " + str(cLocale.latitude)
-               + ", " + str(cLocale.longitude) + ", " + hold[48].split('\n')[5] + "\n")
+    cLocale = liegen.geocode(hold[49].split('\n')[1] + ", PR")
+    file.write(hold[49].split('\n')[1] + ", " + pr + ", " + str(cLocale.latitude)
+               + ", " + str(cLocale.longitude) + ", " + hold[49].split('\n')[5] + "\n")
     sleep(1)
-    fLocale = liegen.geocode(hold[49].split('\n')[1] + ", PR")
-    file.write(hold[49].split('\n')[1] + ", " + pr + ", " + str(fLocale.latitude)
-               + ", " + str(fLocale.longitude) + ", " + hold[49].split('\n')[5] + "\n")
+    fLocale = liegen.geocode(hold[50].split('\n')[1] + ", PR")
+    file.write(hold[50].split('\n')[1] + ", " + pr + ", " + str(fLocale.latitude)
+               + ", " + str(fLocale.longitude) + ", " + hold[50].split('\n')[5] + "\n")
     sleep(1)
-    maLocale = liegen.geocode(hold[50].split('\n')[1] + ", PR")
-    file.write(hold[50].split('\n')[1] + ", " + pr + ", " + str(maLocale.latitude)
-               + ", " + str(maLocale.longitude) + ", " + hold[50].split('\n')[5] + "\n")
+    maLocale = liegen.geocode(hold[51].split('\n')[1] + ", PR")
+    file.write(hold[51].split('\n')[1] + ", " + pr + ", " + str(maLocale.latitude)
+               + ", " + str(maLocale.longitude) + ", " + hold[51].split('\n')[5] + "\n")
     sleep(1)
     meLocale = liegen.geocode("Canovanas, PR")
-    file.write(hold[51].split('\n')[1] + ", " + pr + ", " + str(meLocale.latitude)
-               + ", " + str(meLocale.longitude) + ", " + hold[51].split('\n')[5] + "\n")
+    file.write(hold[52].split('\n')[1] + ", " + pr + ", " + str(meLocale.latitude)
+               + ", " + str(meLocale.longitude) + ", " + hold[52].split('\n')[5] + "\n")
     sleep(1)
-    pLocale = liegen.geocode(hold[52].split('\n')[1] + ", PR")
-    file.write(hold[52].split('\n')[1] + ", " + pr + ", " + str(pLocale.latitude)
-               + ", " + str(pLocale.longitude) + ", " + hold[52].split('\n')[5] + "\n")
+    pLocale = liegen.geocode(hold[53].split('\n')[1] + ", PR")
+    file.write(hold[53].split('\n')[1] + ", " + pr + ", " + str(pLocale.latitude)
+               + ", " + str(pLocale.longitude) + ", " + hold[53].split('\n')[5] + "\n")
     sleep(1)
-    file.write(hold[53].split('\n')[1] + ", " + pr + ", " + ""
-               + ", " + "" + ", " + hold[53].split('\n')[5] + "\n")
     file.write(hold[54].split('\n')[1] + ", " + pr + ", " + ""
                + ", " + "" + ", " + hold[54].split('\n')[5] + "\n")
+    file.write(hold[55].split('\n')[1] + ", " + pr + ", " + ""
+               + ", " + "" + ", " + hold[55].split('\n')[5] + "\n")
     
     file.close()
     
-    if (hold[46].split('\n')[1]) == 'Arecibo' and (hold[54].split('\n')[1]) == 'Not available':
+    if (hold[47].split('\n')[1]) == 'Arecibo' and (hold[55].split('\n')[1]) == 'Not available':
         print("Puerto Rico scraper is complete.")
     else:
         print("ERROR: Must fix Puerto Rico scraper.")
@@ -2574,7 +2581,7 @@ def scScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[50:96]:
+    for h in hold[51:97]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + co + ", " + sc)
         catch_TimeOut(take[1] + co + ", " + sc)
@@ -2584,7 +2591,7 @@ def scScrape():
     
     file.close()
     
-    if (hold[50].split('\n')[1]) == 'Abbeville' and (hold[95].split('\n')[1]) == 'York':
+    if (hold[51].split('\n')[1]) == 'Abbeville' and (hold[96].split('\n')[1]) == 'York':
         print("South Carolina scraper is complete.")
     else:
         print("ERROR: Must fix South Carolina scraper.")
@@ -2753,6 +2760,14 @@ def sdScrape():
     file.write(hold[93].strip() + ", " + sd + ", " + str(locale32.latitude) + ", " 
                + str(locale32.longitude) + ", " + hold[94].strip() + ", " + "" + ", " + hold[95].strip() + "\n")
     sleep(1)
+    locale33 = liegen.geocode(hold[96].strip() + co + ", " + sd)
+    file.write(hold[96].strip() + ", " + sd + ", " + str(locale33.latitude) + ", " 
+               + str(locale33.longitude) + ", " + hold[97].strip() + ", " + "" + ", " + hold[98].strip() + "\n")
+    sleep(1)
+    locale34 = liegen.geocode(hold[99].strip() + co + ", " + sd)
+    file.write(hold[99].strip() + ", " + sd + ", " + str(locale34.latitude) + ", " 
+               + str(locale34.longitude) + ", " + hold[100].strip() + ", " + "" + ", " + hold[101].strip() + "\n")
+    sleep(1)
     
     file.write("\n")
     
@@ -2769,7 +2784,7 @@ def sdScrape():
         
     file.close()
     
-    if (hold[0].strip()) == 'Aurora' and (hold[93].strip()) ==  'Yankton' and mort == 'Deaths':
+    if (hold[0].strip()) == 'Aurora' and (hold[99].strip()) ==  'Yankton' and mort == 'Deaths':
         print("South Dakota scraper is complete.")
     else:
         print("ERROR: Must fix South Dakota scraper.")
@@ -2882,7 +2897,7 @@ def txScrape():
                    + str(locale1.longitude) + ", " + tags[80].findAll('td')[1].text.replace(',','') 
                    + ", " + tags[80].findAll('td')[2].text + "\n")
     
-    for tag in tags[81:168]:
+    for tag in tags[81:171]:
         pull = tag.findAll('td')
         locale = liegen.geocode(pull[0].text + co + ", " + tx)
         catch_TimeOut(pull[0].text + co + ", " + tx)
@@ -2892,7 +2907,7 @@ def txScrape():
     
     file.close()
     
-    if (tags[0].find('td').text) == 'Harris' and (tags[167].find('td').text) == 'Anderson':
+    if (tags[0].find('td').text) == 'Harris' and (tags[170].find('td').text) == 'Tyler':
         print("Texas scraper is complete.")
     else:
         print("ERROR: Must fix Texas scraper.")
@@ -2963,7 +2978,7 @@ def vaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[51:75]:
+    for h in hold[52:76]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + va)
         catch_TimeOut(take[1] + ", " + va)
@@ -2972,7 +2987,7 @@ def vaScrape():
                    + ", " + take[5].split('[')[0] + "\n")
         sleep(1)
         
-    for h in hold[77:81]:
+    for h in hold[78:82]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + va)
         catch_TimeOut(take[1] + ", " + va)
@@ -2981,7 +2996,7 @@ def vaScrape():
                    + ", " + take[5].split('[')[0] + "\n")
         sleep(1)
     
-    for h in hold[82:135]:
+    for h in hold[83:136]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + va)
         catch_TimeOut(take[1] + ", " + va)
@@ -2990,7 +3005,7 @@ def vaScrape():
                    + ", " + take[5].split('[')[0] + "\n")
         sleep(1.1)
     
-    for h in hold[136:148]:
+    for h in hold[137:148]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + va)
         catch_TimeOut(take[1] + ", " + va)
@@ -2999,7 +3014,7 @@ def vaScrape():
                    + ", " + take[5].split('[')[0] + "\n")
         sleep(1)
     
-    for h in hold[148:176]:
+    for h in hold[149:177]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + va)
         catch_TimeOut(take[1] + ", " + va)
@@ -3010,7 +3025,7 @@ def vaScrape():
     
     file.close()
     
-    if (hold[51].split('\n')[1]) == 'Accomack County' and (hold[175].split('\n')[1]) == 'York County':
+    if (hold[52].split('\n')[1]) == 'Accomack County' and (hold[176].split('\n')[1]) == 'York County':
         print("Virginia scraper is complete.")
     else:
         print("ERROR: Must fix Virginia scraper.")
@@ -3091,7 +3106,7 @@ def vtScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[49:63]:
+    for h in hold[50:65]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + co + ", " + vt)
         catch_TimeOut(take[1] + co + ", " + vt)
@@ -3104,7 +3119,7 @@ def vtScrape():
     
     file.close()
     
-    if (hold[49].split('\n')[1]) == 'Addison' and (hold[63].split('\n')[1]) == 'N/A[a]':
+    if (hold[50].split('\n')[1]) == 'Addison' and (hold[64].split('\n')[1]) == 'N/A[a]':
         print("Vermont scraper is complete.")
     else:
         print("ERROR: Must fix Vermont scraper.")
@@ -3138,7 +3153,7 @@ def waScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[49:86]:
+    for h in hold[50:87]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + co + ", " + wa)
         catch_TimeOut(take[1] + co + ", " + wa)
@@ -3147,13 +3162,13 @@ def waScrape():
                    + ", " + take[5].split('[')[0].replace(',','') + "\n")
         sleep(1)
         
-    file.write(hold[86].split('\n')[1] + ", " + wa + ", " + str(liegen.geocode(wa).latitude) + ", " 
-                   + str(liegen.geocode(wa).longitude) + ", " + hold[86].split('\n')[3].split('[')[0].replace(',','') 
-                   + ", " + hold[86].split('\n')[5].split('[')[0].replace(',','') + "\n")
+    file.write(hold[87].split('\n')[1] + ", " + wa + ", " + str(liegen.geocode(wa).latitude) + ", " 
+                   + str(liegen.geocode(wa).longitude) + ", " + hold[87].split('\n')[3].split('[')[0].replace(',','') 
+                   + ", " + hold[87].split('\n')[5].split('[')[0].replace(',','') + "\n")
     
     file.close()
     
-    if (hold[49].split('\n')[1]) == 'Adams' and (hold[86].split('\n')[1]) == '(Unassigned by county)':
+    if (hold[50].split('\n')[1]) == 'Adams' and (hold[87].split('\n')[1]) == '(Unassigned by county)':
         print("Washington scraper is complete.")
     else:
         print("ERROR: Must fix Washington scraper.")
@@ -3221,7 +3236,7 @@ def wvScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    for h in hold[42:84]:
+    for h in hold[43:86]:
         take = h.split('\n')
         locale = liegen.geocode(take[1] + ", " + wv)
         catch_TimeOut(take[1] + ", " + wv)
@@ -3231,7 +3246,7 @@ def wvScrape():
     
     file.close()
     
-    if hold[42].split('\n')[1] == 'Barbour County' and hold[83].split('\n')[1] == 'Wyoming County':
+    if hold[43].split('\n')[1] == 'Barbour County' and hold[85].split('\n')[1] == 'Wyoming County':
         print("West Virginia scraper is complete.")
     else:
         print("ERROR: Must fix West Virginia scraper.")

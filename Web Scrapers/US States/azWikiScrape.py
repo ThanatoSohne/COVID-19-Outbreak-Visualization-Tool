@@ -36,11 +36,11 @@ for h in hold[46:61]:
     file.write(take[1] + ", " + az + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
     sleep(1)
 
-file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
+#file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
 
 file.close()
 
-if (hold[46].split('\n')[1]) == 'Maricopa' and (hold[61].split('\n')[1]) == 'Undetermined':
+if (hold[46].split('\n')[1]) == 'Apache' and (hold[60].split('\n')[1]) == 'Yuma':
     print("Arizona scraper is complete.\n")
 else:
     print("ERROR: Must fix Arizona scraper.\n")

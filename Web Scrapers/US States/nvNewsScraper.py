@@ -24,7 +24,7 @@ file.write(headers)
 
 tags = tables.findAll('li')
 
-for t in range(0,9):
+for t in range(0,10):
     locale = liegen.geocode(tags[t].get_text().split(': ')[0] + co + ", " + nv)
     sleep(1)
     file.write(tags[t].get_text().split(': ')[0] + ", " + nv + ", " 
@@ -33,7 +33,7 @@ for t in range(0,9):
 
 file.close()
      
-if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[8].get_text().split(': ')[0]) == 'White Pine':
+if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[9].get_text().split(': ')[0]) == 'White Pine':
     print("Nevada scraper is complete.\n")
 else:
     print("ERROR: Must fix Nevada scraper.\n")

@@ -22,7 +22,7 @@ headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 file = open(csvfile, "w")
 file.write(headers)
 
-for t in tables[:80]:
+for t in tables[:81]:
     pull = t.findAll('td')
     locale = liegen.geocode(pull[0].text + co + ", " + ms)
     file.write(pull[0].text + ", " + ms + ", " + str(locale.latitude) + ", " 
@@ -31,7 +31,7 @@ for t in tables[:80]:
 
 file.close()
 
-if (tables[0].find('td').text) == 'Adams' and (tables[79].find('td').text) == 'Yazoo':
+if (tables[0].find('td').text) == 'Adams' and (tables[80].find('td').text) == 'Yazoo':
     print("Mississippi scraper is complete.")
 else:
     print("ERROR: Must fix Mississippi scraper.")

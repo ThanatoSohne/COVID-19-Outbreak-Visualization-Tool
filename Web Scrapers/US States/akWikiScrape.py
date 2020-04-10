@@ -38,23 +38,23 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-file.write(hold[41].split('\n')[1] + ", " + ak + ", " + str(anch.latitude) + ", " + str(anch.longitude) + ", " + hold[41].split('\n')[3] + "\n")
+file.write(hold[42].split('\n')[1] + ", " + ak + ", " + str(anch.latitude) + ", " + str(anch.longitude) + ", " + hold[42].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[42].split('\n')[1] + ", " + ak + ", " + str(gulf.latitude) + ", " + str(gulf.longitude) + ", " + hold[42].split('\n')[3] + "\n")
+file.write(hold[43].split('\n')[1] + ", " + ak + ", " + str(gulf.latitude) + ", " + str(gulf.longitude) + ", " + hold[43].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[43].split('\n')[1] + ", " + ak + ", " + str(inter.latitude) + ", " + str(inter.longitude) + ", " + hold[43].split('\n')[3] + "\n")
+file.write(hold[44].split('\n')[1] + ", " + ak + ", " + str(inter.latitude) + ", " + str(inter.longitude) + ", " + hold[44].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[44].split('\n')[1] + ", " + ak + ", " + str(matsu.latitude) + ", " + str(matsu.longitude) + ", " + hold[44].split('\n')[3] + "\n")
+file.write(hold[45].split('\n')[1] + ", " + ak + ", " + str(matsu.latitude) + ", " + str(matsu.longitude) + ", " + hold[45].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[45].split('\n')[1] + ", " + ak + ", " + str(north.latitude) + ", " + str(north.longitude) + ", " + hold[45].split('\n')[3] + "\n")
+file.write(hold[46].split('\n')[1] + ", " + ak + ", " + str(north.latitude) + ", " + str(north.longitude) + ", " + hold[46].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[46].split('\n')[1] + ", " + ak + ", " + str(sE.latitude) + ", " + str(sE.longitude) + ", " + hold[46].split('\n')[3] + "\n")
+file.write(hold[47].split('\n')[1] + ", " + ak + ", " + str(sE.latitude) + ", " + str(sE.longitude) + ", " + hold[47].split('\n')[3] + "\n")
 sleep(1)
-file.write(hold[47].split('\n')[1] + ", " + ak + ", " + str(sW.latitude) + ", " + str(sW.longitude) + ", " + hold[47].split('\n')[3] + "\n")
+file.write(hold[48].split('\n')[1] + ", " + ak + ", " + str(sW.latitude) + ", " + str(sW.longitude) + ", " + hold[48].split('\n')[3] + "\n")
 
 file.close()
 
-if (hold[41].split('\n')[1]) == 'Anchorage/Southcentral Alaska' and (hold[47].split('\n')[1]) == 'Southwest':
+if (hold[42].split('\n')[1]) == 'Anchorage/Southcentral Alaska' and (hold[48].split('\n')[1]) == 'Southwest':
     print("Alaska scraper complete.")
 else:
     print("ERROR: Must fix Alaska scraper.")
