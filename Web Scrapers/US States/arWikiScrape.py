@@ -31,7 +31,7 @@ for t in tables:
 
 for h in hold[50:119]:
     #locale = liegen.geocode(h.split('\n')[1] + ", " + "ARKANSAS")
-    g = geocoder.opencage(h.split('\n')[1] + ", " + "ARKANSAS", key='bf1344578b6f462c9183655c80b12d1e')
+    g = geocoder.opencage(h.split('\n')[1] + ", " + "ARKANSAS", key='')
     take = h.split('\n')
     file.write(take[1] + ", " + "ARKANSAS" + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + ", " + take[7] +"\n")
     #sleep(1)
@@ -45,3 +45,5 @@ if (hold[50].split('\n')[1]) == 'Arkansas' and (hold[1189].split('\n')[1]) == 'M
     print("Arkansas scraper is complete.\n")
 else:
     print("ERROR: Must fix Arkansas scraper.\n")
+    
+    
