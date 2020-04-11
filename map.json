@@ -1,0 +1,991 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Albany",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 426",
+        "Deaths": " 8",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.9843997,
+          42.5986896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Allegany",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 26",
+        "Deaths": " 1",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.0419281,
+          42.2446061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Broome",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 112",
+        "Deaths": " 6",
+        "Recoveries": " 24"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.8404114,
+          42.1455623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Cattaraugus",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 18",
+        "Deaths": " 0",
+        "Recoveries": " 3"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.6477096,
+          42.2234823
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Cayuga",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 27",
+        "Deaths": " 2",
+        "Recoveries": " 5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.5700777,
+          42.8093409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Chautauqua",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 23",
+        "Deaths": " 3",
+        "Recoveries": " 12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -79.421728,
+          42.2894671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Chemung",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 59",
+        "Deaths": " 1",
+        "Recoveries": " 4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.7725493,
+          42.1384667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Chenango",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 60",
+        "Deaths": " 0",
+        "Recoveries": " 7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.6130279,
+          42.4784565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Clinton",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 43",
+        "Deaths": " 0",
+        "Recoveries": " 7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.6686982,
+          44.7278943
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Columbia",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 74",
+        "Deaths": " 4",
+        "Recoveries": " 32"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.6723456,
+          42.2415027
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Cortland",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 20",
+        "Deaths": " 1",
+        "Recoveries": " 16"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.0704906,
+          42.5842136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Delaware",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 39",
+        "Deaths": " 1",
+        "Recoveries": " 7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.0016302,
+          42.194917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Dutchess",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 1598",
+        "Deaths": " 22",
+        "Recoveries": " 104"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.7516205,
+          41.7194303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Erie",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 1506",
+        "Deaths": " 54",
+        "Recoveries": " 430"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.7620327,
+          42.7164263
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Essex",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 10",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.7542043,
+          44.0638879
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Franklin",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 11",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.3273735,
+          44.5599139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Fulton",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 18",
+        "Deaths": " 2",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.4461771,
+          43.1061507
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Genesee",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 65",
+        "Deaths": " 1",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.1780196,
+          43.0102726
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Greene",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 34",
+        "Deaths": " 0",
+        "Recoveries": " 14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.0878112,
+          42.2628769
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Hamilton",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 3",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.4659275,
+          43.6307863
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Herkimer",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 36",
+        "Deaths": " 3",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.9481252,
+          43.4911326
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Jefferson",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 43",
+        "Deaths": " 0",
+        "Recoveries": " 9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.9995742,
+          44.059311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Lewis",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 6",
+        "Deaths": " 3",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.440289,
+          43.7344277
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Livingston",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 34",
+        "Deaths": " 3",
+        "Recoveries": " 15"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.7781416,
+          42.7360902
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Madison",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 105",
+        "Deaths": " 3",
+        "Recoveries": " 77"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.6802581,
+          42.875882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Monroe",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 742",
+        "Deaths": " 44",
+        "Recoveries": " 341"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.6810141,
+          43.150094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Montgomery",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 29",
+        "Deaths": " 2",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.4099745,
+          42.8941269
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Nassau",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 21512",
+        "Deaths": " 723",
+        "Recoveries": " 232"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.5877699,
+          40.7412643
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Niagara",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 166",
+        "Deaths": " 4",
+        "Recoveries": " 51"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.7676017,
+          43.2042439
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Oneida",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 172",
+        "Deaths": " 2",
+        "Recoveries": " 30"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.4039155,
+          43.2144051
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Onondaga",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 456",
+        "Deaths": " 7",
+        "Recoveries": " 176"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.2257127,
+          43.015598
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Ontario",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 51",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.295025,
+          42.8580624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Orange",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 4640",
+        "Deaths": " 132",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.2507287,
+          41.3873306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Orleans",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 24",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.2272835,
+          43.2244513
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Oswego",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 42",
+        "Deaths": " 2",
+        "Recoveries": " 20"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.1279841,
+          43.4112973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Otsego",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 41",
+        "Deaths": " 2",
+        "Recoveries": " 9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.0142701,
+          42.5984272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Putnam",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 487",
+        "Deaths": " 22",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.760156,
+          41.426996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Rensselaer",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 112",
+        "Deaths": " 5",
+        "Recoveries": " 37"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.5107732,
+          42.7091389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Rockland",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 7122",
+        "Deaths": " 172",
+        "Recoveries": " 1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.0357266,
+          41.1519319
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Saratoga",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 182",
+        "Deaths": " 5",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.8712155,
+          43.0833231
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Schenectady",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 191",
+        "Deaths": " 7",
+        "Recoveries": " 21"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.0445388,
+          42.831851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Schoharie",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 12",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.4390277,
+          42.5757217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Schuyler",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 5",
+        "Deaths": " 0",
+        "Recoveries": " 2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.8744093,
+          42.3899705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Seneca",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 15",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.8386051,
+          42.7831619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "St. Lawrence",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 78",
+        "Deaths": " 1",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -75.0657043,
+          44.4973591
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Steuben",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 117",
+        "Deaths": " 5",
+        "Recoveries": " 30"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.3750862,
+          42.2359045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Suffolk",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 18980",
+        "Deaths": " 414",
+        "Recoveries": " 449"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -72.8578027,
+          40.8832318
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Sullivan",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 318",
+        "Deaths": " 6",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.7804323,
+          41.7156311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Tioga",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 18",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.3309339,
+          42.1333395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Tompkins",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 112",
+        "Deaths": " 0",
+        "Recoveries": " 82"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -76.4725921,
+          42.443114
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Ulster",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 530",
+        "Deaths": " 9",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.2618518,
+          41.8689317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Warren",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 43",
+        "Deaths": " 0",
+        "Recoveries": " 0"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.8164637,
+          43.5018687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Washington",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 26",
+        "Deaths": " 1",
+        "Recoveries": " 7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.4471343,
+          43.2294536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Wayne",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 41",
+        "Deaths": " 0",
+        "Recoveries": " 12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.0377603,
+          43.1500557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Westchester",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 18077",
+        "Deaths": " 389",
+        "Recoveries": " 4376"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -73.7907554,
+          41.1763139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Wyoming",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 30",
+        "Deaths": " 1",
+        "Recoveries": " 5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -78.2415228,
+          42.7039813
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "Yates",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 2",
+        "Deaths": " 0",
+        "Recoveries": " 1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -77.112177,
+          42.6444444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "County": "New York City",
+        "State": " NEW YORK",
+        "Confirmed Cases": " 94409",
+        "Deaths": " 5820",
+        "Recoveries": " 9736"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          -74.0060152,
+          40.7127281
+        ]
+      }
+    }
+  ]
+}
