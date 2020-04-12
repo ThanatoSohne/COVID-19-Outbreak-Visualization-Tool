@@ -19,9 +19,6 @@ co = ' County'
 csvfile = "COVID-19_cases_scWiki.csv"
 headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
 hold = []
 
 for t in tables:
@@ -29,17 +26,23 @@ for t in tables:
         for p in pull:
             take = p.get_text()
             hold.append(take)
+            
+if (hold[52].split('\n')[1]) == 'Abbeville' and (hold[97].split('\n')[1]) == 'York':
+            
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    for h in hold[52:98]:
+        take = h.split('\n')
+        locale = geocoder.opencage(take[1] + co + ", " + sc, key='')
+        #locale = liegen.geocode(take[1] + co + ", " + sc)
+        #catch_TimeOut(take[1] + co + ", " + sc)
+        file.write(take[1] + ", " + sc + ", " + str(locale.latlng).strip('[]') + ", " 
+                   + take[3] + ", " + take[5] + "\n")
+        #sleep(1.1)
+    
+    file.close()
 
-for h in hold[51:97]:
-    take = h.split('\n')
-    locale = liegen.geocode(take[1] + co + ", " + sc)
-    file.write(take[1] + ", " + sc + ", " + str(locale.latitude) + ", " 
-               + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
-    sleep(1.1)
-
-file.close()
-
-if (hold[51].split('\n')[1]) == 'Abbeville' and (hold[96].split('\n')[1]) == 'York':
     print("South Carolina scraper is complete.")
 else:
     print("ERROR: Must fix South Carolina scraper.")

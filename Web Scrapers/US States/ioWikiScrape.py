@@ -2,6 +2,7 @@ from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 from geopy import Nominatim 
 from time import sleep
+import geocoder
 
 ioWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Iowa'
 
@@ -18,10 +19,7 @@ co = ' County'
 
 csvfile = "COVID-19_cases_ioWiki.csv"
 headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
-
-file = open(csvfile, "w")
-file.write(headers)
-
+    
 hold = []
 
 for t in tables:
@@ -29,21 +27,26 @@ for t in tables:
         for p in pull:
             take = p.get_text()
             hold.append(take)
+            
+if (hold[54].split('\n')[1]) == 'Adair' and (hold[133].split('\n')[1]) == 'Wright':
 
-for h in hold[53:131]:
-    locale = liegen.geocode(h.split('\n')[1] + co + ", " + io)
-    take = h.split('\n')
-    file.write(take[1] + ", " + io + ", " + str(locale.latitude) + ", "  
-               + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
-    sleep(1)
-    
-file.close()
+    file = open(csvfile, "w")
+    file.write(headers)
 
-if (hold[53].split('\n')[1]) == 'Adair' and (hold[130].split('\n')[1]) == 'Wright':
-    print("Iowa scraper is complete.\n")
+    for h in hold[54:134]:
+        #locale = liegen.geocode(h.split('\n')[1] + co + ", " + io)
+        #catch_TimeOut(h.split('\n')[1] + co + ", " + io)
+        take = h.split('\n')
+        file.write(take[1] + ", " + io + ", " 
+                   + str(geocoder.opencage(h.split('\n')[1] + co + ", " + io, key='').latlng).strip('[]') 
+                   + ", " + take[3] + ", " + take[5] + "\n")
+        #sleep(1)
+        
+    file.close()
+
+    print("Iowa scraper is complete.")
 else:
-    print("ERROR: Must fix Iowa Scraper.\n")
-
+    print("ERROR: Must fix Iowa Scraper.")
 
 
 

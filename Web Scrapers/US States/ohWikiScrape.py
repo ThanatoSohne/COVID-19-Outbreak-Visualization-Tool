@@ -19,9 +19,6 @@ co = ' County'
 csvfile = "COVID-19_cases_ohWiki.csv"
 headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
 hold = []
 
 for t in tables:
@@ -30,20 +27,25 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[48:131]:
-    take = h.split('\n')
-    locale = liegen.geocode(take[1] + co + ", " + oh)
-    file.write(take[1] + ", " + oh + ", " + str(locale.latitude) + ", " 
-               + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
-    sleep(1)
+if (hold[52].split('\n')[1]) == 'Adams' and (hold[136].split('\n')[1]) == 'Wyandot':
+            
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    for h in hold[52:137]:
+        take = h.split('\n')
+        locale = geocoder.opencage(take[1] + co + ", " + oh, key='')
+        #locale = liegen.geocode(take[1] + co + ", " + oh)
+        #catch_TimeOut(take[1] + co + ", " + oh)
+        file.write(take[1] + ", " + oh + ", " + str(locale.latlng).strip('[]') + ", " 
+                   + take[3] + ", " + take[5] + "\n")
+        #sleep(1)
+    
+    file.close()
 
-file.close()
-
-if (hold[48].split('\n')[1]) == 'Adams' and (hold[130].split('\n')[1]) == 'Wyandot':
     print("Ohio scraper is complete.")
 else:
     print("ERROR: Must fix Ohio scraper.")
-
 
 
 

@@ -18,9 +18,6 @@ ky = "KENTUCKY"
 csvfile = "COVID-19_cases_kyNews.csv"
 headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths\n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
 tag = tables.find_all('p')[12:110]
 
 hold = []
@@ -29,20 +26,27 @@ for t in tag:
     take = t.get_text()
     hold.append(take)
     
-for h in hold[:95]: 
-    locale = liegen.geocode(h.split(':')[0] + ", " + ky)
-    file.write(h.split(':')[0] + ", " + ky + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + h.split(':')[1].split('c')[0].strip()
-               + ", " + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
-    sleep(1)
+if (hold[0].split(':')[0]) == 'Adair County' and (hold[97].split(':')[0]) == 'No County Available':
+
+    file = open(csvfile, "w")
+    file.write(headers)
+        
+    for h in hold[:97]: 
+        #locale = liegen.geocode(h.split(':')[0] + ", " + ky)
+        #catch_TimeOut(h.split(':')[0] + ", " + ky)
+        file.write(h.split(':')[0] + ", " + ky + ", "
+                   + str(geocoder.opencage(h.split('\n')[0] + ", " + ky, key='').latlng).strip('[]') 
+                   + ", " + h.split(':')[1].split('c')[0].strip()
+                   + ", " + h.split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+        #sleep(1)
     
-file.write(hold[95].split(':')[0] + ", " + ky + ", " + "" + ", " + "" + ", "
-           + hold[95].split(':')[1].split('c')[0].strip() + ", "
-           + hold[95].split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+    file.write(hold[97].split(':')[0] + ", " + ky + ", " + str(liegen.geocode(ky).latitude) + ", " 
+               + str(liegen.geocode(ky).longitude) + ", "
+               + hold[97].split(':')[1].split('c')[0].strip() + ", "
+               + hold[97].split('case')[1].strip('; ').strip(' death').replace('\xa0', '').strip(',').strip('s').strip() + "\n")
+        
+    file.close()
 
-file.close()
-
-if (hold[0].split(':')[0]) == 'Adair County' and (hold[95].split(':')[0]) == 'No County Available':
     print("Kentucky scraper is complete.")
 else:
     print("ERROR: Must fix Kentucky scraper.")

@@ -2,6 +2,7 @@ from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 from geopy import Nominatim
 from time import sleep
+import geocoder
 
 kaWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Kansas'
 
@@ -19,9 +20,6 @@ co = ' County'
 csvfile = "COVID-19_cases_kaWiki.csv"
 headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
 hold = []
 
 for t in tables:
@@ -30,18 +28,24 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-for h in hold[53:110]:
-    locale = liegen.geocode(h.split('\n')[1] + co + ", " + ka)
-    take = h.split('\n')
-    file.write(take[1] + ", " + ka + ", " + str(locale.latitude) + ", " +  
-               str(locale.longitude) + ", " + take[3] + ", " + take[4] + "\n")
-    sleep(1)
+if (hold[53].split('\n')[1]) == 'Anderson' and (hold[112].split('\n')[1]) == 'Wyandotte':
+   
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    for h in hold[53:113]:
+        #locale = liegen.geocode(h.split('\n')[1] + co + ", " + ka)
+        #catch_TimeOut(h.split('\n')[1] + co + ", " + ka)
+        take = h.split('\n')
+        file.write(take[1] + ", " + ka + ", "  
+                   + str(geocoder.opencage(h.split('\n')[1] + co + ", " + ka, key='').latlng).strip('[]') 
+                   + ", " + take[3] + ", " + take[4] + "\n")
+        #sleep(2)
+    
+    file.close()
 
-file.close()
-
-if (hold[53].split('\n')[1]) == 'Atchison' and (hold[109].split('\n')[1]) == 'Wyandotte':
-    print("Kansas scraper is complete.\n")
+    print("Kansas scraper is complete.")
 else:
-    print("ERROR: Must fix Kansas scraper.\n")
+    print("ERROR: Must fix Kansas scraper.")
 
 

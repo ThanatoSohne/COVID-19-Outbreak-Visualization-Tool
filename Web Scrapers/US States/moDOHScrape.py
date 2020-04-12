@@ -2,6 +2,7 @@ from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 from geopy import Nominatim 
 from time import sleep
+import geocoder
 
 moDOH = 'https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php'
 
@@ -17,61 +18,39 @@ mo = "MISSOURI"
 co = ' County'
 
 csvfile = "COVID-19_cases_modoh.csv"
-csvFile = "COVID-19_deaths_modoh.csv"
-headers = "County, State, Latitude, Longitude, Cases \n"
-sHeaders = "County, State, Latitude, Longitude, , Deaths \n"
+headers = "County, State, Latitude, Longitude, Cases, Deaths\n"
 
-file = open(csvfile, "w")
-file.write(headers)
+if (tables[1].find('td').text) == 'Adair' and (tables[134].find('td').text) == 'TBD':
 
-for t in tables[1:40]:
-    pull = t.findAll('td')
-    locale = liegen.geocode(pull[0].text + co + ", " + mo)
-    file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + pull[1].text + "\n")
-    sleep(1.1)
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    #Pull from the county case table
+    for t in tables[1:92]:
+        pull = t.findAll('td')
+        locale = geocoder.opencage(pull[0].text + co + ", " + mo, key='')
+        #locale = liegen.geocode(pull[0].text + co + ", " + mo)
+        #catch_TimeOut(pull[0].text + co + ", " + mo)
+        file.write(pull[0].text + ", " + mo + ", " + str(locale.latlng).strip('[]')
+                    + ", " + pull[1].text + "\n")
+        
+    file.write(tables[92].findAll('td')[0].text + ", " + mo + ", " + str(geocoder.opencage(mo, key='').latlng).strip('[]')
+               + ", " + tables[92].findAll('td')[1].text + "\n")
+    
+    #Pull from the county death table
+    for t in tables[110:134]:
+        pull = t.findAll('td')
+        locale = geocoder.opencage(pull[0].text + co + ", " + mo, key='')
+        #locale = liegen.geocode(pull[0].text + co + ", " + mo)
+        #catch_TimeOut(pull[0].text + co + ", " + mo)
+        file.write(pull[0].text + ", " + mo + ", " + str(locale.latlng).strip('[]')
+                   + ", " + "" + ", " + pull[1].text + "\n")
+        
+    file.write(tables[134].findAll('td')[0].text + ", " + mo + ", " + str(geocoder.opencage(mo, key='').latlng).strip('[]')
+               + ", " + "" + ", " + tables[134].findAll('td')[1].text + "\n")
+    
+    file.close()
 
-sleep(1)
-
-for t in tables[40:80]:
-    pull = t.findAll('td')
-    locale = liegen.geocode(pull[0].text + co + ", " + mo)
-    file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + pull[1].text + "\n")
-    sleep(1.1)
-
-
-for t in tables[80:118]:
-    pull = t.findAll('td')
-    locale = liegen.geocode(pull[0].text + co + ", " + mo)
-    file.write(pull[0].text + ", " + mo + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + pull[1].text + "\n")
-    sleep(1)
-
-
-file.write(tables[118].find('td').text + ", " + mo + ", " + "" + ", "
-               + "" + ", " + tables[118].findAll('td')[1].text + "\n")
-
-file.close()
-
-tablesDe = site_parse.find("div", {"id": "collapseDeaths"}).findAll('tr')
-
-dFile = open(csvFile, "w")
-dFile.write(sHeaders)
-
-for ta in tablesDe[1:17]:
-    pullDe = ta.findAll('td')
-    localeD = liegen.geocode(pullDe[0].text + co + ", " + mo)
-    dFile.write(pullDe[0].text + ", " + mo + ", " + str(localeD.latitude) + ", "
-               + str(localeD.longitude) + ", " + "" + ", " + pullDe[1].text + "\n")
-    sleep(1)
-
-dFile.write(tablesDe[17].find('td').text + ", " + mo + ", " + "" + ", "
-               + "" + ", " + "" + ", " + tablesDe[17].findAll('td')[1].text + "\n")
-
-dFile.close()
-
-if (tables[1].find('td').text) == 'Adair' and (tables[118].find('td').text) == 'TBD':
     print("Missouri scraper is complete.")
 else:
-    print("ERROR: Must fix Missour scraper.")
+    print("ERROR: Must fix Missouri scraper.")

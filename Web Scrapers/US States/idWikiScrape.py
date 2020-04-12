@@ -18,33 +18,34 @@ iD = "IDAHO"
 co = ' County'
 
 csvfile = "COVID-19_cases_idWiki.csv"
-headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, , , Active Cases \n"
-
-file = open(csvfile, "w")
-file.write(headers)
+headers = "County, State, Latitude, Longitude, Total Cases, Deaths \n"
 
 hold = []
 
 for t in tables:
-        pull = t.findAll('tr')
-        for p in pull[2:]:
-            take = p.get_text()
-            hold.append(take)
-            
-for h in hold[35:67]:
-    locale = liegen.geocode((h.split('\n')[1] + co) + ", " + iD)
-    take = h.split('\n')
-    #print(take[1], take[3], take[5], take[7], take[9])
-    file.write(take[1] + ", " + iD + ", " + str(locale.latitude) + ", " 
-               + str(locale.longitude) + ", " + take[9] + ", " + take[5] + ", "
-               + take[7] + ", " + "" + ", " + "" + ", " + take[3] + "\n")
-    sleep(1)
+    pull = t.findAll('tr')
+    for p in pull[2:]:
+        take = p.get_text()
+        hold.append(take)
 
-file.close()
+if (hold[38].split('\n')[1]) == 'Ada' and (hold[69].split('\n')[1]) == 'Washington':
+
+    file = open(csvfile, "w")
+    file.write(headers)
+                
+    for h in hold[38:70]:
+        locale = liegen.geocode((h.split('\n')[1] + co) + ", " + iD)
+        catch_TimeOut((h.split('\n')[1] + co) + ", " + iD)
+        take = h.split('\n')
+        file.write(take[1] + ", " + iD + ", " + str(locale.latitude) + ", " 
+                   + str(locale.longitude) + ", " + take[3] + ", "
+                   + take[7] + "\n")
+        sleep(1.1)
     
-if (hold[35].split('\n')[1]) == 'Ada' and (hold[66].split('\n')[1]) == 'Washington':
-    print("Idaho scraper is complete.\n")
+    file.close()
+
+    print("Idaho scraper is complete.")
 else:
-    print("ERROR: Must fix Idaho scraper.\n")
+    print("ERROR: Must fix Idaho scraper.")
 
 

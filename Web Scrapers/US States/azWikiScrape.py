@@ -16,31 +16,31 @@ liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 az = "ARIZONA"
 
 csvfile = "COVID-19_cases_azWiki.csv"
-headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths \n"
-
-file = open(csvfile, "w")
-file.write(headers)
-
+headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths\n"
 
 hold = []
 
 for t in tables:
-        pull = t.findAll('tr')
-        for p in pull:
-            take = p.get_text()
-            hold.append(take)
+    pull = t.findAll('tr')
+    for p in pull:
+        take = p.get_text()
+        hold.append(take)
 
-for h in hold[46:61]:
-    locale = liegen.geocode(h.split('\n')[1] + ", " + az)
-    take = h.split('\n')
-    file.write(take[1] + ", " + az + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
-    sleep(1)
+if (hold[49].split('\n')[1]) == 'Apache' and (hold[63].split('\n')[1]) == 'Yuma':
 
-#file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
-
-file.close()
-
-if (hold[46].split('\n')[1]) == 'Apache' and (hold[60].split('\n')[1]) == 'Yuma':
-    print("Arizona scraper is complete.\n")
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    for h in hold[49:64]:
+        locale = liegen.geocode(h.split('\n')[1] + ", " + az)
+        catch_TimeOut(h.split('\n')[1] + ", " + az)
+        take = h.split('\n')
+        file.write(take[1] + ", " + az + ", " + str(locale.latitude) + ", " + str(locale.longitude) + ", " + take[3] + ", " + take[5] + "\n")
+        sleep(1)
+    
+    #file.write(hold[61].split('\n')[1] + ", " + az + ", " + "" + ", " + ""+ ", "+ hold[61].split('\n')[3] + ", " + hold[61].split('\n')[5] + "\n" )
+    
+    file.close()
+    print("Arizona scraper is complete.")
 else:
-    print("ERROR: Must fix Arizona scraper.\n")
+    print("ERROR: Must fix Arizona scraper.")

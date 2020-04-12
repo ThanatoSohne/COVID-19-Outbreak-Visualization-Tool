@@ -19,34 +19,37 @@ co = ' County'
 csvfile = "COVID-19_cases_ilWiki.csv"
 headers = "County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Active Cases \n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
 hold = []
 
 for t in tables:
-        pull = t.findAll('tr')
-        for p in pull[2:]:
-            take = p.get_text()
-            hold.append(take)
-            
-for h in hold[66:147]:
-    locale = liegen.geocode((h.split('\n')[1]+co) + ", " + il)
-    take = h.split('\n')
-    file.write(take[1] + ", " + il + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + take[9].replace(',','') + ", " 
-               + take[5].replace(',','') + ", " + take[7].replace(',','') + ", " 
-               + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
-    sleep(1)
+    pull = t.findAll('tr')
+    for p in pull[2:]:
+        take = p.get_text()
+        hold.append(take)
 
-file.write(hold[147].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
-               + str(liegen.geocode(il).longitude) + ", " + hold[147].split('\n')[9] + ", " + hold[147].split('\n')[5] + ", " 
-               + hold[147].split('\n')[7] + ", " + "" + ", " + "" + ", "
-               + hold[147].split('\n')[3] + "\n")
+if (hold[67].split('\n')[1]) == 'Adams' and (hold[152].split('\n')[1]) == 'Woodford':
 
-file.close()
+    file = open(csvfile, "w")
+    file.write(headers)
+                
+    for h in hold[67:153]:
+        #locale = liegen.geocode((h.split('\n')[1]+co) + ", " + il)
+        #catch_TimeOut((h.split('\n')[1]+co) + ", " + il)
+        take = h.split('\n')
+        file.write(take[1] + ", " + il + ", " 
+                   + str(geocoder.opencage(h.split('\n')[1] + co + ", " + il, key='').latlng).strip('[]') 
+                   + ", " + take[9].replace(',','') + ", " 
+                   + take[5].replace(',','') + ", " + take[7].replace(',','') + ", " 
+                   + "" + ", " + "" + ", " + take[3].replace(',','') + "\n")
+        #sleep(1)
     
-if (hold[66].split('\n')[1]) == 'Adams' and (hold[146].split('\n')[1]) == 'Woodford':
-    print("Illinois scraper is complete.\n")
+    file.write(hold[153].split('\n')[1] + ", " + il + ", " + str(liegen.geocode(il).latitude) + ", "
+                   + str(liegen.geocode(il).longitude) + ", " + hold[153].split('\n')[9] + ", " + hold[153].split('\n')[5] + ", " 
+                   + hold[153].split('\n')[7] + ", " + "" + ", " + "" + ", "
+                   + hold[153].split('\n')[3] + "\n")
+    
+    file.close()
+    
+    print("Illinois scraper is complete.")
 else:
-    print("ERROR: Must fix Illinois scraper.\n")
+    print("ERROR: Must fix Illinois scraper.")

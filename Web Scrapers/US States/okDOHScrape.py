@@ -2,6 +2,7 @@ from urllib.request import urlopen as req
 from bs4 import BeautifulSoup as soup
 from geopy import Nominatim
 from time import sleep
+import geocoder
 
 okDOH = 'https://coronavirus.health.ok.gov/'
 
@@ -23,19 +24,22 @@ co = ' County'
 csvfile = "COVID-19_cases_okdoh.csv"
 headers = "County, State, Latitude, Longitude, Cases, Deaths \n"
 
-file = open(csvfile, "w")
-file.write(headers)
+if (tags[0].find('td').text) == 'Adair' and (tags[61].find('td').text) == 'Woodward':
 
-for tag in tags[:61]:
-    pull = tag.findAll('td')
-    locale = liegen.geocode(pull[0].text + co + ", " + ok)
-    file.write(pull[0].text + ", " + ok + ", " + str(locale.latitude) + ", "
-               + str(locale.longitude) + ", " + pull[1].text + ", " + pull[2].text + "\n")
-    sleep(1)
+    file = open(csvfile, "w")
+    file.write(headers)
     
-file.close()
+    for tag in tags[:62]:
+        pull = tag.findAll('td')
+        locale = geocoder.opencage(pull[0].text + co + ", " + ok, key='')
+        #locale = liegen.geocode(pull[0].text + co + ", " + ok)
+        #catch_TimeOut(pull[0].text + co + ", " + ok)
+        file.write(pull[0].text + ", " + ok + ", " + str(locale.latlng).strip('[]') + ", "
+                   + pull[1].text + ", " + pull[2].text + "\n")
+        #sleep(1)
+        
+    file.close()
 
-if (tags[0].find('td').text) == 'Adair' and (tags[60].find('td').text) == 'Woodward':
     print("Oklahoma scraper is complete.")
 else:
     print("ERROR: Must fix Oklahoma scraper.")

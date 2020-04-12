@@ -18,19 +18,20 @@ co = ' County'
 csvfile = "COVID-19_cases_widoh.csv"
 headers = "County, State, Latitude, Longitude, Positive Cases, Deaths \n"
 
-file = open(csvfile, "w")
-file.write(headers)
-
-for a in attr:
-    file.write(a.get('attributes').get('NAME') + ", " + wi + ", " 
-                   + str(liegen.geocode(a.get('attributes').get('NAME') + co + ", " + wi).latitude) + ", " 
-                   + str(liegen.geocode(a.get('attributes').get('NAME') + co + ", " + wi).longitude) + ", "
-                   + str(a.get('attributes').get('POSITIVE')) + ", " + str(a.get('attributes').get('DEATHS')) + "\n")
-    sleep(1)
-
-file.close()
-
 if attr[0].get('attributes').get('NAME') == 'Adams' and attr[71].get('attributes').get('NAME') == 'Wood':
+ 
+    file = open(csvfile, "w")
+    file.write(headers)
+    
+    for a in attr:
+        file.write(a.get('attributes').get('NAME') + ", " + wi + ", " 
+                       + str(geocoder.opencage(a.get('attributes').get('NAME') + co + ", " + wi, key='').latlng).strip('[]') + ", " 
+                       + str(a.get('attributes').get('POSITIVE')) + ", " + str(a.get('attributes').get('DEATHS')) + "\n")
+        #catch_TimeOut(a.get('attributes').get('NAME') + co + ", " + wi)
+        
+    
+    file.close()
+
     print("Wisconsin scraper is complete.")
 else:
     print("ERROR: Must fix Wisconsin scraper.")
