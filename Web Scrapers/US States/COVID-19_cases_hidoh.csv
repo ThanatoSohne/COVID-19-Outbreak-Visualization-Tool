@@ -1,0 +1,7 @@
+County, State, Latitude, Longitude, Total Cases, Deaths, Recoveries, Released from Isolation, Req. Hospitalization, , Pending 
+Hawaii County, HAWAII, 19.58955475, -155.44869830348483, 34, 0,  , 25, 0
+Honolulu County, HAWAII, 21.468151, -157.960511, 348, 5,  , 223, 36
+Kauai County, HAWAII, 22.0557204, -159.4945109, 19, 0,  , 12, 1
+Maui County, HAWAII, 20.7580586, -156.3105232, 80, 3,  , 40, 7
+HI Residents diagnosed outside of HI, HAWAII, 21.2160437, -157.975203, 2
+County Pending, HAWAII, 21.2160437, -157.975203, , , , , , 3
