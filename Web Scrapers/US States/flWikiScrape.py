@@ -4,6 +4,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut
 from time import sleep
 import geocoder
+import addfips
 
 def catch_TimeOut(locale):
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
@@ -22,12 +23,13 @@ flClient.close()
 tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 
 csvfile = "COVID-19_cases_flWiki.csv"
-headers = "County/Region, State, Latitude, Longitude, Confirmed Cases, Deaths, , , Hospitalizations \n"
+headers = "County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,,,Hospitalizations \n"
 
 liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 
 fl = "FLORIDA"
 co = ' County'
+fips = addfips.AddFIPS()
 
 hold = []
 
@@ -37,24 +39,22 @@ for t in tables:
         take = p.get_text()
         hold.append(take)
 
-if (hold[56].split('\n')[1]) == 'Alachua' and (hold[122].split('\n')[1]) == 'Washington':
+if (hold[58].split('\n')[1]) == 'Alachua' and (hold[124].split('\n')[1]) == 'Washington':
 
     file = open(csvfile, "w")
     file.write(headers)
         
-    for h in hold[56:123]:
-        #locale = liegen.geocode(h.split('\n')[1] + ", " + fl)
-        #catch_TimeOut(h.split('\n')[1] + ", " + fl)
+    for h in hold[58:125]:
         take = h.split('\n')
-        file.write(take[1] + ", " + fl + ", "  
+        file.write(take[1] + ", " + fl + ", " + fips.get_county_fips(take[1], state = fl) + ", "
                    + str(geocoder.opencage(h.split('\n')[1] + ", " + fl, key='').latlng).strip('[]') 
                    + ", " + take[3] + ", " + take[7] + ", " 
                    + "" + ", " + "" + ", " + take[5] +"\n")
-        #sleep(1)
-    file.write(hold[123].split('\n')[1] + ", " + fl + ", " + str(liegen.geocode(fl).latitude) + ", " 
-               + str(liegen.geocode(fl).longitude) + ", " + hold[123].split('\n')[3] 
-               + ", " + hold[123].split('\n')[7] + ", " + "" + ", " + "" 
-               + ", " + hold[123].split('\n')[5] +"\n")
+    file.write(hold[125].split('\n')[1] + ", " + fl + ", " + fips.get_state_fips(fl) 
+               + ", " + str(liegen.geocode(fl).latitude) + ", " 
+               + str(liegen.geocode(fl).longitude) + ", " + hold[125].split('\n')[3] 
+               + ", " + hold[125].split('\n')[7] + ", " + "" + ", " + "" 
+               + ", " + hold[125].split('\n')[5] +"\n")
     
     file.close()
 

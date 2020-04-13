@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as soup
 from geopy import Nominatim
 from time import sleep
 import geocoder
+import addfips
 
 mdWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_Maryland'
 
@@ -16,9 +17,10 @@ tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
 liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
 md = "MARYLAND"
 co = ' County'
+fips = addfips.AddFIPS()
 
 csvfile = "COVID-19_cases_mdWiki.csv"
-headers = "County, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries \n"
+headers = "County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
 
 hold = []
 
@@ -28,32 +30,25 @@ for t in tables:
             take = p.get_text()
             hold.append(take)
 
-if (hold[79].split('\n')[1]) == 'Allegany' and (hold[103].split('\n')[1]) == 'Unassigned':
+if (hold[81].split('\n')[1]) == 'Allegany' and (hold[105].split('\n')[1]) == 'Unassigned':
             
     file = open(csvfile, "w")
     file.write(headers)
         
-    for h in hold[79:103]:
-        #locale = liegen.geocode(h.split('\n')[1] + co + ", " + md)
-        #catch_TimeOut(h.split('\n')[1] + co + ", " + md)
+    for h in hold[81:105]:
         take = h.split('\n')
-        file.write(take[1] + ", " + md + ", " 
+        file.write(take[1] + ", " + md + ", " + fips.get_county_fips(take[1],state=md) + ", "
                    + str(geocoder.opencage(h.split('\n')[1] + co + ", " + md, key='').latlng).strip('[]') 
                    + ", " + take[3] + ", " + take[5] + ", " 
                    + take[7] + "\n")
-        #sleep(1)
         
-    file.write(hold[103].split('\n')[1] + ", " + md + ", " + str(liegen.geocode(md).latitude) + ", " 
+    file.write(hold[105].split('\n')[1] + ", " + md + ", " + fips.get_state_fips(md) + ", " + str(liegen.geocode(md).latitude) + ", " 
                + str(liegen.geocode(md).longitude) + ", " 
-               + hold[103].split('\n')[3] + ", " + hold[103].split('\n')[5] + ", " 
-               + hold[103].split('\n')[7] + "\n")
+               + hold[105].split('\n')[3] + ", " + hold[105].split('\n')[5] + ", " 
+               + hold[105].split('\n')[7] + "\n")
     
     file.close()
 
     print("Maryland scraper is complete.")
 else:
     print("ERROR: Must fix Maryland scraper.")
-
-
-
-
