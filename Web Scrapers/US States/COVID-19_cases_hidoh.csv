@@ -1,7 +1,5 @@
-County,State,fips,Latitude,Longitude,Total Cases,Deaths,Recoveries,Released from Isolation,Hospitalization
-Hawaii County,HAWAII,15001,19.58955475,-155.44869830348483,40,0,,28,0
+County,State,fips,Latitude,Longitude,Total Cases,Deaths,Recoveries,Released from Isolation,Hospitalization,Pending
+Hawaii County,HAWAII,15001,19.58955475,-155.44869830348483,40,0,,28,0,3
 Honolulu County,HAWAII,15003,21.468151,-157.960511,352,6,,233,36
 Kauai County,HAWAII,15007,22.0557204,-159.4945109,21,0,,14,1
 Maui County,HAWAII,15009,20.7580586,-156.3105232,86,3,,40,7
-HI Residents diagnosed outside of HI,HAWAII,15001,21.2160437,-157.975203,2,,,,
-County Pending,HAWAII,15001,21.2160437,-157.975203,3,,,,
