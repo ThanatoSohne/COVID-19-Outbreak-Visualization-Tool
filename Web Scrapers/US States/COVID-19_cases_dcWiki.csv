@@ -1,2 +1,2 @@
-County/Region, State, Latitude, Longitude, Confirmed Cases, Deaths, Recoveries 
-Washington D.C., WASHINGTON DC, 38.8948932, -77.0365529, 1523, 32, 393
+County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries
+Washington D.C.,WASHINGTON DC,11001,38.8948932,-77.0365529,1959,53,507

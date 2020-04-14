@@ -1,2 +1,2 @@
-Region, State, Latitude, Longitude, Positive Cases, Deaths, Recoveries 
-GUAM, GUAM, 13.450125700000001, 144.75755102972062, 133, 5, 58
+County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries
+GUAM,GUAM,66010,13.450125700000001,144.75755102972062,134,5,58
