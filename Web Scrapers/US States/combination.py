@@ -46,6 +46,7 @@ def akScrape():
     
     anch = liegen.geocode("Anchorage, Alaska")                      #1
     sleep(1)   
+    
     hold = []
     
     for t in tables:
@@ -54,66 +55,132 @@ def akScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if (hold[88].split('\n')[1]) == 'Anchor Point' and (hold[112].split('\n')[1]) == 'Total':
+    if (hold[94].split('\n')[1]) == 'Anchor Point' and (hold[118].split('\n')[1]) == 'Total':
         
         file = open(csvfile, "w")
         file.write(headers)
         
         #Anchor Point, AK
-        file.write(hold[88].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Anchor Point, AK",key='').latlng).strip('[]') + "," + hold[88].split('\n')[3] + "\n")
+        file.write(hold[94].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() 
+                   + "03110"
+                   + "," + str(geocoder.opencage("Anchor Point, AK",key='').latlng).strip('[]')
+                   + "," + hold[94].split('\n')[3].replace('\xa0','0') + "\n")
         #Anchorage, AK
-        file.write(hold[89].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," + str(anch.latitude) + "," + str(anch.longitude) + "," + hold[89].split('\n')[3] + "\n")
-        sleep(1)
+        #file.write(hold[89].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," + str(anch.latitude) + "," + str(anch.longitude) + "," + hold[89].split('\n')[3] + "\n")
+        #sleep(1)
         #Bethel, AK
-        file.write(hold[90].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Bethel", state = ak)).strip() + "," + str(geocoder.opencage("Bethel, AK",key='').latlng).strip('[]') + "," + hold[90].split('\n')[3] + "\n")
+        file.write(hold[96].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Bethel", state = ak)).strip() 
+                   + "06520"
+                   + "," + str(geocoder.opencage("Bethel, AK",key='').latlng).strip('[]') 
+                   + "," + hold[96].split('\n')[3].replace('\xa0','0') + "\n")
         #Chugiak, AK
-        file.write(hold[91].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," + str(geocoder.opencage("Chugiak, AK",key='').latlng).strip('[]') + "," + hold[91].split('\n')[3] + "\n")
+        file.write(hold[97].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," 
+                   + "14440" + ","
+                   + str(geocoder.opencage("Chugiak, AK",key='').latlng).strip('[]') + "," 
+                   + hold[97].split('\n')[3].replace('\xa0','0') + "\n")
         #Craig, AK
-        file.write(hold[92].split('\n')[1] + "," + ak + "," + "02201" + "," + str(geocoder.opencage("Craig, AK",key='').latlng).strip('[]') + "," + hold[92].split('\n')[3] + "\n")
+        file.write(hold[98].split('\n')[1] + "," + ak + "," 
+                   + "02201" + "," + str(geocoder.opencage("Craig, AK",key='').latlng).strip('[]') 
+                   + "," + hold[98].split('\n')[3].replace('\xa0','0') + "\n")
         #Delta Junction, AK
-        file.write(hold[93].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Southeast Fairbanks", state = ak)).strip() + "," + str(geocoder.opencage("Delta Junction, AK",key='').latlng).strip('[]') + "," + hold[93].split('\n')[3] + "\n")
+        file.write(hold[99].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Southeast Fairbanks", state = ak)).strip() + "," 
+                   + "18620" + ","
+                   + str(geocoder.opencage("Delta Junction, AK",key='').latlng).strip('[]') + "," 
+                   + hold[99].split('\n')[3].replace('\xa0','0') + "\n")
         #Eagle River, AK
-        file.write(hold[94].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," + str(geocoder.opencage("Eagle River, AK",key='').latlng).strip('[]') + "," + hold[94].split('\n')[3] + "\n")
+        file.write(hold[100].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Anchorage", state = ak)).strip() 
+                   + "20490"
+                   + "," + str(geocoder.opencage("Eagle River, AK",key='').latlng).strip('[]') 
+                   + "," + hold[100].split('\n')[3].replace('\xa0','0') + "\n")
         #Fairbanks, AK
-        file.write(hold[95].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Fairbanks North Star", state = ak)).strip() + "," + str(geocoder.opencage("Fairbanks, AK",key='').latlng).strip('[]') + "," + hold[95].split('\n')[3] + "\n")
+        file.write((hold[101].split('\n')[1] + '/' + hold[110].split('\n')[1]) 
+                    + "," + ak + "," + str(fips.get_county_fips("Fairbanks North Star", state = ak)).strip() 
+                    + "," + str(geocoder.opencage("Fairbanks, AK",key='').latlng).strip('[]') 
+                    + "," + str(int(hold[101].split('\n')[3]) + int(hold[110].split('\n')[3])) + "\n")
         #Fairbanks North Star
 #        file.write(hold[54].split('\n')[1].split(', ')[0] + "," + ak + "," + str(fips.get_county_fips("Fairbanks North Star", state = ak)).strip() + "," + str(liegen.geocode("Fairbanks, AK").latitude) + "," + str(liegen.geocode("Fairbanks, AK").longitude) + "," + hold[54].split('\n')[3] + "\n")
 #        sleep(1)
-        #Girdwood, AK
-        file.write(hold[96].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Anchorage", state = ak)).strip() + "," + str(geocoder.opencage("Girdwood, AK",key='').latlng).strip('[]') + "," + hold[96].split('\n')[3] + "\n")
+        #Girdwood, AK/ Anchorage
+        file.write(hold[102].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Anchorage", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Girdwood, AK",key='').latlng).strip('[]') 
+                   + "," + str(int(hold[102].split('\n')[3]) + int(hold[95].split('\n')[3]))  + "\n")
         #Homer, AK
-        file.write(hold[97].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Homer, AK",key='').latlng).strip('[]') + "," + hold[97].split('\n')[3] + "\n")
+        file.write(hold[103].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() 
+                   + "33140"
+                   + "," + str(geocoder.opencage("Homer, AK",key='').latlng).strip('[]') 
+                   + "," + hold[103].split('\n')[3].replace('\xa0','0') + "\n")
         #Juneau, AK
-        file.write(hold[99].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Juneau", state = ak)).strip() + "," + str(geocoder.opencage("Juneau, AK",key='').latlng).strip('[]') + "," + hold[99].split('\n')[3] + "\n")
+        file.write(hold[105].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Juneau", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Juneau, AK",key='').latlng).strip('[]') 
+                   + "," + hold[105].split('\n')[3].replace('\xa0','0') + "\n")
         #Kenai, AK
-        file.write(hold[100].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Kenai, AK",key='').latlng).strip('[]') + "," + hold[100].split('\n')[3] + "\n")
+        file.write(hold[106].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Kenai, AK",key='').latlng).strip('[]') 
+                   + "," + hold[106].split('\n')[3].replace('\xa0','0') + "\n")
         #Ketchikan, AK
-        file.write(hold[101].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Ketchikan Gateway", state = ak)).strip() + "," + str(geocoder.opencage("Ketchikan, AK",key='').latlng).strip('[]') + "," + hold[101].split('\n')[3] + "\n")
+        file.write(hold[107].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Ketchikan Gateway", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Ketchikan, AK",key='').latlng).strip('[]') 
+                   + "," + hold[107].split('\n')[3].replace('\xa0','0') + "\n")
         #North Pole
-        file.write(hold[102].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Fairbanks North Star", state = ak)).strip() + "," + str(geocoder.opencage("North Pole, AK",key='').latlng).strip('[]') + "," + hold[102].split('\n')[3] + "\n")
+        #file.write(hold[102].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Fairbanks North Star", state = ak)).strip() + "," + str(geocoder.opencage("North Pole, AK",key='').latlng).strip('[]') + "," + hold[102].split('\n')[3] + "\n")
         #Palmer, AK
-        file.write(hold[103].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Matanuska-Susitna", state = ak)).strip() + "," + str(geocoder.opencage("Palmer, AK",key='').latlng).strip('[]') + "," + hold[103].split('\n')[3] + "\n")
+        file.write(hold[111].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Matanuska-Susitna", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Palmer, AK",key='').latlng).strip('[]') 
+                   + "," + hold[111].split('\n')[3].replace('\xa0','0') + "\n")
         #Petersburg, AK
-        file.write(hold[104].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Petersburg", state = ak)).strip() + "," + str(geocoder.opencage("Petersburg, AK",key='').latlng).strip('[]') + "," + hold[104].split('\n')[3] + "\n")
+        file.write(hold[112].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Petersburg", state = ak)).strip() + "," 
+                   + str(geocoder.opencage("Petersburg, AK",key='').latlng).strip('[]') 
+                   + "," + hold[112].split('\n')[3].replace('\xa0','0') + "\n")
         #Seward, AK
-        file.write(hold[105].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Seward, AK",key='').latlng).strip('[]') + "," + hold[105].split('\n')[3] + "\n")
+        file.write(hold[113].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," 
+                   + "68560" + ","
+                   + str(geocoder.opencage("Seward, AK",key='').latlng).strip('[]') + "," 
+                   + hold[113].split('\n')[3].replace('\xa0','0') + "\n")
         #Soldotna, AK
-        file.write(hold[106].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Soldotna, AK",key='').latlng).strip('[]') + "," + hold[106].split('\n')[3] + "\n")
+        file.write(hold[114].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," 
+                   + "71640" + ","
+                   + str(geocoder.opencage("Soldotna, AK",key='').latlng).strip('[]') 
+                   + "," + hold[114].split('\n')[3].replace('\xa0','0') + "\n")
         #Sterling, AK
-        file.write(hold[107].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() + "," + str(geocoder.opencage("Sterling, AK",key='').latlng).strip('[]') + "," + hold[107].split('\n')[3] + "\n")
+        file.write(hold[115].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Kenai Peninsula", state = ak)).strip() 
+                   + "73070"
+                   + "," + str(geocoder.opencage("Sterling, AK",key='').latlng).strip('[]') 
+                   + "," + hold[115].split('\n')[3].replace('\xa0','0') + "\n")
         #Yukon-Koyukuk, AK
-        file.write(hold[108].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Yukon-Koyukuk", state = ak)).strip() + "," + str(geocoder.opencage("Yukon-Koyukuk, AK",key='').latlng).strip('[]') + "," + hold[108].split('\n')[3] + "\n")
+        file.write(hold[116].split('\n')[1] + "," + ak + "," 
+                   + str(fips.get_county_fips("Yukon-Koyukuk", state = ak)).strip() 
+                   + "," + str(geocoder.opencage("Yukon-Koyukuk, AK",key='').latlng).strip('[]') 
+                   + "," + hold[116].split('\n')[3].replace('\xa0','0') + "\n")
         #Wasilla, AK
-        file.write(hold[109].split('\n')[1] + "," + ak + "," + str(fips.get_county_fips("Matanuska-Susitna", state = ak)).strip() + "," + str(geocoder.opencage("Wasilla, AK",key='').latlng).strip('[]') + "," + hold[109].split('\n')[3] + "\n")
+        file.write(hold[117].split('\n')[1] + "," + ak + "," 
+                   #+ str(fips.get_county_fips("Matanuska-Susitna", state = ak)).strip() + "," 
+                   + "83080" + ","
+                   + str(geocoder.opencage("Wasilla, AK",key='').latlng).strip('[]') 
+                   + "," + hold[117].split('\n')[3].replace('\xa0','0') + "\n")
         #Simply for purposes of allocating counties on map visualization
         file.write("Aleutians East" + "," + ak + "," + str(fips.get_county_fips("Aleutians East", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Aleutians West" + "," + ak + "," + str(fips.get_county_fips("Aleutians West", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Denali" + "," + ak + "," + str(fips.get_county_fips("Denali", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Dillingham" + "," + ak + "," + str(fips.get_county_fips("Dillingham", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Haines" + "," + ak + "," + str(fips.get_county_fips("Haines", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
-        file.write("Kodiak Island" + "," + ak + "," + str(fips.get_county_fips("Kodiak Island", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
+        file.write("Kodiak Island" + "," + ak + "," + str(fips.get_county_fips("Kodiak Island", state = ak)).strip() + "," + hold[108].split('\n')[3].replace('\xa0','0') + "," + "" + "," + "" + "\n")
         file.write("Lake and Peninsula" + "," + ak + "," + str(fips.get_county_fips("Lake and Peninsula", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
-        file.write("Nome" + "," + ak + "," + str(fips.get_county_fips("Nome", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
+        file.write("Nome" + "," + ak + "," + str(fips.get_county_fips("Nome", state = ak)).strip() + "," + "" + "," + "" + "," + hold[109].split('\n')[3].replace('\xa0','0') + "\n")
         file.write("Northwest Attic" + "," + ak + "," + "02188" + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Sitka" + "," + ak + "," + str(fips.get_county_fips("Sitka", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
         file.write("Skagway" + "," + ak + "," + str(fips.get_county_fips("Skagway", state = ak)).strip() + "," + "" + "," + "" + "," + "" + "\n")
@@ -188,22 +255,22 @@ def arScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if (hold[57].split('\n')[1]) == 'Arkansas' and (hold[132].split('\n')[1]) == 'Missing county information':
+    if (hold[61].split('\n')[1]) == 'Arkansas' and (hold[136].split('\n')[1]) == 'Missing county information':
         
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[57:132]:
+        for h in hold[61:136]:
             take = h.split('\n')
             file.write(take[1] + "," + ar + "," + fips.get_county_fips(take[1], state = ar) + ","
                        + str(geocoder.opencage(h.split('\n')[1] + "," + ar, key='').latlng).strip('[]') 
                        +  "," + take[3] + "," + take[5] + "," + take[7] +"\n")
         
-        file.write(hold[132].split('\n')[1] + "," + ar +  "," + fips.get_state_fips(ar) + ","
+        file.write(hold[136].split('\n')[1] + "," + ar +  "," + fips.get_state_fips(ar) + ","
                    + str(geocoder.opencage(ar, key='').latlng).strip('[]') 
-                   +","+ hold[132].split('\n')[3] + "," 
-                   + hold[132].split('\n')[5] + "," 
-                   + hold[132].split('\n')[7] +"\n")
+                   +","+ hold[136].split('\n')[3] + "," 
+                   + hold[136].split('\n')[5] + "," 
+                   + hold[136].split('\n')[7] +"\n")
             
         file.close()
         
@@ -241,15 +308,15 @@ def aSamScrape():
             take = p.get_text()
             hold.append(take)
     
-    if hold[19].split('\n')[3] == "American Samoa":
+    if hold[138].split('\n')[3] == "American Samoa":
     
         file = open(csvfile, "w")
         file.write(headers)
         
-        file.write(hold[19].split('\n')[3] + "," + aSam + "," + fips.get_state_fips(aSam) + "," + str(asGeo.latitude) 
-                   + "," + str(asGeo.longitude) + "," + hold[19].split('\n')[5].replace(',','') 
-                   + "," + hold[19].split('\n')[7].replace(',','') + "," 
-                   + hold[19].split('\n')[9].replace(',','') + "\n")
+        file.write(hold[138].split('\n')[3] + "," + aSam + "," + fips.get_state_fips(aSam) + "," + str(asGeo.latitude) 
+                   + "," + str(asGeo.longitude) + "," + hold[138].split('\n')[5].replace(',','') 
+                   + "," + hold[138].split('\n')[7].replace(',','') + "," 
+                   + hold[138].split('\n')[9].replace(',','') + "\n")
         
         file.close()
         print("American Samoa scraper is complete.")
@@ -280,12 +347,12 @@ def azScrape():
             take = p.get_text()
             hold.append(take)
     
-    if (hold[54].split('\n')[1]) == 'Apache' and (hold[68].split('\n')[1]) == 'Yuma':
+    if (hold[57].split('\n')[1]) == 'Apache' and (hold[71].split('\n')[1]) == 'Yuma':
     
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[54:69]:
+        for h in hold[57:72]:
             take = h.split('\n')
             file.write(take[1] + "," + az + "," + str(fips.get_county_fips(take[1], state = az)).strip()
                        + "," + str(geocoder.opencage(take[1] + "," + az, key='').latlng).strip('[]') + "," 
@@ -346,7 +413,7 @@ def coScrape():
     site_parse = soup(coClient.read(), 'lxml')
     coClient.close()
     
-    tables = site_parse.findAll("div", {"class": "field field--name-field-card-body field--type-text-long field--label-hidden field--item"})[2]
+    tables = site_parse.findAll("div", {"class": "field field--name-field-card-body field--type-text-long field--label-hidden field--item"})[10]
     
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
     co = "COLORADO"
@@ -364,7 +431,7 @@ def coScrape():
         file = open(csvfile, "w")
         file.write(headers)
         
-        for t in test[1:57]:
+        for t in test[1:43]:
                 pull = t.findAll('td')
                 file.write(pull[0].text + "," + co + "," + str(fips.get_county_fips(pull[0].text, state = co)).strip() + ","
                            + str(geocoder.opencage(test[1].find('td').text + "," + co, key='').latlng).strip('[]') 
@@ -466,7 +533,7 @@ def dcScrape():
     tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
     
     csvfile = "COVID-19_cases_dcWiki.csv"
-    headers = "County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
+    headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
     
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
     
@@ -484,16 +551,16 @@ def dcScrape():
             take = p.get_text()
             hold.append(take)
 
-    if hold[26].split('\n')[3] == "District of Columbia":
+    if hold[145].split('\n')[3] == "District of Columbia":
     
         file = open(csvfile, "w")
         file.write(headers)
             
-        file.write(hold[26].split('\n')[3] + "," + dc + "," 
+        file.write(hold[145].split('\n')[3] + "," + dc + "," 
                    + str(fips.get_county_fips("Washington", state= "DC")).strip() + "," + str(dcGeo.latitude) 
-                   + "," + str(dcGeo.longitude) + "," + hold[26].split('\n')[5].replace(',','')
-                   + "," + hold[26].split('\n')[7].replace(',','') + "," 
-                   + hold[26].split('\n')[9].replace(',','') + "\n")
+                   + "," + str(dcGeo.longitude) + "," + hold[145].split('\n')[5].replace(',','')
+                   + "," + hold[145].split('\n')[7].replace(',','') + "," 
+                   + hold[145].split('\n')[9].replace(',','') + "\n")
         
         file.close()
     
@@ -574,22 +641,22 @@ def flScrape():
             take = p.get_text()
             hold.append(take)
 
-    if (hold[64].split('\n')[1]) == 'Alachua' and (hold[130].split('\n')[1]) == 'Washington':
+    if (hold[67].split('\n')[1]) == 'Alachua' and (hold[133].split('\n')[1]) == 'Washington':
     
         file = open(csvfile, "w")
         file.write(headers)
             
-        for h in hold[64:131]:
+        for h in hold[67:134]:
             take = h.split('\n')
             file.write(take[1] + "," + fl + "," + str(fips.get_county_fips(take[1], state = fl)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + "," + fl, key='').latlng).strip('[]') 
                        + "," + take[3].replace(',','') + "," + take[7].replace(',','') + "," 
                        + "" + "," + "" + "," + take[5].replace(',','') +"\n")
-        file.write(hold[131].split('\n')[1] + "," + fl + "," + str(fips.get_state_fips(fl)).strip() 
+        file.write(hold[134].split('\n')[1] + "," + fl + "," + str(fips.get_state_fips(fl)).strip() 
                    + "," + str(liegen.geocode(fl).latitude) + "," 
-                   + str(liegen.geocode(fl).longitude) + "," + hold[131].split('\n')[3].replace(',','') 
-                   + "," + hold[131].split('\n')[7].replace(',','') + "," + "" + "," + "" 
-                   + "," + hold[131].split('\n')[5].replace(',','') +"\n")
+                   + str(liegen.geocode(fl).longitude) + "," + hold[134].split('\n')[3].replace(',','') 
+                   + "," + hold[134].split('\n')[7].replace(',','') + "," + "" + "," + "" 
+                   + "," + hold[134].split('\n')[5].replace(',','') +"\n")
         
         file.close()
     
@@ -638,46 +705,63 @@ def gaScrape():
         
 def guScrape():
     
-    guDOH = 'http://dphss.guam.gov/covid-19/'
+    guWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_the_United_States'
 
-    guClient = req(guDOH)
+    guClient = req(guWiki)
     
     site_parse = soup(guClient.read(), "lxml")
     guClient.close()
     
-    tables = site_parse.find("div", {"class" : "et_pb_row et_pb_row_1"}).findAll('p')
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
+    
+    csvfile = "COVID-19_cases_guWiki.csv"
+    headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
     
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
+    
     gu = "GUAM"
     
-    csvfile = "COVID-19_cases_guDOH.csv"
-    headers = "County,State,FIPS,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
- 
+    guGeo = liegen.geocode(gu)
+    
+    sleep(1)
+    
+    mp = "NORTHERN MARIANA ISLANDS"
+    
+    mpGeo = liegen.geocode(mp)
+    
+    sleep(1)
+
+    
     hold = []
     
     for t in tables:
-        take = t.text
-        hold.append(take)
-        
-    locale = liegen.geocode(gu)
-    sleep(1)
-    pos = hold[0]
-    mort = hold[2]
-    hope = hold[4]
+        pull = t.findAll('tr')
+        for p in pull:
+            take = p.get_text()
+            hold.append(take)
 
-    if hold[1] == 'POSITIVE':
+    if hold[148].split('\n')[3] == "Guam" and hold[173].split('\n')[3] == "Northern Mariana Islands":
     
         file = open(csvfile, "w")
         file.write(headers)
             
-        file.write(gu + "," + gu + "," + fips.get_county_fips(gu, state=gu) + "," + str(locale.latitude) + "," 
-                   + str(locale.longitude) + "," + pos + "," + mort + "," + hope + "\n")
+        file.write(hold[148].split('\n')[3] + "," + gu + "," 
+                   + str(fips.get_county_fips(gu, state=gu)).strip() + "," + str(guGeo.latitude) 
+                   + "," + str(guGeo.longitude) + "," + hold[148].split('\n')[5].replace(',','')
+                   + "," + hold[148].split('\n')[7].replace(',','') + "," 
+                   + hold[148].split('\n')[9].replace(',','') + "\n")
+    
+        file.write(hold[173].split('\n')[3] + "," + mp + "," + str(fips.get_county_fips("Rota",state=mp)).strip() + ","  + str(mpGeo.latitude) 
+                   + "," + str(mpGeo.longitude) + "," + hold[173].split('\n')[5].replace(',','') 
+                   + "," + hold[173].split('\n')[7].replace(',','') + "," 
+                   + hold[173].split('\n')[9].replace(',','').replace('\xa0','0') + "\n")
         
         file.close()
     
-        print("Guam scraper is complete.")
+        print("Guam/Northern Mariana scraper is complete.")
     else:
-        print("ERROR: Must fix Guam scraper.")
+        print("ERROR: Must fix Guam/Northern Mariana scraper.")
+
     
 def hiScrape():
     
@@ -688,54 +772,53 @@ def hiScrape():
     site_parse = soup(hiClient.read(), "lxml")
     hiClient.close()
     
-    tables = site_parse.find("div", {"id": "inner-wrap"}).find('tbody')
-    
+    tables = site_parse.find("div", {"class": "primary-content secondary"}).findAll("div", {"class": "wp-block-group"})    
+
     hi= "HAWAII"
     
     csvfile = "COVID-19_cases_hidoh.csv"
     headers = "County,State,fips,Latitude,Longitude,Total Cases,Deaths,Recoveries,Released from Isolation,Hospitalization,Pending\n"
     
-    tags = tables.findAll('td')
-    
-    hawaii = tags[18].text.replace("\xa0","")
+    hawaii = tables[4].find('th').text
     haLocale = str(geocoder.opencage(hawaii + "," + hi, key='').latlng).strip('[]')
     haFIPS = str(fips.get_county_fips(hawaii,state=hi)).strip()
-    haTotal = tags[21].text
-    haIso = tags[23].text
-    haHosp = tags[25].text
-    haDeaths = tags[27].text
+    haTotal = tables[4].findAll('td')[1].text.split(' ')[0]
+    haIso = tables[4].findAll('td')[3].text.split(' ')[0]
+    haHosp = tables[4].findAll('td')[5].text.split(' ')[0]
+    haDeaths = tables[4].findAll('td')[7].text.split(' ')[0]
 
-    honolulu = tags[30].text
+    honolulu = tables[5].find('th').text
     honLocale = str(geocoder.opencage(honolulu + "," + hi, key='').latlng).strip('[]')
     honFIPS = str(fips.get_county_fips(honolulu,state=hi)).strip()
-    honTotal = tags[33].text
-    honIso = tags[35].text
-    honHosp = tags[37].text
-    honDeaths = tags[39].text
+    honTotal = tables[5].findAll('td')[1].text.split(' ')[0]
+    honIso = tables[5].findAll('td')[3].text.split(' ')[0]
+    honHosp = tables[5].findAll('td')[5].text.split(' ')[0]
+    honDeaths = tables[5].findAll('td')[7].text.split(' ')[0]
 
-    kauai = tags[42].text
+    kauai = tables[6].find('th').text
     kauLocale = str(geocoder.opencage(kauai + "," + hi, key='').latlng).strip('[]')
     kauFIPS = str(fips.get_county_fips(kauai,state=hi)).strip()
-    kauTotal = tags[45].text
-    kauIso = tags[47].text
-    kauHosp = tags[49].text
-    kauDeaths = tags[51].text
+    kauTotal = tables[6].findAll('td')[1].text.split(' ')[0]
+    kauIso = tables[6].findAll('td')[3].text.split(' ')[0]
+    kauHosp = tables[6].findAll('td')[5].text.split(' ')[0]
+    kauDeaths = tables[6].findAll('td')[7].text.split(' ')[0]
 
-    maui = tags[54].text
+    maui = tables[7].find('th').text
     mauiLocale = str(geocoder.opencage(maui + "," + hi, key='').latlng).strip('[]')
     mauiFIPS = str(fips.get_county_fips(maui,state=hi)).strip()
-    mauiTotal = tags[57].text
-    mauiIso = tags[59].text
-    mauiHosp = tags[61].text
-    mauiDeaths = tags[63].text
+    mauiTotal = tables[7].findAll('td')[1].text.split(' ')[0]
+    mauiIso = tables[7].findAll('td')[3].text.split(' ')[0]
+    mauiHosp = tables[7].findAll('td')[5].text.split(' ')[0]
+    mauiDeaths = tables[7].findAll('td')[7].text.split(' ')[0]
 
-    outHI = tags[66].text
-    outHIno = tags[67].text
+    outliers = site_parse.find("div", {"class": "primary-content secondary"}).findAll("table", {"class": "has-fixed-layout"})
+    outHI = outliers[5].findAll('th')[0].text
+    outHIno = outliers[5].findAll('th')[1].text.split(' ')[0]
 
-    pending = tags[68].text
-    penNo = tags[69].text
+    pending = outliers[6].findAll('th')[0].text
+    penNo = outliers[6].findAll('th')[1].text.split(' ')[0]
 
-    if hawaii == 'Hawaii County' and pending == 'County Pending':
+    if hawaii == 'HAWAII COUNTY' and pending == 'County Pending':
 
         file = open(csvfile, "w")
         file.write(headers)
@@ -786,12 +869,12 @@ def idScrape():
             take = p.get_text()
             hold.append(take)
     
-    if (hold[44].split('\n')[1]) == 'Ada' and (hold[75].split('\n')[1]) == 'Washington':
+    if (hold[51].split('\n')[1]) == 'Ada' and (hold[82].split('\n')[1]) == 'Washington':
 
         file = open(csvfile, "w")
         file.write(headers)
                     
-        for h in hold[44:76]:
+        for h in hold[51:83]:
             take = h.split('\n')
             file.write(take[1] + "," + iD + "," + str(fips.get_county_fips(take[1],state=iD)).strip() + "," 
                        + str(geocoder.opencage(take[1] + ", " + iD, key='').latlng).strip('[]') 
@@ -829,23 +912,30 @@ def ilScrape():
             take = p.get_text()
             hold.append(take)
     
-    if (hold[70].split('\n')[1]) == 'Adams' and (hold[161].split('\n')[1]) == 'Woodford':
+    if (hold[74].split('\n')[1]) == 'Adams' and (hold[168].split('\n')[1]) == 'Woodford':
     
         file = open(csvfile, "w")
         file.write(headers)
                     
-        for h in hold[70:162]:
+        for h in hold[74:88]:
             take = h.split('\n')
             file.write(take[1] + "," + il + "," + str(fips.get_county_fips(take[1], state=il)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + co + "," + il, key='').latlng).strip('[]') 
                        + "," + take[9].replace(',','') + "," + take[5].replace(',','')
                        + "," + take[7].replace(',','').replace('–','0') + "\n")
         
-        file.write(hold[162].split('\n')[1] + "," + il + "," + str(fips.get_state_fips(il)).strip() + "," 
-                   + str(geocoder.opencage(il, key='').latlng).strip('[]')
-                   + "," + hold[162].split('\n')[9] + "," + hold[162].split('\n')[5] + "," 
-                   + hold[162].split('\n')[7] + "\n")
+        file.write(hold[88].split('\n')[1] + "," + il + "," + str(fips.get_county_fips(hold[85].split('\n')[1], il)).strip() + "," 
+                   + str(geocoder.opencage(hold[88].split('\n')[1], key='').latlng).strip('[]')
+                   + "," + hold[88].split('\n')[9].replace(',','') + "," + hold[88].split('\n')[5].replace(',','') + "," 
+                   + hold[88].split('\n')[7].replace(',','').split('[')[0] + "\n")
         
+        for h in hold[89:169]:
+            take = h.split('\n')
+            file.write(take[1] + "," + il + "," + str(fips.get_county_fips(take[1], state=il)).strip() + ","
+                       + str(geocoder.opencage(h.split('\n')[1] + co + "," + il, key='').latlng).strip('[]') 
+                       + "," + take[9].replace(',','') + "," + take[5].replace(',','')
+                       + "," + take[7].replace(',','').replace('–','0') + "\n")
+
         file.close()
         
         print("Illinois scraper is complete.")
@@ -878,16 +968,16 @@ def inScrape():
             take = p.get_text()
             hold.append(take)
 
-    if (hold[56].split('\n')[1]) == 'Adams' and (hold[147].split('\n')[1]) == 'Whitley':
+    if (hold[59].split('\n')[1]) == 'Adams' and (hold[150].split('\n')[1]) == 'Whitley':
     
         file = open(csvfile, "w")
         file.write(headers)
             
-        for h in hold[56:148]:
+        for h in hold[59:151]:
             take = h.split('\n')
             file.write(take[1] + "," + inD + "," + str(fips.get_county_fips(take[1],state=inD)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + co + "," + inD, key='').latlng).strip('[]') 
-                       + "," + take[2] + "," + take[3] + "\n")        
+                       + "," + take[2].replace(',','') + "," + take[3].replace(',','') + "\n")        
         file.close()
     
         print("Indiana scraper is complete.")
@@ -921,12 +1011,12 @@ def ioScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    if (hold[59].split('\n')[1]) == 'Adair' and (hold[140].split('\n')[1]) == 'Wright':
+    if (hold[63].split('\n')[1]) == 'Adair' and (hold[144].split('\n')[1]) == 'Wright':
 
         file = open(csvfile, "w")
         file.write(headers)
     
-        for h in hold[59:141]:
+        for h in hold[63:144]:
             take = h.split('\n')
             file.write(take[1] + "," + io + "," + str(fips.get_county_fips(take[1],state=io)).strip() + "," 
                        + str(geocoder.opencage(h.split('\n')[1] + co + "," + io, key='').latlng).strip('[]') 
@@ -964,12 +1054,12 @@ def kaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if (hold[60].split('\n')[1]) == 'Atchison' and (hold[125].split('\n')[1]) == 'Wyandotte':
+    if (hold[64].split('\n')[1]) == 'Atchison' and (hold[132].split('\n')[1]) == 'Wyandotte':
        
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[60:126]:
+        for h in hold[64:133]:
             take = h.split('\n')
             file.write(take[1] + "," + ka + "," + str(fips.get_county_fips(take[1],state=ka)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + co + "," + ka, key='').latlng).strip('[]') 
@@ -1007,8 +1097,8 @@ def kyScrape():
             
         for a in attr[1:]:
             file.write(a.get('subregion') + "," + ky + "," + str(fips.get_county_fips(a.get('subregion'), state=ky)).strip() + ","
-                       + str(geocoder.opencage(a.get('subregion') + ky, key='').latlng).strip('[]') + "," 
-                       + str(a.get('cases')[-1:]) + "," + str(a.get('deaths')[-1:]) + "," + str(a.get('recovered')[-1:]) + "\n")
+                       + str(geocoder.opencage(a.get('subregion') + ", " + ky, key='').latlng).strip('[]') + "," 
+                       + str(a.get('cases')[-1:]).strip('[]') + "," + str(a.get('deaths')[-1:]).strip('[]') + "," + str(a.get('recovered')[-1:]).strip('[]') + "\n")
             
         file.close()
     
@@ -1039,12 +1129,12 @@ def laScrape():
                 take = p.get_text()
                 hold.append(take)
         
-    if (hold[102].split('\n')[1]) == 'Acadia' and (hold[167].split('\n')[1]) == 'Winn':
+    if (hold[107].split('\n')[1]) == 'Acadia' and (hold[172].split('\n')[1]) == 'Winn':
             
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[102:168]:
+        for h in hold[107:172]:
             take = h.split('\n')
             file.write(take[1] + "," + la + "," + str(fips.get_county_fips(take[1],state=la)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + "," + la, key='').latlng).strip('[]') 
@@ -1148,28 +1238,28 @@ def mdScrape():
             take = p.get_text()
             holdDC.append(take)
 
-    if (hold[86].split('\n')[1]) == 'Allegany' and (hold[110].split('\n')[1]) == 'Unassigned' and holdDC[26].split('\n')[3] == "District of Columbia":
+    if (hold[89].split('\n')[1]) == 'Allegany' and (hold[113].split('\n')[1]) == 'Unassigned' and holdDC[145].split('\n')[3] == "District of Columbia":
                 
         file = open(csvfile, "w")
         file.write(headers)
             
-        for h in hold[86:110]:
+        for h in hold[89:113]:
             take = h.split('\n')
             file.write(take[1] + "," + md + "," + str(fips.get_county_fips(take[1],state=md)).strip() + ","
                        + str(geocoder.opencage(h.split('\n')[1] + co + "," + md, key='').latlng).strip('[]') 
                        + "," + take[3].replace(',','') + "," + take[5].replace(',','') + "," 
                        + take[7].replace(',','') + "\n")
             
-        file.write(hold[110].split('\n')[1] + "," + md + "," + str(fips.get_state_fips(md)).strip() + "," + str(liegen.geocode(md).latitude) + "," 
+        file.write(hold[113].split('\n')[1] + "," + md + "," + str(fips.get_state_fips(md)).strip() + "," + str(liegen.geocode(md).latitude) + "," 
                    + str(liegen.geocode(md).longitude) + "," 
-                   + hold[110].split('\n')[3].replace(',','') + "," + hold[110].split('\n')[5].replace(',','') + "," 
-                   + hold[110].split('\n')[7].replace(',','') + "\n")
+                   + hold[113].split('\n')[3].replace(',','') + "," + hold[113].split('\n')[5].replace(',','') + "," 
+                   + hold[113].split('\n')[7].replace(',','') + "\n")
         
-        file.write(holdDC[26].split('\n')[3] + "," + dc + "," 
+        file.write(holdDC[145].split('\n')[3] + "," + dc + "," 
                    + str(fips.get_county_fips("Washington", state= "DC")).strip() + "," + str(dcGeo.latitude) 
-                   + "," + str(dcGeo.longitude) + "," + holdDC[26].split('\n')[5].replace(',','')
-                   + "," + holdDC[26].split('\n')[7].replace(',','') + "," 
-                   + holdDC[26].split('\n')[9].replace(',','') + "\n")
+                   + "," + str(dcGeo.longitude) + "," + holdDC[145].split('\n')[5].replace(',','')
+                   + "," + holdDC[145].split('\n')[7].replace(',','') + "," 
+                   + holdDC[145].split('\n')[9].replace(',','') + "\n")
         
         file.close()
     
@@ -1415,65 +1505,74 @@ def miScrape():
     mi = "MICHIGAN"
     co = ' County'
     
+    alcona = site_parse.find("div", {"class": "fullContent"}).findAll("th")[0].text
+    alNo = site_parse.find("div", {"class": "fullContent"}).findAll("th")[1].text
+    alMort = site_parse.find("div", {"class": "fullContent"}).findAll("th")[2].text.replace('\xa0','0')
+    
     csvfile = "COVID-19_cases_midoh.csv"
     headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths\n"
     
-    if (tags[0].find('td').text.strip()) == 'Alcona' and (tags[80].find('td').text.strip()) == 'Out of State':
+    if (tags[0].find('td').text.strip()) == 'Allegan' and (tags[81].find('td').text.strip()) == 'Out of State':
 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for tag in tags[0:17]:
+        #Alcona
+        file.write(alcona + "," + mi + "," + str(fips.get_county_fips(alcona, state=mi)).strip() + ","
+                       + str(geocoder.opencage(alcona + co + "," + mi, key='').latlng).strip('[]') 
+                       + "," + alNo + "," + alMort + "\n")
+        
+        for tag in tags[0:18]:
             pull = tag.findAll('td')
             file.write(pull[0].text + "," + mi + "," + str(fips.get_county_fips(pull[0].text,state=mi)).strip() + ","
                        + str(geocoder.opencage(pull[0].text + co + "," + mi, key='').latlng).strip('[]') 
                        + "," + pull[1].text.replace('\xa0','0') + "," + pull[2].text.replace('\xa0','0') + "\n")
             
-        for tag in tags[18:70]:
+        for tag in tags[19:71]:
             pull = tag.findAll('td')
             file.write(pull[0].text + "," + mi + "," + str(fips.get_county_fips(pull[0].text,state=mi)).strip() + ","
                        + str(geocoder.opencage(pull[0].text + co + "," + mi, key='').latlng).strip('[]') 
                        + "," + pull[1].text.replace('\xa0','0') + "," + pull[2].text.replace('\xa0','0') + "\n")
         
         #St.Clair
-        file.write(tags[70].findAll('td')[0].text + "," + mi + "," + "26147" + ","
-                       + str(geocoder.opencage(tags[70].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]') 
-                       + "," + tags[70].findAll('td')[1].text.replace('\xa0','0') + "," + tags[70].findAll('td')[1].text.replace('\xa0','0') + "\n")
-        #St.Joseph
-        file.write(tags[71].findAll('td')[0].text + "," + mi + "," + "26149" + ","
+        file.write(tags[71].findAll('td')[0].text + "," + mi + "," + "26147" + ","
                        + str(geocoder.opencage(tags[71].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]') 
                        + "," + tags[71].findAll('td')[1].text.replace('\xa0','0') + "," + tags[71].findAll('td')[1].text.replace('\xa0','0') + "\n")
+        #St.Joseph
+        file.write(tags[72].findAll('td')[0].text + "," + mi + "," + "26149" + ","
+                       + str(geocoder.opencage(tags[72].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]') 
+                       + "," + tags[72].findAll('td')[1].text.replace('\xa0','0') + "," + tags[72].findAll('td')[1].text.replace('\xa0','0') + "\n")
         
-        for tag in tags[72:75]:
+        for tag in tags[73:76]:
             pull = tag.findAll('td')
             file.write(pull[0].text + "," + mi + "," + str(fips.get_county_fips(pull[0].text,state=mi)).strip() + ","
                        + str(geocoder.opencage(pull[0].text + co + "," + mi, key='').latlng).strip('[]') 
                        + "," + pull[1].text.replace('\xa0','0') + "," + pull[2].text.replace('\xa0','0') + "\n")
         
-        file.write(tags[75].findAll('td')[0].text + "," + mi + "," + str(fips.get_county_fips(tags[75].findAll('td')[0].text,state=mi)).strip() + ","
-                       + str(geocoder.opencage(tags[75].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]')
-                       + "," + str((int(tags[17].findAll('td')[1].text)) + (int(tags[75].findAll('td')[1].text))) + ","
-                       + str((int(tags[17].findAll('td')[2].text)) + (int(tags[75].findAll('td')[2].text))) + "\n")
-        
         file.write(tags[76].findAll('td')[0].text + "," + mi + "," + str(fips.get_county_fips(tags[76].findAll('td')[0].text,state=mi)).strip() + ","
-                       + str(geocoder.opencage(tags[76].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]') 
-                       + "," + tags[76].findAll('td')[1].text.replace('\xa0','0') + "," + tags[76].findAll('td')[1].text.replace('\xa0','0') + "\n")
+                       + str(geocoder.opencage(tags[76].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]')
+                       + "," + str((int(tags[18].findAll('td')[1].text)) + (int(tags[76].findAll('td')[1].text))) + ","
+                       + str((int(tags[18].findAll('td')[2].text)) + (int(tags[76].findAll('td')[2].text))) + "\n")
+        
+        file.write(tags[77].findAll('td')[0].text + "," + mi + "," + str(fips.get_county_fips(tags[77].findAll('td')[0].text,state=mi)).strip() + ","
+                       + str(geocoder.opencage(tags[77].findAll('td')[0].text + co + "," + mi, key='').latlng).strip('[]') 
+                       + "," + tags[77].findAll('td')[1].text.replace('\xa0','0') + "," + tags[77].findAll('td')[1].text.replace('\xa0','0') + "\n")
         
         file.write("MI Department of Corrections" + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
-                   + str(liegen.geocode(mi).longitude) + "," + tags[77].findAll('td')[1].text.strip() + "," 
-                   + tags[77].findAll('td')[2].text.strip() + "\n")
-        sleep(1)
-        file.write("Federal Correctional Institute" + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
                    + str(liegen.geocode(mi).longitude) + "," + tags[78].findAll('td')[1].text.strip() + "," 
                    + tags[78].findAll('td')[2].text.strip() + "\n")
         sleep(1)
-        file.write(tags[79].find('td').text.strip() + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
+        file.write("Federal Correctional Institute" + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
                    + str(liegen.geocode(mi).longitude) + "," + tags[79].findAll('td')[1].text.strip() + "," 
                    + tags[79].findAll('td')[2].text.strip() + "\n")
         sleep(1)
         file.write(tags[80].find('td').text.strip() + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
                    + str(liegen.geocode(mi).longitude) + "," + tags[80].findAll('td')[1].text.strip() + "," 
                    + tags[80].findAll('td')[2].text.strip() + "\n")
+        sleep(1)
+        file.write(tags[81].find('td').text.strip() + "," + mi + "," + str(fips.get_state_fips(mi)).strip() + "," + str(liegen.geocode(mi).latitude) + "," 
+                   + str(liegen.geocode(mi).longitude) + "," + tags[81].findAll('td')[1].text.strip() + "," 
+                   + tags[81].findAll('td')[2].text.strip() + "\n")
         
         file.close()
     
@@ -1507,7 +1606,7 @@ def mnScrape():
         take = td.get_text()
         hold.append(take)
         
-    if hold[0] == 'Aitkin' and hold[216] == 'Yellow Medicine':    
+    if hold[0] == 'Aitkin' and hold[228] == 'Yellow Medicine':    
         
         file = open(csvfile, "w")
         file.write(headers)
@@ -1784,18 +1883,30 @@ def mnScrape():
         file.write(hold[204] + "," + mn + ","  + str(fips.get_county_fips(hold[204],state=mn)).strip() + ","
                    + str(geocoder.opencage(hold[204] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[205] 
                    + "," + hold[206] +"\n")
-        file.write(hold[207] + "," + mn + ","  + str(fips.get_state_fips(mn)).strip() + ","
+        file.write(hold[207] + "," + mn + ","  + str(fips.get_county_fips(hold[207],state=mn)).strip() + ","
                    + str(geocoder.opencage(hold[207] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[208] 
                    + "," + hold[209] +"\n")
-        file.write(hold[210] + "," + mn + ","  + str(fips.get_state_fips(mn)).strip() + ","
+        file.write(hold[210] + "," + mn + ","  + str(fips.get_county_fips(hold[210],state=mn)).strip() + ","
                    + str(geocoder.opencage(hold[210] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[211] 
                    + "," + hold[212] +"\n")
-        file.write(hold[213] + "," + mn + ","  + str(fips.get_state_fips(mn)).strip() + ","
+        file.write(hold[213] + "," + mn + ","  + str(fips.get_county_fips(hold[213],state=mn)).strip() + ","
                    + str(geocoder.opencage(hold[213] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[214] 
                    + "," + hold[215] +"\n")
-        file.write(hold[216] + "," + mn + ","  + str(fips.get_state_fips(mn)).strip() + ","
+        file.write(hold[216] + "," + mn + ","  + str(fips.get_county_fips(hold[216],state=mn)).strip() + ","
                    + str(geocoder.opencage(hold[216] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[217] 
                    + "," + hold[218] +"\n")
+        file.write(hold[219] + "," + mn + ","  + str(fips.get_county_fips(hold[219],state=mn)).strip() + ","
+                   + str(geocoder.opencage(hold[219] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[220] 
+                   + "," + hold[221] +"\n")
+        file.write(hold[222] + "," + mn + ","  + str(fips.get_county_fips(hold[222],state=mn)).strip() + ","
+                   + str(geocoder.opencage(hold[222] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[223] 
+                   + "," + hold[224] +"\n")
+        file.write(hold[225] + "," + mn + ","  + str(fips.get_county_fips(hold[225],state=mn)).strip() + ","
+                   + str(geocoder.opencage(hold[225] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[226] 
+                   + "," + hold[227] +"\n")
+        file.write(hold[228] + "," + mn + ","  + str(fips.get_county_fips(hold[228],state=mn)).strip() + ","
+                   + str(geocoder.opencage(hold[228] + co + "," + mn, key='').latlng).strip('[]') + "," + hold[229] 
+                   + "," + hold[230] +"\n")
         
         file.close()
     
@@ -1822,7 +1933,7 @@ def moScrape():
     csvfile = "COVID-19_cases_modoh.csv"
     headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths\n"
     
-    if (tables[1].find('td').text) == 'Adair' and (tables[163].find('td').text) == 'TBD':
+    if (tables[1].find('td').text) == 'Adair' and (tables[164].find('td').text) == 'TBD':
     
         file = open(csvfile, "w")
         file.write(headers)
@@ -1835,17 +1946,17 @@ def moScrape():
                         + "," + pull[1].text + "," + "" + "\n")
             
         file.write(tables[118].findAll('td')[0].text + "," + mo + "," + str(fips.get_state_fips(mo)).strip() + "," + str(geocoder.opencage(mo, key='').latlng).strip('[]')
-                   + "," + tables[92].findAll('td')[1].text + "," + "" + "\n")
+                   + "," + tables[118].findAll('td')[1].text + "," + "" + "\n")
         
         #Pull from the county death table
-        for t in tables[136:163]:
+        for t in tables[136:164]:
             pull = t.findAll('td')
             locale = geocoder.opencage(pull[0].text + co + "," + mo, key='')
             file.write(pull[0].text + "," + mo + "," + str(fips.get_county_fips(pull[0].text,state=mo)).strip() + "," + str(locale.latlng).strip('[]')
                        + "," + "" + "," + pull[1].text + "\n")
             
-        file.write(tables[163].findAll('td')[0].text + "," + mo + "," + str(fips.get_state_fips(mo)).strip() + "," + str(geocoder.opencage(mo, key='').latlng).strip('[]')
-                   + "," + "" + "," + tables[163].findAll('td')[1].text + "\n")
+        file.write(tables[164].findAll('td')[0].text + "," + mo + "," + str(fips.get_state_fips(mo)).strip() + "," + str(geocoder.opencage(mo, key='').latlng).strip('[]')
+                   + "," + "" + "," + tables[164].findAll('td')[1].text + "\n")
         
         file.close()
     
@@ -1883,15 +1994,15 @@ def mpScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if hold[54].split('\n')[3] == "Northern Mariana Islands":
+    if hold[173].split('\n')[3] == "Northern Mariana Islands":
 
         file = open(csvfile, "w")
         file.write(headers)
         
-        file.write(hold[54].split('\n')[3] + "," + mp + "," + str(fips.get_county_fips("Rota",state=mp)).strip() + ","  + str(mpGeo.latitude) 
-                   + "," + str(mpGeo.longitude) + "," + hold[54].split('\n')[5].replace(',','') 
-                   + "," + hold[54].split('\n')[7].replace(',','') + "," 
-                   + hold[54].split('\n')[9].replace(',','') + "\n")
+        file.write(hold[173].split('\n')[3] + "," + mp + "," + str(fips.get_county_fips("Rota",state=mp)).strip() + ","  + str(mpGeo.latitude) 
+                   + "," + str(mpGeo.longitude) + "," + hold[173].split('\n')[5].replace(',','') 
+                   + "," + hold[173].split('\n')[7].replace(',','') + "," 
+                   + hold[173].split('\n')[9].replace(',','') + "\n")
         
         file.close()
     
@@ -2035,12 +2146,12 @@ def ndScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if hold[54].split('\n')[1] == 'Barnes' and hold[84].split('\n')[1] == 'Williams':
+    if hold[57].split('\n')[1] == 'Barnes' and hold[88].split('\n')[1] == 'Williams':
 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[54:85]:
+        for h in hold[57:89]:
             locale = geocoder.opencage(h.split('\n')[1] + co + "," + nd, key='')
             take = h.split('\n')
             file.write(take[1] + "," + nd + "," + str(fips.get_county_fips(take[1],state=nd)).strip() + "," + str(locale.latlng).strip('[]') + "," + take[3] + "\n")
@@ -2077,12 +2188,12 @@ def neScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if (hold[57].split('\n')[1]) == 'Adams' and (hold[107].split('\n')[1]) == 'TBD':
+    if (hold[60].split('\n')[1]) == 'Adams' and (hold[113].split('\n')[1]) == 'TBD':
                             
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[57:107]:
+        for h in hold[60:113]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + ne, key='')
             file.write(take[1] + "," + ne + "," 
@@ -2090,11 +2201,11 @@ def neScrape():
                        + "," + str(locale.latlng).strip('[]') + "," 
                        + take[3] + "," + take[5] + "\n")
         
-        file.write(hold[107].split('\n')[1] + "," + ne + "," 
+        file.write(hold[113].split('\n')[1] + "," + ne + "," 
                    + str(fips.get_state_fips(ne)).strip() 
                    + "," + str(liegen.geocode(ne).latitude)
                    + "," + str(liegen.geocode(ne).longitude) + "," 
-                   + hold[107].split('\n')[3] + "," + hold[107].split('\n')[5] + "\n")
+                   + hold[113].split('\n')[3] + "," + hold[113].split('\n')[5] + "\n")
         
         file.close()
     
@@ -2168,22 +2279,22 @@ def njScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    if (hold[61].split('\n')[1]) == 'Atlantic' and (hold[82].split('\n')[1]) == 'Under investigation':
+    if (hold[68].split('\n')[1]) == 'Atlantic' and (hold[89].split('\n')[1]) == 'Under investigation':
             
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[61:82]:
+        for h in hold[68:89]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + nj, key='')
             file.write(take[1] + "," + nj + "," + str(fips.get_county_fips(take[1], state=nj)).strip() + "," + str(locale.latlng).strip('[]') + "," 
                        + take[3].replace(',','') + "," 
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         
-        file.write(hold[82].split('\n')[1] + "," + nj + "," + str(fips.get_state_fips(nj)).strip() + "," + str(liegen.geocode(nj).latitude) + "," 
-                   + str(liegen.geocode(nj).longitude) + "," + hold[82].split('\n')[3].replace(',','') 
-                   + "," + hold[82].split('\n')[5].replace(',','') 
-                   + "," + hold[82].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[89].split('\n')[1] + "," + nj + "," + str(fips.get_state_fips(nj)).strip() + "," + str(liegen.geocode(nj).latitude) + "," 
+                   + str(liegen.geocode(nj).longitude) + "," + hold[89].split('\n')[3].replace(',','') 
+                   + "," + hold[89].split('\n')[5].replace(',','') 
+                   + "," + hold[89].split('\n')[7].replace(',','') + "\n")
         
         file.close()
     
@@ -2216,12 +2327,12 @@ def nmScrape():
     csvfile = "COVID-19_cases_nmdoh.csv"
     headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths\n"
     
-    if (hold[56].split('\n')[1]) == 'Bernalillo' and (hold[81].split('\n')[1]) == 'Valencia':
+    if (hold[57].split('\n')[1]) == 'Bernalillo' and (hold[83].split('\n')[1]) == 'Valencia':
 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[56:62]:
+        for h in hold[57:63]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + nm, key='')
             file.write(take[1] + "," + nm + "," + str(fips.get_county_fips(take[1],state=nm)).strip() + "," 
@@ -2231,10 +2342,10 @@ def nmScrape():
             
         file.write("Dona Ana" + "," + nm + "," + "35013" 
                    + "," + str(geocoder.opencage("Dona Ana County" + ", " + nm, key='').latlng).strip('[]') + "," 
-                   + hold[62].split('\n')[3].replace(',','') + "," 
-                   + hold[62].split('\n')[5].replace(',','') + "\n")
+                   + hold[63].split('\n')[3].replace(',','') + "," 
+                   + hold[63].split('\n')[5].replace(',','') + "\n")
         
-        for h in hold[63:82]:
+        for h in hold[64:84]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + nm, key='')
             file.write(take[1] + "," + nm + "," + str(fips.get_county_fips(take[1],state=nm)).strip() + "," 
@@ -2268,7 +2379,7 @@ def nvScrape():
     
     tags = tables.findAll('li')
     
-    if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[9].get_text().split(': ')[0]) == 'Lincoln':
+    if (tags[0].get_text().split(': ')[0]) == 'Clark' and (tags[9].get_text().split(': ')[0]) == 'White Pine':
 
         file = open(csvfile, "w")
         file.write(headers)
@@ -2329,12 +2440,12 @@ def nyScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    if (hold[123].split('\n')[1]) == 'Albany' and (hold[179].split('\n')[1]) == 'Yates' and staten == 'Staten Island':
+    if (hold[127].split('\n')[1]) == 'Albany' and (hold[183].split('\n')[1]) == 'Yates' and staten == 'Staten Island':
                 
         file = open(csvfile, "w", encoding = 'utf-8')
         file.write(headers)
         
-        for h in hold[123:180]:
+        for h in hold[127:184]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1].split('[')[0] + co + "," + ny, key='')
             file.write(take[1].split('[')[0] + "," + ny + "," 
@@ -2394,12 +2505,12 @@ def ohScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if (hold[59].split('\n')[1]) == 'Adams' and (hold[146].split('\n')[1]) == 'Wyandot':
+    if (hold[61].split('\n')[1]) == 'Adams' and (hold[148].split('\n')[1]) == 'Wyandot':
                 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[59:147]:
+        for h in hold[61:150]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + oh, key='')
             file.write(take[1] + "," + oh + "," + str(fips.get_county_fips(take[1],state=oh)).strip() + "," 
@@ -2414,42 +2525,34 @@ def ohScrape():
 
 def okScrape():
     
-    okDOH = 'https://coronavirus.health.ok.gov/'
-
-    bypass = {'User-Agent': 'Mozilla/5.0'}
-    okClient = Request(okDOH, headers=bypass)
-    okPage = req(okClient)
+    testUrl = 'https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports'
+    testClient = req(testUrl)
     
-    site_parse = soup(okPage.read(), "lxml")
-    okPage.close()
+    site_parse = soup(testClient.read(), 'lxml')
+    testClient.close()
     
-    tables = site_parse.find("table", {"summary": "COVID-19 Cases by County"}).find("tbody")
+    tables = site_parse.find("div", {"class": "Box mb-3 Box--condensed"})
     
-    tags = tables.findAll('tr')
+    tags = tables.find('tbody')
     
-    ok = "OKLAHOMA"
-    co = ' County'
+    att = tags.findAll('tr', {"class":"js-navigation-item"})[-2]
     
-    csvfile = "COVID-19_cases_okdoh.csv"
-    headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths\n"
+    current = att.find('a').text
     
-    if (tags[0].find('td').text) == 'Adair' and (tags[63].find('td').text) == 'Woodward':
+    git = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
+           
+    newUrl = git + current
     
-        file = open(csvfile, "w")
-        file.write(headers)
+    df = pd.read_csv(newUrl)
         
-        for tag in tags[:64]:
-            pull = tag.findAll('td')
-            locale = geocoder.opencage(pull[0].text + co + "," + ok, key='')
-            file.write(pull[0].text + "," + ok + "," + str(fips.get_county_fips(pull[0].text,state=ok)).strip() + "," 
-                       + str(locale.latlng).strip('[]') + ","
-                       + pull[1].text + "," + pull[2].text + "\n")
-            
-        file.close()
+    okDF = df.groupby('Province_State').get_group('Oklahoma')
+    okie = okDF[okDF.Admin2 != 'Unassigned']
+    hold = okie.reindex(columns = ['Admin2', 'Province_State', 'FIPS', 'Lat', 'Long_', 'Confirmed', 'Deaths', 'Recovered'])
+    newHold = hold.rename(columns = {'Admin2' : 'County', 'Province_State' : 'State', 'FIPS' : 'fips', 'Lat' : 'Latitude', 'Long_' : 'Longitude', 'Confirmed'  :'Confirmed Cases', 'Recovered':'Recoveries'})
+    newHold = newHold.fillna(0)
+    newHold = newHold.astype({'fips':'int64'})
     
-        print("Oklahoma scraper is complete.")
-    else:
-        print("ERROR: Must fix Oklahoma scraper.")
+    newHold.to_csv('COVID-19_cases_okdoh.csv',index=False, header=True)
     
 def orScrape():
     
@@ -2552,51 +2655,51 @@ def prScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if (hold[54].split('\n')[1]) == 'Arecibo' and (hold[62].split('\n')[1]) == 'Not available':
+    if (hold[57].split('\n')[1]) == 'Arecibo' and (hold[65].split('\n')[1]) == 'Not available':
                 
         file = open(csvfile, "w")
         file.write(headers)
                     
-        aLocale = liegen.geocode(hold[54].split('\n')[1] + ", PR")
-        file.write(hold[54].split('\n')[1] + "," + pr + "," 
-                   + str(fips.get_county_fips(hold[54].split('\n')[1],state=pr)).strip() + "," + str(aLocale.latitude)
-                   + "," + str(aLocale.longitude) + "," + hold[54].split('\n')[5] + "\n")
+        aLocale = liegen.geocode(hold[57].split('\n')[1] + ", PR")
+        file.write(hold[57].split('\n')[1] + "," + pr + "," 
+                   + str(fips.get_county_fips(hold[57].split('\n')[1],state=pr)).strip() + "," + str(aLocale.latitude)
+                   + "," + str(aLocale.longitude) + "," + hold[57].split('\n')[5] + "\n")
         sleep(1)
-        bLocale = liegen.geocode(hold[55].split('\n')[1] + ", PR")
-        file.write(hold[55].split('\n')[1] + "," + pr + "," 
-                   + str(fips.get_county_fips(hold[55].split('\n')[1],state=pr)).strip() + "," + str(bLocale.latitude)
-                   + "," + str(bLocale.longitude) + "," + hold[55].split('\n')[5] + "\n")
+        bLocale = liegen.geocode(hold[58].split('\n')[1] + ", PR")
+        file.write(hold[58].split('\n')[1] + "," + pr + "," 
+                   + str(fips.get_county_fips(hold[58].split('\n')[1],state=pr)).strip() + "," + str(bLocale.latitude)
+                   + "," + str(bLocale.longitude) + "," + hold[58].split('\n')[5] + "\n")
         sleep(1)
-        cLocale = liegen.geocode(hold[56].split('\n')[1] + ", PR")
-        file.write(hold[56].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[56].split('\n')[1],state=pr)).strip() + "," 
+        cLocale = liegen.geocode(hold[59].split('\n')[1] + ", PR")
+        file.write(hold[59].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[56].split('\n')[1],state=pr)).strip() + "," 
                    + str(cLocale.latitude) + "," 
-                   + str(cLocale.longitude) + "," + hold[56].split('\n')[5] + "\n")
+                   + str(cLocale.longitude) + "," + hold[59].split('\n')[5] + "\n")
         sleep(1)
-        fLocale = liegen.geocode(hold[57].split('\n')[1] + ", PR")
-        file.write(hold[57].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[57].split('\n')[1],state=pr)).strip() + "," 
+        fLocale = liegen.geocode(hold[60].split('\n')[1] + ", PR")
+        file.write(hold[60].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[60].split('\n')[1],state=pr)).strip() + "," 
                    + str(fLocale.latitude) + "," 
-                   + str(fLocale.longitude) + "," + hold[57].split('\n')[5] + "\n")
+                   + str(fLocale.longitude) + "," + hold[60].split('\n')[5] + "\n")
         sleep(1)
-        maLocale = liegen.geocode(hold[58].split('\n')[1] + ", PR")
-        file.write(hold[58].split('\n')[1] + "," + pr + "," + "72097" + ","
+        maLocale = liegen.geocode(hold[61].split('\n')[1] + ", PR")
+        file.write(hold[61].split('\n')[1] + "," + pr + "," + "72097" + ","
                    + str(maLocale.latitude) + "," 
-                   + str(maLocale.longitude) + "," + hold[58].split('\n')[5] + "\n")
+                   + str(maLocale.longitude) + "," + hold[61].split('\n')[5] + "\n")
         sleep(1)
         meLocale = liegen.geocode("Canovanas, PR")
-        file.write(hold[59].split('\n')[1].split(' (')[0] + "," + pr + "," + str(fips.get_county_fips("Canovanas",state=pr)).strip() + "," 
+        file.write(hold[62].split('\n')[1].split(' (')[0] + "," + pr + "," + str(fips.get_county_fips("Canovanas",state=pr)).strip() + "," 
                    + str(meLocale.latitude) + "," 
-                   + str(meLocale.longitude) + "," + hold[59].split('\n')[5] + "\n")
+                   + str(meLocale.longitude) + "," + hold[62].split('\n')[5] + "\n")
         sleep(1)
-        pLocale = liegen.geocode(hold[60].split('\n')[1] + ", PR")
-        file.write(hold[60].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[60].split('\n')[1],state=pr)).strip() + "," 
+        pLocale = liegen.geocode(hold[63].split('\n')[1] + ", PR")
+        file.write(hold[63].split('\n')[1] + "," + pr + "," + str(fips.get_county_fips(hold[63].split('\n')[1],state=pr)).strip() + "," 
                    + str(pLocale.latitude) + "," 
-                   + str(pLocale.longitude) + "," + hold[60].split('\n')[5] + "\n")
+                   + str(pLocale.longitude) + "," + hold[63].split('\n')[5] + "\n")
         sleep(1)
-        file.write(hold[61].split('\n')[1] + "," + pr + "," + str(fips.get_state_fips(pr)).strip() + "," + ""
-                   + "," + "" + "," + hold[61].split('\n')[5] + "\n")
-        file.write(hold[62].split('\n')[1] + "," + pr + "," + str(fips.get_state_fips(pr)).strip() + "," 
+        file.write(hold[64].split('\n')[1] + "," + pr + "," + str(fips.get_state_fips(pr)).strip() + "," + ""
+                   + "," + "" + "," + hold[64].split('\n')[5] + "\n")
+        file.write(hold[65].split('\n')[1] + "," + pr + "," + str(fips.get_state_fips(pr)).strip() + "," 
                    + str(liegen.geocode(pr).latitude)
-                   + "," + str(liegen.geocode(pr).longitude) + "," + hold[62].split('\n')[5] + "\n")
+                   + "," + str(liegen.geocode(pr).longitude) + "," + hold[65].split('\n')[5] + "\n")
         
         file.close()
         print("Puerto Rico scraper is complete.")
@@ -2718,12 +2821,12 @@ def scScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    if (hold[57].split('\n')[1]) == 'Abbeville' and (hold[102].split('\n')[1]) == 'York':
+    if (hold[61].split('\n')[1]) == 'Abbeville' and (hold[106].split('\n')[1]) == 'York':
                 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[57:103]:
+        for h in hold[61:107]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + sc, key='')
             file.write(take[1] + "," + sc + "," + str(fips.get_county_fips(take[1],state=sc)).strip() 
@@ -2738,318 +2841,44 @@ def scScrape():
 
 def sdScrape():
     
-    sdDOH = 'https://doh.sd.gov/news/Coronavirus.aspx'
+    sdWiki = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_South_Dakota'
 
-    sdClient = req(sdDOH)
+    sdClient = req(sdWiki)
     
     site_parse = soup(sdClient.read(), "lxml")
     sdClient.close()
     
-    tables = site_parse.find("div", {"id": "content_block"}).findAll("table")[2]
-    tables1 = site_parse.find("div", {"id": "content_block"}).findAll("table")[1]
-    
-    tags = tables.findAll('td')
-    tages = tables1.findAll('td')
+    tables = site_parse.find("div", {"class": "mw-parser-output"}).find_all('tbody')
     
     liegen = Nominatim(user_agent = 'combiner-atomeundwolke@gmail.com')
     sd = "SOUTH DAKOTA"
     co = ' County'
     
-    csvfile = "COVID-19_cases_sddoh.csv"
-    headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries,,Hospitalization\n"
+    csvfile = "COVID-19_cases_sdWiki.csv"
+    headers = "County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries\n"
     
     hold = []
-    holdE = []
     
-    for t in tags:
-        take = t.get_text()
-        hold.append(take)
-    
-    for ta in tages:
-        taken = ta.get_text()
-        holdE.append(taken)
-    
-    krankenhaus = holdE[2:4]
-    haus = krankenhaus[0]
-    hausNo = krankenhaus[1]
-    deaths = holdE[4:6]
-    mort = deaths[0].strip('**')
-    mortNo = deaths[1]
-        
-    if (hold[0].strip()) == 'Aurora' and (hold[260].strip()) ==  'Ziebach' and mort == 'Deaths':
-
+    for t in tables:
+        pull = t.findAll('tr')
+        for p in pull:
+            take = p.get_text()
+            hold.append(take)
+                
+    if (hold[56].split('\n')[1]) == 'Aurora' and (hold[97].split('\n')[1]) == 'Yankton':
+                
         file = open(csvfile, "w")
         file.write(headers)
         
-        locale1 = geocoder.opencage(hold[0].strip() + co + "," + sd, key='')
-        file.write(hold[0].strip() + "," + sd + "," + str(fips.get_county_fips(hold[0].strip(),state=sd)).strip() + "," + str(locale1.latlng).strip('[]') + "," 
-                   + hold[1].strip() + "," + "" + "," + hold[3].strip() + "," + "" + "," + ""  + "\n")
+        for h in hold[56:97]:
+            take = h.split('\n')
+            locale = geocoder.opencage(take[1] + co + "," + sd, key='')
+            file.write(take[1] + "," + sd + "," + str(fips.get_county_fips(take[1],state=sd)).strip() 
+                       + "," + str(locale.latlng).strip('[]') + "," 
+                       + take[3] + "," + take[7] + "," + take[5] + "\n")
         
-        locale2 = geocoder.opencage(hold[4].strip() + co + "," + sd, key='')
-        file.write(hold[4].strip() + "," + sd + "," + str(fips.get_county_fips(hold[4].strip(),state=sd)).strip() + "," + str(locale2.latlng).strip('[]') + "," 
-                   + hold[5].strip()  + "," + "" + "," + hold[7].strip() + "," + "" + "," + "" + "\n")
-
-        locale3 = geocoder.opencage(hold[8].strip() + co + "," + sd, key='')
-        file.write(hold[8].strip() + "," + sd + "," + str(fips.get_county_fips(hold[8].strip(),state=sd)).strip() + "," + str(locale3.latlng).strip('[]') + "," 
-                   + hold[9].strip() + "," + "" + "," + hold[11].strip() + "," + "" + "," + "" +  "\n")
-        
-        locale4 = geocoder.opencage(hold[12].strip() + co + "," + sd, key='')
-        file.write(hold[12].strip() + "," + sd + "," + str(fips.get_county_fips(hold[12].strip(),state=sd)).strip() + "," + str(locale4.latlng).strip('[]') + "," 
-                   + hold[13].strip() + "," + "" + "," + hold[15].strip() + "," + "" + "," + "" + "\n")
-        
-        locale5 = geocoder.opencage(hold[16].strip() + co + "," + sd, key='')
-        file.write(hold[16].strip() + "," + sd + "," + str(fips.get_county_fips(hold[16].strip(),state=sd)).strip() + "," + str(locale5.latlng).strip('[]') + "," 
-                   + hold[17].strip() + ","  + "" + "," + hold[19].strip() + "," + "" + "," + "" +  "\n")
-        #sleep(1)
-        locale6 = geocoder.opencage(hold[20].strip() + co + "," + sd, key='')
-        file.write(hold[20].strip() + "," + sd + "," + str(fips.get_county_fips(hold[20].strip(),state=sd)).strip() + "," + str(locale6.latlng).strip('[]') + "," 
-                   + hold[21].strip() + ","  + "" + "," + hold[23].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale7 = geocoder.opencage(hold[24].strip() + co + "," + sd, key='')
-        file.write(hold[24].strip() + "," + sd + "," + str(fips.get_county_fips(hold[24].strip(),state=sd)).strip() + "," + str(locale7.latlng).strip('[]') + "," 
-                   + hold[25].strip() + "," + "" + "," + hold[27].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale8 = geocoder.opencage(hold[28].strip() + co + "," + sd, key='')
-        file.write(hold[28].strip() + "," + sd + "," + str(fips.get_county_fips(hold[28].strip(),state=sd)).strip() + "," + str(locale8.latlng).strip('[]') + "," 
-                   + hold[29].strip() + ","  + "" + "," + hold[31].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale9 = geocoder.opencage(hold[32].strip() + co + "," + sd, key='')
-        file.write(hold[32].strip() + "," + sd + "," + str(fips.get_county_fips(hold[32].strip(),state=sd)).strip() + "," + str(locale9.latlng).strip('[]') + "," 
-                   + hold[33].strip() + ","  + "" + "," + hold[35].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale10 = geocoder.opencage(hold[36].strip() + co + "," + sd, key='')
-        file.write(hold[36].strip() + "," + sd + "," + str(fips.get_county_fips(hold[36].strip(),state=sd)).strip() + "," + str(locale10.latlng).strip('[]') + "," 
-                   + hold[37].strip() + ","  + "" + "," + hold[39].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale11 = geocoder.opencage(hold[40].strip() + co + "," + sd, key='')
-        file.write(hold[40].strip() + "," + sd + "," + str(fips.get_county_fips(hold[40].strip(),state=sd)).strip() + "," + str(locale11.latlng).strip('[]') + "," 
-                   + hold[41].strip() + ","  + "" + "," + hold[43].strip() + "," + "" + "," + "" +  "\n")
-        #sleep(1)
-        locale12 = geocoder.opencage(hold[44].strip() + co + "," + sd, key='')
-        file.write(hold[44].strip() + "," + sd + "," + str(fips.get_county_fips(hold[44].strip(),state=sd)).strip() + "," + str(locale12.latlng).strip('[]') + "," 
-                   + hold[45].strip() + ","  + "" + "," + hold[47].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale13 = geocoder.opencage(hold[48].strip() + co + "," + sd, key='')
-        file.write(hold[48].strip() + "," + sd + "," + str(fips.get_county_fips(hold[48].strip(),state=sd)).strip() + "," + str(locale13.latlng).strip('[]') + "," 
-                   + hold[49].strip() + ","  + "" + "," + hold[51].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale14 = geocoder.opencage(hold[52].strip() + co + "," + sd, key='')
-        file.write(hold[52].strip() + "," + sd + "," + str(fips.get_county_fips(hold[52].strip(),state=sd)).strip() + "," + str(locale14.latlng).strip('[]') + "," 
-                   + hold[53].strip() + "," + "" + "," + hold[55].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale15 = geocoder.opencage(hold[56].strip() + co + "," + sd, key='')
-        file.write(hold[56].strip() + "," + sd + "," + str(fips.get_county_fips(hold[56].strip(),state=sd)).strip() + "," + str(locale15.latlng).strip('[]') + "," 
-                   + hold[57].strip() + ","  + "" + "," + hold[59].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale16 = geocoder.opencage(hold[60].strip() + co + "," + sd, key='')
-        file.write(hold[60].strip() + "," + sd + "," + str(fips.get_county_fips(hold[60].strip(),state=sd)).strip() + "," + str(locale16.latlng).strip('[]') + "," 
-                   + hold[61].strip() + ","  + "" + "," + hold[63].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale17 = geocoder.opencage(hold[64].strip() + co + "," + sd, key='')
-        file.write(hold[64].strip() + "," + sd + "," + str(fips.get_county_fips(hold[64].strip(),state=sd)).strip() + "," + str(locale17.latlng).strip('[]') + "," 
-                   + hold[65].strip() + ","  + "" + "," + hold[67].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale18 = geocoder.opencage(hold[68].strip() + co + "," + sd, key='')
-        file.write(hold[68].strip() + "," + sd + "," + str(fips.get_county_fips(hold[68].strip(),state=sd)).strip() + "," + str(locale18.latlng).strip('[]') + "," 
-                   + hold[69].strip() + ","  + "" + "," + hold[71].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale19 = geocoder.opencage(hold[72].strip() + co + "," + sd, key='')
-        file.write(hold[72].strip() + "," + sd + "," + str(fips.get_county_fips(hold[72].strip(),state=sd)).strip() + "," + str(locale19.latlng).strip('[]') + "," 
-                   + hold[73].strip() + ","  + "" + "," + hold[75].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale20 = geocoder.opencage(hold[76].strip() + co + "," + sd, key='')
-        file.write(hold[76].strip() + "," + sd + "," + str(fips.get_county_fips(hold[76].strip(),state=sd)).strip() + "," + str(locale20.latlng).strip('[]') + "," 
-                   + hold[77].strip() + "," + "" + "," + hold[79].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale21 = geocoder.opencage(hold[80].strip() + co + "," + sd, key='')
-        file.write(hold[80].strip() + "," + sd + "," + str(fips.get_county_fips(hold[80].strip(),state=sd)).strip() + "," + str(locale21.latlng).strip('[]') + "," 
-                   + hold[81].strip() + ","  + "" + "," + hold[83].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale22 = geocoder.opencage(hold[84].strip() + co + "," + sd, key='')
-        file.write(hold[84].strip() + "," + sd + "," + str(fips.get_county_fips(hold[84].strip(),state=sd)).strip() + "," + str(locale22.latlng).strip('[]') + "," 
-                   + hold[85].strip() + ","  + "" + "," + hold[87].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale23 = geocoder.opencage(hold[88].strip() + co + "," + sd, key='')
-        file.write(hold[88].strip() + "," + sd + "," + str(fips.get_county_fips(hold[88].strip(),state=sd)).strip() + "," + str(locale23.latlng).strip('[]') + "," 
-                   + hold[89].strip() + ","  + "" + "," + hold[91].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale24 = geocoder.opencage(hold[92].strip() + co + "," + sd, key='')
-        file.write(hold[92].strip() + "," + sd + "," + str(fips.get_county_fips(hold[92].strip(),state=sd)).strip() + "," + str(locale24.latlng).strip('[]') + "," 
-                   + hold[93].strip() + ","  + "" + "," + hold[95].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale25 = geocoder.opencage(hold[96].strip() + co + "," + sd, key='')
-        file.write(hold[96].strip() + "," + sd + "," + str(fips.get_county_fips(hold[96].strip(),state=sd)).strip() + "," + str(locale25.latlng) + "," 
-                   + hold[97].strip() + ","  + "" + "," + hold[99].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale26 = geocoder.opencage(hold[100].strip() + co + "," + sd, key='')
-        file.write(hold[100].strip() + "," + sd + "," + str(fips.get_county_fips(hold[100].strip(),state=sd)).strip() + "," + str(locale26.latlng).strip('[]') + "," 
-                   + hold[101].strip() + "," + "" + "," + hold[103].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale27 = geocoder.opencage(hold[104].strip() + co + "," + sd, key='')
-        file.write(hold[104].strip() + "," + sd + "," + str(fips.get_county_fips(hold[104].strip(),state=sd)).strip() + "," + str(locale27.latlng).strip('[]') + "," 
-                   + hold[105].strip() + "," + "" + "," + hold[107].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale28 = geocoder.opencage(hold[108].strip() + co + "," + sd, key='')
-        file.write(hold[108].strip() + "," + sd + "," + str(fips.get_county_fips(hold[108].strip(),state=sd)).strip() + "," + str(locale28.latlng).strip('[]') + "," 
-                   + hold[109].strip() + "," + "" + "," + hold[111].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale29 = geocoder.opencage(hold[112].strip() + co + "," + sd, key='')
-        file.write(hold[112].strip() + "," + sd + "," + str(fips.get_county_fips(hold[112].strip(),state=sd)).strip() + "," + str(locale29.latlng).strip('[]') + "," 
-                   + hold[113].strip() + "," + "" + "," + hold[115].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale30 = geocoder.opencage(hold[116].strip() + co + "," + sd, key='')
-        file.write(hold[116].strip() + "," + sd + "," + str(fips.get_county_fips(hold[116].strip(),state=sd)).strip() + "," + str(locale30.latlng).strip('[]') + "," 
-                   + hold[117].strip() + "," + "" + "," + hold[119].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale31 = geocoder.opencage(hold[120].strip() + co + "," + sd, key='')
-        file.write(hold[120].strip() + "," + sd + "," + str(fips.get_county_fips(hold[120].strip(),state=sd)).strip() + "," + str(locale31.latlng).strip('[]') + "," 
-                   + hold[121].strip() + "," + "" + "," + hold[123].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale32 = geocoder.opencage(hold[124].strip() + co + "," + sd, key='')
-        file.write(hold[124].strip() + "," + sd + "," + str(fips.get_county_fips(hold[124].strip(),state=sd)).strip() + "," + str(locale32.latlng).strip('[]') + "," 
-                   + hold[125].strip() + "," + "" + "," + hold[127].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale33 = geocoder.opencage(hold[128].strip() + co + "," + sd, key='')
-        file.write(hold[128].strip() + "," + sd + "," + str(fips.get_county_fips(hold[128].strip(),state=sd)).strip() + "," + str(locale33.latlng).strip('[]') + "," 
-                   + hold[129].strip() + "," + "" + "," + hold[131].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale34 = geocoder.opencage(hold[132].strip() + co + "," + sd, key='')
-        file.write(hold[132].strip() + "," + sd + "," + str(fips.get_county_fips(hold[132].strip(),state=sd)).strip() + "," + str(locale34.latlng).strip('[]') + "," 
-                   + hold[133].strip() + "," + "" + "," + hold[135].strip() + "," + "" + "," + "" + "\n")
-        #sleep(1)
-        locale35 = geocoder.opencage(hold[136].strip() + co + "," + sd, key='')
-        file.write(hold[136].strip() + "," + sd + "," + str(fips.get_county_fips(hold[136].strip(),state=sd)).strip() + "," + str(locale35.latlng).strip('[]') + "," 
-                   + hold[137].strip() + "," + "" + "," + hold[139].strip() + "," + "" + "," + "" + "\n")
-        
-        locale36 = geocoder.opencage(hold[140].strip() + co + "," + sd, key='')
-        file.write(hold[140].strip() + "," + sd + "," + str(fips.get_county_fips(hold[140].strip(),state=sd)).strip() + "," + str(locale36.latlng).strip('[]') + "," 
-                   + hold[141].strip() + "," + "" + "," + hold[143].strip() + "," + "" + "," + "" + "\n")
-        locale37 = geocoder.opencage(hold[144].strip() + co + "," + sd, key='')
-        file.write(hold[144].strip() + "," + sd + "," + str(fips.get_county_fips(hold[144].strip(),state=sd)).strip() + "," + str(locale37.latlng).strip('[]') + "," 
-                   + hold[145].strip() + "," + "" + "," + hold[147].strip() + "," + "" + "," + "" + "\n")
-        locale38 = geocoder.opencage(hold[148].strip() + co + "," + sd, key='')
-        file.write(hold[148].strip() + "," + sd + "," + str(fips.get_county_fips(hold[148].strip(),state=sd)).strip() + "," + str(locale38.latlng).strip('[]') + "," 
-                   + hold[149].strip() + "," + "" + "," + hold[151].strip() + "," + "" + "," + "" + "\n")
-        locale39 = geocoder.opencage(hold[152].strip() + co + "," + sd, key='')
-        file.write(hold[152].strip() + "," + sd + "," + str(fips.get_county_fips(hold[152].strip(),state=sd)).strip() + "," + str(locale39.latlng).strip('[]') + "," 
-                   + hold[153].strip() + "," + "" + "," + hold[155].strip() + "," + "" + "," + "" + "\n")
-        locale40 = geocoder.opencage(hold[156].strip() + co + "," + sd, key='')
-        file.write(hold[156].strip() + "," + sd + "," + str(fips.get_county_fips(hold[156].strip(),state=sd)).strip() + "," + str(locale40.latlng).strip('[]') + "," 
-                   + hold[157].strip() + "," + "" + "," + hold[159].strip() + "," + "" + "," + "" + "\n")
-        locale41 = geocoder.opencage(hold[160].strip() + co + "," + sd, key='')
-        file.write(hold[160].strip() + "," + sd + "," + str(fips.get_county_fips(hold[160].strip(),state=sd)).strip() + "," + str(locale41.latlng).strip('[]') + "," 
-                   + hold[161].strip() + "," + "" + "," + hold[163].strip() + "," + "" + "," + "" + "\n")
-        
-        locale42 = geocoder.opencage(hold[164].strip() + co + "," + sd, key='')
-        file.write(hold[164].strip() + "," + sd + "," + str(fips.get_county_fips(hold[164].strip(),state=sd)).strip() + "," + str(locale42.latlng).strip('[]') + "," 
-                   + hold[165].strip() + "," + "" + "," + hold[167].strip() + "," + "" + "," + "" + "\n")
-        
-        locale43 = geocoder.opencage(hold[168].strip() + co + "," + sd, key='')
-        file.write(hold[168].strip() + "," + sd + "," + str(fips.get_county_fips(hold[168].strip(),state=sd)).strip() + "," + str(locale43.latlng).strip('[]') + "," 
-                   + hold[169].strip() + "," + "" + "," + hold[171].strip() + "," + "" + "," + "" + "\n")
-        
-        locale44 = geocoder.opencage(hold[172].strip() + co + "," + sd, key='')
-        file.write(hold[172].strip() + "," + sd + "," + str(fips.get_county_fips(hold[172].strip(),state=sd)).strip() + "," + str(locale44.latlng).strip('[]') + "," 
-                   + hold[173].strip() + "," + "" + "," + hold[175].strip() + "," + "" + "," + "" + "\n")
-        
-        locale45 = geocoder.opencage(hold[176].strip() + co + "," + sd, key='')
-        file.write(hold[176].strip() + "," + sd + "," + str(fips.get_county_fips(hold[176].strip(),state=sd)).strip() + "," + str(locale45.latlng).strip('[]') + "," 
-                   + hold[177].strip() + "," + "" + "," + hold[179].strip() + "," + "" + "," + "" + "\n")
-        
-        locale46 = geocoder.opencage(hold[180].strip() + co + "," + sd, key='')
-        file.write(hold[180].strip() + "," + sd + "," + str(fips.get_county_fips(hold[180].strip(),state=sd)).strip() + "," + str(locale46.latlng).strip('[]') + "," 
-                   + hold[181].strip() + "," + "" + "," + hold[183].strip() + "," + "" + "," + "" + "\n")
-        
-        locale47 = geocoder.opencage(hold[184].strip() + co + "," + sd, key='')
-        file.write(hold[184].strip() + "," + sd + "," + str(fips.get_county_fips(hold[184].strip(),state=sd)).strip() + "," + str(locale47.latlng).strip('[]') + "," 
-                   + hold[185].strip() + "," + "" + "," + hold[187].strip() + "," + "" + "," + "" + "\n")
-        
-        locale48 = geocoder.opencage(hold[188].strip() + co + "," + sd, key='')
-        file.write(hold[188].strip() + "," + sd + "," + str(fips.get_county_fips(hold[188].strip(),state=sd)).strip() + "," + str(locale48.latlng).strip('[]') + "," 
-                   + hold[189].strip() + "," + "" + "," + hold[191].strip() + "," + "" + "," + "" + "\n")
-        
-        locale49 = geocoder.opencage(hold[192].strip() + co + "," + sd, key='')
-        file.write(hold[192].strip() + "," + sd + "," + str(fips.get_county_fips(hold[192].strip(),state=sd)).strip() + "," + str(locale49.latlng).strip('[]') + "," 
-                   + hold[193].strip() + "," + "" + "," + hold[195].strip() + "," + "" + "," + "" + "\n")
-        
-        locale50 = geocoder.opencage(hold[196].strip() + co + "," + sd, key='')
-        file.write(hold[196].strip() + "," + sd + "," + str(fips.get_county_fips(hold[196].strip(),state=sd)).strip() + "," + str(locale50.latlng).strip('[]') + "," 
-                   + hold[197].strip() + "," + "" + "," + hold[199].strip() + "," + "" + "," + "" + "\n")
-        
-        locale51 = geocoder.opencage(hold[200].strip() + co + "," + sd, key='')
-        file.write(hold[200].strip() + "," + sd + "," + str(fips.get_county_fips(hold[200].strip(),state=sd)).strip() + "," + str(locale51.latlng).strip('[]') + "," 
-                   + hold[201].strip() + "," + "" + "," + hold[203].strip() + "," + "" + "," + "" + "\n")
-        
-        locale52 = geocoder.opencage(hold[204].strip() + co + "," + sd, key='')
-        file.write(hold[204].strip() + "," + sd + "," + str(fips.get_county_fips(hold[204].strip(),state=sd)).strip() + "," + str(locale52.latlng).strip('[]') + "," 
-                   + hold[205].strip() + "," + "" + "," + hold[207].strip() + "," + "" + "," + "" + "\n")
-        
-        locale53 = geocoder.opencage(hold[208].strip() + co + "," + sd, key='')
-        file.write(hold[208].strip() + "," + sd + "," + str(fips.get_county_fips(hold[208].strip(),state=sd)).strip() + "," + str(locale53.latlng).strip('[]') + "," 
-                   + hold[209].strip() + "," + "" + "," + hold[211].strip() + "," + "" + "," + "" + "\n")
-        
-        locale54 = geocoder.opencage(hold[212].strip() + co + "," + sd, key='')
-        file.write(hold[212].strip() + "," + sd + "," + str(fips.get_county_fips(hold[212].strip(),state=sd)).strip() + "," + str(locale54.latlng).strip('[]') + "," 
-                   + hold[213].strip() + "," + "" + "," + hold[215].strip() + "," + "" + "," + "" + "\n")
-        
-        locale55 = geocoder.opencage(hold[216].strip() + co + "," + sd, key='')
-        file.write(hold[216].strip() + "," + sd + "," + str(fips.get_county_fips(hold[216].strip(),state=sd)).strip() + "," + str(locale55.latlng).strip('[]') + "," 
-                   + hold[217].strip() + "," + "" + "," + hold[219].strip() + "," + "" + "," + "" + "\n")
-        
-        locale56 = geocoder.opencage(hold[220].strip() + co + "," + sd, key='')
-        file.write(hold[220].strip() + "," + sd + "," + str(fips.get_county_fips(hold[220].strip(),state=sd)).strip() + "," + str(locale56.latlng).strip('[]') + "," 
-                   + hold[221].strip() + "," + "" + "," + hold[223].strip() + "," + "" + "," + "" + "\n")
-        
-        locale57 = geocoder.opencage(hold[224].strip() + co + "," + sd, key='')
-        file.write(hold[224].strip() + "," + sd + "," + str(fips.get_county_fips(hold[224].strip(),state=sd)).strip() + "," + str(locale57.latlng).strip('[]') + "," 
-                   + hold[225].strip() + "," + "" + "," + hold[227].strip() + "," + "" + "," + "" + "\n")
-        
-        locale58 = geocoder.opencage(hold[228].strip() + co + "," + sd, key='')
-        file.write(hold[228].strip() + "," + sd + "," + str(fips.get_county_fips(hold[228].strip(),state=sd)).strip() + "," + str(locale58.latlng).strip('[]') + "," 
-                   + hold[229].strip() + "," + "" + "," + hold[231].strip() + "," + "" + "," + "" + "\n")
-        
-        locale59 = geocoder.opencage(hold[232].strip() + co + "," + sd, key='')
-        file.write(hold[232].strip() + "," + sd + "," + str(fips.get_county_fips(hold[232].strip(),state=sd)).strip() + "," + str(locale59.latlng).strip('[]') + "," 
-                   + hold[233].strip() + "," + "" + "," + hold[235].strip() + "," + "" + "," + "" + "\n")
-        
-        locale60 = geocoder.opencage(hold[236].strip() + co + "," + sd, key='')
-        file.write(hold[236].strip() + "," + sd + "," + str(fips.get_county_fips(hold[236].strip(),state=sd)).strip() + "," + str(locale60.latlng).strip('[]') + "," 
-                   + hold[237].strip() + "," + "" + "," + hold[239].strip() + "," + "" + "," + "" + "\n")
-        
-        locale61 = geocoder.opencage(hold[240].strip() + co + "," + sd, key='')
-        file.write(hold[240].strip() + "," + sd + "," + str(fips.get_county_fips(hold[240].strip(),state=sd)).strip() + "," + str(locale61.latlng).strip('[]') + "," 
-                   + hold[241].strip() + "," + "" + "," + hold[243].strip() + "," + "" + "," + "" + "\n")
-        
-        locale62 = geocoder.opencage(hold[244].strip() + co + "," + sd, key='')
-        file.write(hold[244].strip() + "," + sd + "," + str(fips.get_county_fips(hold[244].strip(),state=sd)).strip() + "," + str(locale62.latlng).strip('[]') + "," 
-                   + hold[245].strip() + "," + "" + "," + hold[247].strip() + "," + "" + "," + "" + "\n")
-        
-        locale63 = geocoder.opencage(hold[248].strip() + co + "," + sd, key='')
-        file.write(hold[248].strip() + "," + sd + "," + str(fips.get_county_fips(hold[248].strip(),state=sd)).strip() + "," + str(locale63.latlng).strip('[]') + "," 
-                   + hold[249].strip() + "," + "" + "," + hold[251].strip() + "," + "" + "," + "" + "\n")
-        
-        locale64 = geocoder.opencage(hold[252].strip() + co + "," + sd, key='')
-        file.write(hold[252].strip() + "," + sd + "," + str(fips.get_county_fips(hold[252].strip(),state=sd)).strip() + "," + str(locale64.latlng).strip('[]') + "," 
-                   + hold[253].strip() + "," + "" + "," + hold[255].strip() + "," + "" + "," + "" + "\n")
-        
-        locale65 = geocoder.opencage(hold[256].strip() + co + "," + sd, key='')
-        file.write(hold[256].strip() + "," + sd + "," + str(fips.get_county_fips(hold[256].strip(),state=sd)).strip() + "," + str(locale65.latlng).strip('[]') + "," 
-                   + hold[257].strip() + "," + "" + "," + hold[259].strip() + "," + "" + "," + "" + "\n")
-        
-        locale66 = geocoder.opencage(hold[260].strip() + co + "," + sd, key='')
-        file.write(hold[260].strip() + "," + sd + "," + str(fips.get_county_fips(hold[260].strip(),state=sd)).strip() + "," + str(locale66.latlng).strip('[]') + "," 
-                   + hold[261].strip() + "," + "" + "," + hold[263].strip() + "," + "" + "," + "" + "\n")
-        
-#        locale67 = geocoder.opencage(hold[264].strip() + co + "," + sd, key='')
-        file.write(hold[264].strip() + "," + sd + "," + str(fips.get_state_fips(sd)).strip() + "," + str(geocoder.opencage(sd, key='').latlng).strip('[]') + "," 
-                   + hold[265].strip() + "," + "" + "," + hold[267].strip() + "," + "" + "," + "" + "\n")
-        
-        file.write("SOUTH DAKOTA" + "," + sd + "," + str(fips.get_state_fips(sd)).strip() + "," + str(liegen.geocode("SOUTH DAKOTA").latitude)
-                   + "," + str(liegen.geocode("SOUTH DAKOTA").longitude) + "," + "" 
-                   + "," + mortNo + "," + "" + "," + "" + "," + hausNo + "\n")
-        
-            
         file.close()
+
     
         print("South Dakota scraper is complete.")
     else:
@@ -3079,12 +2908,12 @@ def tnScrape():
                 take = p.get_text()
                 hold.append(take)    
                 
-    if (hold[148].split('\n')[1]) == 'Anderson' and (hold[239].split('\n')[1]) == 'Pending':
+    if (hold[157].split('\n')[1]) == 'Anderson' and (hold[249].split('\n')[1]) == 'Pending':
         
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[148:238]:
+        for h in hold[157:248]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1].split('[')[0] + co + "," + tn, key='')
             file.write(take[1].split('[')[0] + "," + tn + "," + str(fips.get_county_fips(take[1].split('[')[0],state=tn)).strip() 
@@ -3092,12 +2921,12 @@ def tnScrape():
                        +  "," + take[3].split('[')[0].replace(',','') + "," 
                        + take[5].split('[')[0].replace(',','') + "," + take[7].split('[')[0].replace(',','') +"\n")
         
-        file.write(hold[238].split('\n')[1].split('[')[0] + "," + tn +  "," + str(fips.get_state_fips(tn)).strip() + ","  
+        file.write(hold[248].split('\n')[1].split('[')[0] + "," + tn +  "," + str(fips.get_state_fips(tn)).strip() + ","  
                    + str(geocoder.opencage(tn, key='').latlng).strip('[]') 
-                   +","+ hold[239].split('\n')[3] + "," + hold[238].split('\n')[5] + "," + hold[238].split('\n')[7] +"\n")
-        file.write(hold[239].split('\n')[1].split('[')[0] + "," + tn +  "," + str(fips.get_state_fips(tn)).strip() + ","
+                   +","+ hold[248].split('\n')[3] + "," + hold[248].split('\n')[5] + "," + hold[248].split('\n')[7] +"\n")
+        file.write(hold[249].split('\n')[1].split('[')[0] + "," + tn +  "," + str(fips.get_state_fips(tn)).strip() + ","
                    + str(geocoder.opencage(tn, key='').latlng).strip('[]') 
-                   +","+ hold[239].split('\n')[3] + "," + hold[239].split('\n')[5] + "," + hold[239].split('\n')[7] +"\n")
+                   +","+ hold[249].split('\n')[3] + "," + hold[249].split('\n')[5] + "," + hold[249].split('\n')[7] +"\n")
             
         file.close()
         
@@ -3280,13 +3109,13 @@ def utScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    salt = hold[61].split('\n')
+    salt = hold[65].split('\n')
     saltLake = salt[1]
     saltCase = salt[3]
     saltKhaus = salt[5]
     
     #San Juan County
-    sanjuan = hold[62].split('\n')
+    sanjuan = hold[66].split('\n')
     sanJ = sanjuan[1]
     sanCases = sanjuan[3]
     sanKhaus = sanjuan[5]
@@ -3315,8 +3144,8 @@ def utScrape():
     
     garfield = "Garfield County"
     garFips = "49017"
-    garCase = hold[64].split('\n')[3]
-    garKhaus = hold[64].split('\n')[5]
+    garCase = hold[68].split('\n')[3]
+    garKhaus = hold[68].split('\n')[5]
     
     iron = "Iron County"
     ironFips = "49021"
@@ -3328,13 +3157,13 @@ def utScrape():
     washFips = "49053"
     
     #Summit County 
-    summit = hold[65].split('\n')
+    summit = hold[69].split('\n')
     sumCo = summit[1] + " County"
     sumCase = summit[3]
     sumKhaus = summit[5]
     
     #Tooele County
-    tooele = hold[66].split('\n')
+    tooele = hold[70].split('\n')
     toolCo = tooele[1] + " County"
     toolCase = tooele[3]
     toolKhaus = tooele[5]
@@ -3506,12 +3335,12 @@ def vaScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if (hold[60].split('\n')[1]) == 'Accomack County' and (hold[183].split('\n')[1]) == 'York County':
+    if (hold[64].split('\n')[1]) == 'Accomack County' and (hold[189].split('\n')[1]) == 'York County':
     
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[60:62]:
+        for h in hold[64:66]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1].split(" ")[0] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3520,10 +3349,10 @@ def vaScrape():
         
         #Alexandria City 
         file.write("Alexandria" + "," + va + "," + "51510" 
-                    + "," + str(geocoder.opencage(hold[62].split('\n')[1].split(' (')[0] + ", " + va,  key='').latlng).strip('[]') + ","
-                    + hold[62].split('\n')[5].replace(',','') + "," + hold[62].split('\n')[7].replace(',','') + "\n")
+                    + "," + str(geocoder.opencage(hold[66].split('\n')[1].split(' (')[0] + ", " + va,  key='').latlng).strip('[]') + ","
+                    + hold[66].split('\n')[5].replace(',','') + "," + hold[66].split('\n')[7].replace(',','') + "\n")
 
-        for h in hold[63:71]:
+        for h in hold[67:75]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1].split(' (')[0] + "," + va, key='')
             file.write(take[1].split(' (')[0] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3532,10 +3361,10 @@ def vaScrape():
                            
         #Bristol [69]
         file.write("Bristol" + "," + va + "," + "51520" 
-                   + "," + str(geocoder.opencage(hold[71].split('\n')[1]  + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[71].split('\n')[5].replace(',','') + "," + hold[71].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[75].split('\n')[1]  + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[75].split('\n')[5].replace(',','') + "," + hold[75].split('\n')[7].replace(',','') + "\n")
         
-        for h in hold[72:75]:
+        for h in hold[76:79]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3544,10 +3373,10 @@ def vaScrape():
             
         #Buena Vista [73]
         file.write("Buena Vista" + "," + va + "," + "51530" 
-                   + "," + str(geocoder.opencage(hold[75].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[75].split('\n')[5].replace(',','') + "," + hold[75].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[79].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[79].split('\n')[5].replace(',','') + "," + hold[79].split('\n')[7].replace(',','') + "\n")
         
-        for h in hold[76:81]:
+        for h in hold[80:85]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3556,15 +3385,15 @@ def vaScrape():
         
         #Charlottesville [79]
         file.write("Charlottesville" + "," + va + "," + "51540" 
-                   + "," + str(geocoder.opencage(hold[81].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[81].split('\n')[5].replace(',','') + "," + hold[81].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[85].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[85].split('\n')[5].replace(',','') + "," + hold[85].split('\n')[7].replace(',','') + "\n")
         
         #Chesapeake
         file.write("Chesapeake" + "," + va + "," + "51550" 
-                   + "," + str(geocoder.opencage(hold[82].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[82].split('\n')[5].replace(',','') + "," + hold[82].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[86].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[86].split('\n')[5].replace(',','') + "," + hold[86].split('\n')[7].replace(',','') + "\n")
         
-        for h in hold[83:85]:
+        for h in hold[87:89]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3573,15 +3402,15 @@ def vaScrape():
         
         #Colonial Heights [83]
         file.write("Colonial Heights" + "," + va + "," + "51570" 
-                   + "," + str(geocoder.opencage(hold[85].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[85].split('\n')[5].replace(',','') + "," + hold[85].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[89].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[89].split('\n')[5].replace(',','') + "," + hold[89].split('\n')[7].replace(',','') + "\n")
         
         #Covington[84]
         file.write("Covington" + "," + va + "," + "51580" 
-                   + "," + str(geocoder.opencage(hold[86].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[86].split('\n')[5].replace(',','') + "," + hold[86].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[90].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[90].split('\n')[5].replace(',','') + "," + hold[90].split('\n')[7].replace(',','') + "\n")
         
-        for h in hold[87:90]:
+        for h in hold[91:94]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3590,34 +3419,34 @@ def vaScrape():
             
         #Danville
         file.write("Danville" + "," + va + "," + "51590" 
-                   + "," + str(geocoder.opencage(hold[90].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[90].split('\n')[5].replace(',','') + "," + hold[90].split('\n')[7].replace(',','') + "\n")
-        
-        #Dinwiddie County
-        file.write(hold[91].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[91].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[91].split('\n')[1] +", "  + va,  key='').latlng).strip('[]') + ","
-                   + hold[91].split('\n')[5].replace(',','') + "," + hold[91].split('\n')[7].replace(',','') + "\n")
-        
-        #Emporia
-        file.write("Emporia" + "," + va + "," + "51595" 
-                   + "," + str(geocoder.opencage(hold[92].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[92].split('\n')[5].replace(',','') + "," + hold[92].split('\n')[7].replace(',','') + "\n")
-        
-        #Fairfax city
-        file.write("Fairfax" + "," + va + "," + "51600" 
-                   + "," + str(geocoder.opencage(hold[93].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[93].split('\n')[5].replace(',','') + "," + hold[93].split('\n')[7].replace(',','') + "\n")
-        
-        #Fairfax County
-        file.write(hold[94].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[94].split('\n')[1],state=va)).strip() 
                    + "," + str(geocoder.opencage(hold[94].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
                    + hold[94].split('\n')[5].replace(',','') + "," + hold[94].split('\n')[7].replace(',','') + "\n")
         
+        #Dinwiddie County
+        file.write(hold[95].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[95].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[95].split('\n')[1] +", "  + va,  key='').latlng).strip('[]') + ","
+                   + hold[95].split('\n')[5].replace(',','') + "," + hold[95].split('\n')[7].replace(',','') + "\n")
+        
+        #Emporia
+        file.write("Emporia" + "," + va + "," + "51595" 
+                   + "," + str(geocoder.opencage(hold[96].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[96].split('\n')[5].replace(',','') + "," + hold[96].split('\n')[7].replace(',','') + "\n")
+        
+        #Fairfax city
+        file.write("Fairfax" + "," + va + "," + "51600" 
+                   + "," + str(geocoder.opencage(hold[97].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[97].split('\n')[5].replace(',','') + "," + hold[97].split('\n')[7].replace(',','') + "\n")
+        
+        #Fairfax County
+        file.write(hold[98].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[98].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[98].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[98].split('\n')[5].replace(',','') + "," + hold[98].split('\n')[7].replace(',','') + "\n")
+        
         #Falls Church
         file.write("Falls Church" + "," + va + "," + "51610" 
-                   + "," + str(geocoder.opencage(hold[95].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[95].split('\n')[5].replace(',','') + "," + hold[95].split('\n')[7].replace(',','') + "\n")
-        for h in hold[96:99]:
+                   + "," + str(geocoder.opencage(hold[99].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[99].split('\n')[5].replace(',','') + "," + hold[99].split('\n')[7].replace(',','') + "\n")
+        for h in hold[100:104]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3625,9 +3454,9 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Franklin
         file.write("Franklin" + "," + va + "," + "51620" 
-                   + "," + str(geocoder.opencage(hold[99].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[99].split('\n')[5].replace(',','') + "," + hold[99].split('\n')[7].replace(',','') + "\n")
-        for h in hold[100:102]:
+                   + "," + str(geocoder.opencage(hold[104].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[104].split('\n')[5].replace(',','') + "," + hold[104].split('\n')[7].replace(',','') + "\n")
+        for h in hold[105:107]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3635,13 +3464,13 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Fredericksburg city
         file.write("Fredericksburg" + "," + va + "," + "51630" 
-                   + "," + str(geocoder.opencage(hold[102].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[102].split('\n')[5].replace(',','') + "," + hold[102].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[107].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[107].split('\n')[5].replace(',','') + "," + hold[107].split('\n')[7].replace(',','') + "\n")
         #Galax
         file.write("Galax" + "," + va + "," + "51640" 
-                   + "," + str(geocoder.opencage(hold[103].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[103].split('\n')[5].replace(',','') + "," + hold[103].split('\n')[7].replace(',','') + "\n")
-        for h in hold[104:110]:
+                   + "," + str(geocoder.opencage(hold[108].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[108].split('\n')[5].replace(',','') + "," + hold[108].split('\n')[7].replace(',','') + "\n")
+        for h in hold[109:115]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3649,17 +3478,17 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Hampton
         file.write("Hampton" + "," + va + "," + "51650" 
-                   + "," + str(geocoder.opencage(hold[110].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[110].split('\n')[5].replace(',','') + "," + hold[110].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[115].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[115].split('\n')[5].replace(',','') + "," + hold[115].split('\n')[7].replace(',','') + "\n")
         #Hanover
-        file.write(hold[111].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[111].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[111].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[111].split('\n')[5].replace(',','') + "," + hold[111].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[116].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[116].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[117].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[116].split('\n')[5].replace(',','') + "," + hold[116].split('\n')[7].replace(',','') + "\n")
         #Harrisonburg
         file.write("Harrisonburg" + "," + va + "," + "51660" 
-                   + "," + str(geocoder.opencage(hold[112].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[112].split('\n')[5].replace(',','') + "," + hold[112].split('\n')[7].replace(',','') + "\n")
-        for h in hold[113:115]:
+                   + "," + str(geocoder.opencage(hold[117].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[117].split('\n')[5].replace(',','') + "," + hold[117].split('\n')[7].replace(',','') + "\n")
+        for h in hold[118:120]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3667,9 +3496,9 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Hopewell
         file.write("Hopewell" + "," + va + "," + "51670" 
-                   + "," + str(geocoder.opencage(hold[115].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[115].split('\n')[5].replace(',','') + "," + hold[115].split('\n')[7].replace(',','') + "\n")
-        for h in hold[116:123]:
+                   + "," + str(geocoder.opencage(hold[120].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[120].split('\n')[5].replace(',','') + "," + hold[120].split('\n')[7].replace(',','') + "\n")
+        for h in hold[121:128]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3677,9 +3506,9 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Lexington
         file.write("Lexington" + "," + va + "," + "51678" 
-                   + "," + str(geocoder.opencage(hold[123].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[123].split('\n')[5].replace(',','') + "," + hold[123].split('\n')[7].replace(',','') + "\n")
-        for h in hold[124:127]:
+                   + "," + str(geocoder.opencage(hold[128].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[128].split('\n')[5].replace(',','') + "," + hold[128].split('\n')[7].replace(',','') + "\n")
+        for h in hold[129:132]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3687,21 +3516,21 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Lynchburg
         file.write("Lynchburg" + "," + va + "," + "51680" 
-                   + "," + str(geocoder.opencage(hold[127].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[127].split('\n')[5].replace(',','') + "," + hold[127].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[132].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[132].split('\n')[5].replace(',','') + "," + hold[132].split('\n')[7].replace(',','') + "\n")
         #Madison County
-        file.write(hold[128].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[128].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[128].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[128].split('\n')[5].replace(',','') + "," + hold[128].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[133].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[133].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[133].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[133].split('\n')[5].replace(',','') + "," + hold[133].split('\n')[7].replace(',','') + "\n")
         #Manassas (city)
         file.write("Manassas" + "," + va + "," + "51683" 
-                   + "," + str(geocoder.opencage(hold[129].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[129].split('\n')[5].replace(',','') + "," + hold[129].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[134].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[134].split('\n')[5].replace(',','') + "," + hold[134].split('\n')[7].replace(',','') + "\n")
         #Manassas Park
         file.write("Manassas Park" + "," + va + "," + "51685" 
-                   + "," + str(geocoder.opencage(hold[130].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[130].split('\n')[5].replace(',','') + "," + hold[130].split('\n')[7].replace(',','') + "\n")
-        for h in hold[131:137]:
+                   + "," + str(geocoder.opencage(hold[135].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[135].split('\n')[5].replace(',','') + "," + hold[135].split('\n')[7].replace(',','') + "\n")
+        for h in hold[136:142]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3709,13 +3538,23 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Newport News
         file.write("Newport News" + "," + va + "," + "51700" 
-                   + "," + str(geocoder.opencage(hold[137].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[137].split('\n')[5].replace(',','') + "," + hold[137].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[142].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[142].split('\n')[5].replace(',','') + "," + hold[142].split('\n')[7].replace(',','') + "\n")
         #Norfolk
         file.write("Norfolk" + "," + va + "," + "51710" 
-                   + "," + str(geocoder.opencage(hold[138].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[138].split('\n')[5].replace(',','') + "," + hold[138].split('\n')[7].replace(',','') + "\n")
-        for h in hold[139:144]:
+                   + "," + str(geocoder.opencage(hold[143].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[143].split('\n')[5].replace(',','') + "," + hold[143].split('\n')[7].replace(',','') + "\n")
+        for h in hold[144:146]:
+            take = h.split('\n')
+            locale = geocoder.opencage(take[1] + "," + va, key='')
+            file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
+                       + "," + str(locale.latlng).strip('[]') + ","
+                       + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
+        #Norton
+        file.write("Norton" + "," + va + "," + "51720" 
+                   + "," + str(geocoder.opencage(hold[146].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[146].split('\n')[5].replace(',','') + "," + hold[146].split('\n')[7].replace(',','') + "\n")
+        for h in hold[147:150]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3723,21 +3562,21 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Petersburg
         file.write("Petersburg" + "," + va + "," + "51730" 
-                   + "," + str(geocoder.opencage(hold[144].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[144].split('\n')[5].replace(',','') + "," + hold[144].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[150].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[150].split('\n')[5].replace(',','') + "," + hold[150].split('\n')[7].replace(',','') + "\n")
         #Pittsylvania County
-        file.write(hold[145].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[145].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[145].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[145].split('\n')[5].replace(',','') + "," + hold[145].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[151].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[151].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[151].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[151].split('\n')[5].replace(',','') + "," + hold[151].split('\n')[7].replace(',','') + "\n")
         #Poquoson
         file.write("Poquoson" + "," + va + "," + "51735" 
-                   + "," + str(geocoder.opencage(hold[146].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[146].split('\n')[5].replace(',','') + "," + hold[146].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[152].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[152].split('\n')[5].replace(',','') + "," + hold[152].split('\n')[7].replace(',','') + "\n")
         #Portsmouth
         file.write("Portsmouth" + "," + va + "," + "51740" 
-                   + "," + str(geocoder.opencage(hold[147].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[147].split('\n')[5].replace(',','') + "," + hold[147].split('\n')[7].replace(',','') + "\n")
-        for h in hold[148:153]:
+                   + "," + str(geocoder.opencage(hold[153].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[153].split('\n')[5].replace(',','') + "," + hold[153].split('\n')[7].replace(',','') + "\n")
+        for h in hold[154:159]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3745,25 +3584,25 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Radford
         file.write("Radford" + "," + va + "," + "51750" 
-                   + "," + str(geocoder.opencage(hold[153].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[153].split('\n')[5].replace(',','') + "," + hold[153].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[159].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[159].split('\n')[5].replace(',','') + "," + hold[159].split('\n')[7].replace(',','') + "\n")
         #Rappahannock County
-        file.write(hold[154].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[154].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[154].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[154].split('\n')[5].replace(',','') + "," + hold[154].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[160].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[160].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[160].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[160].split('\n')[5].replace(',','') + "," + hold[160].split('\n')[7].replace(',','') + "\n")
         #Richmond (city)
         file.write("Richmond" + "," + va + "," + "51760" 
-                   + "," + str(geocoder.opencage(hold[155].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[155].split('\n')[5].replace(',','') + "," + hold[155].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[161].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[161].split('\n')[5].replace(',','') + "," + hold[161].split('\n')[7].replace(',','') + "\n")
         #Richmond County
-        file.write(hold[156].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[156].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[156].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[156].split('\n')[5].replace(',','') + "," + hold[156].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[162].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[162].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[162].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[162].split('\n')[5].replace(',','') + "," + hold[162].split('\n')[7].replace(',','') + "\n")
         #Roanoke
         file.write("Roanoke" + "," + va + "," + "51770" 
-                   + "," + str(geocoder.opencage(hold[157].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[157].split('\n')[5].replace(',','') + "," + hold[157].split('\n')[7].replace(',','') + "\n")
-        for h in hold[158:162]:
+                   + "," + str(geocoder.opencage(hold[163].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[163].split('\n')[5].replace(',','') + "," + hold[163].split('\n')[7].replace(',','') + "\n")
+        for h in hold[164:168]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3771,9 +3610,9 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Salem
         file.write("Salem" + "," + va + "," + "51775" 
-                   + "," + str(geocoder.opencage(hold[162].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[162].split('\n')[5].replace(',','') + "," + hold[162].split('\n')[7].replace(',','') + "\n")
-        for h in hold[163:169]:
+                   + "," + str(geocoder.opencage(hold[168].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[168].split('\n')[5].replace(',','') + "," + hold[168].split('\n')[7].replace(',','') + "\n")
+        for h in hold[169:175]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3781,13 +3620,13 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Stauton
         file.write("Stauton" + "," + va + "," + "51790" 
-                   + "," + str(geocoder.opencage(hold[169].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[169].split('\n')[5].replace(',','') + "," + hold[169].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[175].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[175].split('\n')[5].replace(',','') + "," + hold[175].split('\n')[7].replace(',','') + "\n")
         #Suffolk
         file.write("Suffolk" + "," + va + "," + "51800" 
-                   + "," + str(geocoder.opencage(hold[170].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[170].split('\n')[5].replace(',','') + "," + hold[170].split('\n')[7].replace(',','') + "\n")
-        for h in hold[171:174]:
+                   + "," + str(geocoder.opencage(hold[176].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[176].split('\n')[5].replace(',','') + "," + hold[176].split('\n')[7].replace(',','') + "\n")
+        for h in hold[177:180]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3795,9 +3634,9 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Virginia Beach
         file.write("Virginia Beach" + "," + va + "," + "51810" 
-                   + "," + str(geocoder.opencage(hold[174].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[174].split('\n')[5].replace(',','') + "," + hold[174].split('\n')[7].replace(',','') + "\n")
-        for h in hold[175:177]:
+                   + "," + str(geocoder.opencage(hold[180].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[180].split('\n')[5].replace(',','') + "," + hold[180].split('\n')[7].replace(',','') + "\n")
+        for h in hold[181:183]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3805,21 +3644,21 @@ def vaScrape():
                        + take[5].replace(',','') + "," + take[7].replace(',','') + "\n")
         #Waynesboro
         file.write("Waynesboro" + "," + va + "," + "51820" 
-                   + "," + str(geocoder.opencage(hold[177].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[177].split('\n')[5].replace(',','') + "," + hold[177].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[183].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[183].split('\n')[5].replace(',','') + "," + hold[183].split('\n')[7].replace(',','') + "\n")
         #Westmoreland County
-        file.write(hold[178].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[178].split('\n')[1],state=va)).strip() 
-                   + "," + str(geocoder.opencage(hold[178].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[178].split('\n')[5].replace(',','') + "," + hold[178].split('\n')[7].replace(',','') + "\n")
+        file.write(hold[184].split('\n')[1] + "," + va + "," + str(fips.get_county_fips(hold[184].split('\n')[1],state=va)).strip() 
+                   + "," + str(geocoder.opencage(hold[184].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[184].split('\n')[5].replace(',','') + "," + hold[184].split('\n')[7].replace(',','') + "\n")
         #Williamsburg
         file.write("Williamsburg" + "," + va + "," + "51830" 
-                   + "," + str(geocoder.opencage(hold[179].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[179].split('\n')[5].replace(',','') + "," + hold[179].split('\n')[7].replace(',','') + "\n")
+                   + "," + str(geocoder.opencage(hold[185].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[185].split('\n')[5].replace(',','') + "," + hold[185].split('\n')[7].replace(',','') + "\n")
         #Winchester
         file.write("Winchester" + "," + va + "," + "51840" 
-                   + "," + str(geocoder.opencage(hold[180].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
-                   + hold[180].split('\n')[5].replace(',','') + "," + hold[180].split('\n')[7].replace(',','') + "\n")
-        for h in hold[181:184]:
+                   + "," + str(geocoder.opencage(hold[186].split('\n')[1] + ", " + va,  key='').latlng).strip('[]') + ","
+                   + hold[186].split('\n')[5].replace(',','') + "," + hold[186].split('\n')[7].replace(',','') + "\n")
+        for h in hold[187:190]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + va, key='')
             file.write(take[1] + "," + va + "," + str(fips.get_county_fips(take[1], state=va)).strip() 
@@ -3904,12 +3743,12 @@ def vtScrape():
                 take = p.get_text()
                 hold.append(take)
                 
-    if (hold[58].split('\n')[1]) == 'Addison' and (hold[72].split('\n')[1]) == 'Unassigned county':
+    if (hold[61].split('\n')[1]) == 'Addison' and (hold[75].split('\n')[1]) == 'Unassigned county':
 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[58:72]:
+        for h in hold[61:75]:
             take = h.split('\n')
             locale = liegen.geocode(take[1] + co + "," + vt)
             catch_TimeOut(take[1] + co + "," + vt)
@@ -3918,10 +3757,10 @@ def vtScrape():
                        + str(locale.longitude) + "," + take[3] + "," + take[5] + "\n")
             sleep(1.1)
         
-        file.write(hold[72].split('\n')[1] + "," + vt + "," + str(fips.get_state_fips(vt)).strip() + "," 
+        file.write(hold[75].split('\n')[1] + "," + vt + "," + str(fips.get_state_fips(vt)).strip() + "," 
                    + str(liegen.geocode(vt).latitude) + ","
-                   + str(liegen.geocode(vt).longitude) + "," + hold[72].split('\n')[3] 
-                   + "," + hold[72].split('\n')[5] + "\n")
+                   + str(liegen.geocode(vt).longitude) + "," + hold[75].split('\n')[3] 
+                   + "," + hold[75].split('\n')[5] + "\n")
         
         file.close()
     
@@ -3955,12 +3794,12 @@ def waScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if (hold[68].split('\n')[1]) == 'Adams' and (hold[107].split('\n')[1]) == 'Unassigned':
+    if (hold[72].split('\n')[1]) == 'Adams' and (hold[111].split('\n')[1]) == 'Unassigned':
     
         file = open(csvfile, "w")
         file.write(headers)    
     
-        for h in hold[68:107]:
+        for h in hold[72:111]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + wa, key='')
             file.write(take[1] + "," + wa + "," + str(fips.get_county_fips(take[1],state=wa)).strip() + "," 
@@ -3968,10 +3807,10 @@ def waScrape():
                        + take[3].split('[')[0].replace(',','') 
                        + "," + take[5].split('[')[0].replace(',','') + "\n")
             
-        file.write(hold[107].split('\n')[1] + "," + wa + "," + str(fips.get_state_fips(wa)).strip() + "," 
+        file.write(hold[111].split('\n')[1] + "," + wa + "," + str(fips.get_state_fips(wa)).strip() + "," 
                    + str(liegen.geocode(wa).latitude) + "," 
-                   + str(liegen.geocode(wa).longitude) + "," + hold[107].split('\n')[3].split('[')[0].replace(',','') 
-                   + "," + hold[107].split('\n')[5].split('[')[0].replace(',','') + "\n")
+                   + str(liegen.geocode(wa).longitude) + "," + hold[111].split('\n')[3].split('[')[0].replace(',','') 
+                   + "," + hold[111].split('\n')[5].split('[')[0].replace(',','') + "\n")
         
         file.close()
     
@@ -4038,12 +3877,12 @@ def wvScrape():
                 take = p.get_text()
                 hold.append(take)
     
-    if hold[54].split('\n')[1] == 'Barbour County' and hold[101].split('\n')[1] == 'Wyoming County':
+    if hold[57].split('\n')[1] == 'Barbour County' and hold[104].split('\n')[1] == 'Wyoming County':
     
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[54:102]:
+        for h in hold[57:105]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + "," + wv, key='')
             file.write(take[1] + "," + wv + "," + str(fips.get_county_fips(take[1],state=wv)).strip() + ","
@@ -4083,12 +3922,12 @@ def wyScrape():
                 take = p.get_text()
                 hold.append(take)
 
-    if (hold[63].split('\n')[1]) == 'Albany' and (hold[85].split('\n')[1]) == 'Weston':
+    if (hold[67].split('\n')[1]) == 'Albany' and (hold[89].split('\n')[1]) == 'Weston':
                 
         file = open(csvfile, "w")
         file.write(headers)
         
-        for h in hold[63:86]:
+        for h in hold[67:90]:
             take = h.split('\n')
             locale = geocoder.opencage(take[1] + co + "," + wy, key='')
             file.write(take[1] + "," + wy + "," + str(fips.get_county_fips(take[1],state=wy)).strip() + ","
@@ -4161,8 +4000,7 @@ def main():
     wvScrape()
     wyScrape()
     
-    path = "C:/Users/Erwac/Desktop/COVID-19/Web Scrapers/US States"
-
+    path = "C:/Users/Erwac/Desktop/COVID-19/COVID-19-Outbreak-Visualization-Tool/Web Scrapers/US States"
     os.chdir(path)
     
     csvFile = "csv"
