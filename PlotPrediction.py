@@ -91,7 +91,7 @@ plt.xticks(fontsize=18)
 plt.yticks(fontsize=18)
 plt.plot(x, regress_Confirmed, color="blue")
 plt.plot(x, regress_Deaths, color = "red")
-plt.plot(x, regress_Recovered, color="gree")
+plt.plot(x, regress_Recovered, color="green")
 plt.show()
 
 
