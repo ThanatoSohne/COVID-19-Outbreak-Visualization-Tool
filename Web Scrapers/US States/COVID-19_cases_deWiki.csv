@@ -1,4 +1,4 @@
-County,State,fips,Latitude,Longitude,Confirmed Cases
+County,State,fips,Latitude,Longitude,Confirmed CasesDeaths,Recoveries
 Kent County,DELAWARE,10001,39.1156908,-75.4841394,652,23,164
 New Castle County,DELAWARE,10003,39.6159851,-75.662956,1629,57,540
 Sussex County,DELAWARE,10005,38.6908097,-75.3691421,1870,45,292
