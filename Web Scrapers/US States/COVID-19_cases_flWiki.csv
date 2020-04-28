@@ -1,4 +1,4 @@
-County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,,,Hospitalizations
+County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries
 Alachua,FLORIDA,12001,29.675568, -82.3640109,254,2,40
 Baker,FLORIDA,12003,30.3143459, -82.2847163,20,3,8
 Bay,FLORIDA,12005,27.7567667, -81.4639835,68,3,9
