@@ -1,30 +1,32 @@
 
-.body {
-	width: 90%;
-	margin: 0 auto;
+body{
+	background-color: #111111;
+	font-family: Georgia;
+	margin: 0
+
 }
-#content {overflow: auto;}
-#nav, #feature, #footer {
-	margin: 1%;
+h1 {
+	color: #F0F8FF;
 }
-.column1, .column2, .column3 {
-	width: 31.3%;
-	float: left;
-	margin: 1%;
+@font-face h1{
+    font-family: 'neumannregular';
+    src: url('td-neumann-webfont.woff2') format('woff2'),
+         url('td-neumann-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
-.column3 {
-	margin-right: 0%;
+
+h1:hover {
+	color: #f00;
+	transition: all 0.3s ease;
+
 }
-.li {
-	display: inline;
-	padding: 0.5em;
-}
-#nav, #footer {
-	background-color: #efefef;
-	padding: 0.5em 0;
-}
-#feature, .article {
-	height: 10em;
-	margin-bottom: 1em;
-	background-color: #efefef;
+h2 {
+	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	-moz-transform: translateX(-50%) translateY(-50%);
+    	-webkit-transform: translateX(-50%) translateY(-50%);
+    	transform: translateX(-50%) translateY(-50%);
 }
