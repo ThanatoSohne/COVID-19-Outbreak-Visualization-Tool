@@ -3,18 +3,18 @@ Africa,Algeria,4006,450,1738
 Africa,Angola,27,2,8
 Africa,Benin,84,2,47
 Africa,Botswana,23,1,8
-Africa,Burkina_Faso,645,43,102
+Africa,Burkina Faso,645,43,102
 Africa,Burundi,15,1,10
 Africa,Cameroon,1832,61,977
-Africa,Cape_Verde,121,1,66
-Africa,Central_African_Republic,50,0,38
+Africa,Cape Verde,121,1,66
+Africa,Central African Republic,50,0,38
 Africa,Chad,73,5,46
 Africa,Congo,220,9,103
-Africa,Cote_dIvoire,1275,14,587
-Africa,Democratic_Republic_of_the_Congo,572,31,285
+Africa,Cote dIvoire,1275,14,587
+Africa,Democratic Republic of the Congo,572,31,285
 Africa,Djibouti,1089,2,498
 Africa,Egypt,5537,392,2864
-Africa,Equatorial_Guinea,315,1,264
+Africa,Equatorial Guinea,315,1,264
 Africa,Eritrea,39,0,4
 Africa,Eswatini,100,1,84
 Africa,Ethiopia,131,3,39
@@ -22,7 +22,7 @@ Africa,Gabon,276,3,181
 Africa,Gambia,12,1,3
 Africa,Ghana,2074,17,1433
 Africa,Guinea,1495,7,1057
-Africa,Guinea_Bissau,205,1,159
+Africa,Guinea Bissau,205,1,159
 Africa,Kenya,396,17,162
 Africa,Liberia,141,16,68
 Africa,Libya,61,3,12
@@ -37,23 +37,23 @@ Africa,Namibia,16,0,0
 Africa,Niger,719,32,110
 Africa,Nigeria,1932,58,1490
 Africa,Rwanda,243,0,105
-Africa,Sao_Tome_and_Principe,16,1,12
+Africa,Sao Tome and Principe,16,1,12
 Africa,Senegal,933,9,598
 Africa,Seychelles,11,0,0
-Africa,Sierra_Leone,124,7,109
+Africa,Sierra Leone,124,7,109
 Africa,Somalia,601,28,521
-Africa,South_Africa,5647,103,3042
-Africa,South_Sudan,35,0,31
+Africa,South Africa,5647,103,3042
+Africa,South Sudan,35,0,31
 Africa,Sudan,442,31,410
 Africa,Togo,116,9,35
 Africa,Tunisia,994,40,172
 Africa,Uganda,83,0,28
-Africa,United_Republic_of_Tanzania,480,16,386
-Africa,Western_Sahara,6,0,6
+Africa,United Republic of Tanzania,480,16,386
+Africa,Western Sahara,6,0,6
 Africa,Zambia,106,3,58
 Africa,Zimbabwe,40,4,16
 America,Anguilla,3,0,0
-America,Antigua_and_Barbuda,24,3,1
+America,Antigua and Barbuda,24,3,1
 America,Argentina,4415,218,1855
 America,Aruba,100,2,5
 America,Bahamas,81,11,27
@@ -63,19 +63,19 @@ America,Bermuda,114,6,31
 America,Bolivia,1167,62,702
 America,Caribbean Netherlands,6,0,2
 America,Brazil,85380,5901,54955
-America,British_Virgin_Islands,6,1,3
+America,British Virgin Islands,6,1,3
 America,Canada,53236,3184,23155
-America,Cayman_Islands,73,1,12
+America,Cayman Islands,73,1,12
 America,Chile,16023,227,7216
 America,Colombia,6507,293,3274
-America,Costa_Rica,719,6,77
+America,Costa Rica,719,6,77
 America,Cuba,1501,61,639
 America,Curaçao,16,1,2
 America,Dominica,16,0,0
-America,Dominican_Republic,6972,301,3217
+America,Dominican Republic,6972,301,3217
 America,Ecuador,24934,900,16709
-America,El_Salvador,424,10,260
-America,Falkland_Islands_(Malvinas),13,0,2
+America,El Salvador,424,10,260
+America,Falkland Islands (Malvinas),13,0,2
 America,Greenland,11,0,0
 America,Grenada,20,0,6
 America,Guatemala,599,16,385
@@ -89,23 +89,23 @@ America,Nicaragua,14,4,5
 America,Panama,6532,188,2516
 America,Paraguay,266,10,92
 America,Peru,36976,1051,24485
-America,Puerto_Rico,1539,92,496
-America,Saint_Kitts_and_Nevis,15,0,1
-America,Saint_Lucia,17,0,2
-America,Saint_Vincent_and_the_Grenadines,16,0,4
-America,Sint_Maarten,76,13,19
+America,Puerto Rico,1539,92,496
+America,Saint Kitts and Nevis,15,0,1
+America,Saint Lucia,17,0,2
+America,Saint Vincent and the Grenadines,16,0,4
+America,Sint Maarten,76,13,19
 America,Suriname,10,1,0
-America,Trinidad_and_Tobago,116,8,2
-America,Turks_and_Caicos_islands,12,1,1
-America,United_States_of_America,1069826,63006,398495
-America,United_States_Virgin_Islands,66,4,15
+America,Trinidad and Tobago,116,8,2
+America,Turks and Caicos islands,12,1,1
+America,United States of America,1069826,63006,398495
+America,United States Virgin Islands,66,4,15
 America,Uruguay,643,17,141
 America,Venezuela,333,10,129
 Asia,Afghanistan,2171,64,1377
 Asia,Bahrain,3040,8,1340
 Asia,Bangladesh,7667,168,6095
 Asia,Bhutan,7,0,2
-Asia,Brunei_Darussalam,138,1,2
+Asia,Brunei Darussalam,138,1,2
 Asia,Cambodia,122,0,0
 Asia,China,83956,4637,202
 Asia,India,35043,1147,21656
@@ -130,17 +130,17 @@ Asia,Pakistan,16817,385,9792
 Asia,Palestine,507,4,213
 Asia,Philippines,8488,568,2828
 Asia,Qatar,13409,10,9306
-Asia,Saudi_Arabia,22753,162,16373
+Asia,Saudi Arabia,22753,162,16373
 Asia,Singapore,16169,15,11742
-Asia,South_Korea,10774,248,139
-Asia,Sri_Lanka,665,7,427
+Asia,South Korea,10774,248,139
+Asia,Sri Lanka,665,7,427
 Asia,Syria,43,3,10
 Asia,Taiwan,429,6,34
 Asia,Tajikistan,15,0,15
 Asia,Thailand,2960,54,260
-Asia,Timor_Leste,24,0,6
+Asia,Timor Leste,24,0,6
 Asia,Turkey,120204,3174,46011
-Asia,United_Arab_Emirates,12481,105,6656
+Asia,United Arab Emirates,12481,105,6656
 Asia,Uzbekistan,2046,9,666
 Asia,Vietnam,270,0,2
 Asia,Yemen,6,2,5
@@ -151,14 +151,14 @@ Europe,Austria,15457,584,1009
 Europe,Azerbaijan,1804,24,521
 Europe,Belarus,14027,89,9823
 Europe,Belgium,48519,7594,13710
-Europe,Bosnia_and_Herzegovina,1689,64,537
+Europe,Bosnia and Herzegovina,1689,64,537
 Europe,Bulgaria,1506,66,706
 Europe,Croatia,2076,69,285
 Europe,Cyprus,850,20,115
 Europe,Czechia,7682,236,1249
 Europe,Denmark,9158,452,2279
 Europe,Estonia,1689,52,255
-Europe,Faroe_Islands,187,0,3
+Europe,Faroe Islands,187,0,3
 Europe,Finland,4995,211,1626
 Europe,France,129581,24376,20734
 Europe,Georgia,539,6,191
@@ -166,11 +166,11 @@ Europe,Germany,159119,6288,25289
 Europe,Gibraltar,144,0,11
 Europe,Greece,2591,140,384
 Europe,Guernsey,251,13,17
-Europe,Holy_See,11,0,3
+Europe,Holy See,11,0,3
 Europe,Hungary,2863,323,1100
 Europe,Iceland,1797,10,58
 Europe,Ireland,20612,1232,7341
-Europe,Isle_of_Man,315,21,31
+Europe,Isle of Man,315,21,31
 Europe,Italy,205463,27967,36522
 Europe,Jersey,286,23,63
 Europe,Kosovo,799,22,350
@@ -183,13 +183,13 @@ Europe,Moldova,3897,119,1743
 Europe,Monaco,95,4,2
 Europe,Montenegro,322,7,19
 Europe,Netherlands,39316,4795,10102
-Europe,North_Macedonia,1465,77,384
+Europe,North Macedonia,1465,77,384
 Europe,Norway,7710,204,919
 Europe,Poland,12877,644,4959
 Europe,Portugal,25056,989,6215
 Europe,Romania,12240,717,4533
 Europe,Russia,106498,1073,78560
-Europe,San_Marino,569,41,143
+Europe,San Marino,569,41,143
 Europe,Serbia,9009,179,3691
 Europe,Slovakia,1396,23,419
 Europe,Slovenia,1429,91,161
@@ -197,14 +197,13 @@ Europe,Spain,213435,24543,28961
 Europe,Sweden,21092,2586,8552
 Europe,Switzerland,29503,1422,2852
 Europe,Ukraine,9866,250,5404
-Europe,United_Kingdom,171253,26771,68160
+Europe,United Kingdom,171253,26771,68160
 Oceania,Australia,6762,92,265
 Oceania,Fiji,18,0,1
-Oceania,French_Polynesia,58,0,3
+Oceania,French Polynesia,58,0,3
 Oceania,Guam,146,5,11
-Oceania,New_Caledonia,18,0,0
-Oceania,New_Zealand,1132,19,46
-Oceania,Northern_Mariana_Islands,14,2,1
-Oceania,Papua_New_Guinea,8,0,1
-Other,Cases_on_an_international_conveyance_Japan,696,7,0
-Total, ,3214256,232570,1098494
+Oceania,New Caledonia,18,0,0
+Oceania,New Zealand,1132,19,46
+Oceania,Northern Mariana Islands,14,2,1
+Oceania,Papua New Guinea,8,0,1
+Other,Cases on an international conveyance Japan,696,7,0
