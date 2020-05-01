@@ -25,6 +25,7 @@ for r in rose:
 
 newAgain = newAgain.drop(columns = 'Date').astype({'date':'float64'})
 
+newAgain = newAgain.reindex(columns = ['date', 'Country/Region', 'Province/State', 'Lat', 'Long', 'Confirmed', 'Recovered', 'Deaths'])
 print(newAgain)
 
 
