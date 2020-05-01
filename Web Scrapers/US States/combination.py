@@ -879,41 +879,41 @@ def hiScrape():
     hawaii = tables[3].find('th').text
     haLocale = str(geocoder.opencage(hawaii + "," + hi, key='').latlng).strip('[]')
     haFIPS = str(fips.get_county_fips(hawaii,state=hi)).strip()
-    haTotal = tables[3].findAll('td')[1].text.split(' ')[0]
-    haIso = tables[3].findAll('td')[3].text.split(' ')[0]
-    haHosp = tables[3].findAll('td')[5].text.split(' ')[0]
-    haDeaths = tables[3].findAll('td')[7].text.split(' ')[0]
+    haTotal = tables[3].findAll('td')[1].text.split(' ')[0].strip('‡')
+    haIso = tables[3].findAll('td')[3].text.split(' ')[0].strip('‡')
+    haHosp = tables[3].findAll('td')[5].text.split(' ')[0].strip('‡')
+    haDeaths = tables[3].findAll('td')[7].text.split(' ')[0].strip('‡')
 
     honolulu = tables[4].find('th').text
     honLocale = str(geocoder.opencage(honolulu + "," + hi, key='').latlng).strip('[]')
     honFIPS = str(fips.get_county_fips(honolulu,state=hi)).strip()
-    honTotal = tables[4].findAll('td')[1].text.split(' ')[0]
-    honIso = tables[4].findAll('td')[3].text.split(' ')[0]
-    honHosp = tables[4].findAll('td')[5].text.split(' ')[0]
+    honTotal = tables[4].findAll('td')[1].text.split(' ')[0].strip('‡')
+    honIso = tables[4].findAll('td')[3].text.split(' ')[0].strip('‡')
+    honHosp = tables[4].findAll('td')[5].text.split(' ')[0].strip('‡')
     honDeaths = tables[4].findAll('td')[7].text.split(' ')[0].strip('‡')
 
     kauai = tables[5].find('th').text
     kauLocale = str(geocoder.opencage(kauai + "," + hi, key='').latlng).strip('[]')
     kauFIPS = str(fips.get_county_fips(kauai,state=hi)).strip()
-    kauTotal = tables[5].findAll('td')[1].text.split(' ')[0]
-    kauIso = tables[5].findAll('td')[3].text.split(' ')[0]
-    kauHosp = tables[5].findAll('td')[5].text.split(' ')[0]
-    kauDeaths = tables[5].findAll('td')[7].text.split(' ')[0]
+    kauTotal = tables[5].findAll('td')[1].text.split(' ')[0].strip('‡')
+    kauIso = tables[5].findAll('td')[3].text.split(' ')[0].strip('‡')
+    kauHosp = tables[5].findAll('td')[5].text.split(' ')[0].strip('‡')
+    kauDeaths = tables[5].findAll('td')[7].text.split(' ')[0].strip('‡')
 
     maui = tables[6].find('th').text
     mauiLocale = str(geocoder.opencage(maui + "," + hi, key='').latlng).strip('[]')
     mauiFIPS = str(fips.get_county_fips(maui,state=hi)).strip()
-    mauiTotal = tables[6].findAll('td')[1].text.split(' ')[0]
-    mauiIso = tables[6].findAll('td')[3].text.split(' ')[0]
-    mauiHosp = tables[6].findAll('td')[5].text.split(' ')[0]
-    mauiDeaths = tables[6].findAll('td')[7].text.split(' ')[0]
+    mauiTotal = tables[6].findAll('td')[1].text.split(' ')[0].strip('‡')
+    mauiIso = tables[6].findAll('td')[3].text.split(' ')[0].strip('‡')
+    mauiHosp = tables[6].findAll('td')[5].text.split(' ')[0].strip('‡')
+    mauiDeaths = tables[6].findAll('td')[7].text.split(' ')[0].strip('‡')
 
     outliers = site_parse.find("div", {"class": "primary-content secondary"}).findAll("table", {"class": "has-fixed-layout"})
     outHI = outliers[5].findAll('th')[0].text
-    outHIno = outliers[5].findAll('th')[1].text.split(' ')[0]
+    outHIno = outliers[5].findAll('th')[1].text.split(' ')[0].strip('‡')
 
     pending = outliers[6].findAll('th')[0].text
-    penNo = outliers[6].findAll('th')[1].text.split(' ')[0]
+    penNo = outliers[6].findAll('th')[1].text.split(' ')[0].strip('‡')
 
     #Check to ensure the parsed and collected information is correct/ pertient.
     #If it is, then print to the CSV file whose name was created earlier
