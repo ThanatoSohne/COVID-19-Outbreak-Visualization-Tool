@@ -70,6 +70,24 @@ states = [{'label': 'Alaska', 'value': 'AK'},
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
+# ---------------------------WORLD SCATTER GEO MAP----------------------------#
+df = pd.read_csv(
+    'https://raw.githubusercontent.com/ThanatoSohne/COVID-19-Outbreak-Visualization-Tool/master/Web%20Scrapers/COVID-19_world_cases_bnoNews.csv')
+# df.head()
+# Create options for users to change the projection of the map
+
+country = df['Country'].tolist()
+cases = df['Cases'].tolist()
+deaths = df['Deaths'].tolist()
+hope = df['Recovered'].tolist()
+
+geofig = px.scatter_geo(df, lat="Latitude", lon="Longitude", color="Cases",
+                        hover_data=["Cases", "New Cases", "Deaths", "New Deaths", "Serious & Critical", "Recovered"],
+                        hover_name="Country", color_continuous_scale="balance",
+                        size="Cases", projection="orthographic", text="Country",
+                        opacity=0.5, size_max=70)
+geofig.update_layout(height=400, margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
 # -------------------------ALASKA CHOROPLETH MAP------------------------------#
 akDF = pd.read_csv(
     'https://raw.githubusercontent.com/ThanatoSohne/COVID-19-Outbreak-Visualization-Tool/master/Web%20Scrapers/US%20States/COVID-19_cases_akWiki.csv',
@@ -1001,7 +1019,7 @@ wyFig.update_layout(mapbox_style="satellite-streets",
 wyFig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 # -------------------------------------------------------------------------------------------------#
 
-app = dash.Dash(external_stylesheets=[dbc.themes.DARKLY])
+app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
 app.config.suppress_callback_exceptions = True
 
 CONTENT_STYLE = {
@@ -1025,6 +1043,7 @@ dropdown = dbc.Row([
             in_navbar=True,
             label="Menu",
             direction="right",
+            color="info",
         ),
     )
 ],
@@ -1158,27 +1177,40 @@ page1_card6 = [
                         'text-align': 'center',
                         'text-size': '16px'
                     }),
-            dbc.CardLink("CDC Self Checker",
-                         href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/index.html#cdc-chat-bot-open"),
+            dbc.Button("CDC Self Checker",
+                       color="light",
+                       size="lg",
+                       external_link= "False",
+                       block="True",
+                       href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/index.html#cdc-chat-bot-open"),
         ]
     ),
 ]
 
-cards = [page1_card1, page1_card6, page1_card3, page1_card4, page1_card5]
-colours = ["secondary", "primary", "success", "info", "warning", "danger", "light", "dark"]
+#This will allow for a bit of shuffling of the home page card system... This way, there is something new or
+#different each time the user visits the home page
+
+#card_deck1 will have subsets of proteins images for the user to look at
+card_deck1_1 = [page1_card4, page1_card5]
+#card_deck2 will have subsets of infographics
+card_deck2_1 = [page1_card3]
+#card_deck3 will have subsets of motivational quotes, etc.
+card_deck3_1 = [page1_card2]
+#card_deck4 will have subsets of links for the user to click on
+card_deck4_1 = [page1_card6]
+#card_deck5 will host cards with information on COVID-19 and how to stay safe
+card_deck5_1 = [page1_card1]
+colours = ["secondary", "primary", "success", "warning", "danger", "info", "dark"]
 
 mason = dbc.CardColumns(
     [
-        dbc.Card(r.sample(cards, k=1), color=r.sample(colours, k=1), inverse=True),
+        dbc.Card(r.choice(card_deck1_1), color=r.choice(colours), inverse=True),
         dbc.Card(page1_card2, body=True),
-        dbc.Card(r.sample(cards, k=1), color=r.sample(colours, k=1), inverse=True),
-        dbc.Card(r.sample(cards, k=1), color=r.sample(colours, k=1), inverse=True),
-        dbc.Card(r.sample(cards, k=1), color=r.sample(colours, k=1), inverse=True),
-        # dbc.Card(page1_card1, color="secondary", inverse=True),
-        # dbc.Card(page1_card6, color="secondary", inverse=True),
-        # dbc.Card(page1_card3, color="danger", inverse=True),
-        # dbc.Card(page1_card4, color="secondary", inverse=True),
-        # dbc.Card(page1_card5, color="dark", inverse=True),
+        dbc.Card(r.choice(card_deck2_1), color=r.choice(colours), inverse=True),
+        dbc.Card(r.choice(card_deck3_1), color=r.choice(colours), inverse=True),
+        dbc.Card(r.choice(card_deck4_1), color=r.choice(colours), inverse=True),
+        dbc.Card(r.choice(card_deck5_1), color=r.choice(colours), inverse=True),
+        ###So on and so forth....
     ]
 )
 
