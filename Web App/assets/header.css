@@ -51,3 +51,13 @@ h2.effect-box:hover:before {
 	transform: scale(1);
 }
 
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+#sidebar {
+$color-1: #1a1a1a;
+$color-2: #fefefe;
+$pad: 0.925rem;
+
+
+
+}

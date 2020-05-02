@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+
+</head>
+
+
+<body>
+
+<script>
+$(document).ready(function() {
+	$("#change").click(function() {
+				var pdb = "&pdbid=5RE4"
+				var mode= $("input:radio[name='mode']:checked").val();
+                var background = $("input:radio[name='bg']:checked").val();
+				var chainType= $("input:radio[name='chainType']:checked").val();
+				var chainColor= $("input:radio[name='chainColor']:checked").val();
+				
+				var url = "https://embed.molview.org/v1/?mode=";
+				var Updateurl = url + mode + pdb + background + chainType + chainColor;
+				
+				var parent = $('embed#bgs').parent();
+				var newUrl = "<embed id=\"bgs\" src=\"" + Updateurl+ "\" width=\"700\" height=\"700\" />";
+				var newElement = $(newUrl);
+				
+				$('embed#bgs').remove();
+				parent.append(newElement);
+				<!-- $("#iframe_id").attr("src", url); -->
+                
+            });
+  });
+</script>
+
+
+
+  <label class="container">White
+  <input type="radio"  id="white" name="bg" checked="checked" value="&bg=white">
+  <span class="checkmark"></span>
+</label>
+  
+  <label class="container">Gray
+  <input type="radio"  id="gray" name="bg" value="&bg=gray">
+   <span class="checkmark"></span>
+</label>
+
+<label class="container">Black
+  <input type="radio" id="black" name="bg" value="&bg=black">
+  <span class="checkmark"></span>
+</label>
+
+  
+  
+  
+<label class="container">Wireframe
+   <input type="radio" id="wireframe" name="mode" checked="checked" value="wireframe">
+    <span class="checkmark2"></span>
+</label>
+
+  
+  <input type="radio" id="line" name="mode" value="line">
+  <label for="line">Line</label>
+  
+  
+  
+  
+  
+  <input type="radio" id="cylinders" name="chainType" checked="checked" value="&chainType=cylinders">
+  <label for="cylinders">Cylinder and Plate</label>
+  
+  
+  
+  
+  
+  
+  <input type="radio" id="polarity" name="chainColor" checked="checked" value="&chainColor=polarity">
+  <label for="polarity">Polarity</label>
+  
+
+<p>Click the button to change the background:</p>
+<p><input id ="change" type="button" value="Reload Molecule with Selected Inputs"></p>
+
+<embed id="bgs" src ="https://embed.molview.org/v1/?mode=line&pdbid=5RE4" width="700" height="700">
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- src="https://embed.molview.org/v1/?mode=line&pdbid=5RE4&" -->
