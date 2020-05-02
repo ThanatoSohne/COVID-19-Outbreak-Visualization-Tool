@@ -1,4 +1,4 @@
-County,State,fips,Latitude,Longitude,Confirmed Cases,Deaths,Recoveries
+County,State,fips,Latitude,Longitude,Total Cases,Deaths,Recoveries
 Albany,WYOMING,56001,41.6684047, -105.6812633,8,0,6
 Big Horn,WYOMING,56003,44.4952545, -108.0024782,3,0,2
 Campbell,WYOMING,56005,44.1908398, -105.5775352,24,0,22
