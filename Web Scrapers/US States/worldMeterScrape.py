@@ -27,7 +27,7 @@ for t in tables:
 csvfile = "COVID-19_cases_worldMeters.csv"
 headers = "Country,Total Cases,New Cases,Total Deaths,New Deaths,Total Recovered,Active Cases,Serious/Critical,Total Tested\n"
 
-file = open(csvfile, "w")
+file = open(csvfile, "w", encoding='Latin-1')
 file.write(headers)
 
 for d in dataCont[8:]:
