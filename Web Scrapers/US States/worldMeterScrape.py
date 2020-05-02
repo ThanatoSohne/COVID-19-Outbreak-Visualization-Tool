@@ -25,8 +25,7 @@ for t in tables:
     dataCont.append(take)
     
 csvfile = "COVID-19_cases_worldMeters.csv"
-headers = "Country,Total Cases,New Cases,Total Deaths,New Deaths,Total Recovered,\
-           Active Cases,Serious/Critical,Total Tested\n"
+headers = "Country,Total Cases,New Cases,Total Deaths,New Deaths,Total Recovered,Active Cases,Serious/Critical,Total Tested\n"
 
 file = open(csvfile, "w")
 file.write(headers)
