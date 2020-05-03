@@ -2603,7 +2603,8 @@ def neScrape():
                 file.write(take[1] + "," + ne + "," 
                            + str(fips.get_county_fips(take[1],state=ne)).strip() 
                            + "," + str(locale.latlng).strip('[]') + "," 
-                           + take[3].replace(',','') + "," + take[5].replace(',','') + "\n")
+                           + take[3].replace(',','').replace('–','0') + "," 
+                           + take[5].replace(',','').replace('–','0') + "\n")
             
 #            file.write(hold[130].split('\n')[1] + "," + ne + "," 
 #                       + str(fips.get_state_fips(ne)).strip() 
